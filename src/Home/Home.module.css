@@ -1,0 +1,13 @@
+.homePageContainer {
+  background-color: black;
+  height: 100%;
+}
+
+.homePageInnerWrapper {
+    max-width: 1200px;
+}
+
+h2 {
+    letter-spacing: 0.1rem;
+}
+
