@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
+import { Button, Row, Col, Image } from "react-bootstrap";
 import styles from "./Home.module.css";
+import { FaStream } from "react-icons/fa";
+import { FaChartBar } from "react-icons/fa";
+
+const image = process.env.PUBLIC_URL + "/images/patrick-nagel-print.png";
 
 const Home = () => {
   return (
@@ -14,11 +18,39 @@ const Home = () => {
           <h2 className="fw-bold">
             CHOOSE<br></br>OPTION
           </h2>
-          <div className="d-flex gap-2">
-            <Button variant="light">flix</Button>
-            <Button variant="light">books</Button>
+          <div className="d-flex gap-3">
+            <Button className={`${styles.btn} fw-semibold`} variant="light">
+              Flix
+            </Button>
+            <Button className={`${styles.btn} fw-semibold`} variant="light">
+              Books
+            </Button>
           </div>
         </div>
+        <Row className="mt-5">
+          <Col>
+            <div className={`${styles.card} p-3 d-flex d-flex flex-column`}>
+              <Image src={image}></Image>
+              <h5 className="fw-semibold mt-4">Flix</h5>
+              <small>Video streaming platform UI</small>
+              <div className="d-flex gap-3 mt-4 align-items-center">
+                <FaStream />
+                <span>something</span>
+              </div>
+            </div>
+          </Col>
+          <Col>
+            <div className={`${styles.card} p-3 d-flex d-flex flex-column`}>
+              <Image src={image}></Image>
+              <h5 className="fw-semibold mt-4">Flix</h5>
+              <small>Accounting software UI</small>
+              <div className="d-flex gap-3 mt-4 align-items-center">
+                <FaChartBar />
+                <span>something</span>
+              </div>
+            </div>
+          </Col>
+        </Row>
       </div>
 
       {/* FlixBooks: Streaming & Accounting

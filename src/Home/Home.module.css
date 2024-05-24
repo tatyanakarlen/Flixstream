@@ -11,3 +11,24 @@ h2 {
     letter-spacing: 0.1rem;
 }
 
+.btn {
+    padding: 0.8rem 2.75rem !important;
+    border-radius: 20px !important;
+    color: var(--darkGreyText) !important; 
+}
+
+.card {
+    background-color: var(--darkGreyText) !important;
+    border-radius: 15px;
+}
+
+.card img {
+   width: 100%;
+   height: 15rem;
+}
+
+.card small {
+    color: var(--lightGreyText);
+}
+
+/* --darkGreyText: #161616;  */
