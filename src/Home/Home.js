@@ -29,24 +29,30 @@ const Home = () => {
         </div>
         <Row className="mt-5">
           <Col>
-            <div className={`${styles.card} p-3 d-flex d-flex flex-column`}>
+            <div className={`${styles.card} p-4 d-flex d-flex flex-column`}>
               <Image src={image}></Image>
               <h5 className="fw-semibold mt-4">Flix</h5>
-              <small>Video streaming platform UI</small>
-              <div className="d-flex gap-3 mt-4 align-items-center">
+              <small className={styles.greySmall}>Video streaming platform UI</small>
+              <div className="d-flex mt-4 align-items-center justify-content-between w-100">
+                <div className="d-flex gap-3 align-items-center">
                 <FaStream />
-                <span>something</span>
+                <span>Media Dashboard</span>
+                </div>
+                <div><small>UI/UX</small></div>
               </div>
             </div>
           </Col>
           <Col>
-            <div className={`${styles.card} p-3 d-flex d-flex flex-column`}>
+            <div className={`${styles.card} p-4 d-flex d-flex flex-column`}>
               <Image src={image}></Image>
-              <h5 className="fw-semibold mt-4">Flix</h5>
-              <small>Accounting software UI</small>
-              <div className="d-flex gap-3 mt-4 align-items-center">
+              <h5 className="fw-semibold mt-4">Books</h5>
+              <small className={styles.greySmall}>Accounting software UI</small>
+              <div className="d-flex mt-4 align-items-center justify-content-between w-100">
+                <div className="d-flex gap-3 align-items-center">
                 <FaChartBar />
-                <span>something</span>
+                <span>Financial Dashboard</span>
+                </div>
+                <div><small>UI/UX</small></div>
               </div>
             </div>
           </Col>
