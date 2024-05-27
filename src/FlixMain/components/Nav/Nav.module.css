@@ -1,0 +1,11 @@
+.customNav {
+    background-color: #2D2D2D !important;
+    color: white !important;
+    /* height: 4.5rem !important; */
+    padding: 1rem 2rem !important;
+}
+
+.innerNav {
+   margin-left: 5rem; 
+   gap: 1rem;
+}

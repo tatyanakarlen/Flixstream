@@ -18,18 +18,29 @@ h2 {
 }
 
 .card {
-    background-color: var(--darkGreyText) !important;
+    background-color: var(--darkGreyText);
     border-radius: 15px;
+}
+
+.card:hover {
+    background-color: rgb(31, 31, 31);
 }
 
 .card img {
    width: 100%;
-   height: 15rem;
+   height: 18rem;
    border-radius: 15px;
 }
 
 .greySmall {
     color: var(--lightGreyText);
 }
+
+a {
+    text-decoration: none !important;
+    color: unset !important;
+}
+
+
 
 /* --darkGreyText: #161616;  */

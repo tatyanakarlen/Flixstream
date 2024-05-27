@@ -8,6 +8,11 @@ const image = process.env.PUBLIC_URL + "/images/patrick-nagel-print.png";
 
 const Home = () => {
   return (
+
+
+    // <Route path="/flix" element={<FlixMain />} />
+    //     <Route path="/books" element={<BooksMain />} />
+    //     <Route path="/" element={<Home />} />
     <div
       className={`${styles.homePageContainer} d-flex justify-content-center align-items-center`}
     >
@@ -19,16 +24,22 @@ const Home = () => {
             CHOOSE<br></br>OPTION
           </h2>
           <div className="d-flex gap-3">
+            <Link to="/flix">
             <Button className={`${styles.btn} fw-semibold`} variant="light">
               Flix
             </Button>
+            </Link>
+          
+            <Link to="/books">
             <Button className={`${styles.btn} fw-semibold`} variant="light">
               Books
             </Button>
+            </Link>
           </div>
         </div>
         <Row className="mt-5">
           <Col>
+          <Link to="/flix">
             <div className={`${styles.card} p-4 d-flex d-flex flex-column`}>
               <Image src={image}></Image>
               <h5 className="fw-semibold mt-4">Flix</h5>
@@ -41,8 +52,10 @@ const Home = () => {
                 <div><small>UI/UX</small></div>
               </div>
             </div>
+            </Link>
           </Col>
           <Col>
+          <Link className={styles.cardLink} to="/flix">
             <div className={`${styles.card} p-4 d-flex d-flex flex-column`}>
               <Image src={image}></Image>
               <h5 className="fw-semibold mt-4">Books</h5>
@@ -55,6 +68,7 @@ const Home = () => {
                 <div><small>UI/UX</small></div>
               </div>
             </div>
+            </Link>
           </Col>
         </Row>
       </div>

@@ -1,6 +1,10 @@
+import Nav from "./components/Nav/Nav";
+
 const FlixMain = () => {
     return (
-        <div>I AM FLIX MAIN</div>
+        <div>
+            <Nav />
+        </div>
     );
 };
 
