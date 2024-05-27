@@ -8,11 +8,6 @@ const image = process.env.PUBLIC_URL + "/images/patrick-nagel-print.png";
 
 const Home = () => {
   return (
-
-
-    // <Route path="/flix" element={<FlixMain />} />
-    //     <Route path="/books" element={<BooksMain />} />
-    //     <Route path="/" element={<Home />} />
     <div
       className={`${styles.homePageContainer} d-flex justify-content-center align-items-center`}
     >
@@ -25,49 +20,57 @@ const Home = () => {
           </h2>
           <div className="d-flex gap-3">
             <Link to="/flix">
-            <Button className={`${styles.btn} fw-semibold`} variant="light">
-              Flix
-            </Button>
+              <Button className={`${styles.btn} fw-semibold`} variant="light">
+                Flix
+              </Button>
             </Link>
-          
+
             <Link to="/books">
-            <Button className={`${styles.btn} fw-semibold`} variant="light">
-              Books
-            </Button>
+              <Button className={`${styles.btn} fw-semibold`} variant="light">
+                Books
+              </Button>
             </Link>
           </div>
         </div>
         <Row className="mt-5">
           <Col>
-          <Link to="/flix">
-            <div className={`${styles.card} p-4 d-flex d-flex flex-column`}>
-              <Image src={image}></Image>
-              <h5 className="fw-semibold mt-4">Flix</h5>
-              <small className={styles.greySmall}>Video streaming platform UI</small>
-              <div className="d-flex mt-4 align-items-center justify-content-between w-100">
-                <div className="d-flex gap-3 align-items-center">
-                <FaStream />
-                <span>Media Dashboard</span>
+            <Link to="/flix">
+              <div className={`${styles.card} p-4 d-flex d-flex flex-column`}>
+                <Image src={image}></Image>
+                <h5 className="fw-semibold mt-4">Flix</h5>
+                <small className={styles.greySmall}>
+                  Video streaming platform UI
+                </small>
+                <div className="d-flex mt-4 align-items-center justify-content-between w-100">
+                  <div className="d-flex gap-3 align-items-center">
+                    <FaStream />
+                    <span>Media Dashboard</span>
+                  </div>
+                  <div>
+                    <small>UI/UX</small>
+                  </div>
                 </div>
-                <div><small>UI/UX</small></div>
               </div>
-            </div>
             </Link>
           </Col>
           <Col>
-          <Link className={styles.cardLink} to="/flix">
-            <div className={`${styles.card} p-4 d-flex d-flex flex-column`}>
-              <Image src={image}></Image>
-              <h5 className="fw-semibold mt-4">Books</h5>
-              <small className={styles.greySmall}>Accounting software UI</small>
-              <div className="d-flex mt-4 align-items-center justify-content-between w-100">
-                <div className="d-flex gap-3 align-items-center">
-                <FaChartBar />
-                <span>Financial Dashboard</span>
+            <Link className={styles.cardLink} to="/flix">
+              <div className={`${styles.card} p-4 d-flex d-flex flex-column`}>
+                <Image src={image}></Image>
+                <h5 className="fw-semibold mt-4">Books</h5>
+                <small className={styles.greySmall}>
+                  Accounting software UI
+                </small>
+                <div className="d-flex mt-4 align-items-center justify-content-between w-100">
+                  <div className="d-flex gap-3 align-items-center">
+                    <FaChartBar />
+                    <span>Financial Dashboard</span>
+                  </div>
+                  <div>
+                    <small>UI/UX</small>
+                  </div>
                 </div>
-                <div><small>UI/UX</small></div>
               </div>
-            </div>
             </Link>
           </Col>
         </Row>
