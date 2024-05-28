@@ -4,13 +4,18 @@ import styles from "./HomePageHero.module.css";
 
 const HomePageHero = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [bgImageLoaded, setBgImageLoaded] = useState(false);
   const nature1 = process.env.PUBLIC_URL + "/images/nature1.jpg";
   const nature2 = process.env.PUBLIC_URL + "/images/nature2.jpg";
+  const flowers = process.env.PUBLIC_URL + "/images/flowers.jpg";
+  const bgImage = process.env.PUBLIC_URL + "/images/flowers.jpg";
+
+ 
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       setActiveIndex((prevIndex) => (prevIndex === 1 ? 0 : prevIndex + 1));
-    }, 6000); // Change slide every 7 seconds
+    }, 3000); // Change slide every 3 seconds
 
     return () => clearInterval(intervalId);
   }, []);
@@ -27,7 +32,7 @@ const HomePageHero = () => {
         onSelect={() => {}}
       >
         <Carousel.Item className={styles.carouselItem}>
-          <div className={styles.backgroundImage}></div>
+          <div className={styles.backgroundImage}><Image src={flowers}/></div>
           <div className={styles.overlay}></div>
           <Row className={`${styles.overlayContent} p-5`}>
             <Col className="h-100">
@@ -79,7 +84,7 @@ const HomePageHero = () => {
         </Carousel.Item>
 
         <Carousel.Item className={styles.carouselItem}>
-          <div className={styles.backgroundImage}></div>
+        <div className={styles.backgroundImage}><Image src={flowers}/></div>
           <div className={styles.overlay}></div>
           <Row className={`${styles.overlayContent} p-5`}>
             <Col className="h-100">
