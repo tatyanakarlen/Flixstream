@@ -1,8 +1,8 @@
 .homePageHeroContainer {
   position: relative;
   overflow: hidden;
-  height: 60%;
-  padding: 2.5rem;
+  /* height: 60%; */
+  /* padding: 2.5rem; */
 }
 
 .backgroundImage {
@@ -61,5 +61,14 @@
 }
 
 .greyBTN {
-    color: #2d2d2d !important;
+  color: #2d2d2d !important;
+}
+
+.carouselItem {
+  height: 30rem;
+  -webkit-backface-visibility: hidden !important;
+  backface-visibility: hidden !important;
+ 
+ 
+  
 }
