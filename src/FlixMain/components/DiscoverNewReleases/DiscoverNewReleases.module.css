@@ -1,0 +1,33 @@
+.container {
+  background-color: black;
+  /* margin-top: 3rem;  */
+}
+
+.cardContainer {
+  background-color: var(--darkGreyBG);
+  border-radius: 15px;
+}
+
+.cardContainer img {
+  height: 10rem;
+  background-size: cover;
+  border-radius: 15px;
+}
+
+.cardContainer small {
+  color: var(--lightGreyText);
+}
+
+.likeSpan {
+  background-color: black;
+}
+
+.btn {
+  padding: 0.4rem 2rem !important;
+  color: var(--darkGreyText) !important;
+  font-size: 0.9rem !important;
+}
+
+.icon {
+  margin-right: -7px;
+}

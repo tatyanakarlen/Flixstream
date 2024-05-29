@@ -1,7 +1,6 @@
 .customNav {
-    background-color: #2D2D2D !important;
+    background-color: var(--darkGreyBG);
     color: white !important;
-    /* height: 4.5rem !important; */
     padding: 1rem 2.5rem !important;
 }
 

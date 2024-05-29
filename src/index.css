@@ -16,6 +16,9 @@ body {
   --darkGreyText: #161616; 
   --lightGreyText: #a3a2a2; 
   --brightRed: #E00606; 
+
+
+  /* background-color: #2D2D2D !important; */
 }
 
 .carousel-inner .carousel-item {

@@ -4,6 +4,7 @@ import styles from "./Home.module.css";
 import { FaStream } from "react-icons/fa";
 import { FaChartBar } from "react-icons/fa";
 
+
 const image = process.env.PUBLIC_URL + "/images/patrick-nagel-print.png";
 
 const Home = () => {
@@ -19,25 +20,25 @@ const Home = () => {
             CHOOSE<br></br>OPTION
           </h2>
           <div className="d-flex gap-3">
-            <Link to="/flixStream">
+            <Link to="/FlixStream">
               <Button className={`${styles.btn} fw-semibold`} variant="light">
-                flixStream
+                FlixStream
               </Button>
             </Link>
 
             <Link to="/swiftBooks">
               <Button className={`${styles.btn} fw-semibold`} variant="light">
-              swiftBooks
+                SwiftBooks
               </Button>
             </Link>
           </div>
         </div>
         <Row className="mt-5">
           <Col>
-            <Link to="/flixStream">
+            <Link to="/FlixStream">
               <div className={`${styles.card} p-4 d-flex d-flex flex-column`}>
                 <Image src={image}></Image>
-                <h5 className="fw-semibold mt-4">flixStream</h5>
+                <h5 className="fw-semibold mt-4">FlixStream</h5>
                 <small className={styles.greySmall}>
                   Video streaming platform UI
                 </small>
@@ -54,10 +55,10 @@ const Home = () => {
             </Link>
           </Col>
           <Col>
-            <Link className={styles.cardLink} to="/swiftBooks">
+            <Link className={styles.cardLink} to="/SwiftBooks">
               <div className={`${styles.card} p-4 d-flex d-flex flex-column`}>
                 <Image src={image}></Image>
-                <h5 className="fw-semibold mt-4">swiftBooks</h5>
+                <h5 className="fw-semibold mt-4">SwiftBooks</h5>
                 <small className={styles.greySmall}>
                   Accounting software UI
                 </small>
@@ -75,12 +76,6 @@ const Home = () => {
           </Col>
         </Row>
       </div>
-
-      {/* FlixBooks: Streaming & Accounting
-      <div className="d-flex flex-column">
-      <Link to="/flix">flix</Link>
-      <Link to="/books">books</Link>
-      </div> */}
     </div>
   );
 };
