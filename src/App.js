@@ -10,8 +10,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/flix" element={<FlixMain />} />
-        <Route path="/books" element={<BooksMain />} />
+        <Route path="/flixStream" element={<FlixMain />} />
+        <Route path="/swiftBooks" element={<BooksMain />} />
         <Route path="/" element={<Home />} />
       </Routes>
 

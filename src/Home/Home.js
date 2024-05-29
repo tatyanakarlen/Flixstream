@@ -19,25 +19,25 @@ const Home = () => {
             CHOOSE<br></br>OPTION
           </h2>
           <div className="d-flex gap-3">
-            <Link to="/flix">
+            <Link to="/flixStream">
               <Button className={`${styles.btn} fw-semibold`} variant="light">
-                Flix
+                flixStream
               </Button>
             </Link>
 
-            <Link to="/books">
+            <Link to="/swiftBooks">
               <Button className={`${styles.btn} fw-semibold`} variant="light">
-                Books
+              swiftBooks
               </Button>
             </Link>
           </div>
         </div>
         <Row className="mt-5">
           <Col>
-            <Link to="/flix">
+            <Link to="/flixStream">
               <div className={`${styles.card} p-4 d-flex d-flex flex-column`}>
                 <Image src={image}></Image>
-                <h5 className="fw-semibold mt-4">Flix</h5>
+                <h5 className="fw-semibold mt-4">flixStream</h5>
                 <small className={styles.greySmall}>
                   Video streaming platform UI
                 </small>
@@ -54,10 +54,10 @@ const Home = () => {
             </Link>
           </Col>
           <Col>
-            <Link className={styles.cardLink} to="/flix">
+            <Link className={styles.cardLink} to="/swiftBooks">
               <div className={`${styles.card} p-4 d-flex d-flex flex-column`}>
                 <Image src={image}></Image>
-                <h5 className="fw-semibold mt-4">Books</h5>
+                <h5 className="fw-semibold mt-4">swiftBooks</h5>
                 <small className={styles.greySmall}>
                   Accounting software UI
                 </small>
