@@ -31,3 +31,8 @@
 .icon {
   margin-right: -7px;
 }
+
+.tagsContainer span:first-of-type {
+    background-color: white !important;
+    color: black !important;
+}

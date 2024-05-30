@@ -127,23 +127,23 @@ const DiscoverNewReleases = () => {
   return (
     <div className={`${styles.container} p-5 d-flex flex-column`}>
       <h4 className="text-light fw-semibold">Discover New Releases</h4>
-      <div className="d-flex gap-2 mt-4">
+      <div className={`${styles.tagsContainer} d-flex gap-2 mt-4`}>
         {tags.map((tag, index) => (
-          <small
+          <span
             key={index}
-            className="bg-light rounded-pill text-dark py-1 px-4 fw-semibold"
+            className="bg-dark text-light rounded-pill py-1 px-4"
           >
             {tag}
-          </small>
+          </span>
         ))}
       </div>
       <Row className="mt-5">
         {data?.slice(0, next)?.map((movie, index) => (
           <Col
             key={index}
-            xs={12}
-            sm={6}
-            lg={3}
+            sm={12}
+            lg={4}
+            xl={3}
             className="mb-4 text-light d-flex flex-column"
           >
             <div
@@ -171,9 +171,7 @@ const DiscoverNewReleases = () => {
           </Col>
         ))}
       </Row>
-      {/* {showItems < data.length && (
-         <Button onClick={handleClick} variant="light" className={`${styles.btn} rounded-pill fw-semibold align-self-center mt-4`}>Load more</Button>
-      )} */}
+
       <Button
         onClick={next === data.length ? handleLessImage : handleMoreImage}
         variant="light"

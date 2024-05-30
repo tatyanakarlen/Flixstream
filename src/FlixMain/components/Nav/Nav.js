@@ -9,6 +9,8 @@ import styles from "./Nav.module.css";
 import { FaVideo, FaList, FaSearch } from "react-icons/fa";
 import { MdOutlineComputer } from "react-icons/md";
 import { BiSolidMovie } from "react-icons/bi";
+import { IoMdNotifications } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const image = process.env.PUBLIC_URL + "/images/user-04.jpg";
 
@@ -24,11 +26,7 @@ const Nav = () => {
       icon: <FaList />,
       link: "/",
     },
-    {
-      text: "TV Series",
-      icon: <MdOutlineComputer />,
-      link: "/",
-    },
+
     {
       text: "Movies",
       icon: <BiSolidMovie />,
@@ -37,12 +35,12 @@ const Nav = () => {
     {
       text: "Search",
       icon: <FaSearch />,
-      link: "/",
+      link: "search",
     },
   ];
   return (
     <Navbar className={`${styles.customNav}`} expand="lg">
-      <Navbar.Brand className="fw-semibold" href="#home">
+      <Navbar.Brand className="fw-semibold fs-4" href="#home">
         FlixStream
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -52,17 +50,20 @@ const Nav = () => {
         >
           <div className="d-flex gap-3">
             {links.map((link, index) => (
-              <BootstrapNav.Link
+              <Link
                 key={index}
                 className="d-flex align-items-center gap-2"
-                href={link.link}
+                to={link.link}
               >
                 <span>{link.icon}</span>
                 <small>{link.text}</small>
-              </BootstrapNav.Link>
+              </Link>
             ))}
           </div>
-          <Image src={image} height={35} width={35} roundedCircle />
+          <div className="d-flex align-items-center gap-3">
+            <IoMdNotifications className="text-light fs-5" />
+            <Image src={image} height={27} width={27} roundedCircle />
+          </div>
         </BootstrapNav>
       </Navbar.Collapse>
     </Navbar>

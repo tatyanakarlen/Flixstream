@@ -20,7 +20,7 @@ const Home = () => {
             CHOOSE<br></br>OPTION
           </h2>
           <div className="d-flex gap-3">
-            <Link to="/FlixStream">
+            <Link to="/flixStream">
               <Button className={`${styles.btn} fw-semibold`} variant="light">
                 FlixStream
               </Button>
@@ -35,7 +35,7 @@ const Home = () => {
         </div>
         <Row className="mt-5">
           <Col>
-            <Link to="/FlixStream">
+            <Link to="/flixStream">
               <div className={`${styles.card} p-4 d-flex d-flex flex-column`}>
                 <Image src={image}></Image>
                 <h5 className="fw-semibold mt-4">FlixStream</h5>
@@ -55,7 +55,7 @@ const Home = () => {
             </Link>
           </Col>
           <Col>
-            <Link className={styles.cardLink} to="/SwiftBooks">
+            <Link className={styles.cardLink} to="/swiftBooks">
               <div className={`${styles.card} p-4 d-flex d-flex flex-column`}>
                 <Image src={image}></Image>
                 <h5 className="fw-semibold mt-4">SwiftBooks</h5>
