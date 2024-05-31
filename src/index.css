@@ -36,6 +36,16 @@ body {
     opacity: 1;
   }
 
+  .redBTN {
+    background-color: var(--brightRed) !important;
+  }
+
+  .greyBTNText {
+    color: #2d2d2d !important;
+  }
+
+
+
 
 
 

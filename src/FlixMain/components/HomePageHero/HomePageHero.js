@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Image, Row, Col, Button, Carousel } from "react-bootstrap";
 import styles from "./HomePageHero.module.css";
+import CustomBTN from "../../../global/components/RedBTN/CustomBTN";
 
 const HomePageHero = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -84,17 +85,13 @@ const HomePageHero = () => {
                   </div>
                   <p className="mt-4">{movie.description}</p>
                   <div className="mt-4 d-flex gap-3">
-                    <Button
-                      className={`${styles.redBTN} ${styles.btn} rounded-pill fw-semibold`}
-                    >
-                      Play now
-                    </Button>
-                    <Button
+                    <CustomBTN text="Play now" bgColor="redBTN" />
+                    <CustomBTN
+                      text="Watch trailer"
+                      textColor="greyBTNText"
                       variant="light"
-                      className={`${styles.greyBTN} ${styles.btn} rounded-pill fw-semibold`}
-                    >
-                      Watch trailer
-                    </Button>
+                    />
+                  
                   </div>
                 </div>
               </Col>

@@ -52,19 +52,6 @@
   font-size: 0.9rem;
 }
 
-.btn {
-  border: 0 !important;
-  padding: 0.4rem 2.5rem !important;
-  font-size: 0.9rem !important;
-}
-
-.redBTN {
-  background-color: var(--brightRed) !important;
-}
-
-.greyBTN {
-  color: #2d2d2d !important;
-}
 
 .carouselItem {
   height: 30rem;
