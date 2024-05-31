@@ -24,6 +24,7 @@
 .link {
   transition: color 0.3s ease, font-weight 0.3s ease;
   color: rgb(199, 199, 199) !important;
+  cursor: pointer;
 }
 
 .activeLink,

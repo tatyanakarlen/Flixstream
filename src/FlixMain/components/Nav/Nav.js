@@ -12,24 +12,31 @@ import { MdOutlineComputer } from "react-icons/md";
 import { BiSolidMovie } from "react-icons/bi";
 import { IoMdNotifications } from "react-icons/io";
 import { MdLogout } from "react-icons/md";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import CustomBTN from "../../../global/components/RedBTN/CustomBTN";
 
 const image = process.env.PUBLIC_URL + "/images/user-04.jpg";
 
 const Nav = ({ searchMode, setSearchMode }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   console.log(location, "location");
   const links = [
     {
       text: "Browse",
       link: "/flixStream",
-      onClick: () => setSearchMode(false),
+      onClick: () => {
+        navigate("/flixStream");
+        setSearchMode(false);
+      },
     },
     {
       text: "Search",
       link: "/flixStream/search",
-      onClick: () => setSearchMode(true),
+      onClick: () => {
+        navigate("/flixStream/search");
+        setSearchMode(false);
+      },
     },
     {
       text: "My List",
@@ -45,13 +52,16 @@ const Nav = ({ searchMode, setSearchMode }) => {
         </Navbar.Brand>
       ) : (
         <div className="w-50 position-relative">
-            <FaSearch className={`${styles.searchIcon} text-light position-absolute`}/>
-        <input className="rounded-pill px-3 py-1" placeholder="Search movies, series, and documentaries"></input>
+          <FaSearch
+            className={`${styles.searchIcon} text-light position-absolute`}
+          />
+          <input
+            className="rounded-pill px-3 py-1"
+            placeholder="Search movies, series, and documentaries"
+          ></input>
         </div>
       )}
-      {/* <Navbar.Brand className={`${styles.navBrand} fw-semibold`} href="#home">
-        {searchMode ? 'search works' : 'FlixStream'}
-      </Navbar.Brand> */}
+
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <BootstrapNav
@@ -59,17 +69,15 @@ const Nav = ({ searchMode, setSearchMode }) => {
         >
           <div className={`${styles.navMenu} d-flex align-items-center`}>
             {links.map((link, index) => (
-              <Link
+              <span
                 onClick={link.onClick && link.onClick}
                 key={index}
                 className={`d-flex align-items-center ${styles.link} ${
                   location.pathname === link.link ? styles.activeLink : ""
                 }`}
-                to={link.link}
               >
-                {/* <span>{link.icon}</span> */}
                 <span>{link.text}</span>
-              </Link>
+              </span>
             ))}
             <Link
               className={`${styles.link} d-flex align-items-center gap-2`}

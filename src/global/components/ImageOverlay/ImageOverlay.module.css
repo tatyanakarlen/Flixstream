@@ -1,0 +1,37 @@
+.imageOverlayContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  border-radius: 22px;
+  overflow: hidden; /* Ensures the image and overlay respect the border-radius */
+}
+
+.backgroundImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.textContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  color: white;
+  text-align: center;
+}
