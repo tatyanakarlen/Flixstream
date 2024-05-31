@@ -1,0 +1,14 @@
+.clearHistoryBTN {
+    background-color: var(--purple) !important;
+    border: 0 !important;
+    font-size: 0.85rem !important;
+    padding: 1px 0.4rem !important;
+}
+
+image {
+    height: unset !important;
+}
+
+small {
+    color: var(--medGreyText);
+}

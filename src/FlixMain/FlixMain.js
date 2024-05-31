@@ -19,7 +19,7 @@ const FlixMain = () => {
           <DiscoverNewReleases />
         </div>
       ) : (
-        <Outlet />
+        <Outlet context={[searchMode, setSearchMode]}/>
       )}
     </div>
   );

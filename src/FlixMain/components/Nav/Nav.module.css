@@ -1,7 +1,8 @@
 .customNav {
   background-color: var(--darkGreyBG);
-  color: white !important;
+  /* color: white !important; */
   padding: 0.8rem 2.5rem !important;
+  height: 4rem;
 }
 
 .innerNav {
@@ -17,13 +18,54 @@
 }
 
 .navMenu {
-    gap: 2.2rem;
+  gap: 2.2rem;
+}
+
+.link {
+  transition: color 0.3s ease, font-weight 0.3s ease;
+  color: rgb(199, 199, 199) !important;
+}
+
+.activeLink,
+.navBrand {
+  color: white !important;
+}
+
+.activeLink {
+  font-weight: 600 !important;
 }
 
 .newSpan {
-    height: 1.3rem;
-    width: 1.3rem;
-    border-radius: 50%;
-    background-color: #A618FC;
-    margin-left: -2px;
+  height: 1.3rem;
+  width: 1.3rem;
+  border-radius: 50%;
+  background-color: var(--purple);
+  margin-left: -2px;
+  color: white;
+}
+
+input {
+  background-color: transparent !important;
+  border: 1px solid #555555 !important;
+  width: 100% !important;
+  color: white;
+  outline: none !important;
+  box-shadow: none !important;
+  /* position: relative; */
+}
+
+input:focus {
+    outline: none !important;
+  box-shadow: none !important;
+}
+
+
+
+input::placeholder {
+    font-size: 0.9rem;
+}
+
+.searchIcon {
+  top: 9px;
+  right: 15px;
 }

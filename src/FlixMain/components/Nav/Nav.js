@@ -12,34 +12,46 @@ import { MdOutlineComputer } from "react-icons/md";
 import { BiSolidMovie } from "react-icons/bi";
 import { IoMdNotifications } from "react-icons/io";
 import { MdLogout } from "react-icons/md";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import CustomBTN from "../../../global/components/RedBTN/CustomBTN";
 
 const image = process.env.PUBLIC_URL + "/images/user-04.jpg";
 
-const Nav = () => {
+const Nav = ({ searchMode, setSearchMode }) => {
+  const location = useLocation();
+  console.log(location, "location");
   const links = [
     {
       text: "Browse",
-      //   icon: <FaVideo />,
-      link: "/",
+      link: "/flixStream",
+      onClick: () => setSearchMode(false),
     },
     {
       text: "Search",
-      //   icon: <FaSearch />,
-      link: "search",
+      link: "/flixStream/search",
+      onClick: () => setSearchMode(true),
     },
     {
       text: "My List",
-      //   icon: <FaList />,
       link: "/",
+      onClick: () => setSearchMode(false),
     },
   ];
   return (
     <Navbar className={`${styles.customNav}`} expand="lg">
-      <Navbar.Brand className="fw-semibold" href="#home">
-        FlixStream
-      </Navbar.Brand>
+      {!searchMode ? (
+        <Navbar.Brand className={`${styles.navBrand} fw-semibold`} href="#home">
+          FlixStream
+        </Navbar.Brand>
+      ) : (
+        <div className="w-50 position-relative">
+            <FaSearch className={`${styles.searchIcon} text-light position-absolute`}/>
+        <input className="rounded-pill px-3 py-1" placeholder="Search movies, series, and documentaries"></input>
+        </div>
+      )}
+      {/* <Navbar.Brand className={`${styles.navBrand} fw-semibold`} href="#home">
+        {searchMode ? 'search works' : 'FlixStream'}
+      </Navbar.Brand> */}
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <BootstrapNav
@@ -48,23 +60,28 @@ const Nav = () => {
           <div className={`${styles.navMenu} d-flex align-items-center`}>
             {links.map((link, index) => (
               <Link
+                onClick={link.onClick && link.onClick}
                 key={index}
-                className="d-flex align-items-center"
+                className={`d-flex align-items-center ${styles.link} ${
+                  location.pathname === link.link ? styles.activeLink : ""
+                }`}
                 to={link.link}
               >
                 {/* <span>{link.icon}</span> */}
                 <span>{link.text}</span>
               </Link>
             ))}
-              <Link
-                
-                className="d-flex align-items-center gap-2"
-                to="/"
+            <Link
+              className={`${styles.link} d-flex align-items-center gap-2`}
+              to="/"
+            >
+              <span>New</span>
+              <small
+                className={`${styles.newSpan} d-flex align-items-center justify-content-center fw-semibold`}
               >
-               
-                <span>New</span>
-                <small className={`${styles.newSpan} d-flex align-items-center justify-content-center fw-semibold`}>2</small>
-              </Link>
+                2
+              </small>
+            </Link>
             <Button
               className={`${styles.signOutBTN} d-flex align-items-center gap-1 rounded-pill fw-semibold`}
             >

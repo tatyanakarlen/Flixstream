@@ -129,12 +129,12 @@ const DiscoverNewReleases = () => {
       <h4 className="text-light fw-semibold">Discover New Releases</h4>
       <div className={`${styles.tagsContainer} d-flex gap-2 mt-4`}>
         {tags.map((tag, index) => (
-          <span
+          <small
             key={index}
             className="bg-dark text-light rounded-pill py-1 px-4"
           >
             {tag}
-          </span>
+          </small>
         ))}
       </div>
       <Row className="mt-5">

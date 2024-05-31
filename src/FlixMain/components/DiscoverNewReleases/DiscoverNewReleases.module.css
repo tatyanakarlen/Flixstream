@@ -32,7 +32,7 @@
   margin-right: -7px;
 }
 
-.tagsContainer span:first-of-type {
+.tagsContainer small:first-of-type {
     background-color: white !important;
     color: black !important;
 }

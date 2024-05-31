@@ -13,41 +13,38 @@ body {
 #root {
   height: 100%;
   --darkGreyBG: #282828;
-  --darkGreyText: #161616; 
-  --lightGreyText: #a3a2a2; 
-  --brightRed: #E00606; 
-
+  --darkGreyText: #161616;
+  --lightGreyText: #a3a2a2;
+  --medGreyText: rgb(199, 199, 199);
+  --brightRed: #e00606;
+  --purple: #a618fc;
 
   /* background-color: #2D2D2D !important; */
 }
 
 .carousel-inner .carousel-item {
-    opacity: 0;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: block;
-    position: absolute;
-  }
-  .carousel-inner .carousel-item:first-of-type {
-    position: relative;
-  }
-  .carousel-inner .active {
-    opacity: 1;
-  }
+  opacity: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: block;
+  position: absolute;
+}
+.carousel-inner .carousel-item:first-of-type {
+  position: relative;
+}
+.carousel-inner .active {
+  opacity: 1;
+}
 
-  .redBTN {
-    background-color: var(--brightRed) !important;
-  }
+.redBTN {
+  background-color: var(--brightRed) !important;
+}
 
-  .greyBTNText {
-    color: #2d2d2d !important;
-  }
+.greyBTNText {
+  color: #2d2d2d !important;
+}
 
-
-
-
-
-
-
-
+.blackContainer {
+  background-color: black;
+}
