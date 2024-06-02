@@ -4,108 +4,9 @@ import { Row, Col, Image, Button } from "react-bootstrap";
 import { BsThreeDots } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
 
-const DiscoverNewReleases = () => {
-  const sciFi = process.env.PUBLIC_URL + "/images/sci-fi.jpg";
-  const people = process.env.PUBLIC_URL + "/images/people.jpg";
+const DiscoverNewReleases = ({ allMovies }) => {
 
-  const data = [
-    {
-      image: sciFi,
-      title: "Fantasy Realm",
-      description: "Journey through magical lands and epic adventures.",
-      likes: "5",
-    },
-    {
-      image: people,
-      title: "Mystery Chronicles",
-      description: "Unraveling the most intriguing and puzzling cases.",
-      likes: "20",
-    },
-    {
-      image: sciFi,
-      title: "Historical Insights",
-      description: "Diving deep into significant events and eras of the past.",
-      likes: "72",
-    },
-    {
-      image: people,
-      title: "Comedy Highlights",
-      description: "Laugh out loud with the best comedies and sitcoms.",
-      likes: "25",
-    },
-    {
-      image: sciFi,
-      title: "Horror Tales",
-      description: "Prepare for spine-chilling scares.",
-      likes: "12",
-    },
-    {
-      image: people,
-      title: "Dramatic Stories",
-      description: "Embrace powerful emotions and compelling narratives.",
-      likes: "19",
-    },
-    {
-      image: sciFi,
-      title: "Action Adventures",
-      description: "Experience adrenaline-pumping thrills and epic battles.",
-      likes: "8",
-    },
-    {
-      image: people,
-      title: "Fantasy Quests",
-      description: "Embark on magical journeys and mythical adventures.",
-      likes: "3",
-    },
-    {
-      image: sciFi,
-      title: "Fantasy Realm",
-      description: "Journey through magical lands and epic adventures.",
-      likes: "5",
-    },
-    {
-      image: people,
-      title: "Mystery Chronicles",
-      description: "Unraveling the most intriguing and puzzling cases.",
-      likes: "20",
-    },
-    {
-      image: sciFi,
-      title: "Historical Insights",
-      description: "Diving deep into significant events and eras of the past.",
-      likes: "72",
-    },
-    {
-      image: people,
-      title: "Comedy Highlights",
-      description: "Laugh out loud with the best comedies and sitcoms.",
-      likes: "25",
-    },
-    {
-      image: sciFi,
-      title: "Horror Tales",
-      description: "Prepare for spine-chilling scares.",
-      likes: "12",
-    },
-    {
-      image: people,
-      title: "Dramatic Stories",
-      description: "Embrace powerful emotions and compelling narratives.",
-      likes: "19",
-    },
-    {
-      image: sciFi,
-      title: "Action Adventures",
-      description: "Experience adrenaline-pumping thrills and epic battles.",
-      likes: "8",
-    },
-    {
-      image: people,
-      title: "Fantasy Quests",
-      description: "Embark on magical journeys and mythical adventures.",
-      likes: "3",
-    },
-  ];
+
   const tags = ["All", "Watched", "Saved", "Recommended", "History"];
 
   const imagePerRow = 8;
@@ -138,7 +39,7 @@ const DiscoverNewReleases = () => {
         ))}
       </div>
       <Row className="mt-5">
-        {data?.slice(0, next)?.map((movie, index) => (
+        {allMovies?.slice(0, next)?.map((movie, index) => (
           <Col
             key={index}
             sm={12}
@@ -173,11 +74,11 @@ const DiscoverNewReleases = () => {
       </Row>
 
       <Button
-        onClick={next === data.length ? handleLessImage : handleMoreImage}
+        onClick={next === allMovies.length ? handleLessImage : handleMoreImage}
         variant="light"
         className={`${styles.btn} rounded-pill fw-semibold align-self-center mt-4`}
       >
-        {next === data.length ? "See less" : "Load more"}
+        {next === allMovies.length ? "See less" : "Load more"}
       </Button>
     </div>
   );

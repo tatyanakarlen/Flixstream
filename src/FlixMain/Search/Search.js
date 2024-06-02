@@ -8,7 +8,8 @@ import ImageOverlay from "../../global/components/ImageOverlay/ImageOverlay";
 const nature1 = process.env.PUBLIC_URL + "/images/nature1.jpg";
 
 const Search = () => {
-  const [search, setSearchMode] = useOutletContext();
+  const [search, setSearchMode, allMovies, filteredData] = useOutletContext();
+  console.log(filteredData, 'filteredData from search')
 
   useEffect(() => {
     setSearchMode(true);
@@ -79,50 +80,56 @@ const Search = () => {
 
   return (
     <div className="blackContainer px-5 py-4">
-      <div className="d-flex w-100 justify-content-between mt-2">
-        <h4 className="text-light">Explore titles</h4>
-        <Button className={`${styles.clearHistoryBTN} rounded-pill`}>
-          Clear history
-        </Button>
-      </div>
-      <div className="d-flex flex-column mt-4 gap-4">
-        {history.map((movie, index) => (
-          <div
-            role="button"
-            key={index}
-            className={`${styles.movieTitle} d-flex justify-content-between align-items-center`}
-          >
-            <div className="d-flex gap-3">
-              <Image
-                roundedCircle
-                fluid
-                width={50}
-                height={50}
-                src={movie.image}
-              />
-              <div className="d-flex flex-column">
-                <span className="text-light fs-6 fw-semibold">
-                  {movie.title}
-                </span>
-                <small>{movie.genre}</small>
-              </div>
-            </div>
-            <FaChevronRight className="text-light me-2 fs-5" />
+      {filteredData && filteredData.length === 0 ? (
+        <>
+          <div className="d-flex w-100 justify-content-between mt-2">
+            <h4 className="text-light">Explore titles</h4>
+            <Button className={`${styles.clearHistoryBTN} rounded-pill`}>
+              Clear history
+            </Button>
           </div>
-        ))}
-      </div>
-      <div className="text-light mt-5">
-        <h5>Recommended for you</h5>
-        <Row className="mt-4">
-          {recommended.map((movie, index) => (
-            <Col sm={12} lg={4} xl={3} className="mb-4">
-              <div>
-                <ImageOverlay item={movie} />
+          <div className="d-flex flex-column mt-4 gap-4">
+            {history.map((movie, index) => (
+              <div
+                role="button"
+                key={index}
+                className={`${styles.movieTitle} d-flex justify-content-between align-items-center`}
+              >
+                <div className="d-flex gap-3">
+                  <Image
+                    roundedCircle
+                    fluid
+                    width={50}
+                    height={50}
+                    src={movie.image}
+                  />
+                  <div className="d-flex flex-column">
+                    <span className="text-light fs-6 fw-semibold">
+                      {movie.title}
+                    </span>
+                    <small>{movie.genre}</small>
+                  </div>
+                </div>
+                <FaChevronRight className="text-light me-2 fs-5" />
               </div>
-            </Col>
-          ))}
-        </Row>
-      </div>
+            ))}
+          </div>
+          <div className="text-light mt-5">
+            <h5>Recommended for you</h5>
+            <Row className="mt-4">
+              {recommended.map((movie, index) => (
+                <Col sm={12} lg={4} xl={3} className="mb-4">
+                  <div>
+                    <ImageOverlay item={movie} />
+                  </div>
+                </Col>
+              ))}
+            </Row>
+          </div>
+        </>
+      ) : (
+        <div>Search results</div>
+      )}
     </div>
   );
 };

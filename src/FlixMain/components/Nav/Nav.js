@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Nav as BootstrapNav,
   Navbar,
@@ -17,10 +17,24 @@ import CustomBTN from "../../../global/components/RedBTN/CustomBTN";
 
 const image = process.env.PUBLIC_URL + "/images/user-04.jpg";
 
-const Nav = ({ searchMode, setSearchMode }) => {
+const Nav = ({
+  searchMode,
+  setSearchMode,
+  filteredData,
+  setFilteredData,
+  allMovies,
+}) => {
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location, "location");
+
+  const handleChange = (e) => {
+    const userInput = e.target.value;
+    setFilteredData(
+      allMovies.filter((movie) => movie.title.toLowerCase().includes(userInput))
+    );
+    console.log(filteredData, "filtered data");
+  };
+
   const links = [
     {
       text: "Browse",
@@ -56,6 +70,7 @@ const Nav = ({ searchMode, setSearchMode }) => {
             className={`${styles.searchIcon} text-light position-absolute`}
           />
           <input
+            onChange={handleChange}
             className="rounded-pill px-3 py-1"
             placeholder="Search movies, series, and documentaries"
           ></input>
