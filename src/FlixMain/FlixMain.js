@@ -1,5 +1,5 @@
 import Nav from "./components/Nav/Nav";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import HomePageHero from "./components/HomePageHero/HomePageHero";
 import DiscoverNewReleases from "./components/DiscoverNewReleases/DiscoverNewReleases";
 import { Outlet, useOutlet, useLocation } from "react-router-dom";
@@ -7,6 +7,7 @@ import { Outlet, useOutlet, useLocation } from "react-router-dom";
 const FlixMain = () => {
   const location = useLocation();
   const [searchMode, setSearchMode] = useState(false);
+  const [searchInput, setSearchInput] = useState('')
   const [filteredData, setFilteredData] = useState([])
   const sciFi = process.env.PUBLIC_URL + "/images/sci-fi.jpg";
   const people = process.env.PUBLIC_URL + "/images/people.jpg";
@@ -110,16 +111,21 @@ const FlixMain = () => {
     },
   ];
 
+  useEffect(() => {
+    console.log(searchInput, 'searchInput from parent');
+  }, [searchInput]); // Effect runs only when `count` changes
+
+
   return (
     <div className="d-flex flex-column h-100">
-      <Nav searchMode={searchMode} setSearchMode={setSearchMode} filteredData={filteredData} setFilteredData={setFilteredData} allMovies={allMovies}/>
+      <Nav searchMode={searchMode} setSearchMode={setSearchMode} filteredData={filteredData} setFilteredData={setFilteredData} allMovies={allMovies} searchInput={searchInput} setSearchInput={setSearchInput}/>
       {location.pathname === "/flixStream" ? (
         <div>
           <HomePageHero />
           <DiscoverNewReleases allMovies={allMovies}/>
         </div>
       ) : (
-        <Outlet context={[searchMode, setSearchMode, allMovies]}/>
+        <Outlet context={[searchMode, setSearchMode, allMovies, filteredData, searchInput]}/>
       )}
     </div>
   );

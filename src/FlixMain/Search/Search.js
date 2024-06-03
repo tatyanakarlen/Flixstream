@@ -8,8 +8,9 @@ import ImageOverlay from "../../global/components/ImageOverlay/ImageOverlay";
 const nature1 = process.env.PUBLIC_URL + "/images/nature1.jpg";
 
 const Search = () => {
-  const [search, setSearchMode, allMovies, filteredData] = useOutletContext();
-  console.log(filteredData, 'filteredData from search')
+  const [search, setSearchMode, allMovies, filteredData, searchInput] =
+    useOutletContext();
+  console.log(filteredData, "filteredData from search");
 
   useEffect(() => {
     setSearchMode(true);
@@ -79,8 +80,11 @@ const Search = () => {
   ];
 
   return (
-    <div className="blackContainer px-5 py-4">
-      {filteredData && filteredData.length === 0 ? (
+    <div className="blackContainer h-100 px-5 py-4">
+      {searchInput.length > 0 && filteredData.length === 0 ? (
+        <div className="text-light">No search results</div>
+      ) : filteredData && filteredData.length === 0 ? (
+        /// added additional condition here
         <>
           <div className="d-flex w-100 justify-content-between mt-2">
             <h4 className="text-light">Explore titles</h4>
@@ -118,7 +122,7 @@ const Search = () => {
             <h5>Recommended for you</h5>
             <Row className="mt-4">
               {recommended.map((movie, index) => (
-                <Col sm={12} lg={4} xl={3} className="mb-4">
+                <Col sm={12} lg={4} xl={3} className="mb-4" key={index}>
                   <div>
                     <ImageOverlay item={movie} />
                   </div>
@@ -128,7 +132,16 @@ const Search = () => {
           </div>
         </>
       ) : (
-        <div>Search results</div>
+        <div className="">
+          {filteredData.map((movie, index) => (
+            <div key={index}>
+              {/* Render your search result item here */}
+              <h4>{movie.title}</h4>
+              <p>{movie.genre}</p>
+              {/* Add any other details you want to show */}
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );

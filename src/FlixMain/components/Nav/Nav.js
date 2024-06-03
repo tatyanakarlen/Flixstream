@@ -23,15 +23,26 @@ const Nav = ({
   filteredData,
   setFilteredData,
   allMovies,
+  searchInput, 
+  setSearchInput
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const userInput = e.target.value;
-    setFilteredData(
-      allMovies.filter((movie) => movie.title.toLowerCase().includes(userInput))
-    );
+    const userInput = e.target.value.toLowerCase();
+    setSearchInput(userInput)
+
+    if (userInput === "") {
+      setFilteredData([]);
+    } else {
+      setFilteredData(
+        allMovies.filter((movie) =>
+          movie.title.toLowerCase().includes(userInput)
+        )
+      );
+    }
+
     console.log(filteredData, "filtered data");
   };
 
