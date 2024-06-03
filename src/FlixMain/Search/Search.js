@@ -80,7 +80,7 @@ const Search = () => {
   ];
 
   return (
-    <div className="blackContainer h-100 px-5 py-4">
+    <div className="blackContainer px-5 py-4">
       {searchInput.length > 0 && filteredData.length === 0 ? (
         <div className="text-light">No search results</div>
       ) : filteredData && filteredData.length === 0 ? (
