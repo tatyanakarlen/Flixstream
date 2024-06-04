@@ -13,7 +13,7 @@ import { BiSolidMovie } from "react-icons/bi";
 import { IoMdNotifications } from "react-icons/io";
 import { MdLogout } from "react-icons/md";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import CustomBTN from "../../../global/components/RedBTN/CustomBTN";
+import CustomBTN from "../../global/components/RedBTN/CustomBTN";
 
 const image = process.env.PUBLIC_URL + "/images/user-04.jpg";
 
@@ -23,15 +23,15 @@ const Nav = ({
   filteredData,
   setFilteredData,
   allMovies,
-  searchInput, 
-  setSearchInput
+  searchInput,
+  setSearchInput,
 }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const userInput = e.target.value.toLowerCase();
-    setSearchInput(userInput)
+    setSearchInput(userInput);
 
     if (userInput === "") {
       setFilteredData([]);
@@ -81,6 +81,7 @@ const Nav = ({
             className={`${styles.searchIcon} text-light position-absolute`}
           />
           <input
+            value={searchInput}
             onChange={handleChange}
             className="rounded-pill px-3 py-1"
             placeholder="Search movies, series, and documentaries"

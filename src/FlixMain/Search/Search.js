@@ -3,17 +3,26 @@ import { Button, Image, Row, Col } from "react-bootstrap";
 import styles from "./Search.module.css";
 import { useOutletContext } from "react-router-dom";
 import { FaChevronRight } from "react-icons/fa";
-import ImageOverlay from "../../global/components/ImageOverlay/ImageOverlay";
+import ImageOverlay from "../global/components/ImageOverlay/ImageOverlay";
+import MovieCard from "../global/components/MovieCard/MovieCard";
 
 const nature1 = process.env.PUBLIC_URL + "/images/nature1.jpg";
 
 const Search = () => {
-  const [search, setSearchMode, allMovies, filteredData, searchInput] =
-    useOutletContext();
-  console.log(filteredData, "filteredData from search");
+  const [
+    searchMode,
+    setSearchMode,
+    allMovies,
+    filteredData,
+    setFilteredData,
+    searchInput,
+    setSearchInput
+  ] = useOutletContext();
 
   useEffect(() => {
     setSearchMode(true);
+    // setFilteredData([]);
+    // setSearchInput('')
   }, []);
 
   const history = [
@@ -133,14 +142,11 @@ const Search = () => {
         </>
       ) : (
         <div className="">
-          {filteredData.map((movie, index) => (
-            <div key={index}>
-              {/* Render your search result item here */}
-              <h4>{movie.title}</h4>
-              <p>{movie.genre}</p>
-              {/* Add any other details you want to show */}
-            </div>
-          ))}
+          <Row className="mt-5">
+            {filteredData.map((movie, index) => (
+              <MovieCard movie={movie} key={index} />
+            ))}
+          </Row>
         </div>
       )}
     </div>

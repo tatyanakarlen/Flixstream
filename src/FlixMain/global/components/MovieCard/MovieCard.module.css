@@ -1,0 +1,73 @@
+.cardContainer {
+  background-color: var(--darkGreyBG);
+  border-radius: 15px;
+}
+
+.imgContainer {
+  width: 100%;
+  height: 13rem;
+  overflow: hidden;
+  border-radius: 15px;
+  position: relative;
+}
+
+.imgContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  cursor: pointer;
+}
+
+.imgContainer:hover img {
+  transform: scale(1.05);
+  filter: brightness(0.3);
+}
+
+.detailsIconDiv {
+  display: none;
+}
+
+.detailsIconDiv svg {
+  font-size: 3rem;
+  color: white;
+}
+
+.imgContainer:hover > .detailsIconDiv {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.cardContainer small {
+  color: var(--lightGreyText);
+}
+
+.likeSpan {
+  background-color: black;
+}
+
+.btn {
+  padding: 0.4rem 2rem !important;
+  color: var(--darkGreyText) !important;
+  font-size: 0.9rem !important;
+}
+
+.icon {
+  margin-right: -7px;
+}
+
+.tagsContainer small:first-of-type {
+  background-color: white !important;
+  color: black !important;
+}
+
+.movieYearLength {
+  font-size: 0.9rem;
+  color: var(--lightGreyText);
+}
