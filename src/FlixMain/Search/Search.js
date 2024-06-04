@@ -16,13 +16,12 @@ const Search = () => {
     filteredData,
     setFilteredData,
     searchInput,
-    setSearchInput
+    setSearchInput, 
+    setShowModal
   ] = useOutletContext();
 
   useEffect(() => {
     setSearchMode(true);
-    // setFilteredData([]);
-    // setSearchInput('')
   }, []);
 
   const history = [
@@ -141,10 +140,11 @@ const Search = () => {
           </div>
         </>
       ) : (
-        <div className="">
-          <Row className="mt-5">
+        <div>
+           <h4 className="text-light mt-1">Search results</h4>
+          <Row className="mt-4">
             {filteredData.map((movie, index) => (
-              <MovieCard movie={movie} key={index} />
+              <MovieCard setShowModal={setShowModal} movie={movie} key={index} />
             ))}
           </Row>
         </div>

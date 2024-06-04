@@ -6,7 +6,12 @@ import { MdOutlinePlaylistPlay } from "react-icons/md";
 import { MdOutlineQueuePlayNext } from "react-icons/md";
 import styles from "./MovieCard.module.css";
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie, setShowModal, setSelectedMovie }) => {
+  const setMovie = (id) => {
+    setSelectedMovie(id);
+    setShowModal(true);
+  };
+
   return (
     <Col sm={12} lg={4} xl={3} className="mb-4 text-light">
       <div
@@ -19,7 +24,10 @@ const MovieCard = ({ movie }) => {
 
           <div className={`${styles.imgContainer} mt-1`}>
             <Image fluid src={movie.image} className="w-100 mt-1" />
-            <div className={styles.detailsIconDiv}>
+            <div
+              onClick={() => setMovie(movie.id)}
+              className={styles.detailsIconDiv}
+            >
               <MdOutlinePlaylistPlay />
             </div>
           </div>
