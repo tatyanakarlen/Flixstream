@@ -62,11 +62,6 @@
   margin-right: -7px;
 }
 
-.tagsContainer small:first-of-type {
-  background-color: white !important;
-  color: black !important;
-}
-
 .movieYearLength {
   font-size: 0.9rem;
   color: var(--lightGreyText);

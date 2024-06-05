@@ -5,6 +5,7 @@ import { useOutletContext } from "react-router-dom";
 import { FaChevronRight } from "react-icons/fa";
 import ImageOverlay from "../global/components/ImageOverlay/ImageOverlay";
 import MovieCard from "../global/components/MovieCard/MovieCard";
+import SearchResultsMovieCard from "../global/components/SearchResultsMovieCard/SearchResultsMovieCard";
 
 const nature1 = process.env.PUBLIC_URL + "/images/nature1.jpg";
 
@@ -140,11 +141,12 @@ const Search = () => {
           </div>
         </>
       ) : (
-        <div>
-           <h4 className="text-light mt-1">Search results</h4>
+        <div className="text-light">
+           <p className="mt-1">{filteredData && filteredData.length} results found for</p>
+           <h4>{searchInput}</h4>
           <Row className="mt-4">
             {filteredData.map((movie, index) => (
-              <MovieCard setShowModal={setShowModal} movie={movie} key={index} />
+              <SearchResultsMovieCard setShowModal={setShowModal} movie={movie} key={index} />
             ))}
           </Row>
         </div>

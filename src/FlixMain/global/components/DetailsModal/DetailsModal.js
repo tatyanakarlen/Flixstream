@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Modal } from "react-bootstrap";
+import { Modal, Image } from "react-bootstrap";
+import styles from './DetailsModal.module.css'
 
 const DetailsModal = ({
   showModal,
@@ -7,7 +8,7 @@ const DetailsModal = ({
   selectedMovie,
   allMovies,
 }) => {
-    
+
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
@@ -18,15 +19,18 @@ const DetailsModal = ({
 
   return (
     <Modal
+      centered
       size="lg"
       show={showModal}
       onHide={() => setShowModal(false)}
       aria-labelledby="example-modal-sizes-title-lg"
+      dialogClassName={styles.modal}
     >
-      <Modal.Header closeButton>
+        <Image src={movie && movie.image}></Image>
+      <Modal.Header className={styles.modalHeader} closeButton>
         <Modal.Title id="example-modal-sizes-title-lg">Large Modal</Modal.Title>
       </Modal.Header>
-      <Modal.Body>...</Modal.Body>
+      <Modal.Body>some content here</Modal.Body>
     </Modal>
   );
 };

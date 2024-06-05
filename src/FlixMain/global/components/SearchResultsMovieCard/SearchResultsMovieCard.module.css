@@ -1,0 +1,38 @@
+.cardContainer,
+.imgContainer,
+.imgContainer img {
+  border-radius: var(--borderRadius);
+}
+
+.cardContainer {
+  background-color: var(--darkGreyBG);
+}
+
+.imgContainer {
+  width: 40%;
+}
+
+.imgContainer img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.movieYearLength {
+  font-size: 0.9rem;
+  color: var(--lightGreyText);
+}
+
+.actionsContainer small {
+  font-size: 0.8rem;
+}
+
+.actionsContainer:first-child svg {
+  color: var(--purple);
+  font-size: 1.7rem !important;
+}
+
+.tag {
+    color: #2D2D2D;
+    background-color: #F8F9FA;
+}
+

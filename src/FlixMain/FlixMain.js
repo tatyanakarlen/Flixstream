@@ -28,6 +28,7 @@ const FlixMain = () => {
       year: "1985",
       length: "1 hr 26 min",
       likes: "5",
+      tags: ["Top Rated", "Trending"]
     },
     {
       id: '2',
@@ -37,6 +38,7 @@ const FlixMain = () => {
       year: "2010",
       length: "1 hr 15 min",
       likes: "20",
+      tags: ["Top Rated", "Recently Added"]
     },
     {
       id: '3',
@@ -46,6 +48,7 @@ const FlixMain = () => {
       year: "2024",
       length: "1 hr 24 min",
       likes: "72",
+      tags: ["Must-Watch"]
     },
     {
       id: '4',
@@ -55,6 +58,7 @@ const FlixMain = () => {
       year: "2016",
       length: "1 hr 10 min",
       likes: "25",
+      tags: ["Must-Watch", "Recently Added"]
     },
     {
       id: '5',
@@ -64,6 +68,7 @@ const FlixMain = () => {
       year: "2020",
       length: "1 hr 25 min",
       likes: "12",
+      tags: ["Top-Rated", "Must-Watch"]
     },
     {
       id: '6',
@@ -73,6 +78,7 @@ const FlixMain = () => {
       year: "2023",
       length: "1 hr 10 min",
       likes: "19",
+      tags: ["Just for You"]
     },
     {
       id: '7',
@@ -82,6 +88,7 @@ const FlixMain = () => {
       year: "2021",
       length: "1 hr 05 min",
       likes: "8",
+      tags: ["Top-Rated", "Popular"]
     },
     {
       id: '8',
@@ -91,6 +98,7 @@ const FlixMain = () => {
       year: "2017",
       length: "1 hr 20 min",
       likes: "3",
+      tags: ["Top-Rated", "Popular"]
     },
     {
       id: '9',
@@ -100,6 +108,7 @@ const FlixMain = () => {
       year: "2020",
       length: "1 hr 08 min",
       likes: "5",
+      tags: ["Popular"]
     },
     {
       id: '10',
@@ -109,6 +118,7 @@ const FlixMain = () => {
       year: "2014",
       length: "1 hr 08 min",
       likes: "20",
+      tags: ["Must-Watch", "Recently Added"]
     },
     {
       id: '11',
@@ -118,6 +128,7 @@ const FlixMain = () => {
       year: "2018",
       length: "1 hr 25 min",
       likes: "72",
+      tags: ["Top-Rated", "Popular"]
     },
     {
       id: '12',
@@ -127,6 +138,7 @@ const FlixMain = () => {
       year: "2020",
       length: "1 hr 10 min",
       likes: "25",
+      tags: ["Just for You"]
     },
     {
       id: '13',
@@ -136,6 +148,7 @@ const FlixMain = () => {
       year: "2017",
       length: "1 hr 03 min",
       likes: "12",
+      tags: ["Must-Watch", "Recently Added"]
     },
     {
       id: '14',
@@ -145,6 +158,7 @@ const FlixMain = () => {
       year: "2020",
       length: "1 hr 01 min",
       likes: "19",
+      tags: ["Top Rated", "Trending"]
     },
     {
       id: '15',
@@ -154,6 +168,7 @@ const FlixMain = () => {
       year: "2012",
       length: "1 hr 20 min",
       likes: "8",
+      tags: ["Popular"]
     },
     {
       id: '16',
@@ -163,6 +178,7 @@ const FlixMain = () => {
       year: "2019",
       length: "1 hr 05 min",
       likes: "3",
+      tags: ["Must-Watch", "Recently Added"]
     },
   ];
 

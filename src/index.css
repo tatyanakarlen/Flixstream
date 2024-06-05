@@ -19,8 +19,11 @@ body {
   --medGreyText: rgb(199, 199, 199);
   --brightRed: #e00606;
   --purple: #a618fc;
+  --borderRadius: 15px; 
+}
 
-  /* background-color: #2D2D2D !important; */
+.purpleBTNbg {
+  background-color: var(--purple) !important;
 }
 
 .carousel-inner .carousel-item {
