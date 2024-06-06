@@ -7,8 +7,10 @@ import { MdOutlinePlaylistPlay } from "react-icons/md";
 import { MdOutlineQueuePlayNext } from "react-icons/md";
 import MovieCard from "../../global/components/MovieCard/MovieCard";
 
-const DiscoverNewReleases = ({ allMovies, setShowModal,  
-  setSelectedMovie }) => {
+const DiscoverNewReleases = ({
+  allMovies,
+  setMovie,
+}) => {
   const tags = ["All", "Watched", "Saved", "Recommended", "History"];
 
   const imagePerRow = 8;
@@ -42,8 +44,7 @@ const DiscoverNewReleases = ({ allMovies, setShowModal,
       </div>
       <Row className="mt-5">
         {allMovies?.slice(0, next)?.map((movie, index) => (
-          <MovieCard setShowModal={setShowModal} movie={movie} key={index} 
-          setSelectedMovie={setSelectedMovie} />
+          <MovieCard movie={movie} key={index} setMovie={setMovie} />
         ))}
       </Row>
 

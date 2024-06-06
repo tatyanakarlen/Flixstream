@@ -15,176 +15,196 @@ const FlixMain = () => {
   const sciFi = process.env.PUBLIC_URL + "/images/sci-fi.jpg";
   const people = process.env.PUBLIC_URL + "/images/people.jpg";
 
-  useEffect(() => {
-    console.log(selectedMovie, 'selectedMovie')
-  }, [selectedMovie])
+  const setMovie = (id) => {
+    setSelectedMovie(id);
+    setShowModal(true);
+  };
 
   const allMovies = [
     {
-      id: '1',
+      id: "1",
       image: sciFi,
       title: "Fantasy Realm",
       description: "Journey through magical lands and epic adventures.",
       year: "1985",
       length: "1 hr 26 min",
       likes: "5",
-      tags: ["Top Rated", "Trending"]
+      tags: ["topRated", "trending"],
     },
     {
-      id: '2',
+      id: "2",
       image: people,
       title: "Mystery Chronicles",
       description: "Unraveling the most intriguing and puzzling cases.",
       year: "2010",
       length: "1 hr 15 min",
       likes: "20",
-      tags: ["Top Rated", "Recently Added"]
+      tags: ["topRated", "recentlyAdded"],
     },
     {
-      id: '3',
+      id: "3",
       image: sciFi,
       title: "Historical Insights",
       description: "Diving deep into significant events and eras of the past.",
       year: "2024",
       length: "1 hr 24 min",
       likes: "72",
-      tags: ["Must-Watch"]
+      tags: ["mustWatch"],
     },
     {
-      id: '4',
+      id: "4",
       image: people,
       title: "Comedy Highlights",
       description: "Laugh out loud with the best comedies and sitcoms.",
       year: "2016",
       length: "1 hr 10 min",
       likes: "25",
-      tags: ["Must-Watch", "Recently Added"]
+      tags: ["mustWatch", "recentlyAdded"],
     },
     {
-      id: '5',
+      id: "5",
       image: sciFi,
       title: "Horror Tales",
       description: "Prepare for spine-chilling scares.",
       year: "2020",
       length: "1 hr 25 min",
       likes: "12",
-      tags: ["Top-Rated", "Must-Watch"]
+      tags: ["topRated", "mustWatch"],
     },
     {
-      id: '6',
+      id: "6",
       image: people,
       title: "Dramatic Stories",
       description: "Embrace powerful emotions and compelling narratives.",
       year: "2023",
       length: "1 hr 10 min",
       likes: "19",
-      tags: ["Just for You"]
+      tags: ["justForYou"],
     },
     {
-      id: '7',
+      id: "7",
       image: sciFi,
       title: "Action Adventures",
       description: "Experience adrenaline-pumping thrills and epic battles.",
       year: "2021",
       length: "1 hr 05 min",
       likes: "8",
-      tags: ["Top-Rated", "Popular"]
+      tags: ["topRated", "popular"],
     },
     {
-      id: '8',
+      id: "8",
       image: people,
       title: "Fantasy Quests",
       description: "Embark on magical journeys and mythical adventures.",
       year: "2017",
       length: "1 hr 20 min",
       likes: "3",
-      tags: ["Top-Rated", "Popular"]
+      tags: ["topRated", "popular"],
     },
     {
-      id: '9',
+      id: "9",
       image: sciFi,
       title: "Fantasy Realm",
       description: "Journey through magical lands and epic adventures.",
       year: "2020",
       length: "1 hr 08 min",
       likes: "5",
-      tags: ["Popular"]
+      tags: ["popular"],
     },
     {
-      id: '10',
+      id: "10",
       image: people,
       title: "Mystery Chronicles",
       description: "Unraveling the most intriguing and puzzling cases.",
       year: "2014",
       length: "1 hr 08 min",
       likes: "20",
-      tags: ["Must-Watch", "Recently Added"]
+      tags: ["mustWatch", "recentlyAdded"],
     },
     {
-      id: '11',
+      id: "11",
       image: sciFi,
       title: "Historical Insights",
       description: "Diving deep into significant events and eras of the past.",
       year: "2018",
       length: "1 hr 25 min",
       likes: "72",
-      tags: ["Top-Rated", "Popular"]
+      tags: ["topRated", "popular"],
     },
     {
-      id: '12',
+      id: "12",
       image: people,
       title: "Comedy Highlights",
       description: "Laugh out loud with the best comedies and sitcoms.",
       year: "2020",
       length: "1 hr 10 min",
       likes: "25",
-      tags: ["Just for You"]
+      tags: ["justForYou"],
     },
     {
-      id: '13',
+      id: "13",
       image: sciFi,
       title: "Horror Tales",
       description: "Prepare for spine-chilling scares.",
       year: "2017",
       length: "1 hr 03 min",
       likes: "12",
-      tags: ["Must-Watch", "Recently Added"]
+      tags: ["mustWatch", "recentlyAdded"],
     },
     {
-      id: '14',
+      id: "14",
       image: people,
       title: "Dramatic Stories",
       description: "Embrace powerful emotions and compelling narratives.",
       year: "2020",
       length: "1 hr 01 min",
       likes: "19",
-      tags: ["Top Rated", "Trending"]
+      tags: ["topRated", "trending"],
     },
     {
-      id: '15',
+      id: "15",
       image: sciFi,
       title: "Action Adventures",
       description: "Experience adrenaline-pumping thrills and epic battles.",
       year: "2012",
       length: "1 hr 20 min",
       likes: "8",
-      tags: ["Popular"]
+      tags: ["popular"],
     },
     {
-      id: '16',
+      id: "16",
       image: people,
       title: "Fantasy Quests",
       description: "Embark on magical journeys and mythical adventures.",
       year: "2019",
       length: "1 hr 05 min",
       likes: "3",
-      tags: ["Must-Watch", "Recently Added"]
+      tags: ["mustWatch", "recentlyAdded"],
     },
   ];
 
+  const contextValue = {
+    searchMode,
+    setSearchMode,
+    allMovies,
+    filteredData,
+    setFilteredData,
+    searchInput,
+    setSearchInput,
+    setShowModal,
+    selectedMovie,
+    setSelectedMovie,
+    setMovie,
+  };
+
   return (
     <div className="d-flex flex-column h-100">
-      <DetailsModal showModal={showModal} setShowModal={setShowModal} selectedMovie={selectedMovie} allMovies={allMovies}/>
+      <DetailsModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        selectedMovie={selectedMovie}
+        allMovies={allMovies}
+      />
       <Nav
         searchMode={searchMode}
         setSearchMode={setSearchMode}
@@ -197,27 +217,11 @@ const FlixMain = () => {
       {location.pathname === "/flixStream" ? (
         <div>
           <HomePageHero />
-          <DiscoverNewReleases
-            allMovies={allMovies}
-            setShowModal={setShowModal}
-            selectedMovie={selectedMovie}
-            setSelectedMovie={setSelectedMovie}
-          />
+          <DiscoverNewReleases allMovies={allMovies} setMovie={setMovie} />
         </div>
       ) : (
         <Outlet
-          context={[
-            searchMode,
-            setSearchMode,
-            allMovies,
-            filteredData,
-            setFilteredData,
-            searchInput,
-            setSearchInput,
-            setShowModal,
-            selectedMovie,
-            setSelectedMovie
-          ]}
+          context={contextValue}
         />
       )}
     </div>

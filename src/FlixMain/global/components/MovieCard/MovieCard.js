@@ -6,12 +6,9 @@ import { MdOutlinePlaylistPlay } from "react-icons/md";
 import { MdOutlineQueuePlayNext } from "react-icons/md";
 import styles from "./MovieCard.module.css";
 
-const MovieCard = ({ movie, setShowModal, setSelectedMovie }) => {
-  const setMovie = (id) => {
-    setSelectedMovie(id);
-    setShowModal(true);
-  };
+const MovieCard = ({ movie, setMovie }) => {
 
+    console.log(setMovie, 'set movie from movie card')
   return (
     <Col sm={12} lg={4} xl={3} className="mb-4 text-light">
       <div

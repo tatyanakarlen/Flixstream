@@ -10,16 +10,15 @@ import SearchResultsMovieCard from "../global/components/SearchResultsMovieCard/
 const nature1 = process.env.PUBLIC_URL + "/images/nature1.jpg";
 
 const Search = () => {
-  const [
-    searchMode,
+  const {
     setSearchMode,
-    allMovies,
     filteredData,
-    setFilteredData,
     searchInput,
-    setSearchInput, 
-    setShowModal
-  ] = useOutletContext();
+    setShowModal,
+    setMovie,
+  } = useOutletContext();
+
+  console.log(setMovie, "setMovie from search");
 
   useEffect(() => {
     setSearchMode(true);
@@ -142,11 +141,18 @@ const Search = () => {
         </>
       ) : (
         <div className="text-light">
-           <p className="mt-1">{filteredData && filteredData.length} results found for</p>
-           <h4>{searchInput}</h4>
+          <p className="mt-1">
+            {filteredData && filteredData.length} results found for
+          </p>
+          <h4>{searchInput}</h4>
           <Row className="mt-4">
             {filteredData.map((movie, index) => (
-              <SearchResultsMovieCard setShowModal={setShowModal} movie={movie} key={index} />
+              <SearchResultsMovieCard
+                setShowModal={setShowModal}
+                movie={movie}
+                setMovie={setMovie}
+                key={index}
+              />
             ))}
           </Row>
         </div>
