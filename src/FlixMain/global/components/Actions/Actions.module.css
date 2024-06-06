@@ -1,0 +1,7 @@
+.actionsContainer small {
+    font-size: 0.8rem;
+  }
+  
+  .actionsContainer:first-child svg {
+    font-size: 1.7rem !important;
+  }

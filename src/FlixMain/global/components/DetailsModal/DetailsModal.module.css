@@ -1,4 +1,33 @@
-.modalHeader {
-    border-bottom: none !important;
+.modal {
+  /* background-color: red !important;
+    padding: 2rem !important; */
+  /* border-radius: 22px !important; */
 }
 
+.modal img {
+  border-radius: 15px !important;
+  height: 25rem !important;
+}
+
+.modal > :first-child {
+  background-color: black !important;
+  padding: 1.25rem;
+  border-radius: 22px !important;
+
+  /* Add any other styles you want to apply to the first child */
+}
+
+.modalHeader {
+  border-bottom: none !important;
+}
+
+.leftSideContentDiv {
+  width: 65%;
+}
+
+.btn {
+    border: 0 !important;
+    padding: 0.3rem 2.5rem !important;
+    font-size: 1.1rem !important;
+    background-color: #a618fc !important;
+  }

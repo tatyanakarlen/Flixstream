@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Image, Row, Col, Button, Carousel } from "react-bootstrap";
 import styles from "./HomePageHero.module.css";
-import CustomBTN from "../../global/components/RedBTN/CustomBTN";
+import CustomBTN from "../../global/components/CustomBTN/CustomBTN";
 
 const HomePageHero = () => {
   const [activeIndex, setActiveIndex] = useState(0);

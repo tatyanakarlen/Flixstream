@@ -47,21 +47,3 @@
   cursor: pointer;
 }
 
-.movieYearLength {
-  font-size: 0.9rem;
-  color: var(--lightGreyText);
-}
-
-.actionsContainer small {
-  font-size: 0.8rem;
-}
-
-.actionsContainer:first-child svg {
-  /* color: var(--purple); */
-  font-size: 1.7rem !important;
-}
-
-.tag {
-  color: #2d2d2d;
-  background-color: #f8f9fa;
-}
