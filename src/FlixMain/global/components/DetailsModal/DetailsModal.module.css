@@ -1,7 +1,4 @@
 .modal {
-  /* background-color: red !important;
-    padding: 2rem !important; */
-  /* border-radius: 22px !important; */
 }
 
 .modal img {
@@ -13,8 +10,10 @@
   background-color: black !important;
   padding: 1.25rem;
   border-radius: 22px !important;
+}
 
-  /* Add any other styles you want to apply to the first child */
+.leftSideContentDiv p, .personellDetails {
+  color: var(--lightGreyText);
 }
 
 .modalHeader {
@@ -25,9 +24,25 @@
   width: 65%;
 }
 
-.btn {
+.personellDetails {
+    font-size: 0.9rem;
+}
+
+.closeBTN {
+    position: absolute;
+    right: 7px;
+    top: 7px;
+    border-radius: 50% !important;
+    height: 2.75rem !important;
+    width: 2.75rem !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--darkGreyBG) !important;
     border: 0 !important;
-    padding: 0.3rem 2.5rem !important;
-    font-size: 1.1rem !important;
-    background-color: #a618fc !important;
-  }
+}
+
+.closeBTN:hover {
+    background-color: rgb(78, 77, 77) !important;
+}
+

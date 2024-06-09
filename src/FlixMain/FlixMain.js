@@ -1,5 +1,6 @@
 import Nav from "./components/Nav/Nav";
 import { useState, useEffect } from "react";
+import "../index.css"
 import HomePageHero from "./components/HomePageHero/HomePageHero";
 import DiscoverNewReleases from "./components/DiscoverNewReleases/DiscoverNewReleases";
 import DetailsModal from "./global/components/DetailsModal/DetailsModal";

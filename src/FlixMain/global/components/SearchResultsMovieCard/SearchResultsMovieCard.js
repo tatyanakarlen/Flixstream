@@ -31,7 +31,7 @@ const SearchResultsMovieCard = ({ movie, setMovie }) => {
             <CustomBTN
               text="Play"
               textColor="text-light"
-              bgColor="purpleBTNbg"
+              bgColor="redBTNbg"
               icon={<IoPlaySharp />}
             />
           </div>

@@ -1,0 +1,7 @@
+.likeSpan {
+    background-color: black;
+  }
+
+  .altBG {
+    background-color: var(--darkGreyBG) !important;
+  }

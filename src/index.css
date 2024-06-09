@@ -7,12 +7,13 @@ body {
   padding: 0;
   font-family: "Source Sans 3" !important;
   background-color: black !important;
-  /* -webkit-transform: translateZ(0) !important; 
-  -moz-transform: translateZ(0) !important; */
 }
 
 #root {
   height: 100%;
+}
+
+:root {
   --darkGreyBG: #282828;
   --darkGreyText: #161616;
   --lightGreyText: #a3a2a2;
@@ -20,6 +21,10 @@ body {
   --brightRed: #e00606;
   --purple: #a618fc;
   --borderRadius: 15px;
+}
+
+.redBTNbg {
+  background-color: var(--brightRed) !important;
 }
 
 .purpleBTNbg {

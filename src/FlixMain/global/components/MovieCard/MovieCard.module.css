@@ -48,10 +48,6 @@
   color: var(--lightGreyText);
 }
 
-.likeSpan {
-  background-color: black;
-}
-
 .btn {
   padding: 0.4rem 2rem !important;
   color: var(--darkGreyText) !important;
