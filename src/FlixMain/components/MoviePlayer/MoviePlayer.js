@@ -1,8 +1,18 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import Reac, { useEffect } from "react";
+import { useParams, useOutletContext } from "react-router-dom";
 
 const MoviePlayer = () => {
   const { movieId } = useParams();
+  const { playMovie, moviePlayed } =
+    useOutletContext();
+
+  console.log(moviePlayed, 'moviePlayed')
+
+  useEffect(() => {
+     playMovie(movieId)
+  }, [])
+
+   
 
   return (
     <div>

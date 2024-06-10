@@ -14,6 +14,7 @@ const FlixMain = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [moviePlayed, setMoviePlayed] = useState(null);
   const sciFi = process.env.PUBLIC_URL + "/images/sci-fi.jpg";
   const people = process.env.PUBLIC_URL + "/images/people.jpg";
 
@@ -345,6 +346,12 @@ const FlixMain = () => {
     },
   ];
 
+  const playMovie = (id) => {
+    const movieToPlay = allMovies.find((movie) => movie.id === id);
+    setMoviePlayed(movieToPlay);
+    console.log("movieToPlay", movieToPlay);
+  };
+
   const contextValue = {
     searchMode,
     setSearchMode,
@@ -357,6 +364,8 @@ const FlixMain = () => {
     selectedMovie,
     setSelectedMovie,
     setMovie,
+    playMovie, 
+    moviePlayed
   };
 
   return (
@@ -377,11 +386,6 @@ const FlixMain = () => {
         setSearchInput={setSearchInput}
       />
 
-      {/* setSearchMode,
-    filteredData,
-    searchInput,
-    setShowModal,
-    setMovie, */}
       {location.pathname === "/flixStream" ? (
         <div>
           {searchMode ? (
