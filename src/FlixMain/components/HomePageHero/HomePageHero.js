@@ -85,7 +85,7 @@ const HomePageHero = () => {
                   </div>
                   <p className="mt-4">{movie.description}</p>
                   <div className="mt-4 d-flex gap-3">
-                    <CustomBTN text="Play now" bgColor="redBTN" />
+                    <CustomBTN text="Watch now" bgColor="redBTNbg" />
                     <CustomBTN
                       text="Watch trailer"
                       textColor="greyBTNText"

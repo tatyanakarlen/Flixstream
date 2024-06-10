@@ -9,14 +9,15 @@ import SearchResultsMovieCard from "../global/components/SearchResultsMovieCard/
 
 const nature1 = process.env.PUBLIC_URL + "/images/nature1.jpg";
 
-const Search = () => {
-  const {
-    setSearchMode,
-    filteredData,
-    searchInput,
-    setShowModal,
-    setMovie,
-  } = useOutletContext();
+const Search = ({
+  setSearchMode,
+  filteredData,
+  searchInput,
+  setShowModal,
+  setMovie,
+}) => {
+  // const { setSearchMode, filteredData, searchInput, setShowModal, setMovie } =
+  //   useOutletContext();
 
   console.log(setMovie, "setMovie from search");
 
@@ -96,7 +97,7 @@ const Search = () => {
         <>
           <div className="d-flex w-100 justify-content-between mt-2">
             <h4 className="text-light">Explore titles</h4>
-            <Button className={`${styles.clearHistoryBTN} rounded-pill`}>
+            <Button className={`${styles.clearHistoryBTN} rounded`}>
               Clear history
             </Button>
           </div>

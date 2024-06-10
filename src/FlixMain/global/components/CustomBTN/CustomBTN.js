@@ -6,7 +6,7 @@ const CustomBTN = ({ link, onClick, text, bgColor, textColor, variant, icon }) =
   return (
     <Button
       variant={variant}
-      className={`${styles.btn} ${bgColor} ${textColor} d-flex align-items-center justify-content-center gap-2 rounded-pill`}
+      className={`${styles.btn} ${bgColor} ${textColor} d-flex align-items-center justify-content-center gap-2 rounded`}
     >
       {icon && icon}
 

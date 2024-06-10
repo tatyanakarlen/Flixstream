@@ -57,10 +57,9 @@ const Nav = ({
     },
     {
       text: "Search",
-      link: "/flixStream/search",
+      link: null,
       onClick: () => {
-        navigate("/flixStream/search");
-        setSearchMode(false);
+        setSearchMode(true);
       },
     },
     {
@@ -72,7 +71,10 @@ const Nav = ({
   return (
     <Navbar className={`${styles.customNav}`} expand="lg">
       {!searchMode ? (
-        <Navbar.Brand className={`${styles.navBrand} fw-semibold`} href="#home">
+        <Navbar.Brand
+          className={`${styles.navBrand} ms-2 fw-semibold`}
+          href="#home"
+        >
           FlixStream
         </Navbar.Brand>
       ) : (
@@ -100,30 +102,28 @@ const Nav = ({
                 onClick={link.onClick && link.onClick}
                 key={index}
                 className={`d-flex align-items-center ${styles.link} ${
-                  location.pathname === link.link ? styles.activeLink : ""
+                  location.pathname === "/flixStream" &&
+                  searchMode &&
+                  link.link === null
+                    ? styles.activeLink
+                    : location.pathname === link.link && !searchMode
+                    ? styles.activeLink
+                    : ""
                 }`}
               >
                 <span>{link.text}</span>
               </span>
             ))}
-            <Link
-              className={`${styles.link} d-flex align-items-center gap-2`}
-              to="/"
-            >
-              <span>New</span>
-              <small
-                className={`${styles.newSpan} d-flex align-items-center justify-content-center fw-semibold`}
-              >
-                2
-              </small>
-            </Link>
-            <Button
-              className={`${styles.signOutBTN} d-flex align-items-center gap-1 rounded-pill fw-semibold`}
-            >
-              Log out
-            </Button>
 
-            <Image src={image} height={32} width={32} roundedCircle />
+            <span className={styles.iconSpan}>
+              <IoMdNotifications className="text-light fs-5" />
+            </span>
+
+            <span className={styles.iconSpan}>
+              <MdLogout className="text-light fs-5" />
+            </span>
+
+            <Image src={image} height={30} width={30} roundedCircle />
           </div>
         </BootstrapNav>
       </Navbar.Collapse>

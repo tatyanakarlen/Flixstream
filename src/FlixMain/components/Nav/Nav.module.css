@@ -2,7 +2,8 @@
   background-color: var(--darkGreyBG);
   /* color: white !important; */
   padding: 0.8rem 2.5rem !important;
-  height: 4rem;
+  min-height: 4rem !important;
+  max-height: 4rem !important;
 }
 
 .innerNav {
@@ -70,3 +71,13 @@ input::placeholder {
   top: 9px;
   right: 15px;
 }
+
+/* .iconSpan {
+  background-color: black;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
