@@ -12,14 +12,30 @@ import {
 import FlixMain from "./FlixMain/FlixMain";
 import BooksMain from "./BooksMain/BooksMain";
 import Search from "./FlixMain/Search/Search";
+import MoviePlayer from "./FlixMain/components/MoviePlayer/MoviePlayer";
 import Home from "./Home/Home";
+
+{/* <Route
+          path="/recipes/:recipeId"
+          element={
+            <Recipe
+              filteredRecipes={filteredRecipes}
+              loading={loading}
+              setLoading={setLoading}
+              likedRecipes={likedRecipes}
+              setLikedRecipes={setLikedRecipes}
+              isRecipeLiked={isRecipeLiked}
+              setIsRecipeLiked={setIsRecipeLiked}
+            />
+          }
+        /> */}
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/flixStream" element={<FlixMain />}>
-          <Route path="search" element={<Search />} />
+          <Route path="/flixStream/:movieId" element={<MoviePlayer />} />
         </Route>
         <Route path="/swiftBooks" element={<BooksMain />} />
         <Route path="/" element={<Home />} />

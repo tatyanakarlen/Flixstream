@@ -12,6 +12,7 @@ import { MdOutlineComputer } from "react-icons/md";
 import { BiSolidMovie } from "react-icons/bi";
 import { IoMdNotifications } from "react-icons/io";
 import { MdLogout } from "react-icons/md";
+import { IoMdSettings } from "react-icons/io";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import CustomBTN from "../../global/components/CustomBTN/CustomBTN";
 
@@ -119,9 +120,9 @@ const Nav = ({
               <IoMdNotifications className="text-light fs-5" />
             </span>
 
-            <span className={styles.iconSpan}>
-              <MdLogout className="text-light fs-5" />
-            </span>
+            {/* <span className={styles.iconSpan}>
+              <IoMdSettings className="text-light fs-5" />
+            </span> */}
 
             <Image src={image} height={30} width={30} roundedCircle />
           </div>

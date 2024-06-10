@@ -8,6 +8,7 @@ import Actions from "../Actions/Actions";
 import Tag from "../Tag/Tag";
 import HeartLikes from "../HeartLikes/HeartLikes";
 import { RiCloseLargeFill } from "react-icons/ri";
+import { Link, useNavigate } from "react-router-dom";
 
 const DetailsModal = ({
   showModal,
@@ -16,6 +17,15 @@ const DetailsModal = ({
   allMovies,
 }) => {
   const [movie, setMovie] = useState(null);
+  const navigate  = useNavigate();
+
+  const handlePlayClick = (id) => {
+    console.log("clicked!")
+    navigate(`/flixStream/${id}`);
+    setShowModal(false);
+  }
+
+ 
 
   useEffect(() => {
     const movie = allMovies.find((movie) => movie.id === selectedMovie);
@@ -48,6 +58,11 @@ const DetailsModal = ({
           />
           <div className="mt-3">
             <CustomBTN
+            click={() => {
+                console.log("clicked!")
+                navigate(`/flixStream/${movie && movie.id}`);
+                setShowModal(false);
+            }}
               text="Play"
               textColor="text-light"
               bgColor="redBTNbg"
