@@ -5,7 +5,6 @@ import CustomBTN from "../../global/components/CustomBTN/CustomBTN";
 
 const HomePageHero = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [bgImageLoaded, setBgImageLoaded] = useState(false);
   const nature1 = process.env.PUBLIC_URL + "/images/nature1.jpg";
   const nature2 = process.env.PUBLIC_URL + "/images/nature2.jpg";
   const nature3 = process.env.PUBLIC_URL + "/images/nature3.jpg";
@@ -44,7 +43,7 @@ const HomePageHero = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setActiveIndex((prevIndex) => (prevIndex === 1 ? 0 : prevIndex + 1));
-    }, 5000); // Change slide every 5 seconds
+    }, 5000);
 
     return () => clearInterval(intervalId);
   }, []);
@@ -91,7 +90,6 @@ const HomePageHero = () => {
                       textColor="greyBTNText"
                       variant="light"
                     />
-                  
                   </div>
                 </div>
               </Col>

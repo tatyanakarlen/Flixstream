@@ -17,15 +17,7 @@ const DetailsModal = ({
   allMovies,
 }) => {
   const [movie, setMovie] = useState(null);
-  const navigate  = useNavigate();
-
-  const handlePlayClick = (id) => {
-    console.log("clicked!")
-    navigate(`/flixStream/${id}`);
-    setShowModal(false);
-  }
-
- 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const movie = allMovies.find((movie) => movie.id === selectedMovie);
@@ -58,11 +50,11 @@ const DetailsModal = ({
           />
           <div className="mt-3">
             <CustomBTN
-            click={() => {
-                console.log("clicked!")
-                navigate(`/flixStream/${movie && movie.id}`);
+              click={() => {
+                console.log("clicked!");
+                navigate(`/flixStream/play/${movie && movie.id}`);
                 setShowModal(false);
-            }}
+              }}
               text="Play"
               textColor="text-light"
               bgColor="redBTNbg"

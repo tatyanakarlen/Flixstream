@@ -16,6 +16,7 @@ import { IoMdSettings } from "react-icons/io";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import CustomBTN from "../../global/components/CustomBTN/CustomBTN";
 
+
 const image = process.env.PUBLIC_URL + "/images/user-04.jpg";
 
 const Nav = ({
@@ -51,6 +52,7 @@ const Nav = ({
     {
       text: "Browse",
       link: "/flixStream",
+      icon: <BiSolidMovie />, 
       onClick: () => {
         navigate("/flixStream");
         setSearchMode(false);
@@ -59,6 +61,7 @@ const Nav = ({
     {
       text: "Search",
       link: null,
+      icon: <FaSearch />, 
       onClick: () => {
         setSearchMode(true);
       },
@@ -66,6 +69,7 @@ const Nav = ({
     {
       text: "My List",
       link: "/",
+      icon: <FaList />, 
       onClick: () => setSearchMode(false),
     },
   ];
@@ -102,7 +106,7 @@ const Nav = ({
               <span
                 onClick={link.onClick && link.onClick}
                 key={index}
-                className={`d-flex align-items-center ${styles.link} ${
+                className={`d-flex align-items-center gap-2 ${styles.link} ${
                   location.pathname === "/flixStream" &&
                   searchMode &&
                   link.link === null
@@ -112,7 +116,9 @@ const Nav = ({
                     : ""
                 }`}
               >
+                 <div className="fs-6 mb-1">{link.icon}</div>
                 <span>{link.text}</span>
+               
               </span>
             ))}
 

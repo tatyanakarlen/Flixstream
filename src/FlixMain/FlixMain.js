@@ -5,7 +5,7 @@ import HomePageHero from "./components/HomePageHero/HomePageHero";
 import DiscoverNewReleases from "./components/DiscoverNewReleases/DiscoverNewReleases";
 import Search from "./Search/Search";
 import DetailsModal from "./global/components/DetailsModal/DetailsModal";
-import { Outlet, useOutlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 const FlixMain = () => {
   const location = useLocation();
@@ -376,6 +376,7 @@ const FlixMain = () => {
         selectedMovie={selectedMovie}
         allMovies={allMovies}
       />
+      {!location.pathname.includes("play") &&
       <Nav
         searchMode={searchMode}
         setSearchMode={setSearchMode}
@@ -385,6 +386,7 @@ const FlixMain = () => {
         searchInput={searchInput}
         setSearchInput={setSearchInput}
       />
+}
 
       {location.pathname === "/flixStream" ? (
         <div>

@@ -1,16 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./DiscoverNewReleases.module.css";
-import { Row, Col, Image, Button } from "react-bootstrap";
-import { BsThreeDots } from "react-icons/bs";
-import { FaHeart } from "react-icons/fa";
-import { MdOutlinePlaylistPlay } from "react-icons/md";
-import { MdOutlineQueuePlayNext } from "react-icons/md";
+import { Row, Button } from "react-bootstrap";
 import MovieCard from "../../global/components/MovieCard/MovieCard";
 
-const DiscoverNewReleases = ({
-  allMovies,
-  setMovie,
-}) => {
+const DiscoverNewReleases = ({ allMovies, setMovie }) => {
   const tags = ["All", "Watched", "Saved", "Recommended", "History"];
 
   const imagePerRow = 8;
@@ -24,10 +17,6 @@ const DiscoverNewReleases = ({
   const handleLessImage = () => {
     setNext(next - imagePerRow);
   };
-
-  useEffect(() => {
-    console.log(next, "next");
-  }, [next]);
 
   return (
     <div className={`${styles.container} p-5 d-flex flex-column`}>

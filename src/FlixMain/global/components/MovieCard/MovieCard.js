@@ -8,7 +8,6 @@ import MovieYearLength from "../MovieYearLength/MovieYearLength";
 import styles from "./MovieCard.module.css";
 
 const MovieCard = ({ movie, setMovie }) => {
-  console.log(setMovie, "set movie from movie card");
   return (
     <Col sm={12} lg={4} xl={3} className="mb-4 text-light">
       <div

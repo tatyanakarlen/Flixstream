@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import { Button, Image, Row, Col } from "react-bootstrap";
 import styles from "./Search.module.css";
-import { useOutletContext } from "react-router-dom";
 import { FaChevronRight } from "react-icons/fa";
 import ImageOverlay from "../global/components/ImageOverlay/ImageOverlay";
-import MovieCard from "../global/components/MovieCard/MovieCard";
 import SearchResultsMovieCard from "../global/components/SearchResultsMovieCard/SearchResultsMovieCard";
 
 const nature1 = process.env.PUBLIC_URL + "/images/nature1.jpg";
@@ -16,11 +14,6 @@ const Search = ({
   setShowModal,
   setMovie,
 }) => {
-  // const { setSearchMode, filteredData, searchInput, setShowModal, setMovie } =
-  //   useOutletContext();
-
-  console.log(setMovie, "setMovie from search");
-
   useEffect(() => {
     setSearchMode(true);
   }, []);

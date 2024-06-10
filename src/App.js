@@ -35,7 +35,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/flixStream" element={<FlixMain />}>
-          <Route path="/flixStream/:movieId" element={<MoviePlayer />} />
+          <Route path="/flixStream/play/:movieId" element={<MoviePlayer />} />
         </Route>
         <Route path="/swiftBooks" element={<BooksMain />} />
         <Route path="/" element={<Home />} />

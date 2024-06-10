@@ -2,11 +2,18 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import styles from "./CustomBTN.module.css";
 
-const CustomBTN = ({ link, click, text, bgColor, textColor, variant, icon }) => {
-  console.log(click, "onclick from custom btn")
+const CustomBTN = ({
+  link,
+  click,
+  text,
+  bgColor,
+  textColor,
+  variant,
+  icon,
+}) => {
   return (
     <Button
-    onClick={click}
+      onClick={click}
       variant={variant}
       className={`${styles.btn} ${bgColor} ${textColor} d-flex align-items-center justify-content-center gap-2 rounded`}
     >
