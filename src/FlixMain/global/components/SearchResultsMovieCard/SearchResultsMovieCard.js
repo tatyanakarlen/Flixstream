@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./SearchResultsMovieCard.module.css";
 import { Col, Image } from "react-bootstrap";
-import CustomBTN from "../CustomBTN/CustomBTN";
+import PlayBTN from "../PlayBTN/PlayBTN";
 import { IoPlaySharp } from "react-icons/io5";
 import { MdAdd } from "react-icons/md";
 import { LuThumbsUp } from "react-icons/lu";
@@ -11,7 +11,7 @@ import MovieYearLength from "../MovieYearLength/MovieYearLength";
 import Actions from "../Actions/Actions";
 import Tag from "../Tag/Tag";
 
-const SearchResultsMovieCard = ({ movie, setMovie }) => {
+const SearchResultsMovieCard = ({ movie, setMovie, setShowModal  }) => {
   return (
     <Col className="mb-4 text-light" xs={12} xxl={6}>
       <div className={`${styles.cardContainer} d-flex gap-4 p-3`}>
@@ -28,11 +28,14 @@ const SearchResultsMovieCard = ({ movie, setMovie }) => {
           <div className="d-flex align-items-center justify-content-between">
             <h5>{movie.title}</h5>
 
-            <CustomBTN
+            <PlayBTN
               text="Play"
               textColor="text-light"
               bgColor="redBTNbg"
               icon={<IoPlaySharp />}
+              movieId={movie && movie.id}
+              movie={movie && movie}
+              setShowModal={setShowModal}
             />
           </div>
           <MovieYearLength length={movie.length} year={movie.year} />

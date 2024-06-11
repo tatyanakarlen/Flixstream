@@ -23,6 +23,12 @@ const FlixMain = () => {
     setShowModal(true);
   };
 
+  // click={() => {
+  //   console.log("clicked!");
+  //   navigate(`/flixStream/play/${movie && movie.id}`);
+  //   setShowModal(false);
+  // }}
+
   const allMovies = [
     {
       id: "1",
@@ -346,6 +352,11 @@ const FlixMain = () => {
     },
   ];
 
+  // const handlePlayMovie = (movie, id) => {
+  //   navigate(`/flixStream/play/${movie && id}`);
+  //   setShowModal(false);
+  // };
+
   const playMovie = (id) => {
     const movieToPlay = allMovies.find((movie) => movie.id === id);
     setMoviePlayed(movieToPlay);
@@ -364,8 +375,8 @@ const FlixMain = () => {
     selectedMovie,
     setSelectedMovie,
     setMovie,
-    playMovie, 
-    moviePlayed
+    playMovie,
+    moviePlayed,
   };
 
   return (
@@ -376,17 +387,17 @@ const FlixMain = () => {
         selectedMovie={selectedMovie}
         allMovies={allMovies}
       />
-      {!location.pathname.includes("play") &&
-      <Nav
-        searchMode={searchMode}
-        setSearchMode={setSearchMode}
-        filteredData={filteredData}
-        setFilteredData={setFilteredData}
-        allMovies={allMovies}
-        searchInput={searchInput}
-        setSearchInput={setSearchInput}
-      />
-}
+      {!location.pathname.includes("play") && (
+        <Nav
+          searchMode={searchMode}
+          setSearchMode={setSearchMode}
+          filteredData={filteredData}
+          setFilteredData={setFilteredData}
+          allMovies={allMovies}
+          searchInput={searchInput}
+          setSearchInput={setSearchInput}
+        />
+      )}
 
       {location.pathname === "/flixStream" ? (
         <div>
@@ -400,7 +411,7 @@ const FlixMain = () => {
             />
           ) : (
             <>
-              <HomePageHero />
+              <HomePageHero setShowModal={setShowModal}/>
               <DiscoverNewReleases allMovies={allMovies} setMovie={setMovie} />
             </>
           )}

@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import styles from "./CustomBTN.module.css";
+import { useNavigate, useOutletContext } from "react-router-dom";
+import styles from "./PlayBTN.module.css";
 
 const CustomBTN = ({
   link,
@@ -10,10 +11,24 @@ const CustomBTN = ({
   textColor,
   variant,
   icon,
+  setShowModal,
+  movieId,
+  movie,
 }) => {
+  const navigate = useNavigate();
+
+  console.log(movie, "movie from customBTN");
+
+  console.log(setShowModal, "set show modal from custom btn");
+
+ 
+
   return (
     <Button
-      onClick={click}
+      onClick={() => {
+        navigate(`/flixStream/play/${movie && movieId}`);
+        setShowModal(false);
+      }}
       variant={variant}
       className={`${styles.btn} ${bgColor} ${textColor} d-flex align-items-center justify-content-center gap-2 rounded`}
     >

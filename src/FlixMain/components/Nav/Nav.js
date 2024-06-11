@@ -14,7 +14,7 @@ import { IoMdNotifications } from "react-icons/io";
 import { MdLogout } from "react-icons/md";
 import { IoMdSettings } from "react-icons/io";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import CustomBTN from "../../global/components/CustomBTN/CustomBTN";
+import CustomBTN from "../../global/components/PlayBTN/PlayBTN";
 
 
 const image = process.env.PUBLIC_URL + "/images/user-04.jpg";

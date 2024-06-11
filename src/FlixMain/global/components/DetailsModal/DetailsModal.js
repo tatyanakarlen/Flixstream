@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Modal, Image, Button } from "react-bootstrap";
 import MovieYearLength from "../MovieYearLength/MovieYearLength";
 import styles from "./DetailsModal.module.css";
-import CustomBTN from "../CustomBTN/CustomBTN";
+import PlayBTN from "../PlayBTN/PlayBTN";
 import { IoPlaySharp } from "react-icons/io5";
 import Actions from "../Actions/Actions";
 import Tag from "../Tag/Tag";
@@ -49,7 +49,10 @@ const DetailsModal = ({
             year={movie && movie.year}
           />
           <div className="mt-3">
-            <CustomBTN
+            <PlayBTN
+              movieId={movie && movie.id}
+              movie={movie && movie}
+              setShowModal={setShowModal}
               click={() => {
                 console.log("clicked!");
                 navigate(`/flixStream/play/${movie && movie.id}`);

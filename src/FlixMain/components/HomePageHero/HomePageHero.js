@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Image, Row, Col, Button, Carousel } from "react-bootstrap";
 import styles from "./HomePageHero.module.css";
-import CustomBTN from "../../global/components/CustomBTN/CustomBTN";
+import PlayBTN from "../../global/components/PlayBTN/PlayBTN";
 
-const HomePageHero = () => {
+const HomePageHero = ( {setShowModal} ) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const nature1 = process.env.PUBLIC_URL + "/images/nature1.jpg";
   const nature2 = process.env.PUBLIC_URL + "/images/nature2.jpg";
@@ -12,6 +12,7 @@ const HomePageHero = () => {
 
   const data = [
     {
+      id: "17",
       image: nature1,
       headline: "The Art of Second Chances",
       directedBy: "Directed by: Sarah Bliss",
@@ -21,6 +22,7 @@ const HomePageHero = () => {
         "A recently divorced gallery owner and a struggling artist find themselves as neighbors in a charming apartment building. As they navigate the ups and downs of their respective lives, they discover that sometimes, the canvas of love can be painted with second chances.",
     },
     {
+      id: "18",
       image: nature2,
       headline: "A Journey Through Time",
       directedBy: "Directed by: John Smith",
@@ -30,6 +32,7 @@ const HomePageHero = () => {
         "A renowned historian and a young journalist embark on a thrilling adventure through ancient ruins. As they unravel hidden secrets and face unexpected dangers, they discover that the past holds the key to their future.",
     },
     {
+      id: "19",
       image: nature3,
       headline: "Echoes of the Forgotten",
       directedBy: "Directed by: Emily Clark",
@@ -84,8 +87,14 @@ const HomePageHero = () => {
                   </div>
                   <p className="mt-4">{movie.description}</p>
                   <div className="mt-4 d-flex gap-3">
-                    <CustomBTN text="Watch now" bgColor="redBTNbg" />
-                    <CustomBTN
+                    <PlayBTN
+                      text="Watch now"
+                      bgColor="redBTNbg"
+                      movieId={movie && movie.id}
+                      movie={movie && movie}
+                      setShowModal={setShowModal}
+                    />
+                    <PlayBTN
                       text="Watch trailer"
                       textColor="greyBTNText"
                       variant="light"
