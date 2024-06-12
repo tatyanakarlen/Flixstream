@@ -19,7 +19,7 @@ const MoviePlayer = () => {
     
     setTimeout(() => {
       setHasUserPressedPlay(false);
-    }, 2000); // Hide controls for 3 seconds
+    }, 1000); // Hide controls for 3 seconds
   };
   const handlePauseVideo = () => videoRef.current.pause();
 
@@ -74,12 +74,10 @@ const MoviePlayer = () => {
         height="100%"
         ref={videoRef}
       />
-      {controlsVisible && (
-        <div
-          className={`${styles.controlsOverlay} ${
-            controlsVisible ? "" : styles.controlsOverlayHidden
-          }`}
-        >
+
+      <div className={`${styles.titleOverlay} ${controlsVisible ? styles.titleVisible : styles.titleHidden}` }>video title here</div>
+     
+       <div className={`${styles.controlsOverlay} ${controlsVisible ? styles.controlsVisible : styles.controlsHidden}`}>
           <button onClick={handlePlayVideo}>Play</button>
           <button onClick={handlePauseVideo}>Pause</button>
           <button onClick={handleStopVideo}>Stop</button>
@@ -87,7 +85,7 @@ const MoviePlayer = () => {
           <button onClick={handleFastForwardVideo}>Fast Forward 10s</button>
           <ProgressBar now={progress} />
         </div>
-      )}
+   
 
       {/* <ProgressBar now={progress} />; */}
     </div>
