@@ -20,43 +20,58 @@ const MoviePlayer = () => {
   const { playMovie, moviePlayed } = useOutletContext();
   const [controlsVisible, setControlsVisible] = useState(true);
   const [hasUserPressedPlay, setHasUserPressedPlay] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const videoRef = useRef();
+  const progressBarRef = useRef();
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     playMovie(movieId);
   }, []);
 
-  const videoRef = useRef();
-  const progressBarRef = useRef();
-  const [progress, setProgress] = useState(0);
-
-  const calculateCirclePosition = () => {
-    const progressBarWidth = progressBarRef.current.clientWidth;
-    const circlePosition = (progress / 100) * progressBarWidth;
-    return circlePosition;
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+    updateProgress(e);
   };
 
-  useEffect(() => {
-    // Calculate the initial position of the circle span
-    const initialCirclePosition = calculateCirclePosition();
-
-    // Update the style of the circle span
-    const circleSpan = progressBarRef.current.querySelector(".circle-span");
-    if (circleSpan) {
-      circleSpan.style.left = `${initialCirclePosition}px`;
+  const handleMouseMove = (e) => {
+    if (isDragging) {
+      updateProgress(e);
     }
-  }, []);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+    document.removeEventListener("mousemove", handleMouseMove);
+    document.removeEventListener("mouseup", handleMouseUp);
+  };
+
+  const updateProgress = (e) => {
+    const progressBarWidth = progressBarRef.current.clientWidth;
+    const offsetX =
+      e.clientX - progressBarRef.current.getBoundingClientRect().left;
+    const newProgress = (offsetX / progressBarWidth) * 100;
+    setProgress(Math.min(100, Math.max(0, newProgress)));
+
+    if (videoRef.current) {
+      videoRef.current.currentTime =
+        (videoRef.current.duration * newProgress) / 100;
+    }
+  };
 
   const handlePlayVideo = () => {
     setTimeout(() => {
       setHasUserPressedPlay(true);
       setControlsVisible(false);
-    }, 3000);
+    }, 4000);
 
     videoRef.current.play();
 
     setTimeout(() => {
       setHasUserPressedPlay(false);
-    }, 4000);
+    }, 5000);
   };
   const handlePauseVideo = () => videoRef.current.pause();
 
@@ -133,11 +148,12 @@ const MoviePlayer = () => {
             ref={progressBarRef}
             className={styles.customProgress}
             now={progress}
+            onMouseDown={handleMouseDown}
           />
         </div>
         <div className="d-flex justify-content-between text-light mt-2">
-          <small className="text-light mt-1">Now playing</small>
-          <small className="text-light mt-1">Next up</small>
+          <small className="text-light">Now playing</small>
+          <small className="text-light">Next up</small>
         </div>
 
         {/* import { IoMdPause } from "react-icons/io";
