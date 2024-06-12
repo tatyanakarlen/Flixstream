@@ -55,3 +55,40 @@
 .controlsOverlay button:hover {
   text-decoration: underline;
 }
+
+.playBTN {
+  height: 2.75rem;
+  width: 2.75rem;
+  border-radius: 50%;
+}
+
+.progressBarContainer {
+  height: 0.6rem;
+}
+
+.customProgress {
+  --bs-progress-height: 0.3rem !important;
+  --bs-progress-border-radius: 0 !important;
+  --bs-progress-bar-bg: var(--brightRed) !important;
+  overflow: visible !important;
+}
+
+
+
+.customProgress > div {
+  position: relative !important;
+  z-index: 1 !important;
+  overflow: visible !important;
+}
+
+.customProgress > div::after {
+  z-index: 2;
+  content: "";
+  position: absolute;
+  top: -6px;
+  right: -5px;
+  width: 15px;
+  height: 15px;
+  background-color: var(--brightRed);
+  border-radius: 50%;
+}

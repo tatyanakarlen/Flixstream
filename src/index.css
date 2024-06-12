@@ -59,4 +59,6 @@ body {
 }
 
 
-
+svg:hover {
+  cursor: pointer;
+}

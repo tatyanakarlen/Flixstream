@@ -23,12 +23,6 @@ const FlixMain = () => {
     setShowModal(true);
   };
 
-  // click={() => {
-  //   console.log("clicked!");
-  //   navigate(`/flixStream/play/${movie && movie.id}`);
-  //   setShowModal(false);
-  // }}
-
   const allMovies = [
     {
       id: "1",
@@ -352,15 +346,10 @@ const FlixMain = () => {
     },
   ];
 
-  // const handlePlayMovie = (movie, id) => {
-  //   navigate(`/flixStream/play/${movie && id}`);
-  //   setShowModal(false);
-  // };
-
   const playMovie = (id) => {
     const movieToPlay = allMovies.find((movie) => movie.id === id);
     setMoviePlayed(movieToPlay);
-   
+    console.log(movieToPlay, "movie to play from flixmain");
   };
 
   const contextValue = {
@@ -411,7 +400,7 @@ const FlixMain = () => {
             />
           ) : (
             <>
-              <HomePageHero setShowModal={setShowModal}/>
+              <HomePageHero setShowModal={setShowModal} />
               <DiscoverNewReleases allMovies={allMovies} setMovie={setMovie} />
             </>
           )}
