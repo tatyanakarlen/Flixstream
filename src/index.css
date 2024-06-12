@@ -57,3 +57,12 @@ body {
 .blackContainer {
   background-color: black;
 }
+
+progress[value] {
+  appearance: none;
+  border: none;
+  color: red;
+}
+progress[value]::-webkit-progress-value {
+  background-color: green;
+}

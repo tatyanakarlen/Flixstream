@@ -17,12 +17,6 @@ const CustomBTN = ({
 }) => {
   const navigate = useNavigate();
 
-  console.log(movie, "movie from customBTN");
-
-  console.log(setShowModal, "set show modal from custom btn");
-
- 
-
   return (
     <Button
       onClick={() => {

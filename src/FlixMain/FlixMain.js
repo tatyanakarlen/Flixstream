@@ -360,7 +360,7 @@ const FlixMain = () => {
   const playMovie = (id) => {
     const movieToPlay = allMovies.find((movie) => movie.id === id);
     setMoviePlayed(movieToPlay);
-    console.log("movieToPlay", movieToPlay);
+   
   };
 
   const contextValue = {

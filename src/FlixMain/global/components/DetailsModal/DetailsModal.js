@@ -22,7 +22,7 @@ const DetailsModal = ({
   useEffect(() => {
     const movie = allMovies.find((movie) => movie.id === selectedMovie);
     setMovie(movie);
-  });
+  }, [selectedMovie]);
 
   return (
     <Modal
