@@ -1,0 +1,31 @@
+.videoContainer video {
+  display: block;
+  margin: 0 auto;
+  object-fit: cover;
+}
+
+.controlsOverlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  color: white;
+  display: block;
+  padding: 10px;
+  transition: opacity 0.3s;
+}
+
+.controlsOverlayHidden {
+    display: none !important;
+}
+
+.controlsOverlay button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.controlsOverlay button:hover {
+  text-decoration: underline;
+}
