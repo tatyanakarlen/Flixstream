@@ -23,11 +23,34 @@ const MoviePlayer = () => {
   const [isDragging, setIsDragging] = useState(false);
   const videoRef = useRef();
   const progressBarRef = useRef();
+  const progressCircleRef = useRef();
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     playMovie(movieId);
   }, []);
+
+  useEffect(() => {
+    const progressCircle = document.createElement("span");
+    progressCircle.classList.add(styles.progressCircle);
+    progressCircleRef.current = progressCircle;
+    progressBarRef.current
+      .querySelector(".progress-bar")
+      .appendChild(progressCircle);
+
+    progressCircle.addEventListener("mousedown", handleMouseDown);
+
+    return () => {
+      progressCircle.removeEventListener("mousedown", handleMouseDown);
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+      if (progressBarRef.current.querySelector(".progress-bar")) {
+        progressBarRef.current
+          .querySelector(".progress-bar")
+          .removeChild(progressCircle);
+      }
+    };
+  }, [progress]);
 
   const handleMouseDown = (e) => {
     setIsDragging(true);
@@ -143,24 +166,23 @@ const MoviePlayer = () => {
         } p-4 text-light`}
       >
         <h3>{moviePlayed && moviePlayed.title}</h3>
-        <div className={`${styles.progressBarContainer} mt-4`}>
+        <div
+          ref={progressBarRef}
+          onMouseDown={handleMouseDown}
+          className={`${styles.progressBarContainer} mt-4`}
+        >
           <ProgressBar
             ref={progressBarRef}
             className={styles.customProgress}
             now={progress}
-            onMouseDown={handleMouseDown}
           />
+        
         </div>
         <div className="d-flex justify-content-between text-light mt-2">
           <small className="text-light">Now playing</small>
           <small className="text-light">Next up</small>
         </div>
 
-        {/* import { IoMdPause } from "react-icons/io";
-import { IoIosRewind } from "react-icons/io";
-import { IoPlaySharp } from "react-icons/io5";
-import { IoMdFastforward } from "react-icons/io";
-import { IoStopSharp } from "react-icons/io5"; */}
         <div className="d-flex justify-content-center align-items-center text-light gap-5 fs-3">
           <IoMdPause onClick={handlePauseVideo} />
           <IoIosRewind onClick={handleRewindVideo} />
