@@ -134,6 +134,7 @@ const Search = ({
           </div>
         </>
       ) : (
+        ///// this will be what comes up when user starts searching other than outlet 
         <div className="text-light">
           <p className="mt-1">
             {filteredData && filteredData.length} results found for

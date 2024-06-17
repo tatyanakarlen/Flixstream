@@ -5,10 +5,12 @@ import HomePageHero from "./components/HomePageHero/HomePageHero";
 import DiscoverNewReleases from "./components/DiscoverNewReleases/DiscoverNewReleases";
 import Search from "./Search/Search";
 import DetailsModal from "./global/components/DetailsModal/DetailsModal";
+import SearchResultsMovieCard from "./global/components/SearchResultsMovieCard/SearchResultsMovieCard";
 import SideNav from "./global/components/SideNav/SideNav";
+import TopNavSearch from "./global/components/TopNavSearch/TopNavSearch";
 import { Outlet, useLocation } from "react-router-dom";
-import { Col, Row } from 'react-bootstrap'
-import styles from './FlixMain.module.css'
+import { Col, Row } from "react-bootstrap";
+import styles from "./FlixMain.module.css";
 
 const FlixMain = () => {
   const location = useLocation();
@@ -20,6 +22,9 @@ const FlixMain = () => {
   const [moviePlayed, setMoviePlayed] = useState(null);
   const sciFi = process.env.PUBLIC_URL + "/images/sci-fi.jpg";
   const people = process.env.PUBLIC_URL + "/images/people.jpg";
+
+  console.log(searchInput.length, "search input");
+  console.log(filteredData.length, "filtered data");
 
   const setMovie = (id) => {
     setSelectedMovie(id);
@@ -372,15 +377,44 @@ const FlixMain = () => {
   };
 
   return (
-   <div className="h-100">
-    <Row className={`${styles.layoutRow} h-100`}>
-      <Col className="" xs={2}><div className="h-100 p-3">
-      <SideNav />
-        </div></Col>
-      <Col><div className="bg-danger h-100">body</div></Col>
-
-      </Row >
-   </div>
+    <div className="h-100">
+      <Row className={`${styles.layoutRow} h-100`}>
+        <Col className="" xs={2}>
+          <div className="h-100 p-3">
+            <SideNav />
+          </div>
+        </Col>
+        <Col>
+          <div className="h-100 pt-3 pe-3 pb-3">
+            <div className="h-100 bg-danger">
+              <TopNavSearch />
+              <div>
+                {searchInput.length === 0 && filteredData.length === 0 ? (
+                  <Outlet context={contextValue} />
+                ) : (
+                  <div className="text-light">
+                    <p className="mt-1">
+                      {filteredData && filteredData.length} results found for
+                    </p>
+                    <h4>{searchInput}</h4>
+                    <Row className="mt-4">
+                      {filteredData.map((movie, index) => (
+                        <SearchResultsMovieCard
+                          setShowModal={setShowModal}
+                          movie={movie}
+                          setMovie={setMovie}
+                          key={index}
+                        />
+                      ))}
+                    </Row>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </Col>
+      </Row>
+    </div>
     // <div className="d-flex flex-column h-100">
     //   <DetailsModal
     //     showModal={showModal}
