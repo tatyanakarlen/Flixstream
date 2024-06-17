@@ -34,20 +34,27 @@ const MoviePlayer = () => {
     const progressCircle = document.createElement("span");
     progressCircle.classList.add(styles.progressCircle);
     progressCircleRef.current = progressCircle;
-    progressBarRef.current
-      .querySelector(".progress-bar")
-      .appendChild(progressCircle);
-
-    progressCircle.addEventListener("mousedown", handleMouseDown);
-
+    const progressBar = progressBarRef.current;
+    
+    if (progressBar) {
+      const progressBarElement = progressBar.querySelector(".progress-bar");
+      if (progressBarElement) {
+        progressBarElement.appendChild(progressCircle);
+      }
+    
+      progressCircle.addEventListener("mousedown", handleMouseDown);
+    }
+  
     return () => {
       progressCircle.removeEventListener("mousedown", handleMouseDown);
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
-      if (progressBarRef.current.querySelector(".progress-bar")) {
-        progressBarRef.current
-          .querySelector(".progress-bar")
-          .removeChild(progressCircle);
+      
+      if (progressBarRef.current) {
+        const progressBarElement = progressBarRef.current.querySelector(".progress-bar");
+        if (progressBarElement && progressCircleRef.current) {
+          progressBarElement.removeChild(progressCircleRef.current);
+        }
       }
     };
   }, [progress]);

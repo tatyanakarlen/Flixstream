@@ -88,20 +88,6 @@
   right: -5px;
   width: 15px;
   height: 15px;
-  /* background-color: var(--brightRed); */
-  background-color: blue;
-  border-radius: 50%;
-  /* transform: translateX(-50%); */
-}
-
-/* .customProgress > div::after {
-  z-index: 2;
-  content: "";
-  position: absolute;
-  top: -6px;
-  right: -5px;
-  width: 15px;
-  height: 15px;
   background-color: var(--brightRed);
   border-radius: 50%;
-} */
+}

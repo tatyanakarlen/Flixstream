@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Image, Button } from "react-bootstrap";
 import { BsThreeDots } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import HeartLikes from "../HeartLikes/HeartLikes";
 import { MdOutlinePlaylistPlay } from "react-icons/md";
 import MovieYearLength from "../MovieYearLength/MovieYearLength";
+import PlayBTN from "../PlayBTN/PlayBTN";
 import styles from "./MovieCard.module.css";
 
-const MovieCard = ({ movie, setMovie }) => {
+const MovieCard = ({ movie, setMovie, setShowModal}) => {
+  const navigate = useNavigate();
   return (
     <Col sm={12} lg={4} xl={3} className="mb-4 text-light">
       <div
@@ -30,6 +33,7 @@ const MovieCard = ({ movie, setMovie }) => {
           <div>
             <h5 className="fw-semibold mt-4">{movie.title}</h5>
             <small className="pe-4">{movie.description}</small>
+          
           </div>
         </div>
 

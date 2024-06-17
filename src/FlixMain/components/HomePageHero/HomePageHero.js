@@ -89,15 +89,19 @@ const HomePageHero = ( {setShowModal} ) => {
                   <div className="mt-4 d-flex gap-3">
                     <PlayBTN
                       text="Watch now"
-                      bgColor="redBTNbg"
                       movieId={movie && movie.id}
                       movie={movie && movie}
                       setShowModal={setShowModal}
+                      icon={true}
+                      textColor="text-light"
+                      bgColor="redBTNbg"
+
                     />
                     <PlayBTN
                       text="Watch trailer"
                       textColor="greyBTNText"
                       variant="light"
+                      icon={false}
                     />
                   </div>
                 </div>

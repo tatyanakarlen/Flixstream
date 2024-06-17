@@ -61,7 +61,7 @@ const DetailsModal = ({
               text="Play"
               textColor="text-light"
               bgColor="redBTNbg"
-              icon={<IoPlaySharp />}
+              icon={true}
             />
           </div>
           <p className="mt-4">{movie && movie.longDescription}</p>

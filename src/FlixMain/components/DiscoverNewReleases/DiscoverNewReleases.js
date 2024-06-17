@@ -3,7 +3,7 @@ import styles from "./DiscoverNewReleases.module.css";
 import { Row, Button } from "react-bootstrap";
 import MovieCard from "../../global/components/MovieCard/MovieCard";
 
-const DiscoverNewReleases = ({ allMovies, setMovie }) => {
+const DiscoverNewReleases = ({ allMovies, setMovie, setShowModal }) => {
   const tags = ["All", "Watched", "Saved", "Recommended", "History"];
 
   const imagePerRow = 8;
@@ -33,7 +33,7 @@ const DiscoverNewReleases = ({ allMovies, setMovie }) => {
       </div>
       <Row className="mt-5">
         {allMovies?.slice(0, next)?.map((movie, index) => (
-          <MovieCard movie={movie} key={index} setMovie={setMovie} />
+          <MovieCard movie={movie} key={index} setMovie={setMovie} setShowModal={setShowModal}/>
         ))}
       </Row>
 

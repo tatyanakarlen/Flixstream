@@ -5,7 +5,10 @@ import HomePageHero from "./components/HomePageHero/HomePageHero";
 import DiscoverNewReleases from "./components/DiscoverNewReleases/DiscoverNewReleases";
 import Search from "./Search/Search";
 import DetailsModal from "./global/components/DetailsModal/DetailsModal";
+import SideNav from "./global/components/SideNav/SideNav";
 import { Outlet, useLocation } from "react-router-dom";
+import { Col, Row } from 'react-bootstrap'
+import styles from './FlixMain.module.css'
 
 const FlixMain = () => {
   const location = useLocation();
@@ -369,46 +372,55 @@ const FlixMain = () => {
   };
 
   return (
-    <div className="d-flex flex-column h-100">
-      <DetailsModal
-        showModal={showModal}
-        setShowModal={setShowModal}
-        selectedMovie={selectedMovie}
-        allMovies={allMovies}
-      />
-      {!location.pathname.includes("play") && (
-        <Nav
-          searchMode={searchMode}
-          setSearchMode={setSearchMode}
-          filteredData={filteredData}
-          setFilteredData={setFilteredData}
-          allMovies={allMovies}
-          searchInput={searchInput}
-          setSearchInput={setSearchInput}
-        />
-      )}
+   <div className="h-100">
+    <Row className={`${styles.layoutRow} h-100`}>
+      <Col className="" xs={2}><div className="h-100 p-3">
+      <SideNav />
+        </div></Col>
+      <Col><div className="bg-danger h-100">body</div></Col>
 
-      {location.pathname === "/flixStream" ? (
-        <div>
-          {searchMode ? (
-            <Search
-              setSearchMode={setSearchMode}
-              filteredData={filteredData}
-              searchInput={searchInput}
-              setShowModal={setShowModal}
-              setMovie={setMovie}
-            />
-          ) : (
-            <>
-              <HomePageHero setShowModal={setShowModal} />
-              <DiscoverNewReleases allMovies={allMovies} setMovie={setMovie} />
-            </>
-          )}
-        </div>
-      ) : (
-        <Outlet context={contextValue} />
-      )}
-    </div>
+      </Row >
+   </div>
+    // <div className="d-flex flex-column h-100">
+    //   <DetailsModal
+    //     showModal={showModal}
+    //     setShowModal={setShowModal}
+    //     selectedMovie={selectedMovie}
+    //     allMovies={allMovies}
+    //   />
+    //   {!location.pathname.includes("play") && (
+    //     <Nav
+    //       searchMode={searchMode}
+    //       setSearchMode={setSearchMode}
+    //       filteredData={filteredData}
+    //       setFilteredData={setFilteredData}
+    //       allMovies={allMovies}
+    //       searchInput={searchInput}
+    //       setSearchInput={setSearchInput}
+    //     />
+    //   )}
+
+    //   {location.pathname === "/flixStream" ? (
+    //     <div>
+    //       {searchMode ? (
+    //         <Search
+    //           setSearchMode={setSearchMode}
+    //           filteredData={filteredData}
+    //           searchInput={searchInput}
+    //           setShowModal={setShowModal}
+    //           setMovie={setMovie}
+    //         />
+    //       ) : (
+    //         <>
+    //           <HomePageHero setShowModal={setShowModal} />
+    //           <DiscoverNewReleases allMovies={allMovies} setMovie={setMovie} setShowModal={setShowModal}/>
+    //         </>
+    //       )}
+    //     </div>
+    //   ) : (
+    //     <Outlet context={contextValue} />
+    //   )}
+    // </div>
   );
 };
 

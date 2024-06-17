@@ -1,16 +1,19 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import { IoPlaySharp } from "react-icons/io5";
 import styles from "./PlayBTN.module.css";
 
 const CustomBTN = ({
   link,
   click,
   text,
-  bgColor,
-  textColor,
+  icon, 
+  bgColor, 
+  textColor, 
+ 
+  
   variant,
-  icon,
   setShowModal,
   movieId,
   movie,
@@ -26,7 +29,9 @@ const CustomBTN = ({
       variant={variant}
       className={`${styles.btn} ${bgColor} ${textColor} d-flex align-items-center justify-content-center gap-2 rounded`}
     >
-      {icon && icon}
+      { icon && 
+      <IoPlaySharp />
+}
 
       {text}
     </Button>
