@@ -1,3 +1,15 @@
 .sideNav {
     background-color: var(--darkGreyBG);
 }
+
+.flixStreamLogo {
+    font-size: 1.4rem !important;
+}
+
+.link {
+   
+}
+
+.activeLink, .upgradePromo {
+    background-color: black;
+}

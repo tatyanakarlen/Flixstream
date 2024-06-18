@@ -20,6 +20,7 @@ body {
   --medGreyText: rgb(199, 199, 199);
   --brightRed: #e00606;
   --purple: #a618fc;
+  --borderRadiusSmall: 3px;
   --borderRadius: 15px;
 }
 
@@ -29,6 +30,10 @@ body {
 
 .purpleBTNbg {
   background-color: var(--purple) !important;
+}
+
+.borderRadiusSmall {
+  border-radius: var(--borderRadiusSmall);
 }
 
 .carousel-inner .carousel-item {

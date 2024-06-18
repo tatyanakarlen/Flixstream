@@ -4,15 +4,14 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import { IoPlaySharp } from "react-icons/io5";
 import styles from "./PlayBTN.module.css";
 
-const CustomBTN = ({
+const PlayBTN = ({
   link,
   click,
   text,
-  icon, 
-  bgColor, 
-  textColor, 
- 
-  
+  icon,
+  bgColor,
+  textColor,
+
   variant,
   setShowModal,
   movieId,
@@ -29,13 +28,11 @@ const CustomBTN = ({
       variant={variant}
       className={`${styles.btn} ${bgColor} ${textColor} d-flex align-items-center justify-content-center gap-2 rounded`}
     >
-      { icon && 
-      <IoPlaySharp />
-}
+      {icon && <IoPlaySharp />}
 
       {text}
     </Button>
   );
 };
 
-export default CustomBTN;
+export default PlayBTN;
