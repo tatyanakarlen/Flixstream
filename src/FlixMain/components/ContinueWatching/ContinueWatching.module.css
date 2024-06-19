@@ -1,0 +1,14 @@
+.continueWatching {
+    background-color: var(--darkGreyBG);
+}
+
+.continueWatching img {
+    /* height: 100% !important; */
+    object-fit: cover;
+}
+
+.playBTN {
+    background-color: var(--bsLight);
+    height: fit-content;
+    border-radius: var(--borderRadiusSmall); 
+}

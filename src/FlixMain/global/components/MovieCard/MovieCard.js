@@ -12,7 +12,7 @@ import styles from "./MovieCard.module.css";
 const MovieCard = ({ movie, setMovie, setShowModal}) => {
   const navigate = useNavigate();
   return (
-    <Col sm={12} lg={4} xl={3} className="mb-4 text-light">
+    <Col sm={12} md={6} lg={4} className="mb-4 text-light">
       <div
         className={`${styles.cardContainer} px-3 pt-2 pb-3 d-flex flex-column h-100 justify-content-between`}
       >

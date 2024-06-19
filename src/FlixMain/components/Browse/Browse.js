@@ -1,11 +1,23 @@
-import React from 'react'
+import React from "react";
+import HomePageHero from "../HomePageHero/HomePageHero";
+import DiscoverNewReleases from "../DiscoverNewReleases/DiscoverNewReleases";
+import ContinueWatching from "../ContinueWatching/ContinueWatching";
+import { useOutletContext } from "react-router-dom";
+
 
 const Browse = () => {
+  const { setShowModal, allMovies, setMovie } = useOutletContext();
   return (
     <div>
-      i am browse page!!!
+      <HomePageHero />
+      <ContinueWatching />
+      <DiscoverNewReleases
+        allMovies={allMovies}
+        setMovie={setMovie}
+        setShowModal={setShowModal}
+      />
     </div>
-  )
-}
+  );
+};
 
-export default Browse
+export default Browse;

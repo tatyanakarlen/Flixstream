@@ -379,15 +379,21 @@ const FlixMain = () => {
   return (
     <div className="h-100">
       <Row className={`${styles.layoutRow} h-100`}>
-        <Col className="" xs={2}>
+        <Col className={styles.fixedSideNav} xs={2}>
           <div className="h-100 p-3">
             <SideNav />
           </div>
         </Col>
-        <Col>
-          <div className="h-100 pt-3 pe-3 pb-3">
-            <div className="h-100 bg-danger">
-              <TopNavSearch />
+        <Col className={styles.scrollableContent}>
+          <div className="h-100 pt-3 pe-3 pb-3 ps-2">
+            <div className="h-100">
+              <TopNavSearch
+                searchInput={searchInput}
+                filteredData={filteredData}
+                setFilteredData={setFilteredData}
+                allMovies={allMovies}
+                setSearchInput={setSearchInput}
+              />
               <div>
                 {searchInput.length === 0 && filteredData.length === 0 ? (
                   <Outlet context={contextValue} />

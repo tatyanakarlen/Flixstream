@@ -53,7 +53,7 @@
 }
 
 .carouselItem {
-  height: 32rem;
+  height: 27rem;
   -webkit-backface-visibility: hidden !important;
-  backface-visibility: hidden !important;
+  backface-visibility: hidden !important; 
 }

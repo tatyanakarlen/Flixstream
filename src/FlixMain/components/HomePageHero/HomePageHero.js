@@ -52,7 +52,7 @@ const HomePageHero = ( {setShowModal} ) => {
   }, []);
 
   return (
-    <div className={`${styles.homePageHeroContainer} position-relative`}>
+    <div className={`${styles.homePageHeroContainer} position-relative mt-4`}>
       <Carousel
         controls={false}
         indicators={false}
@@ -61,12 +61,12 @@ const HomePageHero = ( {setShowModal} ) => {
         onSelect={() => {}}
       >
         {data.map((movie, index) => (
-          <Carousel.Item key={index} className={styles.carouselItem}>
+          <Carousel.Item key={index} className={`${styles.carouselItem}`}>
             <div className={styles.backgroundImage}>
               <Image src={flowers} />
             </div>
             <div className={styles.overlay}></div>
-            <Row className={`${styles.overlayContent} p-5`}>
+            <Row className={`${styles.overlayContent} px-3 py-4`}>
               <Col className="h-100">
                 <div className="h-100">
                   <Image src={movie.image} />
@@ -80,11 +80,11 @@ const HomePageHero = ( {setShowModal} ) => {
                   <h2>{movie.headline}</h2>
                   <p className="mt-3">{movie.directedBy}</p>
                   <p className="mb-2">{movie.cast}</p>
-                  <div className="d-flex gap-5">
+                  {/* <div className="d-flex gap-5">
                     {movie.specs.map((spec, index) => (
                       <span key={index}>{spec}</span>
                     ))}
-                  </div>
+                  </div> */}
                   <p className="mt-4">{movie.description}</p>
                   <div className="mt-4 d-flex gap-3">
                     <PlayBTN

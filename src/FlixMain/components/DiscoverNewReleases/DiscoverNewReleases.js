@@ -19,7 +19,7 @@ const DiscoverNewReleases = ({ allMovies, setMovie, setShowModal }) => {
   };
 
   return (
-    <div className={`${styles.container} p-5 d-flex flex-column`}>
+    <div className={`${styles.container} py-3 d-flex flex-column`}>
       <h4 className="text-light fw-semibold">Discover New Releases</h4>
       <div className={`${styles.tagsContainer} d-flex gap-2 mt-4`}>
         {tags.map((tag, index) => (
