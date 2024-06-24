@@ -1,0 +1,28 @@
+.listContainer {
+  overflow: hidden;
+}
+
+.navMenuList {
+  display: flex;
+  overflow-x: scroll;
+  list-style: none;
+  padding: 0;
+  margin: 1.1rem 0;
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
+}
+
+.navMenuList::-webkit-scrollbar {
+  display: none; 
+}
+
+.navMenuList li {
+  color: white;
+  font-weight: 600;
+  margin: 0 16px;
+  display: flex;
+  cursor: pointer;
+  flex-shrink: 0;
+  align-items: center;
+  transition: all 0.2s ease 0.1s;
+}

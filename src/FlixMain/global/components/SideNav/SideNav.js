@@ -24,7 +24,7 @@ const SideNav = () => {
     },
     {
       text: "My List",
-      link: "/",
+      link: "/flixStream/my-list",
       icon: <FaThList />,
     },
     {
