@@ -1,14 +1,21 @@
 .continueWatching {
-    background-color: var(--darkGreyBG);
+  background-color: var(--darkGreyBG);
+  border-radius: var();
 }
 
 .continueWatching img {
-    /* height: 100% !important; */
-    object-fit: cover;
+  /* height: 100% !important; */
+  object-fit: cover;
 }
 
 .playBTN {
-    background-color: var(--bsLight);
-    height: fit-content;
-    border-radius: var(--borderRadiusSmall); 
+  background-color: var(--bsLight);
+  height: fit-content;
+  border-radius: var(--borderRadiusSmall);
+}
+
+.customProgress {
+  --bs-progress-border-radius: 2px !important;
+  --bs-progress-bar-bg: var(--brightRed) !important;
+  --bs-progress-height: 0.7rem !important;
 }

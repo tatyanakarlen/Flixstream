@@ -39,7 +39,7 @@ const TopNavSearch = ({
         <input
           value={searchInput}
           onChange={handleChange}
-          className="px-3 py-2"
+          className="ps-5 pt-2 pb-2 pe-2"
           placeholder="Search for movies"
         ></input>
       </div>

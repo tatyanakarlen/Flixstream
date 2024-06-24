@@ -66,7 +66,7 @@ const HomePageHero = ( {setShowModal} ) => {
               <Image src={flowers} />
             </div>
             <div className={styles.overlay}></div>
-            <Row className={`${styles.overlayContent} px-3 py-4`}>
+            <Row className={`${styles.overlayContent} p-4`}>
               <Col className="h-100">
                 <div className="h-100">
                   <Image src={movie.image} />
@@ -75,7 +75,7 @@ const HomePageHero = ( {setShowModal} ) => {
               <Col className="h-100 d-flex flex-column justify-content-center">
                 {" "}
                 <div
-                  className={`${styles.textContainer} d-flex flex-column w-75`}
+                  className={`${styles.textContainer} d-flex flex-column`}
                 >
                   <h2>{movie.headline}</h2>
                   <p className="mt-3">{movie.directedBy}</p>

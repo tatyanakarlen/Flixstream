@@ -9,7 +9,7 @@ import MovieYearLength from "../MovieYearLength/MovieYearLength";
 import PlayBTN from "../PlayBTN/PlayBTN";
 import styles from "./MovieCard.module.css";
 
-const MovieCard = ({ movie, setMovie, setShowModal}) => {
+const MovieCard = ({ movie, setMovie, setShowModal }) => {
   const navigate = useNavigate();
   return (
     <Col sm={12} md={6} lg={4} className="mb-4 text-light">
@@ -30,11 +30,10 @@ const MovieCard = ({ movie, setMovie, setShowModal}) => {
               <MdOutlinePlaylistPlay />
             </div>
           </div>
-          <div>
-            <h5 className="fw-semibold mt-4">{movie.title}</h5>
-            <small className="pe-4">{movie.description}</small>
-          
-          </div>
+
+          <h5 className="fw-semibold mt-4">{movie.title}</h5>
+
+          <small className="pe-4">{movie.description}</small>
         </div>
 
         <div

@@ -11,7 +11,6 @@ import {
 } from "react-router-dom";
 import FlixMain from "./FlixMain/FlixMain";
 import BooksMain from "./BooksMain/BooksMain";
-import Search from "./FlixMain/Search/Search";
 import MoviePlayer from "./FlixMain/components/MoviePlayer/MoviePlayer";
 import Home from "./Home/Home";
 import Browse from "./FlixMain/components/Browse/Browse";
@@ -41,7 +40,7 @@ function App() {
         <Route path="/flixStream" element={<FlixMain />}>
           <Route path="/flixStream" element={<Browse />} />
           <Route path="/flixStream/discover" element={<Discover />} />
-
+          <Route path="/flixStream/my-list" element={<Discover />} />
           <Route path="/flixStream/play/:movieId" element={<MoviePlayer />} />
         </Route>
         <Route path="/swiftBooks" element={<BooksMain />} />

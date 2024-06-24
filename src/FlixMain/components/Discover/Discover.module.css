@@ -5,11 +5,10 @@
     padding: 1px 0.8rem !important;
 }
 
-image {
-    height: unset !important;
+.historyIMG {
+    height: 50px !important;
 }
 
 small {
     color: var(--medGreyText);
 }
-

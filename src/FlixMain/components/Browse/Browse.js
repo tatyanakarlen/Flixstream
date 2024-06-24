@@ -9,7 +9,7 @@ const Browse = () => {
   const { setShowModal, allMovies, setMovie } = useOutletContext();
   return (
     <div>
-      <HomePageHero />
+      <HomePageHero setShowModal={setShowModal}/>
       <ContinueWatching />
       <DiscoverNewReleases
         allMovies={allMovies}

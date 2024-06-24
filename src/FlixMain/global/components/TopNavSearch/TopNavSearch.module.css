@@ -3,6 +3,7 @@ input {
   border: 1px solid white !important;
   width: 100% !important;
   color: white;
+  /* padding-left: 2rem !important; */
   outline: none !important;
   box-shadow: none !important;
 }
@@ -15,12 +16,12 @@ input:focus {
 input::placeholder {
   font-size: 1rem;
   color: white !important;
-  padding-left: 2rem !important;
+  /* padding-left: 2rem !important; */
   letter-spacing: 1px;
 }
 
 .searchIcon {
   top: 10px;
-  left: 15px;
+  left: 12px;
 
 }

@@ -6,7 +6,7 @@
 .imageContainer {
   position: relative;
   width: 100%;
-  border-radius: 22px;
+  border-radius: 5px; 
   overflow: hidden; /* Ensures the image and overlay respect the border-radius */
 }
 

@@ -14,10 +14,8 @@ import { IoPlaySharp } from "react-icons/io5";
 import { IoMdFastforward } from "react-icons/io";
 import { IoStopSharp } from "react-icons/io5";
 
-const MoviePlayer = () => {
+const MoviePlayer = ({ playMovie, moviePlayed }) => {
   const { movieId } = useParams();
-
-  const { playMovie, moviePlayed } = useOutletContext();
   const [controlsVisible, setControlsVisible] = useState(true);
   const [hasUserPressedPlay, setHasUserPressedPlay] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -35,23 +33,24 @@ const MoviePlayer = () => {
     progressCircle.classList.add(styles.progressCircle);
     progressCircleRef.current = progressCircle;
     const progressBar = progressBarRef.current;
-    
+
     if (progressBar) {
       const progressBarElement = progressBar.querySelector(".progress-bar");
       if (progressBarElement) {
         progressBarElement.appendChild(progressCircle);
       }
-    
+
       progressCircle.addEventListener("mousedown", handleMouseDown);
     }
-  
+
     return () => {
       progressCircle.removeEventListener("mousedown", handleMouseDown);
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
-      
+
       if (progressBarRef.current) {
-        const progressBarElement = progressBarRef.current.querySelector(".progress-bar");
+        const progressBarElement =
+          progressBarRef.current.querySelector(".progress-bar");
         if (progressBarElement && progressCircleRef.current) {
           progressBarElement.removeChild(progressCircleRef.current);
         }
@@ -183,7 +182,6 @@ const MoviePlayer = () => {
             className={styles.customProgress}
             now={progress}
           />
-        
         </div>
         <div className="d-flex justify-content-between text-light mt-2">
           <small className="text-light">Now playing</small>

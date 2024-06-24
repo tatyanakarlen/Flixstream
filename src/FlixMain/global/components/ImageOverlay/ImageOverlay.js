@@ -10,7 +10,7 @@ const ImageOverlay = ({ item }) => {
         <div
           className={`${styles.textContainer} w-100 h-100 d-flex justify-content-center align-items-center`}
         >
-          <h3>{item.title}</h3>
+          <h4>{item.title}</h4>
         </div>
       </div>
     </div>
