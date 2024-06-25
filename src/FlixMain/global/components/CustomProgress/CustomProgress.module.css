@@ -1,5 +1,5 @@
 .customProgress {
     --bs-progress-border-radius: 2px !important;
     --bs-progress-bar-bg: var(--brightRed) !important;
-    --bs-progress-height: 0.7rem !important;
+    --bs-progress-height: 0.5rem !important;
   }

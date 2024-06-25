@@ -351,6 +351,29 @@ const FlixMain = () => {
     },
   ];
 
+  const continueWatching = [
+    {
+      title: "Fantasy Quests",
+      timeRemaining: "12min 8s",
+      image: people,
+    },
+    {
+      title: "Action Adventures",
+      timeRemaining: "19min 2s",
+      image: people,
+    },
+    {
+      title: "Dramatic Stories",
+      timeRemaining: "23min 1s",
+      image: people,
+    },
+    {
+      title: "Comedy Highlights",
+      timeRemaining: "12min 8s",
+      image: people,
+    },
+  ];
+
   const playMovie = (id) => {
     const movieToPlay = allMovies.find((movie) => movie.id === id);
     setMoviePlayed(movieToPlay);
@@ -371,6 +394,7 @@ const FlixMain = () => {
     setMovie,
     playMovie,
     moviePlayed,
+    continueWatching
   };
 
   return (
@@ -381,54 +405,53 @@ const FlixMain = () => {
         selectedMovie={selectedMovie}
         allMovies={allMovies}
       />
-      { !location.pathname.includes("play") ?
-      <Row className={`${styles.layoutRow} h-100`}>
-        <Col className={styles.fixedSideNav} xs={2}>
-          <div className="h-100 p-3">
-            <SideNav />
-          </div>
-        </Col>
-        <Col className={styles.scrollableContent}>
-          <div className="h-100 pt-3 pe-3 pb-3 ps-2">
-            <div className="h-100">
-              <TopNavSearch
-                searchInput={searchInput}
-                filteredData={filteredData}
-                setFilteredData={setFilteredData}
-                allMovies={allMovies}
-                setSearchInput={setSearchInput}
-              />
-              <div>
-                {searchInput.length === 0 && filteredData.length === 0 ? (
-                  <Outlet context={contextValue} />
-                ) : (
-                  <div className="text-light mt-4">
-                    <p className="mt-1">
-                      {filteredData && filteredData.length} results found for
-                    </p>
-                    <h4>{searchInput}</h4>
-                    <Row className="mt-4">
-                      {filteredData.map((movie, index) => (
-                        <SearchResultsMovieCard
-                          setShowModal={setShowModal}
-                          movie={movie}
-                          setMovie={setMovie}
-                          key={index}
-                        />
-                      ))}
-                    </Row>
-                  </div>
-                )}
+      {!location.pathname.includes("play") ? (
+        <Row className={`${styles.layoutRow} h-100`}>
+          <Col className={styles.fixedSideNav} xs={2}>
+            <div className="h-100 p-3">
+              <SideNav />
+            </div>
+          </Col>
+          <Col className={styles.scrollableContent}>
+            <div className="h-100 pt-3 pe-3 pb-3 ps-2">
+              <div className="h-100">
+                <TopNavSearch
+                  searchInput={searchInput}
+                  filteredData={filteredData}
+                  setFilteredData={setFilteredData}
+                  allMovies={allMovies}
+                  setSearchInput={setSearchInput}
+                />
+                <div>
+                  {searchInput.length === 0 && filteredData.length === 0 ? (
+                    <Outlet context={contextValue} />
+                  ) : (
+                    <div className="text-light mt-4">
+                      <p className="mt-1">
+                        {filteredData && filteredData.length} results found for
+                      </p>
+                      <h4>{searchInput}</h4>
+                      <Row className="mt-4">
+                        {filteredData.map((movie, index) => (
+                          <SearchResultsMovieCard
+                            setShowModal={setShowModal}
+                            movie={movie}
+                            setMovie={setMovie}
+                            key={index}
+                          />
+                        ))}
+                      </Row>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        </Col>
-      </Row>
-      : 
-      <MoviePlayer playMovie={playMovie} moviePlayed={moviePlayed}/>
-}
+          </Col>
+        </Row>
+      ) : (
+        <MoviePlayer playMovie={playMovie} moviePlayed={moviePlayed} />
+      )}
     </div>
-    
   );
 };
 

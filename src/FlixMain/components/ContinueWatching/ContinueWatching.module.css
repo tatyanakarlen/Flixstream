@@ -1,6 +1,7 @@
 .continueWatching {
   background-color: var(--darkGreyBG);
   border-radius: var();
+  width: 28rem;
 }
 
 .continueWatching img {

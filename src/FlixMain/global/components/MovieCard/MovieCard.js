@@ -8,6 +8,7 @@ import { MdOutlinePlaylistPlay } from "react-icons/md";
 import MovieYearLength from "../MovieYearLength/MovieYearLength";
 import PlayBTN from "../PlayBTN/PlayBTN";
 import styles from "./MovieCard.module.css";
+import ImgOnclickShowsDetail from "../ImgOnclickShowsDetail/ImgOnclickShowsDetail";
 
 const MovieCard = ({ movie, setMovie, setShowModal }) => {
   const navigate = useNavigate();
@@ -20,16 +21,11 @@ const MovieCard = ({ movie, setMovie, setShowModal }) => {
           <div className="d-flex w-100 justify-content-end">
             <BsThreeDots role="button" className={`${styles.icon} fs-3 me-1`} />
           </div>
-
-          <div className={`${styles.imgContainer} mt-1`}>
-            <Image fluid src={movie.image} className="w-100 mt-1" />
-            <div
-              onClick={() => setMovie(movie.id)}
-              className={styles.detailsIconDiv}
-            >
-              <MdOutlinePlaylistPlay />
-            </div>
-          </div>
+          <ImgOnclickShowsDetail
+            src={movie.image}
+            onClick={() => setMovie(movie.id)}
+            height="13rem"
+          />
 
           <h5 className="fw-semibold mt-4">{movie.title}</h5>
 

@@ -9,9 +9,11 @@ import CustomProgress from "../../global/components/CustomProgress/CustomProgres
 import ContinueWatching from "../ContinueWatching/ContinueWatching";
 import { CgPlayListRemove } from "react-icons/cg";
 import ScrollableList from "../../global/components/ScrollableList/ScrollableList";
+import ImgOnclickShowsDetail from "../../global/components/ImgOnclickShowsDetail/ImgOnclickShowsDetail";
 
 const MyList = () => {
-  const { allMovies, setMovie, setShowModal } = useOutletContext();
+  const { allMovies, setMovie, setShowModal, continueWatching } =
+    useOutletContext();
   return (
     <div>
       <h4 className="mt-4 text-light fw-semibold">My list</h4>
@@ -19,16 +21,15 @@ const MyList = () => {
         {/* <div className={`${styles.listContainer} mt-2`}>
         <ul className={`${styles.list} text-light`}> */}
         {allMovies.map((movie, index) => (
-          <li key={index} className={`${styles.cardContainer} scrollableListCardContainer p-3`}>
-            <div className={`${styles.imgContainer}`}>
-              <Image fluid src={movie.image} className="w-100 mt-1" />
-              <div
-                onClick={() => setMovie(movie.id)}
-                className={styles.detailsIconDiv}
-              >
-                <MdOutlinePlaylistPlay />
-              </div>
-            </div>
+          <li
+            key={index}
+            className={`${styles.cardContainer} scrollableListCardContainer p-3 text-light`}
+          >
+            <ImgOnclickShowsDetail
+              src={movie.image}
+              onClick={() => setMovie(movie.id)}
+              height="11rem"
+            />
             <div className="d-flex w-100 justify-content-between align-items-center">
               <h5 className="fw-semibold mt-3">{movie.title}</h5>
               <div className="mt-2">
@@ -60,12 +61,19 @@ const MyList = () => {
             <div></div>
           </li>
         ))}
-        {/* </ul>
-        
-       
-      </div> */}
+     
       </ScrollableList>
-      <ContinueWatching />
+      <h4 className="mt-4 text-light fw-semibold">Continue watching</h4>
+      <ScrollableList>
+        {continueWatching.map((movie, index) => (
+          <li
+            key={index}
+            className={`scrollableListCardContainer`}
+          >
+            <ContinueWatching movie={movie} />
+          </li>
+        ))}
+      </ScrollableList>
     </div>
   );
 };
