@@ -60,8 +60,24 @@ body {
   color: #2d2d2d !important;
 }
 
+.lgBTNPadding {
+  padding: 0.3rem 2.5rem !important;
+}
+
+.smBTNPadding {
+  padding: 0.1rem 1rem !important;
+}
+
 .blackContainer {
   background-color: black;
+}
+.scrollableListCardContainer {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  flex-shrink: 0;
+  align-items: center;
+  transition: all 0.2s ease 0.1s;
 }
 
 

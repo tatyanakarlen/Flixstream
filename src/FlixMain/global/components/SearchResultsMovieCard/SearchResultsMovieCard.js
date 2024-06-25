@@ -36,6 +36,7 @@ const SearchResultsMovieCard = ({ movie, setMovie, setShowModal }) => {
               movieId={movie && movie.id}
               movie={movie && movie}
               setShowModal={setShowModal}
+              padding="lgBTNPadding"
             />
           </div>
           <MovieYearLength length={movie.length} year={movie.year} />

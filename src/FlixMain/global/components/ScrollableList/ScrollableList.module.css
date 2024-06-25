@@ -1,0 +1,32 @@
+.listContainer {
+    overflow: hidden;
+  }
+  
+  .list {
+    display: flex;
+    overflow-x: scroll;
+    list-style: none;
+    padding: 0;
+    margin: 1.1rem 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    gap: 2rem;
+  }
+  
+  .list::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .list li {
+    
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    flex-shrink: 0;
+    align-items: center;
+    transition: all 0.2s ease 0.1s;
+    /* background-color: var(--darkGreyBG);
+    border-radius: 15px;
+    width: 22rem; */
+    
+  }

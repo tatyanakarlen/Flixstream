@@ -53,15 +53,11 @@ const DetailsModal = ({
               movieId={movie && movie.id}
               movie={movie && movie}
               setShowModal={setShowModal}
-            //   click={() => {
-            //     console.log("clicked!");
-            //     navigate(`/flixStream/play/${movie && movie.id}`);
-            //     setShowModal(false);
-            //   }}
               text="Play"
               textColor="text-light"
               bgColor="redBTNbg"
               icon={true}
+              padding="lgBTNPadding"
             />
           </div>
           <p className="mt-4">{movie && movie.longDescription}</p>

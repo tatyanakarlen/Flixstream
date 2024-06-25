@@ -11,7 +11,7 @@ const PlayBTN = ({
   icon,
   bgColor,
   textColor,
-
+  padding, 
   variant,
   setShowModal,
   movieId,
@@ -26,7 +26,7 @@ const PlayBTN = ({
         setShowModal(false);
       }}
       variant={variant}
-      className={`${styles.btn} ${bgColor} ${textColor} d-flex align-items-center justify-content-center gap-2 rounded`}
+      className={`${padding} ${styles.btn} ${bgColor} ${textColor} d-flex align-items-center justify-content-center gap-2 rounded`}
     >
       {icon && <IoPlaySharp />}
 
