@@ -9,6 +9,8 @@ import MovieYearLength from "../MovieYearLength/MovieYearLength";
 import PlayBTN from "../PlayBTN/PlayBTN";
 import styles from "./MovieCard.module.css";
 import ImgOnclickShowsDetail from "../ImgOnclickShowsDetail/ImgOnclickShowsDetail";
+import { LuListPlus } from "react-icons/lu";
+import { MdPlaylistAdd } from "react-icons/md";
 
 const MovieCard = ({ movie, setMovie, setShowModal }) => {
   const navigate = useNavigate();
@@ -26,8 +28,10 @@ const MovieCard = ({ movie, setMovie, setShowModal }) => {
             onClick={() => setMovie(movie.id)}
             height="13rem"
           />
-
-          <h5 className="fw-semibold mt-4">{movie.title}</h5>
+          <div className="mt-3 d-flex justify-content-between w-100 align-items-center">
+            <h5 className="fw-semibold">{movie.title}</h5>
+            <MdPlaylistAdd className="fs-3 mb-2"/>
+          </div>
 
           <small className="pe-4">{movie.description}</small>
         </div>

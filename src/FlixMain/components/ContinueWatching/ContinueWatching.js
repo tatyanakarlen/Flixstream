@@ -18,7 +18,7 @@ const ContinueWatching = ({ movie }) => {
         </div>
       </div>
       <div className={`${styles.playBTN} p-2 me-3`}>
-        <FaPlay className="fs-4" />
+        <FaPlay className="fs-5" />
       </div>
     </div>
   );

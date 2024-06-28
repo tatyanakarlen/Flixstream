@@ -28,9 +28,9 @@ const SideNav = () => {
       icon: <FaThList />,
     },
     {
-      text: "Offline",
-      link: "/",
-      icon: <RiCloudOffLine />,
+      text: "Profile",
+      link: "/flixStream/profile-settings",
+      icon: <FaGear />,
     },
   ];
   return (
@@ -42,15 +42,15 @@ const SideNav = () => {
         <div className="mt-3 d-flex flex-column gap-3">
           {links.map((link, index) => (
             <Link className="text-light text-decoration-none" to={link.link}>
-            <span
-              key={index}
-              className={`d-flex align-items-center gap-3 px-3 py-2 rounded ${
-                styles.link
-              } ${location.pathname === link.link ? styles.activeLink : ""}`}
-            >
-              <div className="fs-6 mb-1">{link.icon}</div>
-              <span>{link.text}</span>
-            </span>
+              <span
+                key={index}
+                className={`d-flex align-items-center gap-3 px-3 py-2 rounded ${
+                  styles.link
+                } ${location.pathname === link.link ? styles.activeLink : ""}`}
+              >
+                <div className="fs-6 mb-1">{link.icon}</div>
+                <span>{link.text}</span>
+              </span>
             </Link>
           ))}
         </div>
@@ -74,9 +74,9 @@ const SideNav = () => {
             className={`d-flex align-items-center gap-3 px-3 py-2 rounded ${styles.link}`}
           >
             <span className="fs-6 mb-1">
-              <FaGear />
+              <RiCloudOffLine />
             </span>
-            <div className="fs-6 mb-1">Profile</div>
+            <div className="fs-6 mb-1">Offline</div>
           </span>
           <span
             className={`d-flex align-items-center gap-3 px-3 py-2 rounded ${styles.link}`}

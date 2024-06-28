@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./DiscoverNewReleases.module.css";
 import { Row, Button } from "react-bootstrap";
 import MovieCard from "../../global/components/MovieCard/MovieCard";
+import PaginationBTN from "../../global/components/PaginationBTN/PaginationBTN";
 
 const DiscoverNewReleases = ({ allMovies, setMovie, setShowModal }) => {
   const tags = ["All", "Watched", "Saved", "Recommended", "History"];
@@ -18,6 +19,8 @@ const DiscoverNewReleases = ({ allMovies, setMovie, setShowModal }) => {
     setNext(next - imagePerRow);
   };
 
+  const showLess = next >= allMovies.length;
+
   return (
     <div className={`${styles.container} py-3 d-flex flex-column mt-3`}>
       <h4 className="text-light fw-semibold">Discover New Releases</h4>
@@ -33,17 +36,18 @@ const DiscoverNewReleases = ({ allMovies, setMovie, setShowModal }) => {
       </div>
       <Row className="mt-5">
         {allMovies?.slice(0, next)?.map((movie, index) => (
-          <MovieCard movie={movie} key={index} setMovie={setMovie} setShowModal={setShowModal}/>
+          <MovieCard
+            movie={movie}
+            key={index}
+            setMovie={setMovie}
+            setShowModal={setShowModal}
+          />
         ))}
       </Row>
-
-      <Button
-        onClick={next === allMovies.length ? handleLessImage : handleMoreImage}
-        variant="light"
-        className={`${styles.btn} rounded-pill fw-semibold align-self-center mt-4`}
-      >
-        {next === allMovies.length ? "See less" : "Load more"}
-      </Button>
+      <PaginationBTN
+        onClick={showLess ? handleLessImage : handleMoreImage}
+        text={showLess ? "See less" : "Load more"}
+      />
     </div>
   );
 };
