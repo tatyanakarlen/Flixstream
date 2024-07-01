@@ -1,13 +1,6 @@
 .btn {
   border: 0 !important;
-  /* padding: 0.3rem 2.5rem !important; */
+  padding: 0.3rem 2.5rem !important;
   font-size: 1rem !important;
 }
 
-.lgPadding {
-  padding: 0.3rem 2.5rem !important;
-}
-
-.smPadding {
-  padding: 0.1rem 1rem !important;
-}
