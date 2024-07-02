@@ -15,32 +15,58 @@ const ProfileSettings = () => {
 
   const image = process.env.PUBLIC_URL + "/images/user-04.jpg";
 
-  const userInfo = [
-    {
-      name: "Stacy Anderson",
-      icon: <AiFillEdit />,
-    },
-    {
-      userName: "stacyStacy84",
-      icon: <FaUser />,
-    },
-    {
-      email: "stacy@email.com",
-      icon: <MdOutlineEmail />,
-    },
-    {
-      streetAddress: "123 Anywhere Street",
-      icon: <FaHouse />,
-    },
-    {
-      zipcode: "M8X0C1",
-      icon: <FaMapPin />,
-    },
-    {
-      city: "Toronto",
-      icon: <FaMapLocationDot />,
-    },
-  ];
+  // const userInfo = [
+  //   {
+  //     name: "Stacy Anderson",
+  //     icon: <AiFillEdit />,
+  //   },
+  //   {
+  //     userName: "stacyStacy84",
+  //     icon: <FaUser />,
+  //   },
+  //   {
+  //     email: "stacy@email.com",
+  //     icon: <MdOutlineEmail />,
+  //   },
+  //   {
+  //     streetAddress: "123 Anywhere Street",
+  //     icon: <FaHouse />,
+  //   },
+  //   {
+  //     zipcode: "M8X0C1",
+  //     icon: <FaMapPin />,
+  //   },
+  //   {
+  //     city: "Toronto",
+  //     icon: <FaMapLocationDot />,
+  //   },
+  // ];
+
+  const userInfo = {
+    name: "Stacy Anderson",
+    userName: "stacyStacy84",
+    email: "stacy@email.com",
+    streetAddress: "123 Anywhere Street",
+    zipcode: "M8X0C1",
+    city: "Toronto",
+  };
+
+  const iconMapping = {
+    name: <AiFillEdit />,
+    userName: <FaUser />,
+    email: <MdOutlineEmail />,
+    streetAddress: <FaHouse />,
+    zipcode: <FaMapPin />,
+    city: <FaMapLocationDot />,
+  };
+
+  const [inputValues, setInputValues] = useState({
+    name: "",
+    email: "",
+    // Add more properties as needed
+  });
+
+ 
 
   const labelMapping = {
     name: "Name",
@@ -223,7 +249,24 @@ const ProfileSettings = () => {
           </Row>
           <h5 className="fw-semibold mt-4 mb-4">Personal Details</h5>
           <Row>
-            {userInfo.map((user, index) => (
+            {Object.keys(userInfo).map((key, index) => (
+               <Col key={index} xs={12} sm={6} className="mb-3">
+                  <div className="d-flex flex-column">
+                        <div className="d-flex align-items-center gap-2">
+                          <span className={`${styles.icon} mb-1`}>
+                          {iconMapping[key]}{" "}
+                          </span>
+                          <small>{labelMapping[key] || key}</small>
+                        </div>
+                        <span className="">{userInfo[key]}</span>
+                      </div>
+
+               </Col>
+
+            ))
+
+            }
+            {/* {userInfo.map((user, index) => (
               <React.Fragment key={index}>
                 {Object.entries(user).map(([key, value]) => {
                   if (key === "icon") return null;
@@ -242,7 +285,7 @@ const ProfileSettings = () => {
                   );
                 })}
               </React.Fragment>
-            ))}
+            ))} */}
           </Row>
         </>
       )}
