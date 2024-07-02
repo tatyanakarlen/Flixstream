@@ -7,11 +7,53 @@ import { BiSolidFilm } from "react-icons/bi";
 import { MdPlaylistAdd } from "react-icons/md";
 import { FaHeart } from "react-icons/fa";
 import { BsHandIndexThumb } from "react-icons/bs";
+import { AiFillEdit } from "react-icons/ai";
+import { FaUser } from "react-icons/fa";
+import { FaHouse } from "react-icons/fa6";
+import { FaMapPin } from "react-icons/fa";
+import { FaMapLocationDot } from "react-icons/fa6";
+import { MdOutlineEmail } from "react-icons/md";
 
 const ProfileSettings = () => {
   const [isEditMode, setIsEditMode] = useState(false);
 
   const image = process.env.PUBLIC_URL + "/images/user-04.jpg";
+
+  const userInfo = [
+    {
+      name: "Stacy Anderson",
+      icon: <AiFillEdit />,
+    },
+    {
+      userName: "stacyStacy84",
+      icon: <FaUser />,
+    },
+    {
+      email: "stacy@email.com",
+      icon: <MdOutlineEmail />,
+    },
+    {
+      streetAddress: "123 Anywhere Street",
+      icon: <FaHouse />,
+    },
+    {
+      zipcode: "M8X0C1",
+      icon: <FaMapPin />,
+    },
+    {
+      city: "Toronto",
+      icon: <FaMapLocationDot />,
+    },
+  ];
+
+  const labelMapping = {
+    name: "Name",
+    userName: "User Name",
+    email: "Email",
+    streetAddress: "Street Adress",
+    zipcode: "Zipcode",
+    city: "City",
+  };
 
   const userWatchHistory = [
     { action: "Watched", number: "120", icon: <BiSolidFilm /> },
@@ -40,7 +82,7 @@ const ProfileSettings = () => {
         <div>i am edit form</div>
       ) : (
         <div>
-          <h4 className="mt-5">Profile Settings</h4>
+          <h4 className="mt-3">Profile Settings</h4>
           <div className="d-flex mt-4 gap-4">
             <Image src={image} height={110} width={110} roundedCircle />
             <div className="d-flex flex-column mt-2">
@@ -105,6 +147,29 @@ const ProfileSettings = () => {
                 </Col>
                 <hr></hr>
               </div>
+            ))}
+          </Row>
+          <h5 className="fw-semibold mt-4 mb-4">Personal Details</h5>
+          <Row>
+            {userInfo.map((user, index) => (
+              <React.Fragment key={index}>
+                {Object.entries(user).map(([key, value]) => {
+                  if (key === "icon") return null;
+                  return (
+                    <Col key={key} xs={12} sm={6} className="mb-3">
+                      <div className="d-flex flex-column">
+                        <div className="d-flex align-items-center gap-2">
+                          <span className={`${styles.icon} mb-1`}>{user.icon} </span>
+                          <small>
+                            {labelMapping[key] || key}
+                          </small>
+                        </div>
+                        <span className="mt-1">{value}</span>
+                      </div>
+                    </Col>
+                  );
+                })}
+              </React.Fragment>
             ))}
           </Row>
         </div>

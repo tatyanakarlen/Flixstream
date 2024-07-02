@@ -12,3 +12,7 @@
     height: 1em !important;
     border: 1px solid #e00606 !important;
 }
+
+.icon {
+    color: var(--brightRed);
+}

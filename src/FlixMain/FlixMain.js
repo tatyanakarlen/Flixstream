@@ -8,6 +8,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { Col, Row } from "react-bootstrap";
 import styles from "./FlixMain.module.css";
 import MoviePlayer from "./components/MoviePlayer/MoviePlayer";
+import ProfileSettings from "./components/ProfileSettings/ProfileSettings";
 
 const FlixMain = () => {
   const location = useLocation();
@@ -394,7 +395,7 @@ const FlixMain = () => {
     setMovie,
     playMovie,
     moviePlayed,
-    continueWatching
+    continueWatching,
   };
 
   return (
@@ -415,13 +416,15 @@ const FlixMain = () => {
           <Col className={styles.scrollableContent}>
             <div className="h-100 pt-3 pe-3 pb-3 ps-2">
               <div className="h-100">
-                <TopNavSearch
-                  searchInput={searchInput}
-                  filteredData={filteredData}
-                  setFilteredData={setFilteredData}
-                  allMovies={allMovies}
-                  setSearchInput={setSearchInput}
-                />
+                {!location.pathname.includes("profile-settings") && (
+                  <TopNavSearch
+                    searchInput={searchInput}
+                    filteredData={filteredData}
+                    setFilteredData={setFilteredData}
+                    allMovies={allMovies}
+                    setSearchInput={setSearchInput}
+                  />
+                )}
                 <div>
                   {searchInput.length === 0 && filteredData.length === 0 ? (
                     <Outlet context={contextValue} />
