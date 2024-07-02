@@ -1,9 +1,7 @@
 import React from "react";
 import styles from "./TopNavSearch.module.css";
 import { FaSearch } from "react-icons/fa";
-import { IoMdNotificationsOff } from "react-icons/io";
-import { Image } from "react-bootstrap";
-import { FaChevronDown } from "react-icons/fa";
+import NotificationsProfileBar from "../NotificationsProfileBar/NotificationsProfileBar";
 
 const TopNavSearch = ({
   searchInput,
@@ -28,7 +26,6 @@ const TopNavSearch = ({
       );
     }
 
-    console.log(filteredData, "filtered data");
   };
   return (
     <div className="d-flex justify-content-between">
@@ -43,14 +40,7 @@ const TopNavSearch = ({
           placeholder="Search for movies"
         ></input>
       </div>
-      <div className="d-flex gap-3 align-items-center">
-        <div className="d-flex align-items-center gap-2 text-light me-2">
-          <IoMdNotificationsOff className="ms-2 fs-5"/>
-          <span>Notifications</span>
-        </div>
-        <Image src={image} height={30} width={30} roundedCircle />
-        <FaChevronDown className="text-light"/>
-      </div>
+      <NotificationsProfileBar />
     </div>
   );
 };
