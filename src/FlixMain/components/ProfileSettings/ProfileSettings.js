@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, Row, Col, Form } from "react-bootstrap";
+import { Image, Row, Col, Form, Modal, Button } from "react-bootstrap";
 import styles from "./ProfileSettings.module.css";
 import CustomBTN from "../../global/components/CustomBTN/CustomBTN";
 import { BiSolidFilm } from "react-icons/bi";
@@ -8,39 +8,17 @@ import { BsHandIndexThumb } from "react-icons/bs";
 import { AiFillEdit } from "react-icons/ai";
 import { FaUser, FaSave, FaMapPin, FaHeart, FaPencilAlt } from "react-icons/fa";
 import { FaHouse, FaMapLocationDot } from "react-icons/fa6";
+import EditForm from "./EditForm/EditForm";
 import NotificationsProfileBar from "../../global/components/NotificationsProfileBar/NotificationsProfileBar";
 
 const ProfileSettings = () => {
   const [isEditMode, setIsEditMode] = useState(false);
+  const [showEditForm, setShowEditForm] = useState(false);
+
+  const handleClose = () => setShowEditForm(false);
+  const handleShow = () => setShowEditForm(true);
 
   const image = process.env.PUBLIC_URL + "/images/user-04.jpg";
-
-  // const userInfo = [
-  //   {
-  //     name: "Stacy Anderson",
-  //     icon: <AiFillEdit />,
-  //   },
-  //   {
-  //     userName: "stacyStacy84",
-  //     icon: <FaUser />,
-  //   },
-  //   {
-  //     email: "stacy@email.com",
-  //     icon: <MdOutlineEmail />,
-  //   },
-  //   {
-  //     streetAddress: "123 Anywhere Street",
-  //     icon: <FaHouse />,
-  //   },
-  //   {
-  //     zipcode: "M8X0C1",
-  //     icon: <FaMapPin />,
-  //   },
-  //   {
-  //     city: "Toronto",
-  //     icon: <FaMapLocationDot />,
-  //   },
-  // ];
 
   const userInfo = {
     name: "Stacy Anderson",
@@ -65,8 +43,6 @@ const ProfileSettings = () => {
     email: "",
     // Add more properties as needed
   });
-
- 
 
   const labelMapping = {
     name: "Name",
@@ -100,6 +76,7 @@ const ProfileSettings = () => {
 
   return (
     <div className="text-light">
+      <EditForm show={showEditForm} handleClose={handleClose} />
       <div className="mt-2 d-flex w-100 align-items-center justify-content-between">
         <h4>Profile Settings</h4>
         <NotificationsProfileBar />
@@ -113,7 +90,7 @@ const ProfileSettings = () => {
           </small>
           <div className="d-flex gap-2 mt-2">
             <CustomBTN
-              text={isEditMode ? "Save Changes" : "Edit Profile"}
+              text="Edit Profile"
               textColor="text-light"
               bgColor="redBTNbg"
               icon={
@@ -124,7 +101,7 @@ const ProfileSettings = () => {
                 )
               }
               padding="smBTNPadding"
-              onClick={() => setIsEditMode(!isEditMode)}
+              onClick={handleShow}
             />
             <CustomBTN
               text="Manage plan"
@@ -163,7 +140,11 @@ const ProfileSettings = () => {
             <Row className="mb-3">
               <Form.Group as={Col} md="8" controlId="validationCustom03">
                 <Form.Label>Email Address</Form.Label>
-                <Form.Control type="text" placeholder="example@email.com" required />
+                <Form.Control
+                  type="text"
+                  placeholder="example@email.com"
+                  required
+                />
                 <Form.Control.Feedback type="invalid">
                   Please provide a valid city.
                 </Form.Control.Feedback>
@@ -172,7 +153,11 @@ const ProfileSettings = () => {
             <Row className="mb-3">
               <Form.Group as={Col} md="8" controlId="validationCustom03">
                 <Form.Label>Street Address</Form.Label>
-                <Form.Control type="text" placeholder="Enter your street address" required />
+                <Form.Control
+                  type="text"
+                  placeholder="Enter your street address"
+                  required
+                />
                 <Form.Control.Feedback type="invalid">
                   Please provide a valid city.
                 </Form.Control.Feedback>
@@ -200,8 +185,23 @@ const ProfileSettings = () => {
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
             </Row>
-           
           </Form>
+          <div className="d-flex align-items-start">
+            <CustomBTN
+              text={isEditMode ? "Save Changes" : "Edit Profile"}
+              textColor="text-light"
+              bgColor="redBTNbg"
+              icon={
+                isEditMode ? (
+                  <FaSave className="fs-6" />
+                ) : (
+                  <FaPencilAlt className="fs-6" />
+                )
+              }
+              padding="smBTNPadding"
+              onClick={() => setIsEditMode(!isEditMode)}
+            />
+          </div>
         </div>
       ) : (
         <>
@@ -250,22 +250,18 @@ const ProfileSettings = () => {
           <h5 className="fw-semibold mt-4 mb-4">Personal Details</h5>
           <Row>
             {Object.keys(userInfo).map((key, index) => (
-               <Col key={index} xs={12} sm={6} className="mb-3">
-                  <div className="d-flex flex-column">
-                        <div className="d-flex align-items-center gap-2">
-                          <span className={`${styles.icon} mb-1`}>
-                          {iconMapping[key]}{" "}
-                          </span>
-                          <small>{labelMapping[key] || key}</small>
-                        </div>
-                        <span className="">{userInfo[key]}</span>
-                      </div>
-
-               </Col>
-
-            ))
-
-            }
+              <Col key={index} xs={12} sm={6} className="mb-3">
+                <div className="d-flex flex-column">
+                  <div className="d-flex align-items-center gap-2">
+                    <span className={`${styles.icon} mb-1`}>
+                      {iconMapping[key]}{" "}
+                    </span>
+                    <small>{labelMapping[key] || key}</small>
+                  </div>
+                  <span className="">{userInfo[key]}</span>
+                </div>
+              </Col>
+            ))}
             {/* {userInfo.map((user, index) => (
               <React.Fragment key={index}>
                 {Object.entries(user).map(([key, value]) => {
