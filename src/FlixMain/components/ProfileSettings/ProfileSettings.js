@@ -6,9 +6,15 @@ import { BiSolidFilm } from "react-icons/bi";
 import { MdPlaylistAdd, MdOutlineEmail } from "react-icons/md";
 import { BsHandIndexThumb } from "react-icons/bs";
 import { AiFillEdit } from "react-icons/ai";
-import { FaUser, FaSave, FaMapPin, FaHeart, FaPencilAlt } from "react-icons/fa";
-import { FaHouse, FaMapLocationDot } from "react-icons/fa6";
-import EditForm from "./EditForm/EditForm";
+import {
+  FaUser,
+  FaSave,
+  FaMapPin,
+  FaHeart,
+  FaPencilAlt,
+  FaGlobe,
+} from "react-icons/fa";
+import { FaHouse, FaMapLocationDot, FaClipboardUser } from "react-icons/fa6";
 import NotificationsProfileBar from "../../global/components/NotificationsProfileBar/NotificationsProfileBar";
 
 const ProfileSettings = () => {
@@ -21,21 +27,25 @@ const ProfileSettings = () => {
   const image = process.env.PUBLIC_URL + "/images/user-04.jpg";
 
   const userInfo = {
-    name: "Stacy Anderson",
+    firstName: "Stacy",
+    lastName: "Anderson",
     userName: "stacyStacy84",
     email: "stacy@email.com",
     streetAddress: "123 Anywhere Street",
     zipcode: "M8X0C1",
     city: "Toronto",
+    country: "Canada",
   };
 
   const iconMapping = {
-    name: <AiFillEdit />,
+    firstName: <AiFillEdit />,
+    lastName: <FaClipboardUser />,
     userName: <FaUser />,
     email: <MdOutlineEmail />,
     streetAddress: <FaHouse />,
     zipcode: <FaMapPin />,
     city: <FaMapLocationDot />,
+    country: <FaGlobe />,
   };
 
   const [inputValues, setInputValues] = useState({
@@ -45,12 +55,14 @@ const ProfileSettings = () => {
   });
 
   const labelMapping = {
-    name: "Name",
+    firstName: "First Name",
+    lastName: "Last Name",
     userName: "User Name",
     email: "Email",
     streetAddress: "Street Adress",
     zipcode: "Zipcode",
     city: "City",
+    country: "Country",
   };
 
   const userWatchHistory = [
@@ -76,7 +88,6 @@ const ProfileSettings = () => {
 
   return (
     <div className="text-light">
-      <EditForm show={showEditForm} handleClose={handleClose} />
       <div className="mt-2 d-flex w-100 align-items-center justify-content-between">
         <h4>Profile Settings</h4>
         <NotificationsProfileBar />
@@ -90,7 +101,8 @@ const ProfileSettings = () => {
           </small>
           <div className="d-flex gap-2 mt-2">
             <CustomBTN
-              text="Edit Profile"
+              onClick={() => setIsEditMode(!isEditMode)}
+              text={isEditMode ? "Save changes" : "Edit profile"}
               textColor="text-light"
               bgColor="redBTNbg"
               icon={
@@ -101,44 +113,78 @@ const ProfileSettings = () => {
                 )
               }
               padding="smBTNPadding"
-              onClick={handleShow}
+              // onClick={handleShow}
             />
             <CustomBTN
-              text="Manage plan"
+              text={isEditMode ? "Cancel" : "Manage plan"}
               textColor="text-dark"
               variant="light"
               padding="smBTNPadding"
+              onClick={() => setIsEditMode(false)}
             />
           </div>
         </div>
       </div>
       {isEditMode ? (
         <div className="mt-5">
-          <Form>
-            <Row className="mb-3">
-              <Form.Group as={Col} md="4" controlId="validationCustom01">
-                <Form.Label>Username</Form.Label>
+          <Form className={styles.form}>
+            <Row className={`${styles.row} mb-3`}>
+              <Form.Group
+                className={styles.formGroupCol}
+                as={Col}
+                md="4"
+                controlId="validationCustom01"
+              >
+                <Form.Label>First Name</Form.Label>
                 <Form.Control
                   required
                   type="text"
-                  placeholder="Enter your username"
+                  placeholder="Enter your first name"
                   // defaultValue="Mark"
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationCustom02">
-                <Form.Label>Name</Form.Label>
+              <Form.Group
+                className={styles.formGroupCol}
+                as={Col}
+                md="4"
+                controlId="validationCustom02"
+              >
+                <Form.Label>Last Name</Form.Label>
                 <Form.Control
                   required
                   type="text"
-                  placeholder="Last name"
-                  defaultValue="Otto"
+                  placeholder="Enter your last name"
+                  // defaultValue="Otto"
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
             </Row>
             <Row className="mb-3">
-              <Form.Group as={Col} md="8" controlId="validationCustom03">
+              <Form.Group
+                className={styles.formGroupCol}
+                as={Col}
+                md="8"
+                controlId="validationCustom03"
+              >
+                <Form.Label>Username</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="example@email.com"
+                  required
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please provide a username.
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Row>
+            <Row className="mb-3">
+              <Form.Group
+                className={styles.formGroupCol}
+                as={Col}
+                md="8"
+                controlId="validationCustom03"
+              >
                 <Form.Label>Email Address</Form.Label>
                 <Form.Control
                   type="text"
@@ -146,62 +192,75 @@ const ProfileSettings = () => {
                   required
                 />
                 <Form.Control.Feedback type="invalid">
-                  Please provide a valid city.
+                  Please provide a valid email address.
                 </Form.Control.Feedback>
               </Form.Group>
             </Row>
             <Row className="mb-3">
-              <Form.Group as={Col} md="8" controlId="validationCustom03">
-                <Form.Label>Street Address</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter your street address"
-                  required
-                />
-                <Form.Control.Feedback type="invalid">
-                  Please provide a valid city.
-                </Form.Control.Feedback>
-              </Form.Group>
-            </Row>
-            <Row className="mb-3">
-              <Form.Group as={Col} md="4" controlId="validationCustom01">
-                <Form.Label>ZIP Code</Form.Label>
+              <Form.Group
+                className={styles.formGroupCol}
+                as={Col}
+                md="4"
+                controlId="validationCustom01"
+              >
+                <Form.Label>Country</Form.Label>
                 <Form.Control
                   required
                   type="text"
-                  placeholder="Enter your zip code"
+                  placeholder="Select country"
                   // defaultValue="Mark"
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationCustom02">
+              <Form.Group
+                className={styles.formGroupCol}
+                as={Col}
+                md="4"
+                controlId="validationCustom02"
+              >
                 <Form.Label>City</Form.Label>
                 <Form.Control
                   required
                   type="text"
-                  placeholder="Enter your city"
-                  defaultValue="Otto"
+                  placeholder="Select country"
+                  // defaultValue="Otto"
+                />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              </Form.Group>
+            </Row>
+            <Row className="mb-3">
+              <Form.Group
+                className={styles.formGroupCol}
+                as={Col}
+                md="4"
+                controlId="validationCustom01"
+              >
+                <Form.Label>Province</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="Select province"
+                  // defaultValue="Mark"
+                />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group
+                className={styles.formGroupCol}
+                as={Col}
+                md="4"
+                controlId="validationCustom02"
+              >
+                <Form.Label>ZIP Code</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  placeholder="Enter ZIP Code"
+                  // defaultValue="Otto"
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
             </Row>
           </Form>
-          <div className="d-flex align-items-start">
-            <CustomBTN
-              text={isEditMode ? "Save Changes" : "Edit Profile"}
-              textColor="text-light"
-              bgColor="redBTNbg"
-              icon={
-                isEditMode ? (
-                  <FaSave className="fs-6" />
-                ) : (
-                  <FaPencilAlt className="fs-6" />
-                )
-              }
-              padding="smBTNPadding"
-              onClick={() => setIsEditMode(!isEditMode)}
-            />
-          </div>
         </div>
       ) : (
         <>

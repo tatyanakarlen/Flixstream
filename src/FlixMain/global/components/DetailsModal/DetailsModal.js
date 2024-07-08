@@ -97,9 +97,6 @@ const DetailsModal = ({
             <HeartLikes likes={movie && movie.likes} altBG={true} />
           </div>
         </div>
-
-        {/* creator: "Andy Breckman", 
-      genres: ["Adventure", "Mystery", "Thriller"] */}
       </div>
     </Modal>
   );
