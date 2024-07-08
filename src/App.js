@@ -17,6 +17,7 @@ import Browse from "./FlixMain/components/Browse/Browse";
 import Discover from "./FlixMain/components/Discover/Discover";
 import MyList from "./FlixMain/components/MyList/MyList";
 import ProfileSettings from "./FlixMain/components/ProfileSettings/ProfileSettings";
+import Welcome from "./FlixMain/components/Welcome/Welcome";
 
 {
   /* <Route
@@ -39,12 +40,13 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/flixStream" element={<FlixMain />}>
-          <Route path="/flixStream" element={<Browse />} />
-          <Route path="/flixStream/discover" element={<Discover />} />
-          <Route path="/flixStream/my-list" element={<MyList />} />
-          <Route path="/flixStream/play/:movieId" element={<MoviePlayer />} />
-          <Route path="/flixStream/profile-settings" element={<ProfileSettings />} />
+      <Route path="/" element={<Welcome />} />
+        <Route path="/dashboard" element={<FlixMain />}>
+          <Route path="/dashboard" element={<Browse />} />
+          <Route path="/dashboard/discover" element={<Discover />} />
+          <Route path="/dashboard/my-list" element={<MyList />} />
+          <Route path="/dashboard/play/:movieId" element={<MoviePlayer />} />
+          <Route path="/dashboard/profile-settings" element={<ProfileSettings />} />
         </Route>
         <Route path="/swiftBooks" element={<BooksMain />} />
         <Route path="/" element={<Home />} />
