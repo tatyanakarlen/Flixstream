@@ -14,22 +14,22 @@ const SideNav = () => {
   const links = [
     {
       text: "Browse",
-      link: "/flixStream",
+      link: "/dashboard",
       icon: <BiSolidFilm />,
     },
     {
       text: "Discover",
-      link: "/flixStream/discover",
+      link: "/dashboard/discover",
       icon: <FaSearch />,
     },
     {
       text: "My List",
-      link: "/flixStream/my-list",
+      link: "/dashboard/my-list",
       icon: <FaThList />,
     },
     {
       text: "Profile",
-      link: "/flixStream/profile-settings",
+      link: "/dashboard/profile-settings",
       icon: <FaGear />,
     },
   ];

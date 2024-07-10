@@ -22,7 +22,7 @@ const PlayBTN = ({
   return (
     <Button
       onClick={() => {
-        navigate(`/flixStream/play/${movie && movieId}`);
+        navigate(`/dashboard/play/${movie && movieId}`);
         setShowModal(false);
       }}
       variant={variant}

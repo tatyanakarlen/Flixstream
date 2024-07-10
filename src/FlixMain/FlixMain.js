@@ -21,8 +21,6 @@ const FlixMain = () => {
   const sciFi = process.env.PUBLIC_URL + "/images/sci-fi.jpg";
   const people = process.env.PUBLIC_URL + "/images/people.jpg";
 
-  console.log(searchInput.length, "search input");
-  console.log(filteredData.length, "filtered data");
 
   const setMovie = (id) => {
     setSelectedMovie(id);

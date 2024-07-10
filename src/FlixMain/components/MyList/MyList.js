@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import styles from "./MyList.module.css";
 import { useOutletContext } from "react-router-dom";
-import { MdOutlinePlaylistPlay } from "react-icons/md";
-import { Image, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import PlayBTN from "../../global/components/PlayBTN/PlayBTN";
 import MovieYearLength from "../../global/components/MovieYearLength/MovieYearLength";
 import CustomProgress from "../../global/components/CustomProgress/CustomProgress";
@@ -13,6 +12,7 @@ import ImgOnclickShowsDetail from "../../global/components/ImgOnclickShowsDetail
 import { FaEye } from "react-icons/fa";
 import { MdPlaylistAdd } from "react-icons/md";
 import PaginationBTN from "../../global/components/PaginationBTN/PaginationBTN";
+import BasicMovieCard from "../../global/components/BasicMovieCard/BasicMovieCard";
 
 const MyList = () => {
   const { allMovies, setMovie, setShowModal, continueWatching } =
@@ -89,24 +89,7 @@ const MyList = () => {
       <h4 className="mt-3 text-light fw-semibold">Recommended</h4>
       <Row className="mt-4">
         {allMovies?.slice(0, next)?.map((movie, index) => (
-          <Col key={index} sm={12} md={6} lg={3} className="mb-5 text-light">
-            <div className={`d-flex flex-column h-100`}>
-              {" "}
-              <ImgOnclickShowsDetail
-                src={movie.image}
-                onClick={() => setMovie(movie.id)}
-                height="13rem"
-              />
-              <h5 className="mt-4 fw-semibold">{movie.title}</h5>
-              <div className="d-flex justify-content-between">
-                <div className="d-flex gap-2 align-items-center">
-                  <FaEye />
-                  <small>10.5k watching</small>
-                </div>
-                <MdPlaylistAdd className="fs-4" />
-              </div>
-            </div>
-          </Col>
+          <BasicMovieCard key={index} movie={movie} setMovie={setMovie} />
         ))}
       </Row>
       <div className="d-flex w-100 justify-content-center">

@@ -19,22 +19,7 @@ import MyList from "./FlixMain/components/MyList/MyList";
 import ProfileSettings from "./FlixMain/components/ProfileSettings/ProfileSettings";
 import Welcome from "./FlixMain/components/Welcome/Welcome";
 
-{
-  /* <Route
-          path="/recipes/:recipeId"
-          element={
-            <Recipe
-              filteredRecipes={filteredRecipes}
-              loading={loading}
-              setLoading={setLoading}
-              likedRecipes={likedRecipes}
-              setLikedRecipes={setLikedRecipes}
-              isRecipeLiked={isRecipeLiked}
-              setIsRecipeLiked={setIsRecipeLiked}
-            />
-          }
-        /> */
-}
+
 
 function App() {
   return (
