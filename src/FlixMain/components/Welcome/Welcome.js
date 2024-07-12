@@ -12,12 +12,12 @@ const Welcome = () => {
   const people = process.env.PUBLIC_URL + "/images/people.jpg";
 
   const [showDetailsModal, setShowDetailsModal] = useState(false);
-  const [isLoginMode, setIsLoginMode] = useState(false);
+  const [isLoginMode, setIsLoginMode] = useState(false)
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   const handleCloseAuthModal = () => {
-    setIsLoginMode(!isLoginMode);
+    setIsLoginMode(!isLoginMode)
     setShowAuthModal(false);
   };
 
@@ -115,11 +115,12 @@ const Welcome = () => {
         selectedMovie={selectedMovie}
         allMovies={allMovies}
       />
-
+    
       <AuthModal
         handleCloseAuthModal={handleCloseAuthModal}
         show={showAuthModal}
         isLoginMode={isLoginMode}
+        setIsLoginMode={setIsLoginMode}
       />
       <Navbar className="justify-content-between" expand="lg">
         <Navbar.Brand
@@ -142,10 +143,10 @@ const Welcome = () => {
                 onClick={() => setShowAuthModal(true)}
               />
               <Nav.Link
-                onClick={() => {
-                  setIsLoginMode(true);
-                  setShowAuthModal(true);
-                }}
+              onClick={() => {
+                setIsLoginMode(true)
+                setShowAuthModal(true)
+              }}
                 className={`${styles.link} text-nowrap fw-semibold`}
               >
                 Sign in

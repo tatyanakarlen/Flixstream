@@ -6,7 +6,13 @@ import { IoClose } from "react-icons/io5";
 import CustomBTN from "../../../global/components/CustomBTN/CustomBTN";
 import { FcGoogle } from "react-icons/fc";
 
-const AuthModal = ({ show, handleCloseAuthModal, isLoginMode }) => {
+const AuthModal = ({
+  show,
+  handleCloseAuthModal,
+  isLoginMode,
+  setIsLoginMode,
+}) => {
+  console.log(isLoginMode, "isLOginmode");
   return (
     <Modal
       dialogClassName={styles.modal}
@@ -72,28 +78,39 @@ const AuthModal = ({ show, handleCloseAuthModal, isLoginMode }) => {
               </h6>
             </div>
           )}
-          <div className="mt-4">
-            <CustomBTN
-              width="w-100"
-              text={isLoginMode ? "Sign In" : "Sign Up"}
-              textColor="text-light"
-              bgColor="redBTNbg"
-              padding="py-2"
-            />
-          </div>
-          <span className="d-flex mt-3 justify-content-center fw-light">
-            {isLoginMode ? "or sign in with" : "or sign up with"}
-          </span>
-          <div
-            className={`d-flex justify-content-center align-items-center mt-3`}
-          >
-            <div
-              role="button"
-              className={`${styles.googleOAuth} d-flex justify-content-center align-items-center gap-1 rounded-pill py-1 px-2`}
-            >
-              <FcGoogle className="fs-4" />
-              <span>Google</span>
+          <div className="mt-4 d-flex justify-content-between align-items-center">
+            <div className="flex-grow-1">
+              <CustomBTN
+                width="w-100"
+                text={isLoginMode ? "Sign In" : "Sign Up"}
+                textColor="text-light"
+                bgColor="redBTNbg"
+                padding="py-2"
+              />
             </div>
+            <div className="d-flex justify-content-center flex-grow-1 gap-2 align-items-center">
+            {isLoginMode ? 'New user?' : 'Have an account?'}
+              <span
+                role="button"
+                // onClick={() => setIsLoginMode(false)}
+                onClick={
+                  isLoginMode
+                    ? () => setIsLoginMode(false)
+                    : () => setIsLoginMode(true)
+                }
+                className={`${styles.signUpSpan} fw-semibold text-decoration-underline`}
+              >
+                {isLoginMode ? 'Sign up' : 'Login'}
+              </span>
+            </div>
+          </div>
+
+          <div
+            role="button"
+            className={`${styles.googleOAuthBTN} w-100 d-flex gap-2 justify-content-center align-items-center mt-3 w-100`}
+          >
+            <FcGoogle className="fs-4" />
+            <span className="fw-light">Continue with Google</span>
           </div>
         </Form>
       </div>

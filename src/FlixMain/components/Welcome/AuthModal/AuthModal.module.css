@@ -1,8 +1,5 @@
-
-
-
 .modal > :first-child {
-   background-color: #282828 !important; 
+  background-color: #282828 !important;
   padding: 1.25rem;
   border-radius: 14px !important;
 }
@@ -13,7 +10,7 @@
 
 .formInput {
   border: none !important;
-  background-color: #515151 !important; 
+  background-color: #515151 !important;
   height: 2.75rem !important;
   color: white !important;
 }
@@ -24,44 +21,52 @@
 }
 
 .form label {
-    font-weight: 500 !important;
-    font-size: 0.9rem;
+  font-weight: 500 !important;
+  font-size: 0.9rem;
 }
 
 .checkbox {
-    appearance: none !important;
-    border: none !important;
-    width: 15px !important;
-    height: 15px !important;
-    border-radius: 50% !important;
-    background-color: #515151 !important;
-    cursor: pointer !important;
-    display: inline-block !important;
-    position: relative !important;
-  }
-  
-  .checkbox:checked {
-    background-color: grey !important;
-  }
-  
-  .checkbox:checked::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 10px;
-    height: 10px;
-    background-color: white;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-  }
+  appearance: none !important;
+  border: none !important;
+  width: 15px !important;
+  height: 15px !important;
+  border-radius: 50% !important;
+  background-color: #515151 !important;
+  cursor: pointer !important;
+  display: inline-block !important;
+  position: relative !important;
+}
 
-  .termsAndConditionsSpan {
-    color: var(--brightRed); 
-  }
+.checkbox:checked {
+  background-color: grey !important;
+}
 
-  .googleOAuth {
-    background-color: black;
-    width: fit-content;
-  }
+.checkbox:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
 
+.termsAndConditionsSpan {
+  color: var(--brightRed);
+}
+
+.googleOAuthBTN {
+  border: 1px solid #605f5f;
+  padding: 0.4rem 1rem;
+}
+
+.googleOAuthBTN span {
+  color: #eeeeee;
+  font-size: 0.95rem;
+}
+
+.signUpSpan {
+  color: var(--brightRed);
+}
