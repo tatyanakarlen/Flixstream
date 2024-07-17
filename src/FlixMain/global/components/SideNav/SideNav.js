@@ -6,6 +6,7 @@ import { FaThList } from "react-icons/fa";
 import { RiCloudOffLine } from "react-icons/ri";
 import { FaGear } from "react-icons/fa6";
 import { MdLogout } from "react-icons/md";
+import { GoHomeFill } from "react-icons/go";
 import { useLocation, Link } from "react-router-dom";
 import CustomBTN from "../CustomBTN/CustomBTN";
 
@@ -13,14 +14,14 @@ const SideNav = () => {
   const location = useLocation();
   const links = [
     {
-      text: "Browse",
+      text: "Home",
       link: "/dashboard",
-      icon: <BiSolidFilm />,
+      icon: <GoHomeFill />,
     },
     {
       text: "Discover",
       link: "/dashboard/discover",
-      icon: <FaSearch />,
+      icon: <BiSolidFilm />,
     },
     {
       text: "My List",

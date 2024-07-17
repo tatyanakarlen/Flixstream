@@ -1,23 +1,27 @@
 import React, { useState } from "react";
-import { Container, Nav, Navbar, Row } from "react-bootstrap";
+import { Container, Nav, Navbar, Row, Carousel } from "react-bootstrap";
 import { TbMovie } from "react-icons/tb";
 import BasicMovieCard from "../../global/components/BasicMovieCard/BasicMovieCard";
 import CustomBTN from "../../global/components/CustomBTN/CustomBTN";
 import DetailsModal from "../../global/components/DetailsModal/DetailsModal";
 import styles from "./Welcome.module.css";
 import AuthModal from "./AuthModal/AuthModal";
+import useMediaQueries from "../../utils/UseMediaQuery";
 
 const Welcome = () => {
+  const { isTablet, isMobile } = useMediaQueries();
+
+  console.log(isTablet, "isTablet");
   const sciFi = process.env.PUBLIC_URL + "/images/sci-fi.jpg";
   const people = process.env.PUBLIC_URL + "/images/people.jpg";
 
   const [showDetailsModal, setShowDetailsModal] = useState(false);
-  const [isLoginMode, setIsLoginMode] = useState(false)
+  const [isLoginMode, setIsLoginMode] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   const handleCloseAuthModal = () => {
-    setIsLoginMode(!isLoginMode)
+    setIsLoginMode(!isLoginMode);
     setShowAuthModal(false);
   };
 
@@ -115,7 +119,7 @@ const Welcome = () => {
         selectedMovie={selectedMovie}
         allMovies={allMovies}
       />
-    
+
       <AuthModal
         handleCloseAuthModal={handleCloseAuthModal}
         show={showAuthModal}
@@ -131,48 +135,123 @@ const Welcome = () => {
           FlixStream
         </Navbar.Brand>
         <div>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto d-flex gap-3">
-              <CustomBTN
-                text="Register"
-                textColor="text-dark fw-semibold"
-                variant="light"
-                icon={false}
-                padding="px-4"
-                onClick={() => setShowAuthModal(true)}
-              />
-              <Nav.Link
+          <Nav className="me-auto d-flex flex-row gap-3">
+            <CustomBTN
+              text="Register"
+              textColor={isTablet ? "text-light" : "text-dark fw-semibold"}
+              variant={!isTablet && "light"}
+              icon={false}
+              padding="px-4"
+              onClick={() => setShowAuthModal(true)}
+              bgColor={isTablet && "redBTNbg"}
+            />
+            <Nav.Link
               onClick={() => {
-                setIsLoginMode(true)
-                setShowAuthModal(true)
+                setIsLoginMode(true);
+                setShowAuthModal(true);
               }}
-                className={`${styles.link} text-nowrap fw-semibold`}
-              >
-                Sign in
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
+              className={`${styles.link} text-nowrap fw-semibold`}
+            >
+              Sign in
+            </Nav.Link>
+          </Nav>
         </div>
       </Navbar>
       <div className="d-flex justify-content-center align-items-center flex-column flex-grow-1">
-        <h1 className="fw-semibold">Welcome to FlixStream</h1>
-        <h5 className="fw-light mt-1">
-          Stream the latest blockbusters and timeless classics
-        </h5>
-        <div className="mt-3">
-          <CustomBTN
-            text="Sign Up for Free"
-            textColor="text-light"
-            bgColor="redBTNbg"
-          />
-        </div>
-        <h4 className="mt-5">Popular Movies</h4>
-        <Row className="mt-5 w-75">
-          {allMovies.map((movie, index) => (
-            <BasicMovieCard key={index} movie={movie} setMovie={setMovie} />
-          ))}
-        </Row>
+        {isTablet ? (
+          <>
+            <span className={`${styles.accentSpan} mt-4`}></span>
+            <div className="d-flex justify-content-center align-items-center">
+              <h2 className="mt-4 text-center w-75 fw-semibold">
+                Stream the latest films and timeless classics
+              </h2>
+            </div>
+            <Carousel>
+              <Carousel.Item>
+                <div>Slide 1</div>
+              </Carousel.Item>
+              <Carousel.Item>
+                <div>Slide 2</div>
+              </Carousel.Item>
+              <Carousel.Item>
+                <div>Slide 3</div>
+              </Carousel.Item>
+            </Carousel>
+
+            {/* <Carousel
+        controls={false}
+        indicators={false}
+        fade
+        activeIndex={activeIndex}
+        onSelect={() => {}}
+      >
+        {data.map((movie, index) => (
+          <Carousel.Item key={index} className={`${styles.carouselItem}`}>
+            <div className={styles.backgroundImage}>
+              <Image src={flowers} />
+            </div>
+            <div className={styles.overlay}></div>
+            <Row className={`${styles.overlayContent} p-4`}>
+              <Col className="h-100">
+                <div className="h-100">
+                  <Image src={movie.image} />
+                </div>
+              </Col>
+              <Col className="h-100 d-flex flex-column justify-content-center">
+                {" "}
+                <div className={`${styles.textContainer} d-flex flex-column`}>
+                  <h2>{movie.headline}</h2>
+                  <p className="mt-3">{movie.directedBy}</p>
+                  <p className="mb-2">{movie.cast}</p>
+                  <p className="mt-4">{movie.description}</p>
+                  <div className="mt-4 d-flex gap-3">
+                    <PlayBTN
+                      text="Watch now"
+                      movieId={movie && movie.id}
+                      movie={movie && movie}
+                      setShowModal={setShowModal}
+                      icon={true}
+                      textColor="text-light"
+                      bgColor="redBTNbg"
+                    />
+                    <PlayBTN
+                      text="Watch trailer"
+                      textColor="greyBTNText"
+                      variant="light"
+                      icon={false}
+                    />
+                  </div>
+                </div>
+              </Col>
+            </Row>
+          </Carousel.Item>
+        ))}
+      </Carousel> */}
+
+          </>
+        ) : (
+          <div className="d-flex flex-column justify-content-center align-items-center">
+            <h1 className="fw-semibold">Welcome to FlixStream</h1>
+            <h5 className="fw-light mt-1">
+              Stream the latest blockbusters and timeless classics
+            </h5>
+            <div className="mt-3">
+              <CustomBTN
+                text="Sign Up for Free"
+                textColor="text-light"
+                bgColor="redBTNbg"
+              />
+            </div>
+            <h4 className="mt-5">Featured Movies</h4>
+          </div>
+        )}
+        {!isTablet && (
+          <Row className="mt-5 w-100 px-lg-1 px-xl-5">
+            {allMovies.map((movie, index) => (
+              <BasicMovieCard key={index} movie={movie} setMovie={setMovie} />
+            ))}
+          </Row>
+        )}
       </div>
     </div>
   );

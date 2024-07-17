@@ -31,7 +31,7 @@ const TopNavSearch = ({
     <div className="d-flex justify-content-between">
       <div className="w-75 position-relative">
         <FaSearch
-          className={`${styles.searchIcon} text-light position-absolute fs-5`}
+          className={`${styles.searchIcon} text-light position-absolute fs-6`}
         />
         <input
           value={searchInput}

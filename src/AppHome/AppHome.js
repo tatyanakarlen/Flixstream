@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button, Row, Col, Image } from "react-bootstrap";
-import styles from "./Home.module.css";
+import styles from "./AppHome.module.css";
 import { FaStream } from "react-icons/fa";
 import { FaChartBar } from "react-icons/fa";
 

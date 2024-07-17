@@ -3,7 +3,7 @@ import { Image, Row, Col, Button, Carousel } from "react-bootstrap";
 import styles from "./HomePageHero.module.css";
 import PlayBTN from "../../global/components/PlayBTN/PlayBTN";
 
-const HomePageHero = ( {setShowModal} ) => {
+const HomePageHero = ({ setShowModal }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const nature1 = process.env.PUBLIC_URL + "/images/nature1.jpg";
   const nature2 = process.env.PUBLIC_URL + "/images/nature2.jpg";
@@ -74,17 +74,10 @@ const HomePageHero = ( {setShowModal} ) => {
               </Col>
               <Col className="h-100 d-flex flex-column justify-content-center">
                 {" "}
-                <div
-                  className={`${styles.textContainer} d-flex flex-column`}
-                >
+                <div className={`${styles.textContainer} d-flex flex-column`}>
                   <h2>{movie.headline}</h2>
                   <p className="mt-3">{movie.directedBy}</p>
                   <p className="mb-2">{movie.cast}</p>
-                  {/* <div className="d-flex gap-5">
-                    {movie.specs.map((spec, index) => (
-                      <span key={index}>{spec}</span>
-                    ))}
-                  </div> */}
                   <p className="mt-4">{movie.description}</p>
                   <div className="mt-4 d-flex gap-3">
                     <PlayBTN
@@ -95,7 +88,6 @@ const HomePageHero = ( {setShowModal} ) => {
                       icon={true}
                       textColor="text-light"
                       bgColor="redBTNbg"
-
                     />
                     <PlayBTN
                       text="Watch trailer"

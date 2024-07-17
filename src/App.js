@@ -12,12 +12,13 @@ import {
 import FlixMain from "./FlixMain/FlixMain";
 import BooksMain from "./BooksMain/BooksMain";
 import MoviePlayer from "./FlixMain/components/MoviePlayer/MoviePlayer";
-import Home from "./Home/Home";
-import Browse from "./FlixMain/components/Browse/Browse";
+import AppHome from "./AppHome/AppHome";
+import Browse from "./FlixMain/components/Home/Home";
 import Discover from "./FlixMain/components/Discover/Discover";
 import MyList from "./FlixMain/components/MyList/MyList";
 import ProfileSettings from "./FlixMain/components/ProfileSettings/ProfileSettings";
 import Welcome from "./FlixMain/components/Welcome/Welcome";
+import Home from "./FlixMain/components/Home/Home"
 
 
 
@@ -27,14 +28,14 @@ function App() {
       <Routes>
       <Route path="/" element={<Welcome />} />
         <Route path="/dashboard" element={<FlixMain />}>
-          <Route path="/dashboard" element={<Browse />} />
+          <Route path="/dashboard" element={<Home />} />
           <Route path="/dashboard/discover" element={<Discover />} />
           <Route path="/dashboard/my-list" element={<MyList />} />
           <Route path="/dashboard/play/:movieId" element={<MoviePlayer />} />
           <Route path="/dashboard/profile-settings" element={<ProfileSettings />} />
         </Route>
         <Route path="/swiftBooks" element={<BooksMain />} />
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<AppHome />} />
       </Routes>
     </Router>
   );
