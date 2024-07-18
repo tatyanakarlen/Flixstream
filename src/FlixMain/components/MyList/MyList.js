@@ -89,7 +89,7 @@ const MyList = () => {
       <h4 className="mt-3 text-light fw-semibold">Recommended</h4>
       <Row className="mt-4">
         {allMovies?.slice(0, next)?.map((movie, index) => (
-          <BasicMovieCard key={index} movie={movie} setMovie={setMovie} />
+          <BasicMovieCard height="13rem" key={index} movie={movie} setMovie={setMovie} />
         ))}
       </Row>
       <div className="d-flex w-100 justify-content-center">

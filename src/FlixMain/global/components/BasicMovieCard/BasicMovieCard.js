@@ -4,15 +4,15 @@ import ImgOnclickShowsDetail from '../ImgOnclickShowsDetail/ImgOnclickShowsDetai
 import { MdPlaylistAdd } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
 
-const BasicMovieCard = ( {movie, setMovie} ) => {
+const BasicMovieCard = ( {movie, setMovie, height} ) => {
   return (
-    <Col sm={12} md={6} lg={3} className="mb-5 text-light">
+    <Col xs={12} md={6} lg={3} className="mb-5 text-light">
             <div className={`d-flex flex-column h-100`}>
               {" "}
               <ImgOnclickShowsDetail
                 src={movie.image}
                 onClick={() => setMovie(movie.id)}
-                height="13rem"
+                height={height}
               />
               <h5 className="mt-4 fw-semibold">{movie.title}</h5>
               <div className="d-flex justify-content-between">

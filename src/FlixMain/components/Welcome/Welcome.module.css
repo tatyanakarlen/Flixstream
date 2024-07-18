@@ -12,11 +12,23 @@
 }
 
 .image {
-    height: 15rem;
-    width: 100%;
-    object-fit: cover;
+  height: 15rem;
+  width: 100%;
+  object-fit: cover;
 }
 
 .carouselRow {
-    background-color: black;
+  background-color: black;
+}
+
+.carousel > :first-child {
+  bottom: -45px !important;
+}
+
+.carousel > :first-child button {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  margin-right: 4px !important;
+  margin-left: 4px !important;
 }
