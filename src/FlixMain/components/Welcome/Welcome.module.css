@@ -10,3 +10,13 @@
   margin: 0 auto;
   border-radius: 2px;
 }
+
+.image {
+    height: 15rem;
+    width: 100%;
+    object-fit: cover;
+}
+
+.carouselRow {
+    background-color: black;
+}
