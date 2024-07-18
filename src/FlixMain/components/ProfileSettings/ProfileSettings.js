@@ -113,7 +113,6 @@ const ProfileSettings = () => {
                 )
               }
               padding="smBTNPadding"
-              // onClick={handleShow}
             />
             <CustomBTN
               text={isEditMode ? "Cancel" : "Manage plan"}

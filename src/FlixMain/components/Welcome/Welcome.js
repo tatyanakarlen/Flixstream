@@ -17,7 +17,7 @@ import AuthModal from "./AuthModal/AuthModal";
 import useMediaQueries from "../../utils/UseMediaQuery";
 
 const Welcome = () => {
-  const { isTablet, isMobile } = useMediaQueries();
+  const { isTablet, isMobile, isXsMobile } = useMediaQueries();
 
   const sciFi = process.env.PUBLIC_URL + "/images/sci-fi.jpg";
   const people = process.env.PUBLIC_URL + "/images/people.jpg";
@@ -130,7 +130,7 @@ const Welcome = () => {
   const chunkedMovies = chunkArray(allMovies, 2);
 
   return (
-    <div className="text-light py-2 px-4 h-100 d-flex flex-column">
+    <div className={`${styles.welcomePage} text-light d-flex flex-column`}>
       <DetailsModal
         showModal={showDetailsModal}
         setShowModal={setShowDetailsModal}
@@ -144,6 +144,7 @@ const Welcome = () => {
         isLoginMode={isLoginMode}
         setIsLoginMode={setIsLoginMode}
       />
+
       <Navbar className="justify-content-between" expand="lg">
         <Navbar.Brand
           className="d-flex align-items-center gap-2 fw-semibold"
@@ -152,59 +153,61 @@ const Welcome = () => {
           <TbMovie />
           FlixStream
         </Navbar.Brand>
-        <div>
-          <Nav className="me-auto d-flex flex-row gap-3">
-            <CustomBTN
-              text="Register"
-              textColor={
-                isTablet ? "text-light fw-semibold" : "text-dark fw-semibold"
-              }
-              variant={!isTablet && "light"}
-              icon={false}
-              padding="px-4"
-              onClick={() => setShowAuthModal(true)}
-              bgColor={isTablet && "redBTNbg"}
-            />
-            <Nav.Link
-              onClick={() => {
-                setIsLoginMode(true);
-                setShowAuthModal(true);
-              }}
-              className={`${styles.link} text-nowrap fw-semibold`}
-            >
-              Sign in
-            </Nav.Link>
-          </Nav>
-        </div>
+        {!isMobile && (
+          <div>
+            <Nav className="me-auto d-flex flex-row gap-3">
+              <CustomBTN
+                text="Register"
+                textColor={
+                  isTablet ? "text-light fw-semibold" : "text-dark fw-semibold"
+                }
+                variant={!isTablet && "light"}
+                icon={false}
+                padding="px-4"
+                onClick={() => setShowAuthModal(true)}
+                bgColor={isTablet && "redBTNbg"}
+              />
+              <Nav.Link
+                onClick={() => {
+                  setIsLoginMode(true);
+                  setShowAuthModal(true);
+                }}
+                className={`${styles.link} text-nowrap fw-semibold`}
+              >
+                Sign in
+              </Nav.Link>
+            </Nav>
+          </div>
+        )}
       </Navbar>
+
       <div className="d-flex justify-content-center align-items-center flex-column flex-grow-1">
         {isTablet ? (
           <>
+          <div className="d-flex flex-column justify-content-center align-items-center">
             <span className={`${styles.accentSpan} mt-4`}></span>
-            <div className="d-flex justify-content-center align-items-center">
-              <h2 className="mt-5 text-center w-75 fw-semibold">
+            
+              <h2 className="mt-4 text-center w-75 w-xs-100 fw-semibold">
                 Stream the latest films and timeless classics
               </h2>
+           
             </div>
             <div className="w-100 mt-5">
-              <Carousel className={styles.carousel} controls={false} interval={null}>
+              <Carousel
+                className={styles.carousel}
+                controls={false}
+                interval={null}
+              >
                 {chunkArray(allMovies, 2).map((moviePair, index) => (
                   <Carousel.Item className="" key={index}>
                     <Row className={styles.carouselRow}>
                       {moviePair.map((movie, subIndex) => (
-                         <BasicMovieCard height="16rem" key={index} movie={movie} setMovie={setMovie} />
-                        // <Col
-                        //   // xs={12}
-                        //   md={6}
-                        //   key={subIndex}
-                        //   className="d-flex flex-column"
-                        // >
-                        //   <Image
-                        //     className={styles.image}
-                        //     src={movie.image}
-                        //     alt={movie.title}
-                        //   />
-                        // </Col>
+                        <BasicMovieCard
+                          height="16rem"
+                          key={index}
+                          movie={movie}
+                          setMovie={setMovie}
+                        />
                       ))}
                     </Row>
                   </Carousel.Item>
@@ -214,22 +217,43 @@ const Welcome = () => {
           </>
         ) : isMobile ? (
           <>
-            <span className={`${styles.accentSpan} mt-4`}></span>
+            <span className={`${styles.accentSpan} mt-1`}></span>
             <div className="d-flex justify-content-center align-items-center">
-              <h2 className="mt-5 text-center w-75 fw-semibold">
+              <h2
+                className={`${styles.h2} mt-4 text-center w-75 w-sm-100 fw-semibold`}
+              >
                 Stream the latest films and timeless classics
               </h2>
             </div>
-            <div className="w-100 mt-5">
-              <Carousel className={styles.carousel} controls={false} interval={null}>
+            <div className="w-100 mt-4">
+              <Carousel
+                className={styles.carousel}
+                controls={false}
+                interval={null}
+              >
                 {allMovies.map((movie, index) => (
                   <Carousel.Item className="" key={index}>
-                     <Row className={styles.carouselRow}>
-                   <BasicMovieCard height="20rem" key={index} movie={movie} setMovie={setMovie} />
-                   </Row>
+                    <Row className={styles.carouselRow}>
+                      <BasicMovieCard
+                        height={isXsMobile ? "15rem" : "20rem"}
+                        key={index}
+                        movie={movie}
+                        setMovie={setMovie}
+                      />
+                    </Row>
                   </Carousel.Item>
                 ))}
               </Carousel>
+            </div>
+            <div className="mt-2 w-100">
+              <CustomBTN
+                onClick={() => setShowAuthModal(true)}
+                text={"Sign Up/Login"}
+                textColor="text-light fw-semibold"
+                bgColor="redBTNbg"
+                padding="lgBTNPadding"
+                width="w-100"
+              />
             </div>
           </>
         ) : (
@@ -250,7 +274,12 @@ const Welcome = () => {
             </div>
             <Row className="mt-5 w-100 px-lg-1 px-xl-5">
               {allMovies.map((movie, index) => (
-                <BasicMovieCard height="13rem" key={index} movie={movie} setMovie={setMovie} />
+                <BasicMovieCard
+                  height="13rem"
+                  key={index}
+                  movie={movie}
+                  setMovie={setMovie}
+                />
               ))}
             </Row>
           </>

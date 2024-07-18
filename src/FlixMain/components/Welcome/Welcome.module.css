@@ -1,3 +1,8 @@
+.welcomePage {
+  height: 100vh;
+  padding: 0.5rem 1.5rem; 
+}
+
 .link {
   font-size: 0.9rem !important;
 }
@@ -25,10 +30,29 @@
   bottom: -45px !important;
 }
 
+@media (max-width: 767px) {
+  .carousel > :first-child {
+    bottom: -15px !important;
+    padding-bottom: 1rem !important;
+  }
+}
+
 .carousel > :first-child button {
   width: 8px !important;
   height: 8px !important;
   border-radius: 50% !important;
   margin-right: 4px !important;
   margin-left: 4px !important;
+}
+
+@media (max-width: 576px) {
+  .h2 {
+    width: 100% !important;
+  }
+}
+
+@media (max-width: 450px) {
+  .welcomePage {
+    padding: 0 1rem 1rem 1rem;
+  }
 }
