@@ -1,0 +1,11 @@
+.navInner {
+  --bs-nav-link-padding-y: unset !important;
+}
+
+.navLink {
+   color: #989696 !important; 
+}
+
+.activeLink {
+    color: white !important;
+}

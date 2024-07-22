@@ -182,13 +182,6 @@ const Welcome = () => {
       <div className="d-flex justify-content-center align-items-center flex-column flex-grow-1">
         {isTablet ? (
           <div className="d-flex flex-column h-100 justify-content-center">
-            {/* <div className="d-flex flex-column justify-content-center align-items-center">
-              <span className={`${styles.accentSpan} mt-4`}></span>
-
-              <h2 className="mt-4 text-center w-75 w-xs-100 fw-semibold">
-                Stream the latest films and timeless classics
-              </h2>
-            </div> */}
             <div className="d-flex flex-column gap-2 align-items-center">
               <span className={`${styles.accentSpan} mb-3`}></span>
               <h1 className="fw-semibold">Welcome to FlixStream</h1>

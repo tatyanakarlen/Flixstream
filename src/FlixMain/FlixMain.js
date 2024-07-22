@@ -5,10 +5,12 @@ import SearchResultsMovieCard from "./global/components/SearchResultsMovieCard/S
 import SideNav from "./global/components/SideNav/SideNav";
 import TopNavSearch from "./global/components/TopNavSearch/TopNavSearch";
 import { Outlet, useLocation } from "react-router-dom";
-import { Col, Row } from "react-bootstrap";
+import { Col, Row, Nav, Navbar } from "react-bootstrap";
 import styles from "./FlixMain.module.css";
 import MoviePlayer from "./components/MoviePlayer/MoviePlayer";
 import ProfileSettings from "./components/ProfileSettings/ProfileSettings";
+import useMediaQueries from "./utils/UseMediaQuery";
+import MobileNav from "./global/components/MobileNav/MobileNav";
 
 const FlixMain = () => {
   const location = useLocation();
@@ -21,6 +23,7 @@ const FlixMain = () => {
   const sciFi = process.env.PUBLIC_URL + "/images/sci-fi.jpg";
   const people = process.env.PUBLIC_URL + "/images/people.jpg";
 
+  const { isTablet, isMobile, isXsMobile } = useMediaQueries();
 
   const setMovie = (id) => {
     setSelectedMovie(id);
@@ -395,6 +398,64 @@ const FlixMain = () => {
     moviePlayed,
     continueWatching,
   };
+
+  if (isMobile || isTablet) {
+    return (
+      <div>
+        <DetailsModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          selectedMovie={selectedMovie}
+          allMovies={allMovies}
+        />
+        {!location.pathname.includes("play") ? (
+          <Row className={`${styles.layoutRow} h-100`}>
+            <Col>
+              <div className="h-100 pt-3 pe-3 pb-3 ps-2">
+                <div className="h-100">
+                  {!location.pathname.includes("profile-settings") && (
+                    <TopNavSearch
+                      searchInput={searchInput}
+                      filteredData={filteredData}
+                      setFilteredData={setFilteredData}
+                      allMovies={allMovies}
+                      setSearchInput={setSearchInput}
+                    />
+                  )}
+                  <div>
+                    {searchInput.length === 0 && filteredData.length === 0 ? (
+                      <Outlet context={contextValue} />
+                    ) : (
+                      <div className="text-light mt-4">
+                        <p className="mt-1">
+                          {filteredData && filteredData.length} results found
+                          for
+                        </p>
+                        <h4>{searchInput}</h4>
+                        <Row className="mt-4">
+                          {filteredData.map((movie, index) => (
+                            <SearchResultsMovieCard
+                              setShowModal={setShowModal}
+                              movie={movie}
+                              setMovie={setMovie}
+                              key={index}
+                            />
+                          ))}
+                        </Row>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <MobileNav />
+            </Col>
+          </Row>
+        ) : (
+          <MoviePlayer playMovie={playMovie} moviePlayed={moviePlayed} />
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="h-100">
