@@ -158,9 +158,7 @@ const Welcome = () => {
             <Nav className="me-auto d-flex flex-row gap-3">
               <CustomBTN
                 text="Register"
-                textColor={
-                  "text-dark fw-semibold"
-                }
+                textColor={"text-dark fw-semibold"}
                 variant="light"
                 icon={false}
                 padding="px-4"
@@ -192,7 +190,7 @@ const Welcome = () => {
               </h2>
             </div> */}
             <div className="d-flex flex-column gap-2 align-items-center">
-            <span className={`${styles.accentSpan} mb-3`}></span>
+              <span className={`${styles.accentSpan} mb-3`}></span>
               <h1 className="fw-semibold">Welcome to FlixStream</h1>
               <h5 className="fw-light mt-1">
                 Stream the latest blockbusters and timeless classics
@@ -205,7 +203,7 @@ const Welcome = () => {
                   onClick={() => setShowAuthModal(true)}
                 />
               </div>
-              </div>
+            </div>
             <div className="w-100 mt-5">
               <Carousel
                 className={styles.carousel}

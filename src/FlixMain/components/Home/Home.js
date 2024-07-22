@@ -4,8 +4,11 @@ import DiscoverNewReleases from "../DiscoverNewReleases/DiscoverNewReleases";
 import ContinueWatching from "../ContinueWatching/ContinueWatching";
 import { useOutletContext } from "react-router-dom";
 import ScrollableList from "../../global/components/ScrollableList/ScrollableList";
-import { Row } from "react-bootstrap";
+import { Row, Nav, Navbar } from "react-bootstrap";
 import styles from "./Home.module.css";
+
+
+
 
 const Home = () => {
   const { setShowModal, allMovies, setMovie, continueWatching } =
