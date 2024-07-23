@@ -4,11 +4,15 @@ import { GoHomeFill } from "react-icons/go";
 import { BiSolidFilm } from "react-icons/bi";
 import { FaThList } from "react-icons/fa";
 import { FaGear } from "react-icons/fa6";
-import { useLocation } from "react-router-dom";
+import { MdLogout } from "react-icons/md";
+import { useLocation, Link } from "react-router-dom";
 import styles from "./MobileNav.module.css";
+import useMediaQueries from "../../../utils/UseMediaQuery";
 
 const MobileNav = () => {
   const location = useLocation();
+  const { isTablet, isMobile, isXsMobile } = useMediaQueries();
+  console.log(isMobile, 'isMobile')
   const links = [
     {
       text: "Home",
@@ -30,26 +34,31 @@ const MobileNav = () => {
       link: "/dashboard/profile-settings",
       icon: <FaGear />,
     },
+    {
+      text: "Logout",
+      link: "/dashboard/profile-settings",
+      icon: <MdLogout />,
+    },
   ];
 
   return (
-    <Navbar fixed="bottom" bg="dark" variant="dark">
+    <Navbar className={styles.nav} fixed="bottom" bg="dark" variant="dark">
       <Nav
         className={`${styles.navInner} justify-content-between text-light w-100 px-4`}
       >
         {links.map((link, index) => (
           <Nav.Item key={index}>
-            <Nav.Link
+            <Link
               className={`${
                 styles.navLink
               } d-flex flex-column align-items-center ${
                 location.pathname === link.link ? styles.activeLink : ""
               }`}
-              href={link.link}
+              to={link.link}
             >
               <span className="fs-5">{link.icon}</span>
-              <small>{link.text}</small>
-            </Nav.Link>
+              {!isXsMobile && <small>{link.text}</small>}
+            </Link>
           </Nav.Item>
         ))}
       </Nav>
