@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./TopNavSearch.module.css";
 import { FaSearch } from "react-icons/fa";
 import NotificationsProfileBar from "../NotificationsProfileBar/NotificationsProfileBar";
+import useMediaQueries from "../../../utils/UseMediaQuery";
 
 const TopNavSearch = ({
   searchInput,
@@ -10,7 +11,9 @@ const TopNavSearch = ({
   allMovies,
   setSearchInput,
 }) => {
-  const image = process.env.PUBLIC_URL + "/images/user-04.jpg";
+
+  const { isTablet, isMobile, isXsMobile, isDesktopOrLaptop } = useMediaQueries();
+
 
   const handleChange = (e) => {
     const userInput = e.target.value.toLowerCase();
@@ -28,8 +31,8 @@ const TopNavSearch = ({
 
   };
   return (
-    <div className="d-flex justify-content-between">
-      <div className="w-75 position-relative">
+    <div className={`d-flex justify-content-between ${!isDesktopOrLaptop ? "gap-1" : "gap-3"}`}>
+      <div className={`${styles.searchBar} ${isDesktopOrLaptop ? "w-75" : "w-100" } position-relative`}>
         <FaSearch
           className={`${styles.searchIcon} text-light position-absolute fs-6`}
         />

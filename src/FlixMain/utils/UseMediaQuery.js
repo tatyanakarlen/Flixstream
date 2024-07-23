@@ -1,7 +1,7 @@
 import { useMediaQuery } from 'react-responsive';
 
 const useMediaQueries = () => {
-  const isDesktopOrLaptop = useMediaQuery({ query: '(min-width: 1224px)' });
+  const isDesktopOrLaptop = useMediaQuery({ query: '(min-width: 991px)' });
   const isBigScreen = useMediaQuery({ query: '(min-width: 1824px)' });
   const isTablet = useMediaQuery({ query: '(min-width: 768px) and (max-width: 991px)' });
   const isMobile = useMediaQuery({ query: '(min-width: 450px) and (max-width: 767px)'})

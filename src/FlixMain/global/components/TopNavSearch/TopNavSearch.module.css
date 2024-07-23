@@ -23,3 +23,10 @@ input::placeholder {
   top: 12px;
   left: 14px;
 }
+
+
+@media (max-width: 991px) {
+  .searchBar {
+    width: 100% !important;
+  }
+}
