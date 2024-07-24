@@ -31,7 +31,7 @@ const TopNavSearch = ({
 
   };
   return (
-    <div className={`d-flex justify-content-between ${!isDesktopOrLaptop ? "gap-1" : "gap-3"}`}>
+    <div className={`d-flex justify-content-between ${!isDesktopOrLaptop ? "gap-1" : "gap-3"} pe-3`}>
       <div className={`${styles.searchBar} ${isDesktopOrLaptop ? "w-75" : "w-100" } position-relative`}>
         <FaSearch
           className={`${styles.searchIcon} text-light position-absolute fs-6`}

@@ -39,16 +39,15 @@ const SideNav = () => {
     },
   ];
 
-  //   <Col className={styles.fixedSideNav} xs={2}>
-  //   <div className="h-100 p-3">
-  //     <SideNav />
-  //   </div>
-  // </Col>
   return (
     <Col className={styles.fixedSideNav} xs={isLgDesktopOrLaptop ? 2 : 1}>
-      <div className={`${styles.sideNavWrapper} h-100 p-3`}>
+      <div className={`h-100 ${styles.sideNavWrapper}`}>
         <div
-          className={`${styles.sideNav} borderRadiusSmall h-100 d-flex flex-column text-light ${isLgDesktopOrLaptop ? 'p-3' : 'p-2'} justify-content-between`}
+          className={`${
+            styles.sideNav
+          } borderRadiusSmall h-100 d-flex flex-column text-light ${
+            isLgDesktopOrLaptop ? "p-3" : "p-2"
+          } justify-content-between`}
         >
           <div className="d-flex flex-column">
             {isLgDesktopOrLaptop ? (
@@ -94,10 +93,10 @@ const SideNav = () => {
               <div
                 className={`${styles.upgradePromo} borderRadiusSmall p-3 d-flex flex-column text-light`}
               >
-                <p className="fs-6">
+                <small className="text-light">
                   Upgrade to Premium for exclusive benefits!
-                </p>
-                <div className="mt-2 w-100">
+                </small>
+                <div className="mt-3 w-100">
                   <CustomBTN
                     text="Join"
                     textColor="text-light"
@@ -109,9 +108,13 @@ const SideNav = () => {
             )}
             <div className="d-flex flex-column mt-3 text-light">
               <span
-                className={`d-flex align-items-center ${!isLgDesktopOrLaptop && 'justify-content-center'} gap-3 px-3 py-2 rounded ${styles.link}`}
+                className={`d-flex align-items-center ${
+                  !isLgDesktopOrLaptop && "justify-content-center"
+                } gap-3 px-3 py-2 rounded ${styles.link}`}
               >
-                <span className={`mb-1 ${isLgDesktopOrLaptop ? 'fs-6' : 'fs-5'}`}>
+                <span
+                  className={`mb-1 ${isLgDesktopOrLaptop ? "fs-6" : "fs-5"}`}
+                >
                   <RiCloudOffLine />
                 </span>
                 {isLgDesktopOrLaptop && (
@@ -119,9 +122,13 @@ const SideNav = () => {
                 )}
               </span>
               <span
-                className={`d-flex align-items-center ${!isLgDesktopOrLaptop && 'justify-content-center'} gap-3 px-3 py-2 rounded ${styles.link}`}
+                className={`d-flex align-items-center ${
+                  !isLgDesktopOrLaptop && "justify-content-center"
+                } gap-3 px-3 py-2 rounded ${styles.link}`}
               >
-                <span className={`mb-1 ${isLgDesktopOrLaptop ? 'fs-6' : 'fs-5'}`}>
+                <span
+                  className={`mb-1 ${isLgDesktopOrLaptop ? "fs-6" : "fs-5"}`}
+                >
                   <MdLogout />
                 </span>
                 {isLgDesktopOrLaptop && (

@@ -20,14 +20,15 @@
 }
 
 .logoMobile {
-    border: 1px solid #e006069c;
+  border: 1px solid #e006069c;
 }
 
-/* sideNavWrapper */
+.sideNavWrapper {
+  padding: 1rem;
+}
 
 @media (max-width: 1155px) {
-    .sideNavWrapper {
-      padding: 0.8rem !important;
-    }
+  .sideNavWrapper {
+    padding: 1rem 0.7rem 0.7rem 0.7rem;
   }
-
+}

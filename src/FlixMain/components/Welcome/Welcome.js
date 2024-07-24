@@ -15,6 +15,7 @@ import DetailsModal from "../../global/components/DetailsModal/DetailsModal";
 import styles from "./Welcome.module.css";
 import AuthModal from "./AuthModal/AuthModal";
 import useMediaQueries from "../../utils/UseMediaQuery";
+import { chunkArray } from "../../utils/chuckArray";
 
 const Welcome = () => {
   const { isTablet, isMobile, isXsMobile } = useMediaQueries();
@@ -27,13 +28,6 @@ const Welcome = () => {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
-  function chunkArray(array, chunkSize) {
-    const result = [];
-    for (let i = 0; i < array.length; i += chunkSize) {
-      result.push(array.slice(i, i + chunkSize));
-    }
-    return result;
-  }
 
   const handleCloseAuthModal = () => {
     setIsLoginMode(!isLoginMode);
@@ -125,7 +119,50 @@ const Welcome = () => {
       creator: "Andy Breckman",
       genres: ["Adventure", "Mystery", "Thriller"],
     },
+    {
+      id: "5",
+      image: people,
+      title: "Comedy Highlights",
+      description: "Laugh out loud with the best comedies and sitcoms.",
+      longDescription:
+        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
+      year: "2016",
+      length: "1 hr 10 min",
+      likes: "25",
+      tags: ["mustWatch", "recentlyAdded"],
+      cast: [
+        "Emma Hartley",
+        "Jonathan Pierce",
+        "Olivia Mason",
+        "Marcus Bradley",
+      ],
+      creator: "Andy Breckman",
+      genres: ["Adventure", "Mystery", "Thriller"],
+    },
+    {
+      id: "6",
+      image: people,
+      title: "Comedy Highlights",
+      description: "Laugh out loud with the best comedies and sitcoms.",
+      longDescription:
+        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
+      year: "2016",
+      length: "1 hr 10 min",
+      likes: "25",
+      tags: ["mustWatch", "recentlyAdded"],
+      cast: [
+        "Emma Hartley",
+        "Jonathan Pierce",
+        "Olivia Mason",
+        "Marcus Bradley",
+      ],
+      creator: "Andy Breckman",
+      genres: ["Adventure", "Mystery", "Thriller"],
+    },
   ];
+
+  const firstThreeMovies = allMovies.slice(0, 3);
+  const firstFourMovies = allMovies.slice(0, 4);
 
   const chunkedMovies = chunkArray(allMovies, 2);
 
@@ -236,7 +273,7 @@ const Welcome = () => {
                 controls={false}
                 interval={null}
               >
-                {allMovies.map((movie, index) => (
+                {firstThreeMovies.map((movie, index) => (
                   <Carousel.Item className="" key={index}>
                     <Row className={styles.carouselRow}>
                       <BasicMovieCard
@@ -279,7 +316,7 @@ const Welcome = () => {
               <h4 className="mt-5">Featured Movies</h4>
             </div>
             <Row className="mt-5 w-100 px-lg-1 px-xl-5">
-              {allMovies.map((movie, index) => (
+              {firstFourMovies.map((movie, index) => (
                 <BasicMovieCard
                   height="13rem"
                   key={index}

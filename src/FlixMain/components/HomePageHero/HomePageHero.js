@@ -52,7 +52,7 @@ const HomePageHero = ({ setShowModal }) => {
   }, []);
 
   return (
-    <div className={`${styles.homePageHeroContainer} position-relative mt-4`}>
+    <div className={`${styles.homePageHeroContainer} position-relative mt-4 pe-3`}>
       <Carousel
         controls={false}
         indicators={false}
@@ -72,7 +72,7 @@ const HomePageHero = ({ setShowModal }) => {
                   <Image src={movie.image} />
                 </div>
               </Col>
-              <Col className="h-100 d-flex flex-column justify-content-center">
+              <Col className="h-100 d-flex flex-column justify-content-center pe-5">
                 {" "}
                 <div className={`${styles.textContainer} d-flex flex-column`}>
                   <h2>{movie.headline}</h2>

@@ -4,21 +4,91 @@ import DiscoverNewReleases from "../DiscoverNewReleases/DiscoverNewReleases";
 import ContinueWatching from "../ContinueWatching/ContinueWatching";
 import { useOutletContext } from "react-router-dom";
 import ScrollableList from "../../global/components/ScrollableList/ScrollableList";
-import { Row, Nav, Navbar } from "react-bootstrap";
+import { Row, Nav, Navbar, Carousel } from "react-bootstrap";
 import styles from "./Home.module.css";
 import useMediaQueries from "../../utils/UseMediaQuery";
+import { chunkArray } from "../../utils/chuckArray";
+import BasicMovieCard from "../../global/components/BasicMovieCard/BasicMovieCard";
 
 const Home = () => {
   const { setShowModal, allMovies, setMovie, continueWatching } =
     useOutletContext();
 
+    const firstSixMovies = allMovies.slice(0, 6);
+
   const { isTablet, isMobile, isXsMobile } = useMediaQueries();
   return (
     <div>
       {isTablet ? (
-        <div>this is tablet</div>
+         <div>
+         <h4 className="text-light fw-semibold mt-4">Recently Added</h4>
+          <div className="w-100 mt-4">
+              <Carousel
+                className={styles.carousel}
+                controls={false}
+                interval={null}
+              >
+                {chunkArray(firstSixMovies, 2).map((moviePair, index) => (
+                  <Carousel.Item className="" key={index}>
+                    <Row className={styles.carouselRow}>
+                      {moviePair.map((movie, subIndex) => (
+                        <BasicMovieCard
+                          height="16rem"
+                          key={index}
+                          movie={movie}
+                          setMovie={setMovie}
+                        />
+                      ))}
+                    </Row>
+                  </Carousel.Item>
+                ))}
+              </Carousel>
+            </div>
+         <div className="mt-4">
+           <h4 className="text-light fw-semibold">Continue watching</h4>
+
+           <ScrollableList>
+             {continueWatching.map((movie, index) => (
+               <li
+                 key={index}
+                 className={`${styles.cardContainer} scrollableListCardContainer`}
+               >
+                 <ContinueWatching movie={movie} />
+               </li>
+             ))}
+           </ScrollableList>
+         </div>
+
+         <DiscoverNewReleases
+           allMovies={allMovies}
+           setMovie={setMovie}
+           setShowModal={setShowModal}
+         />
+       </div>
       ) : isMobile ? (
-        <div>this is mobile</div>
+        <div>
+        <HomePageHero setShowModal={setShowModal} />
+        <div className="mt-4">
+          <h4 className="text-light fw-semibold">Continue watching</h4>
+
+          <ScrollableList>
+            {continueWatching.map((movie, index) => (
+              <li
+                key={index}
+                className={`${styles.cardContainer} scrollableListCardContainer`}
+              >
+                <ContinueWatching movie={movie} />
+              </li>
+            ))}
+          </ScrollableList>
+        </div>
+
+        <DiscoverNewReleases
+          allMovies={allMovies}
+          setMovie={setMovie}
+          setShowModal={setShowModal}
+        />
+      </div>
       ) : (
         <div>
           <HomePageHero setShowModal={setShowModal} />

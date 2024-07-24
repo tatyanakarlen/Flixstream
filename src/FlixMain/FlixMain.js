@@ -411,7 +411,7 @@ const FlixMain = () => {
         {!location.pathname.includes("play") ? (
           <Row className={`${styles.layoutRow} h-100`}>
             <Col>
-              <div className="h-100 p-3">
+              <div className="h-100 pt-3 pb-3 ps-3">
                 <div className="h-100">
                   {!location.pathname.includes("profile-settings") && (
                     <TopNavSearch
@@ -470,7 +470,7 @@ const FlixMain = () => {
           <SideNav />
 
           <Col className={styles.scrollableContent}>
-            <div className="h-100 pt-3 pe-3 pb-3 ps-2">
+            <div className="h-100 pt-3 pb-3 ps-2">
               <div className="h-100">
                 {!location.pathname.includes("profile-settings") && (
                   <TopNavSearch
