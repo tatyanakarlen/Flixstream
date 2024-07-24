@@ -467,11 +467,8 @@ const FlixMain = () => {
       />
       {!location.pathname.includes("play") ? (
         <Row className={`${styles.layoutRow} h-100`}>
-          <Col className={styles.fixedSideNav} xs={2}>
-            <div className="h-100 p-3">
-              <SideNav />
-            </div>
-          </Col>
+          <SideNav />
+
           <Col className={styles.scrollableContent}>
             <div className="h-100 pt-3 pe-3 pb-3 ps-2">
               <div className="h-100">

@@ -13,3 +13,9 @@
 .activeLink, .upgradePromo {
     background-color: black;
 }
+
+.fixed-side-nav {
+    height: 100vh !important;
+    overflow-y: auto !important;
+  }
+

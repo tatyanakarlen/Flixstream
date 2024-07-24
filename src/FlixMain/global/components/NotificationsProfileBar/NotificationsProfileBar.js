@@ -11,7 +11,7 @@ const NotificationsProfileBar = () => {
     useMediaQueries();
 
   return (
-    <div className={`d-flex ${!isDesktopOrLaptop ? "gap-1" : "gap-2"} align-items-center`}>
+    <div className={`d-flex ${!isDesktopOrLaptop ? "gap-1" : "gap-3"} align-items-center`}>
       <div className="d-flex align-items-center gap-2 text-light me-2">
         <IoMdNotificationsOff className="ms-2 fs-5" />
         {isDesktopOrLaptop && <span>Notifications</span>}

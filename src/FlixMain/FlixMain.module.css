@@ -5,10 +5,6 @@
   overflow: hidden !important;
 }
 
-.fixed-side-nav {
-    height: 100vh !important;
-    overflow-y: auto !important;
-  }
 
   .scrollableContent {
     height: 100vh !important;
