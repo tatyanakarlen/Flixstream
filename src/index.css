@@ -20,7 +20,7 @@ body {
   --darkGreyText: #161616;
   --lightGreyText: #a3a2a2;
   --medGreyText: rgb(199, 199, 199);
-  --bsLight: #f8f9fa; 
+  --bsLight: #f8f9fa;
   --brightRed: #e00606;
   --purple: #a618fc;
   --borderRadiusSmall: 3px;
@@ -81,7 +81,6 @@ body {
   align-items: center;
   transition: all 0.2s ease 0.1s;
 }
-
 
 svg:hover {
   cursor: pointer;

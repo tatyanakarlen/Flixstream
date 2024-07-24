@@ -45,10 +45,10 @@ const SideNav = () => {
   //   </div>
   // </Col>
   return (
-    <Col className={styles.fixedSideNav} xs={2}>
-      <div className="h-100 p-3">
+    <Col className={styles.fixedSideNav} xs={isLgDesktopOrLaptop ? 2 : 1}>
+      <div className={`${styles.sideNavWrapper} h-100 p-3`}>
         <div
-          className={`${styles.sideNav} borderRadiusSmall h-100 d-flex flex-column text-light p-3 justify-content-between`}
+          className={`${styles.sideNav} borderRadiusSmall h-100 d-flex flex-column text-light ${isLgDesktopOrLaptop ? 'p-3' : 'p-2'} justify-content-between`}
         >
           <div className="d-flex flex-column">
             {isLgDesktopOrLaptop ? (
@@ -56,7 +56,11 @@ const SideNav = () => {
                 Flixstream
               </h4>
             ) : (
-              <BiSolidCameraMovie />
+              <span
+                className={`${styles.logoMobile} mt-2 mb-2 d-flex justify-content-center align-items-center p-2 rounded`}
+              >
+                <BiSolidCameraMovie className="fs-4" />
+              </span>
             )}
             <div className="mt-3 d-flex flex-column gap-3">
               {links.map((link, index) => (
@@ -66,13 +70,19 @@ const SideNav = () => {
                 >
                   <span
                     key={index}
-                    className={`d-flex align-items-center gap-3 px-3 py-2 rounded ${
-                      styles.link
-                    } ${
+                    className={`d-flex align-items-center ${
+                      !isLgDesktopOrLaptop && "justify-content-center"
+                    } gap-3 px-3 py-2 rounded ${styles.link} ${
                       location.pathname === link.link ? styles.activeLink : ""
                     }`}
                   >
-                    <div className="fs-6 mb-1">{link.icon}</div>
+                    <div
+                      className={`${
+                        isLgDesktopOrLaptop ? "fs-6" : "fs-5"
+                      } mb-1`}
+                    >
+                      {link.icon}
+                    </div>
                     {isLgDesktopOrLaptop && <span>{link.text}</span>}
                   </span>
                 </Link>
@@ -97,11 +107,11 @@ const SideNav = () => {
                 </div>
               </div>
             )}
-            <div className="d-flex flex-column mt-3">
+            <div className="d-flex flex-column mt-3 text-light">
               <span
-                className={`d-flex align-items-center gap-3 px-3 py-2 rounded ${styles.link}`}
+                className={`d-flex align-items-center ${!isLgDesktopOrLaptop && 'justify-content-center'} gap-3 px-3 py-2 rounded ${styles.link}`}
               >
-                <span className="fs-6 mb-1">
+                <span className={`mb-1 ${isLgDesktopOrLaptop ? 'fs-6' : 'fs-5'}`}>
                   <RiCloudOffLine />
                 </span>
                 {isLgDesktopOrLaptop && (
@@ -109,9 +119,9 @@ const SideNav = () => {
                 )}
               </span>
               <span
-                className={`d-flex align-items-center gap-3 px-3 py-2 rounded ${styles.link}`}
+                className={`d-flex align-items-center ${!isLgDesktopOrLaptop && 'justify-content-center'} gap-3 px-3 py-2 rounded ${styles.link}`}
               >
-                <span className="fs-6 mb-1">
+                <span className={`mb-1 ${isLgDesktopOrLaptop ? 'fs-6' : 'fs-5'}`}>
                   <MdLogout />
                 </span>
                 {isLgDesktopOrLaptop && (
