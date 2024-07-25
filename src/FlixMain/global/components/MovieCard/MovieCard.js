@@ -12,7 +12,7 @@ import ImgOnclickShowsDetail from "../ImgOnclickShowsDetail/ImgOnclickShowsDetai
 import { LuListPlus } from "react-icons/lu";
 import { MdPlaylistAdd } from "react-icons/md";
 
-const MovieCard = ({ movie, setMovie, setShowModal }) => {
+const MovieCard = ({ movie, setMovie, setShowModal, height }) => {
   const navigate = useNavigate();
   return (
     <Col sm={12} md={6} lg={4} className="mb-4 text-light">
@@ -26,7 +26,7 @@ const MovieCard = ({ movie, setMovie, setShowModal }) => {
           <ImgOnclickShowsDetail
             src={movie.image}
             onClick={() => setMovie(movie.id)}
-            height="13rem"
+            height={height}
           />
           <div className="mt-3 d-flex justify-content-between w-100 align-items-center">
             <h5 className="fw-semibold">{movie.title}</h5>

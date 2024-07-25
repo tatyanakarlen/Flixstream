@@ -3,9 +3,18 @@ import styles from "./DiscoverNewReleases.module.css";
 import { Row, Button } from "react-bootstrap";
 import MovieCard from "../../global/components/MovieCard/MovieCard";
 import PaginationBTN from "../../global/components/PaginationBTN/PaginationBTN";
+import useMediaQueries from "../../utils/UseMediaQuery";
 
 const DiscoverNewReleases = ({ allMovies, setMovie, setShowModal }) => {
   const tags = ["All", "Watched", "Saved", "Recommended", "History"];
+
+  const {
+    isTablet,
+    isMobile,
+    isXsMobile,
+    isDesktopOrLaptop,
+    isLgDesktopOrLaptop,
+  } = useMediaQueries();
 
   const imagePerRow = 8;
 
@@ -26,7 +35,7 @@ const DiscoverNewReleases = ({ allMovies, setMovie, setShowModal }) => {
       className={`${styles.container} py-3 d-flex flex-column mt-3 pe-md-4 pe-lg-3 pe-3`}
     >
       <h4 className="text-light fw-semibold">Discover New Releases</h4>
-      <div className={`${styles.tagsContainer} d-flex gap-2 mt-4`}>
+      <div className={`${styles.tagsContainer} d-flex flex-wrap gap-2 mt-4`}>
         {tags.map((tag, index) => (
           <small
             key={index}
@@ -43,6 +52,7 @@ const DiscoverNewReleases = ({ allMovies, setMovie, setShowModal }) => {
             key={index}
             setMovie={setMovie}
             setShowModal={setShowModal}
+            height={isMobile || isXsMobile ? "20rem" : "13"}
           />
         ))}
       </Row>
