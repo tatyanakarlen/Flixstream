@@ -411,7 +411,7 @@ const FlixMain = () => {
         {!location.pathname.includes("play") ? (
           <Row className={`${styles.layoutRow} h-100`}>
             <Col>
-              <div className="h-100 pt-3 pb-3 ps-3">
+              <div className="h-100 pt-md-4 pb-md-4 ps-md-4 pt-lg-3 pb-lg-3 ps-lg-2 pt-3 pb-3 ps-3">
                 <div className="h-100">
                   {!location.pathname.includes("profile-settings") && (
                     <TopNavSearch
