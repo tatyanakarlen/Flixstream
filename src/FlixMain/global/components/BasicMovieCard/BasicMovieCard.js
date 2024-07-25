@@ -3,6 +3,8 @@ import { Col } from "react-bootstrap";
 import ImgOnclickShowsDetail from "../ImgOnclickShowsDetail/ImgOnclickShowsDetail";
 import { MdPlaylistAdd } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
+import { IoPlaySharp } from "react-icons/io5";
+import PlayBTN from "../PlayBTN/PlayBTN";
 
 const BasicMovieCard = ({ movie, setMovie, height }) => {
   return (
@@ -16,7 +18,11 @@ const BasicMovieCard = ({ movie, setMovie, height }) => {
         />
         <div className="mt-4 d-flex justify-content-between align-items-center">
           <h5 className="fw-semibold mb-0">{movie.title}</h5>
+          <div className="d-flex align-items-center gap-2">
+          {/* <IoPlaySharp className="fs-5" /> */}
+          <PlayBTN padding="px-3" icon={<IoPlaySharp className="fs-5" />}/>
           <MdPlaylistAdd className="fs-4" />
+          </div>
         </div>
         <div className="mt-1 d-flex gap-2 align-items-center">
           <FaEye />
