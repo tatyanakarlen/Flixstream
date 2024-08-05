@@ -87,7 +87,7 @@ const MyList = () => {
         ))}
       </ScrollableList>
       <h4 className="mt-3 text-light fw-semibold">Recommended</h4>
-      <Row className="mt-4">
+      <Row className="mt-4 pe-3">
         {allMovies?.slice(0, next)?.map((movie, index) => (
           <BasicMovieCard height="13rem" key={index} movie={movie} setMovie={setMovie} />
         ))}

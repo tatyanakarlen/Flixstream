@@ -4,6 +4,8 @@ import { GoHomeFill } from "react-icons/go";
 import { BiSolidFilm } from "react-icons/bi";
 import { FaThList } from "react-icons/fa";
 import { FaGear } from "react-icons/fa6";
+import { BiSolidCameraMovie } from "react-icons/bi";
+import { TbMovie } from "react-icons/tb";
 import { MdLogout } from "react-icons/md";
 import { useLocation, Link } from "react-router-dom";
 import styles from "./MobileNav.module.css";
@@ -12,7 +14,7 @@ import useMediaQueries from "../../../utils/UseMediaQuery";
 const MobileNav = () => {
   const location = useLocation();
   const { isTablet, isMobile, isXsMobile } = useMediaQueries();
-  console.log(isMobile, 'isMobile')
+  console.log(isMobile, "isMobile");
   const links = [
     {
       text: "Home",
@@ -22,7 +24,7 @@ const MobileNav = () => {
     {
       text: "Discover",
       link: "/dashboard/discover",
-      icon: <BiSolidFilm />,
+      icon: <BiSolidCameraMovie />,
     },
     {
       text: "My List",

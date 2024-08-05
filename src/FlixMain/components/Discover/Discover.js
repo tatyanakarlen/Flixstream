@@ -167,7 +167,7 @@ const Discover = () => {
     },
   ];
   return (
-    <div>
+    <div className="pe-3">
       <div className="d-flex w-100 justify-content-between mt-4">
         <h4 className="text-light">Explore titles</h4>
         <Button className={`${styles.clearHistoryBTN} rounded`}>
@@ -206,7 +206,7 @@ const Discover = () => {
         <h5>Recommended for you</h5>
         <Row className="mt-4">
           {recommended.map((movie, index) => (
-            <Col sm={12} lg={4} xl={3} className="mb-4" key={index}>
+            <Col sm={12} md={6} lg={4} className="mb-4" key={index}>
               <div>
                 <ImageOverlay item={movie} />
               </div>

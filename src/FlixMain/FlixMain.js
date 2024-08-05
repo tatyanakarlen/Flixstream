@@ -401,7 +401,7 @@ const FlixMain = () => {
 
   if (isXsMobile || isMobile || isTablet) {
     return (
-      <div>
+      <div className={`${styles.mobileWrapper}`}>
         <DetailsModal
           showModal={showModal}
           setShowModal={setShowModal}
@@ -451,7 +451,9 @@ const FlixMain = () => {
             </Col>
           </Row>
         ) : (
+         
           <MoviePlayer playMovie={playMovie} moviePlayed={moviePlayed} />
+         
         )}
       </div>
     );

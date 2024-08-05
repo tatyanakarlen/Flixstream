@@ -66,6 +66,7 @@ const Home = () => {
                       key={index}
                       movie={movie}
                       setMovie={setMovie}
+                      setShowModal={setShowModal}
                     />
                   </Row>
                 </Carousel.Item>

@@ -135,7 +135,7 @@ const MoviePlayer = ({ playMovie, moviePlayed }) => {
 
   return (
     <div
-      className={`${styles.videoContainer} w-100 h-100 position-relative overflow-hidden`}
+      className={`${styles.videoContainer} w-100 position-relative overflow-hidden`}
       onMouseEnter={() => !hasUserPressedPlay && setControlsVisible(true)}
       onMouseLeave={() => !videoRef.current.paused && setControlsVisible(false)}
     >

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Image, Row, Col, Button, Carousel } from "react-bootstrap";
 import styles from "./HomePageHero.module.css";
 import PlayBTN from "../../global/components/PlayBTN/PlayBTN";
+import CustomBTN from "../../global/components/CustomBTN/CustomBTN";
 
 const HomePageHero = ({ setShowModal }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -89,7 +90,7 @@ const HomePageHero = ({ setShowModal }) => {
                       textColor="text-light"
                       bgColor="redBTNbg"
                     />
-                    <PlayBTN
+                    <CustomBTN
                       text="Watch trailer"
                       textColor="greyBTNText"
                       variant="light"

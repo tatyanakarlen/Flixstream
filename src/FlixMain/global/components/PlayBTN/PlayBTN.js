@@ -5,11 +5,8 @@ import { IoPlaySharp } from "react-icons/io5";
 import styles from "./PlayBTN.module.css";
 
 const PlayBTN = ({
-  link,
-  click,
   text,
   icon,
-  bgColor,
   textColor,
   padding, 
   variant,
@@ -23,7 +20,7 @@ const PlayBTN = ({
     <Button
       onClick={() => {
         navigate(`/dashboard/play/${movie && movieId}`);
-        setShowModal(false);
+        setShowModal && setShowModal(false);
       }}
       variant={variant}
       className={`${padding} ${styles.btn} ${textColor} d-flex align-items-center justify-content-center gap-2 rounded`}

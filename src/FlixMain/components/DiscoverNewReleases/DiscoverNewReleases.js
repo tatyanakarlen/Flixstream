@@ -52,7 +52,7 @@ const DiscoverNewReleases = ({ allMovies, setMovie, setShowModal }) => {
             key={index}
             setMovie={setMovie}
             setShowModal={setShowModal}
-            height={isMobile || isXsMobile ? "20rem" : "13"}
+            height={isMobile || isXsMobile ? "18rem" : "13rem"}
           />
         ))}
       </Row>

@@ -87,7 +87,7 @@ const ProfileSettings = () => {
   ];
 
   return (
-    <div className="text-light">
+    <div className="text-light pe-3">
       <div className="mt-2 d-flex w-100 align-items-center justify-content-between">
         <h4>Profile Settings</h4>
         <NotificationsProfileBar />

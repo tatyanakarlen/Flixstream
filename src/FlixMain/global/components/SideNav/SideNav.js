@@ -6,6 +6,7 @@ import { RiCloudOffLine } from "react-icons/ri";
 import { FaGear } from "react-icons/fa6";
 import { MdLogout } from "react-icons/md";
 import { BiSolidCameraMovie } from "react-icons/bi";
+import { TbMovie } from "react-icons/tb";
 import { GoHomeFill } from "react-icons/go";
 import { useLocation, Link } from "react-router-dom";
 import CustomBTN from "../CustomBTN/CustomBTN";
@@ -25,7 +26,7 @@ const SideNav = () => {
     {
       text: "Discover",
       link: "/dashboard/discover",
-      icon: <BiSolidFilm />,
+      icon: <BiSolidCameraMovie />,
     },
     {
       text: "My List",
@@ -58,7 +59,7 @@ const SideNav = () => {
               <span
                 className={`${styles.logoMobile} mt-2 mb-2 d-flex justify-content-center align-items-center p-2 rounded`}
               >
-                <BiSolidCameraMovie className="fs-4" />
+                <TbMovie className="fs-4" />
               </span>
             )}
             <div className="mt-3 d-flex flex-column gap-3">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, Form, Col, Row, InputGroup } from "react-bootstrap";
 import styles from "./AuthModal.module.css";
 import { TbMovie } from "react-icons/tb";
@@ -12,7 +12,7 @@ const AuthModal = ({
   isLoginMode,
   setIsLoginMode,
 }) => {
-  console.log(isLoginMode, "isLOginmode");
+  
   return (
     <Modal
       dialogClassName={styles.modal}
