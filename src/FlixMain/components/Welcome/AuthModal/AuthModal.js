@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Modal, Form, Col, Row, InputGroup } from "react-bootstrap";
+import { Modal, Form, Col, Row, InputGroup, Button } from "react-bootstrap";
 import styles from "./AuthModal.module.css";
 import { TbMovie } from "react-icons/tb";
 import { IoClose } from "react-icons/io5";
 import CustomBTN from "../../../global/components/CustomBTN/CustomBTN";
+import { supabase } from "../../../../supabaseClient";
 import { FcGoogle } from "react-icons/fc";
 
 const AuthModal = ({
@@ -12,6 +13,28 @@ const AuthModal = ({
   isLoginMode,
   setIsLoginMode,
 }) => {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
+  const [message, setMessage] = useState('');
+
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+
+    const { user, error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+
+    if (error) {
+      setError(error.message);
+      setMessage('');
+    } else {
+      setError(null);
+      setMessage('Check your email for a confirmation link!');
+    }
+  };
   
   return (
     <Modal
@@ -34,14 +57,16 @@ const AuthModal = ({
         <h2 className="fw-semibold mt-4">
           {isLoginMode ? "Sign In" : "Create Your Account"}
         </h2>
-        <Form className={`${styles.form} mt-2`}>
+        <Form onSubmit={!isLoginMode && handleSignUp} className={`${styles.form} mt-2`}>
           <Row className="mb-3">
             <Form.Group as={Col} md="12" controlId="validationCustom01">
               <Form.Label>Email</Form.Label>
               <Form.Control
+                type="email"
                 className={styles.formInput}
                 required
-                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Example@email.com"
               />
               <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -52,7 +77,9 @@ const AuthModal = ({
               <Form.Label>Password</Form.Label>
               <Form.Control
                 className={styles.formInput}
-                type="text"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter password"
                 required
               />
@@ -80,13 +107,14 @@ const AuthModal = ({
           )}
           <div className="mt-4 d-flex justify-content-between align-items-center">
             <div className="flex-grow-1">
-              <CustomBTN
+              <Button type="submit">{isLoginMode ? "Sign In" : "Sign Up"}</Button>
+              {/* <CustomBTN
                 width="w-100"
                 text={isLoginMode ? "Sign In" : "Sign Up"}
                 textColor="text-light"
                 bgColor="redBTNbg"
                 padding="py-2"
-              />
+              /> */}
             </div>
             <div className="d-flex justify-content-center flex-grow-1 gap-2 align-items-center">
             {isLoginMode ? 'New user?' : 'Have an account?'}
