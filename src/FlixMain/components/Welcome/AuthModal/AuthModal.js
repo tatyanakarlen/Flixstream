@@ -19,21 +19,35 @@ const AuthModal = ({
   const [error, setError] = useState(null);
   const [message, setMessage] = useState('');
 
+
   const handleSignUp = async (e) => {
     e.preventDefault();
 
-    const { user, error } = await supabase.auth.signUp({
+    // Sign up the user
+    const { user, error: authError } = await supabase.auth.signUp({
       email,
       password,
     });
 
-    if (error) {
-      setError(error.message);
+    if (authError) {
+      setError(authError.message);
       setMessage('');
-    } else {
-      setError(null);
-      setMessage('Check your email for a confirmation link!');
+      return;
     }
+
+    // Insert additional user profile data
+    // const { error: profileError } = await supabase
+    //   .from('profiles')
+    //   .upsert({ id: user.id, username });
+
+    // if (profileError) {
+    //   setError(profileError.message);
+    //   setMessage('');
+    // } else {
+    //   setError(null);
+    //   setMessage('Check your email for a confirmation link and your profile is set!');
+    // }
+    handleCloseAuthModal()
   };
   
   return (
@@ -107,14 +121,8 @@ const AuthModal = ({
           )}
           <div className="mt-4 d-flex justify-content-between align-items-center">
             <div className="flex-grow-1">
-              <Button type="submit">{isLoginMode ? "Sign In" : "Sign Up"}</Button>
-              {/* <CustomBTN
-                width="w-100"
-                text={isLoginMode ? "Sign In" : "Sign Up"}
-                textColor="text-light"
-                bgColor="redBTNbg"
-                padding="py-2"
-              /> */}
+              <Button className="py-2 w-100 text-light redBTNbg border-0" type="submit">{isLoginMode ? "Sign In" : "Sign Up"}</Button>
+             
             </div>
             <div className="d-flex justify-content-center flex-grow-1 gap-2 align-items-center">
             {isLoginMode ? 'New user?' : 'Have an account?'}
