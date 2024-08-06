@@ -6,6 +6,7 @@ import { IoClose } from "react-icons/io5";
 import CustomBTN from "../../../global/components/CustomBTN/CustomBTN";
 import { supabase } from "../../../../supabaseClient";
 import { FcGoogle } from "react-icons/fc";
+import { useNavigate } from "react-router-dom";
 
 const AuthModal = ({
   show,
@@ -18,6 +19,7 @@ const AuthModal = ({
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const [message, setMessage] = useState('');
+  const navigate = useNavigate()
 
 
   const handleSignUp = async (e) => {
@@ -48,6 +50,31 @@ const AuthModal = ({
     //   setMessage('Check your email for a confirmation link and your profile is set!');
     // }
     handleCloseAuthModal()
+    setEmail('')
+    setPassword('')
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    // Sign in the user
+    const { data: { user }, error: authError } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (authError) {
+      setError(authError.message);
+      setMessage('');
+    } else {
+      setError(null);
+      setMessage('Logged in successfully!');
+      console.log('Logged in user:', user); // Log the signed-in user
+    }
+    handleCloseAuthModal()
+    setEmail('')
+    setPassword('')
+    navigate('/dashboard')
   };
   
   return (
@@ -71,7 +98,7 @@ const AuthModal = ({
         <h2 className="fw-semibold mt-4">
           {isLoginMode ? "Sign In" : "Create Your Account"}
         </h2>
-        <Form onSubmit={!isLoginMode && handleSignUp} className={`${styles.form} mt-2`}>
+        <Form onSubmit={isLoginMode ? handleLogin : handleSignUp} className={`${styles.form} mt-2`}>
           <Row className="mb-3">
             <Form.Group as={Col} md="12" controlId="validationCustom01">
               <Form.Label>Email</Form.Label>
