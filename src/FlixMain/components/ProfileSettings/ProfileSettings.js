@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Image, Row, Col, Form, Modal, Button } from "react-bootstrap";
 import styles from "./ProfileSettings.module.css";
 import CustomBTN from "../../global/components/CustomBTN/CustomBTN";
@@ -16,10 +16,14 @@ import {
 } from "react-icons/fa";
 import { FaHouse, FaMapLocationDot, FaClipboardUser } from "react-icons/fa6";
 import NotificationsProfileBar from "../../global/components/NotificationsProfileBar/NotificationsProfileBar";
+import { UserContext } from "../../../userContext";
 
 const ProfileSettings = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
+  const { user } = useContext(UserContext);
+  console.log(user.identities[0].user_id
+    , 'user id from profile page')
 
   const handleClose = () => setShowEditForm(false);
   const handleShow = () => setShowEditForm(true);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./SideNav.module.css";
 import { BiSolidFilm } from "react-icons/bi";
 import { FaThList } from "react-icons/fa";
@@ -12,11 +12,13 @@ import { useLocation, Link } from "react-router-dom";
 import CustomBTN from "../CustomBTN/CustomBTN";
 import useMediaQueries from "../../../utils/UseMediaQuery";
 import { Col } from "react-bootstrap";
+import { UserContext } from "../../../../userContext";
 
 const SideNav = () => {
+  const { logout } = useContext(UserContext);
   const location = useLocation();
   const { isLgDesktopOrLaptop } = useMediaQueries();
-  console.log(isLgDesktopOrLaptop, "desktop");
+ 
   const links = [
     {
       text: "Home",
@@ -123,6 +125,8 @@ const SideNav = () => {
                 )}
               </span>
               <span
+                role="button"
+                onClick={logout}
                 className={`d-flex align-items-center ${
                   !isLgDesktopOrLaptop && "justify-content-center"
                 } gap-3 px-3 py-2 rounded ${styles.link}`}

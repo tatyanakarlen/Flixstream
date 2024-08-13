@@ -207,7 +207,7 @@ const Welcome = () => {
                   setIsLoginMode(true);
                   setShowAuthModal(true);
                 }}
-                className={`${styles.link} text-nowrap fw-semibold`}
+                className={`${styles.link} text-nowrap fw-semibold text-light`}
               >
                 Sign in
               </Nav.Link>
