@@ -18,27 +18,19 @@ import { refreshAuthToken } from "./FlixMain/utils/refreshAuthToken";
 
 const ProtectedRoute = ({ element }) => {
   const { user, loading } = useContext(UserContext);
-  console.log(loading, "loading from protected route");
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("ProtectedRoute - user:", user);
-    console.log("ProtectedRoute - loading:", loading);
-
-    if (!loading) {
+if (!loading) {
       if (user === null) {
-        console.log("User is null, navigating to /");
         navigate("/", { replace: true });
       }
     }
   }, [user, loading, navigate]);
 
   if (loading) {
-    console.log("ProtectedRoute - Loading...");
     return <div>Loading...</div>;
   }
-
-  console.log("ProtectedRoute - rendering:", user ? "Element" : "Null");
   return user ? element : null;
 };
 

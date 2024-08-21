@@ -4,6 +4,7 @@ import styles from "./ProfileSettings.module.css";
 import CustomBTN from "../../global/components/CustomBTN/CustomBTN";
 import { BiSolidFilm } from "react-icons/bi";
 import { MdPlaylistAdd, MdOutlineEmail } from "react-icons/md";
+import { supabase } from "../../../supabaseClient";
 import { BsHandIndexThumb } from "react-icons/bs";
 import { AiFillEdit } from "react-icons/ai";
 import {
@@ -22,8 +23,8 @@ const ProfileSettings = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
   const { user } = useContext(UserContext);
-  console.log(user.identities[0].user_id
-    , 'user id from profile page')
+  const [userId, setUserId] = useState(user.identities[0].user_id);
+  console.log(user.email, "user email");
 
   const handleClose = () => setShowEditForm(false);
   const handleShow = () => setShowEditForm(true);
@@ -34,11 +35,12 @@ const ProfileSettings = () => {
     firstName: "Stacy",
     lastName: "Anderson",
     userName: "stacyStacy84",
-    email: "stacy@email.com",
+    email: user.email,
     streetAddress: "123 Anywhere Street",
     zipcode: "M8X0C1",
     city: "Toronto",
     country: "Canada",
+    userId: userId,
   };
 
   const iconMapping = {
@@ -311,19 +313,23 @@ const ProfileSettings = () => {
           </Row>
           <h5 className="fw-semibold mt-4 mb-4">Personal Details</h5>
           <Row>
-            {Object.keys(userInfo).map((key, index) => (
-              <Col key={index} xs={12} sm={6} className="mb-3">
-                <div className="d-flex flex-column">
-                  <div className="d-flex align-items-center gap-2">
-                    <span className={`${styles.icon} mb-1`}>
-                      {iconMapping[key]}{" "}
-                    </span>
-                    <small>{labelMapping[key] || key}</small>
+            {Object.keys(userInfo).map((key, index) => {
+              if (key === "userId") return null; // Skip rendering userId
+
+              return (
+                <Col key={index} xs={12} sm={6} className="mb-3">
+                  <div className="d-flex flex-column">
+                    <div className="d-flex align-items-center gap-2">
+                      <span className={`${styles.icon} mb-1`}>
+                        {iconMapping[key]}{" "}
+                      </span>
+                      <small>{labelMapping[key] || key}</small>
+                    </div>
+                    <span className="">{userInfo[key]}</span>
                   </div>
-                  <span className="">{userInfo[key]}</span>
-                </div>
-              </Col>
-            ))}
+                </Col>
+              );
+            })}
             {/* {userInfo.map((user, index) => (
               <React.Fragment key={index}>
                 {Object.entries(user).map(([key, value]) => {
