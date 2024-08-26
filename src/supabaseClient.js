@@ -7,3 +7,4 @@ console.log('Supabase URL:', supabaseUrl);  // Debugging line
 console.log('Supabase Anon Key:', supabaseAnonKey);  // Debugging line
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+

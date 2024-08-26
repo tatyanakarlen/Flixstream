@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
+import { supabase } from "../../../supabaseClient";
+import React, { useState, useContext, useEffect } from "react";
 import { Image, Row, Col, Form, Modal, Button } from "react-bootstrap";
 import styles from "./ProfileSettings.module.css";
 import CustomBTN from "../../global/components/CustomBTN/CustomBTN";
 import { BiSolidFilm } from "react-icons/bi";
 import { MdPlaylistAdd, MdOutlineEmail } from "react-icons/md";
-import { supabase } from "../../../supabaseClient";
 import { BsHandIndexThumb } from "react-icons/bs";
 import { AiFillEdit } from "react-icons/ai";
 import {
@@ -24,24 +24,109 @@ const ProfileSettings = () => {
   const [showEditForm, setShowEditForm] = useState(false);
   const { user } = useContext(UserContext);
   const [userId, setUserId] = useState(user.identities[0].user_id);
-  console.log(user.email, "user email");
+  console.log(userId, "user id");
 
   const handleClose = () => setShowEditForm(false);
   const handleShow = () => setShowEditForm(true);
 
   const image = process.env.PUBLIC_URL + "/images/user-04.jpg";
 
-  const userInfo = {
-    firstName: "Stacy",
-    lastName: "Anderson",
-    userName: "stacyStacy84",
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    userName: "",
     email: user.email,
-    streetAddress: "123 Anywhere Street",
-    zipcode: "M8X0C1",
-    city: "Toronto",
-    country: "Canada",
+    streetAddress: "",
+    apt: "",
+    zipcode: "",
+    city: "",
+    country: "",
+    province: "",
     userId: userId,
+  });
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (userId) {
+        console.log("Fetching data for userId:", userId);
+        const { data, error } = await supabase
+          .from("users")
+          .select("*")
+          .eq("user_id", userId);
+
+        console.log("API Response data:", data);
+
+        if (error) {
+          console.error("Error fetching profile:", error);
+          return;
+        }
+
+        if (data && data.length > 0) {
+          const userData = data[0];
+          setFormData({
+            firstName: userData.first_name || "",
+            lastName: userData.last_name || "",
+            userName: userData.user_name || "",
+            email: userData.email || "",
+            streetAddress: userData.street_address || "",
+            zipcode: userData.zipcode || "",
+            city: userData.city || "",
+            country: userData.country || "",
+            province: userData.province || "",
+          });
+        } else {
+          console.log("No matching data found.");
+          setFormData({
+            firstName: "",
+            lastName: "",
+            userName: "",
+            email: "",
+            streetAddress: "",
+            zipcode: "",
+            city: "",
+            country: "",
+            province: "",
+          });
+        }
+      }
+    };
+
+    fetchUserData();
+  }, [userId]);
+
+  // console.log(formData, "form data");
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { error } = await supabase.from("users").upsert({
+      user_id: userId,
+      first_name: formData.firstName,
+      last_name: formData.lastName,
+      user_name: formData.userName,
+      email: user.email,
+      street_address: formData.streetAddress,
+      zipcode: formData.zipcode,
+      city: formData.city,
+      country: formData.country,
+      province: formData.province,
+    });
+
+    if (error) {
+      console.error("Error updating user data:", error);
+    } else {
+      console.log("User data updated successfully!");
+    }
+  };
+
+  console.log(formData, "formData");
 
   const iconMapping = {
     firstName: <AiFillEdit />,
@@ -49,25 +134,25 @@ const ProfileSettings = () => {
     userName: <FaUser />,
     email: <MdOutlineEmail />,
     streetAddress: <FaHouse />,
+    apt: <FaHouse />,
     zipcode: <FaMapPin />,
     city: <FaMapLocationDot />,
+    province: <FaMapLocationDot />,
     country: <FaGlobe />,
   };
 
-  const [inputValues, setInputValues] = useState({
-    name: "",
-    email: "",
-    // Add more properties as needed
-  });
+
 
   const labelMapping = {
     firstName: "First Name",
     lastName: "Last Name",
-    userName: "User Name",
+    userName: "Username",
     email: "Email",
-    streetAddress: "Street Adress",
+    streetAddress: "Street Address",
+    apt: "Apt/Suite",
     zipcode: "Zipcode",
     city: "City",
+    province: "Province",
     country: "Country",
   };
 
@@ -132,7 +217,7 @@ const ProfileSettings = () => {
       </div>
       {isEditMode ? (
         <div className="mt-5">
-          <Form className={styles.form}>
+          <Form className={styles.form} onSubmit={handleSubmit}>
             <Row className={`${styles.row} mb-3`}>
               <Form.Group
                 className={styles.formGroupCol}
@@ -144,6 +229,9 @@ const ProfileSettings = () => {
                 <Form.Control
                   required
                   type="text"
+                  name="firstName" 
+                  value={formData.firstName}
+                  onChange={handleInputChange}
                   placeholder="Enter your first name"
                   // defaultValue="Mark"
                 />
@@ -159,8 +247,10 @@ const ProfileSettings = () => {
                 <Form.Control
                   required
                   type="text"
+                  name="lastName" 
                   placeholder="Enter your last name"
-                  // defaultValue="Otto"
+                  value={formData.lastName}
+                  onChange={handleInputChange}
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
@@ -174,6 +264,9 @@ const ProfileSettings = () => {
               >
                 <Form.Label>Username</Form.Label>
                 <Form.Control
+                  value={formData.userName}
+                  onChange={handleInputChange}
+                  name="userName" 
                   type="text"
                   placeholder="example@email.com"
                   required
@@ -194,7 +287,31 @@ const ProfileSettings = () => {
                 <Form.Control
                   type="text"
                   placeholder="example@email.com"
+                  name="email" 
                   required
+                  onChange={handleInputChange}
+                  value={formData.email}
+                />
+                <Form.Control.Feedback type="invalid">
+                  Please provide a valid email address.
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Row>
+            <Row className="mb-3">
+              <Form.Group
+                className={styles.formGroupCol}
+                as={Col}
+                md="8"
+                controlId="validationCustom03"
+              >
+                <Form.Label>Street Address</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="123 Anywhere Street"
+                  name="streetAddress" 
+                  required
+                  onChange={handleInputChange}
+                  value={formData.streetAddress}
                 />
                 <Form.Control.Feedback type="invalid">
                   Please provide a valid email address.
@@ -212,8 +329,10 @@ const ProfileSettings = () => {
                 <Form.Control
                   required
                   type="text"
+                  name="country" 
                   placeholder="Select country"
-                  // defaultValue="Mark"
+                  onChange={handleInputChange}
+                  value={formData.country}
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
@@ -227,8 +346,10 @@ const ProfileSettings = () => {
                 <Form.Control
                   required
                   type="text"
-                  placeholder="Select country"
-                  // defaultValue="Otto"
+                  name="city" 
+                  placeholder="Select city"
+                  onChange={handleInputChange}
+                  value={formData.city}
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
@@ -244,7 +365,10 @@ const ProfileSettings = () => {
                 <Form.Control
                   required
                   type="text"
+                  name="province" 
                   placeholder="Select province"
+                  onChange={handleInputChange}
+                  value={formData.province}
                   // defaultValue="Mark"
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -259,7 +383,10 @@ const ProfileSettings = () => {
                 <Form.Control
                   required
                   type="text"
+                  name="zipcode" 
                   placeholder="Enter ZIP Code"
+                  onChange={handleInputChange}
+                  value={formData.zipcode}
                   // defaultValue="Otto"
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
@@ -313,7 +440,7 @@ const ProfileSettings = () => {
           </Row>
           <h5 className="fw-semibold mt-4 mb-4">Personal Details</h5>
           <Row>
-            {Object.keys(userInfo).map((key, index) => {
+            {Object.keys(formData).map((key, index) => {
               if (key === "userId") return null; // Skip rendering userId
 
               return (
@@ -325,7 +452,7 @@ const ProfileSettings = () => {
                       </span>
                       <small>{labelMapping[key] || key}</small>
                     </div>
-                    <span className="">{userInfo[key]}</span>
+                    <span className="">{formData[key]}</span>
                   </div>
                 </Col>
               );
