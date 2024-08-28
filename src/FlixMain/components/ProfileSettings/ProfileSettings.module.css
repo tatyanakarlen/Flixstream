@@ -32,6 +32,7 @@
     border: 1px solid #3f3f3f !important;
     background-color: #151414 !important;
     border-radius: 4px !important;
+    color: rgb(144, 144, 144) !important;
 }
 
 .form input::placeholder {

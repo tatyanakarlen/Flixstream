@@ -11,11 +11,13 @@ const CustomBTN = ({
   textColor,
   variant,
   padding,
-  width
+  width, 
+  type
 
 }) => {
   return (
     <Button
+    type={type}
       onClick={onClick}
       variant={variant}
       className={`${styles.btn} ${bgColor} ${textColor} ${padding} ${width} text-nowrap d-flex align-items-center justify-content-center gap-2`}

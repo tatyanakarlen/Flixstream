@@ -63,6 +63,7 @@ const ProfileSettings = () => {
 
         if (data && data.length > 0) {
           const userData = data[0];
+          setIsEditMode(true); // User data exists, so it's Edit Mode
           setFormData({
             firstName: userData.first_name || "",
             lastName: userData.last_name || "",
@@ -76,11 +77,12 @@ const ProfileSettings = () => {
           });
         } else {
           console.log("No matching data found.");
+          setIsEditMode(false); // No user data, so it's Add Mode
           setFormData({
             firstName: "",
             lastName: "",
             userName: "",
-            email: "",
+            email: user.email,
             streetAddress: "",
             zipcode: "",
             city: "",
@@ -94,7 +96,9 @@ const ProfileSettings = () => {
     fetchUserData();
   }, [userId]);
 
-  // console.log(formData, "form data");
+  console.log(isEditMode, "is edit mode");
+
+  console.log(formData, "form data");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -140,8 +144,6 @@ const ProfileSettings = () => {
     province: <FaMapLocationDot />,
     country: <FaGlobe />,
   };
-
-
 
   const labelMapping = {
     firstName: "First Name",
@@ -192,7 +194,15 @@ const ProfileSettings = () => {
           </small>
           <div className="d-flex gap-2 mt-2">
             <CustomBTN
-              onClick={() => setIsEditMode(!isEditMode)}
+              // type={isEditMode ? "submit" : "button"}
+              onClick={(e) => {
+                if (isEditMode) {
+                  handleSubmit(e);
+                  setIsEditMode(false) 
+                } else {
+                  setIsEditMode(true); 
+                }
+              }}
               text={isEditMode ? "Save changes" : "Edit profile"}
               textColor="text-light"
               bgColor="redBTNbg"
@@ -229,7 +239,7 @@ const ProfileSettings = () => {
                 <Form.Control
                   required
                   type="text"
-                  name="firstName" 
+                  name="firstName"
                   value={formData.firstName}
                   onChange={handleInputChange}
                   placeholder="Enter your first name"
@@ -247,7 +257,7 @@ const ProfileSettings = () => {
                 <Form.Control
                   required
                   type="text"
-                  name="lastName" 
+                  name="lastName"
                   placeholder="Enter your last name"
                   value={formData.lastName}
                   onChange={handleInputChange}
@@ -255,18 +265,19 @@ const ProfileSettings = () => {
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
             </Row>
+
             <Row className="mb-3">
               <Form.Group
                 className={styles.formGroupCol}
                 as={Col}
-                md="8"
-                controlId="validationCustom03"
+                md="4"
+                controlId="validationCustom01"
               >
                 <Form.Label>Username</Form.Label>
                 <Form.Control
                   value={formData.userName}
                   onChange={handleInputChange}
-                  name="userName" 
+                  name="userName"
                   type="text"
                   placeholder="example@email.com"
                   required
@@ -275,19 +286,17 @@ const ProfileSettings = () => {
                   Please provide a username.
                 </Form.Control.Feedback>
               </Form.Group>
-            </Row>
-            <Row className="mb-3">
               <Form.Group
                 className={styles.formGroupCol}
                 as={Col}
-                md="8"
-                controlId="validationCustom03"
+                md="4"
+                controlId="validationCustom02"
               >
                 <Form.Label>Email Address</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="example@email.com"
-                  name="email" 
+                  name="email"
                   required
                   onChange={handleInputChange}
                   value={formData.email}
@@ -297,6 +306,7 @@ const ProfileSettings = () => {
                 </Form.Control.Feedback>
               </Form.Group>
             </Row>
+
             <Row className="mb-3">
               <Form.Group
                 className={styles.formGroupCol}
@@ -308,7 +318,7 @@ const ProfileSettings = () => {
                 <Form.Control
                   type="text"
                   placeholder="123 Anywhere Street"
-                  name="streetAddress" 
+                  name="streetAddress"
                   required
                   onChange={handleInputChange}
                   value={formData.streetAddress}
@@ -329,7 +339,7 @@ const ProfileSettings = () => {
                 <Form.Control
                   required
                   type="text"
-                  name="country" 
+                  name="country"
                   placeholder="Select country"
                   onChange={handleInputChange}
                   value={formData.country}
@@ -346,7 +356,7 @@ const ProfileSettings = () => {
                 <Form.Control
                   required
                   type="text"
-                  name="city" 
+                  name="city"
                   placeholder="Select city"
                   onChange={handleInputChange}
                   value={formData.city}
@@ -365,7 +375,7 @@ const ProfileSettings = () => {
                 <Form.Control
                   required
                   type="text"
-                  name="province" 
+                  name="province"
                   placeholder="Select province"
                   onChange={handleInputChange}
                   value={formData.province}
@@ -383,7 +393,7 @@ const ProfileSettings = () => {
                 <Form.Control
                   required
                   type="text"
-                  name="zipcode" 
+                  name="zipcode"
                   placeholder="Enter ZIP Code"
                   onChange={handleInputChange}
                   value={formData.zipcode}
