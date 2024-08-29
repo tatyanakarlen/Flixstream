@@ -21,6 +21,7 @@ import { UserContext } from "../../../userContext";
 
 const ProfileSettings = () => {
   const [isEditMode, setIsEditMode] = useState(false);
+  const [isUserExists, setIsUserExists] = useState(false); // New state to check if user data exists
   const [showEditForm, setShowEditForm] = useState(false);
   const { user } = useContext(UserContext);
   const [userId, setUserId] = useState(user.identities[0].user_id);
@@ -63,7 +64,7 @@ const ProfileSettings = () => {
 
         if (data && data.length > 0) {
           const userData = data[0];
-          setIsEditMode(true); // User data exists, so it's Edit Mode
+          setIsUserExists(true); // User data exists, set state to true
           setFormData({
             firstName: userData.first_name || "",
             lastName: userData.last_name || "",
@@ -77,12 +78,12 @@ const ProfileSettings = () => {
           });
         } else {
           console.log("No matching data found.");
-          setIsEditMode(false); // No user data, so it's Add Mode
+          setIsUserExists(false); // No user data, set state to false
           setFormData({
             firstName: "",
             lastName: "",
             userName: "",
-            email: user.email,
+            email: user.email, // Assuming 'user' is available in your context or props
             streetAddress: "",
             zipcode: "",
             city: "",
@@ -94,7 +95,7 @@ const ProfileSettings = () => {
     };
 
     fetchUserData();
-  }, [userId]);
+  }, [userId]); // Runs when userId changes
 
   console.log(isEditMode, "is edit mode");
 
@@ -110,23 +111,41 @@ const ProfileSettings = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { error } = await supabase.from("users").upsert({
+
+    // Prepare data to be inserted or updated
+    const userData = {
       user_id: userId,
       first_name: formData.firstName,
       last_name: formData.lastName,
       user_name: formData.userName,
-      email: user.email,
+      email: user.email, // Assuming 'user' is available in your context or props
       street_address: formData.streetAddress,
       zipcode: formData.zipcode,
       city: formData.city,
       country: formData.country,
       province: formData.province,
-    });
+    };
+
+    let response;
+    if (isUserExists) {
+      // Edit existing user profile
+      response = await supabase
+        .from("users")
+        .update(userData)
+        .eq("user_id", userId);
+    } else {
+      // Create a new user profile
+      response = await supabase.from("users").insert(userData);
+    }
+
+    const { error } = response;
 
     if (error) {
-      console.error("Error updating user data:", error);
+      console.error("Error saving user data:", error);
     } else {
-      console.log("User data updated successfully!");
+      console.log("User data saved successfully!");
+      setIsEditMode(false); // Exit edit mode after saving
+      setIsUserExists(true); // Set user exists to true after creating the profile
     }
   };
 
@@ -198,9 +217,9 @@ const ProfileSettings = () => {
               onClick={(e) => {
                 if (isEditMode) {
                   handleSubmit(e);
-                  setIsEditMode(false) 
+                  setIsEditMode(false);
                 } else {
-                  setIsEditMode(true); 
+                  setIsEditMode(true);
                 }
               }}
               text={isEditMode ? "Save changes" : "Edit profile"}
