@@ -23,6 +23,7 @@ const ProfileSettings = () => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [isUserExists, setIsUserExists] = useState(false); // New state to check if user data exists
   const [showEditForm, setShowEditForm] = useState(false);
+  const [userName, setUserName] = useState(null)
   const { user } = useContext(UserContext);
   const [userId, setUserId] = useState(user.identities[0].user_id);
   console.log(userId, "user id");
@@ -76,6 +77,7 @@ const ProfileSettings = () => {
             country: userData.country || "",
             province: userData.province || "",
           });
+          setUserName(userData.user_name)
         } else {
           console.log("No matching data found.");
           setIsUserExists(false); // No user data, set state to false
@@ -207,7 +209,7 @@ const ProfileSettings = () => {
       <div className="d-flex mt-4 gap-4">
         <Image src={image} height={110} width={110} roundedCircle />
         <div className="d-flex flex-column mt-2">
-          <h5>Username: stacystacy19</h5>
+          <h5>Username: {userName ? userName : "none"}</h5>
           <small className={styles.subscriptionPlan}>
             Subscription plan: Premium
           </small>

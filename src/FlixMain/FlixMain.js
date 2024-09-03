@@ -11,9 +11,11 @@ import MoviePlayer from "./components/MoviePlayer/MoviePlayer";
 import ProfileSettings from "./components/ProfileSettings/ProfileSettings";
 import useMediaQueries from "./utils/UseMediaQuery";
 import MobileNav from "./global/components/MobileNav/MobileNav";
+import { supabase } from "../supabaseClient";
 
 const FlixMain = () => {
   const location = useLocation();
+  const [movies, setMovies] = useState([]);
   const [searchMode, setSearchMode] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [filteredData, setFilteredData] = useState([]);
@@ -30,328 +32,350 @@ const FlixMain = () => {
     setShowModal(true);
   };
 
-  const allMovies = [
-    {
-      id: "1",
-      image: sciFi,
-      title: "Fantasy Realm",
-      description: "Journey through magical lands and epic adventures.",
-      longDescription:
-        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
-      year: "1985",
-      length: "1 hr 26 min",
-      likes: "5",
-      tags: ["topRated", "trending"],
-      cast: [
-        "Emma Hartley",
-        "Jonathan Pierce",
-        "Olivia Mason",
-        "Marcus Bradley",
-      ],
-      creator: "Andy Breckman",
-      genres: ["Adventure", "Mystery", "Thriller"],
-    },
-    {
-      id: "2",
-      image: people,
-      title: "Mystery Chronicles",
-      description: "Unraveling the most intriguing and puzzling cases.",
-      longDescription:
-        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
-      year: "2010",
-      length: "1 hr 15 min",
-      likes: "20",
-      tags: ["topRated", "recentlyAdded"],
-      cast: [
-        "Emma Hartley",
-        "Jonathan Pierce",
-        "Olivia Mason",
-        "Marcus Bradley",
-      ],
-      creator: "Andy Breckman",
-      genres: ["Adventure", "Mystery", "Thriller"],
-    },
-    {
-      id: "3",
-      image: sciFi,
-      title: "Historical Insights",
-      description: "Diving deep into significant events and eras of the past.",
-      longDescription:
-        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
-      year: "2024",
-      length: "1 hr 24 min",
-      likes: "72",
-      tags: ["mustWatch"],
-      cast: [
-        "Emma Hartley",
-        "Jonathan Pierce",
-        "Olivia Mason",
-        "Marcus Bradley",
-      ],
-      creator: "Andy Breckman",
-      genres: ["Adventure", "Mystery", "Thriller"],
-    },
-    {
-      id: "4",
-      image: people,
-      title: "Comedy Highlights",
-      description: "Laugh out loud with the best comedies and sitcoms.",
-      longDescription:
-        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
-      year: "2016",
-      length: "1 hr 10 min",
-      likes: "25",
-      tags: ["mustWatch", "recentlyAdded"],
-      cast: [
-        "Emma Hartley",
-        "Jonathan Pierce",
-        "Olivia Mason",
-        "Marcus Bradley",
-      ],
-      creator: "Andy Breckman",
-      genres: ["Adventure", "Mystery", "Thriller"],
-    },
-    {
-      id: "5",
-      image: sciFi,
-      title: "Horror Tales",
-      description: "Prepare for spine-chilling scares.",
-      longDescription:
-        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
-      year: "2020",
-      length: "1 hr 25 min",
-      likes: "12",
-      tags: ["topRated", "mustWatch"],
-      cast: [
-        "Emma Hartley",
-        "Jonathan Pierce",
-        "Olivia Mason",
-        "Marcus Bradley",
-      ],
-      creator: "Andy Breckman",
-      genres: ["Adventure", "Mystery", "Thriller"],
-    },
-    {
-      id: "6",
-      image: people,
-      title: "Dramatic Stories",
-      description: "Embrace powerful emotions and compelling narratives.",
-      longDescription:
-        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
-      year: "2023",
-      length: "1 hr 10 min",
-      likes: "19",
-      tags: ["justForYou"],
-      cast: [
-        "Emma Hartley",
-        "Jonathan Pierce",
-        "Olivia Mason",
-        "Marcus Bradley",
-      ],
-      creator: "Andy Breckman",
-      genres: ["Adventure", "Mystery", "Thriller"],
-    },
-    {
-      id: "7",
-      image: sciFi,
-      title: "Action Adventures",
-      description: "Experience adrenaline-pumping thrills and epic battles.",
-      longDescription:
-        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
-      year: "2021",
-      length: "1 hr 05 min",
-      likes: "8",
-      tags: ["topRated", "popular"],
-      cast: [
-        "Emma Hartley",
-        "Jonathan Pierce",
-        "Olivia Mason",
-        "Marcus Bradley",
-      ],
-      creator: "Andy Breckman",
-      genres: ["Adventure", "Mystery", "Thriller"],
-    },
-    {
-      id: "8",
-      image: people,
-      title: "Fantasy Quests",
-      description: "Embark on magical journeys and mythical adventures.",
-      longDescription:
-        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
-      year: "2017",
-      length: "1 hr 20 min",
-      likes: "3",
-      tags: ["topRated", "popular"],
-      cast: [
-        "Emma Hartley",
-        "Jonathan Pierce",
-        "Olivia Mason",
-        "Marcus Bradley",
-      ],
-      creator: "Andy Breckman",
-      genres: ["Adventure", "Mystery", "Thriller"],
-    },
-    {
-      id: "9",
-      image: sciFi,
-      title: "Fantasy Realm",
-      description: "Journey through magical lands and epic adventures.",
-      longDescription:
-        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
-      year: "2020",
-      length: "1 hr 08 min",
-      likes: "5",
-      tags: ["popular"],
-      cast: [
-        "Emma Hartley",
-        "Jonathan Pierce",
-        "Olivia Mason",
-        "Marcus Bradley",
-      ],
-      creator: "Andy Breckman",
-      genres: ["Adventure", "Mystery", "Thriller"],
-    },
-    {
-      id: "10",
-      image: people,
-      title: "Mystery Chronicles",
-      description: "Unraveling the most intriguing and puzzling cases.",
-      longDescription:
-        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
-      year: "2014",
-      length: "1 hr 08 min",
-      likes: "20",
-      tags: ["mustWatch", "recentlyAdded"],
-      cast: [
-        "Emma Hartley",
-        "Jonathan Pierce",
-        "Olivia Mason",
-        "Marcus Bradley",
-      ],
-      creator: "Andy Breckman",
-      genres: ["Adventure", "Mystery", "Thriller"],
-    },
-    {
-      id: "11",
-      image: sciFi,
-      title: "Historical Insights",
-      description: "Diving deep into significant events and eras of the past.",
-      longDescription:
-        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
-      year: "2018",
-      length: "1 hr 25 min",
-      likes: "72",
-      tags: ["topRated", "popular"],
-      cast: [
-        "Emma Hartley",
-        "Jonathan Pierce",
-        "Olivia Mason",
-        "Marcus Bradley",
-      ],
-      creator: "Andy Breckman",
-      genres: ["Adventure", "Mystery", "Thriller"],
-    },
-    {
-      id: "12",
-      image: people,
-      title: "Comedy Highlights",
-      description: "Laugh out loud with the best comedies and sitcoms.",
-      longDescription:
-        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
-      year: "2020",
-      length: "1 hr 10 min",
-      likes: "25",
-      tags: ["justForYou"],
-      cast: [
-        "Emma Hartley",
-        "Jonathan Pierce",
-        "Olivia Mason",
-        "Marcus Bradley",
-      ],
-      creator: "Andy Breckman",
-      genres: ["Adventure", "Mystery", "Thriller"],
-    },
-    {
-      id: "13",
-      image: sciFi,
-      title: "Horror Tales",
-      description: "Prepare for spine-chilling scares.",
-      longDescription:
-        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
-      year: "2017",
-      length: "1 hr 03 min",
-      likes: "12",
-      tags: ["mustWatch", "recentlyAdded"],
-      cast: [
-        "Emma Hartley",
-        "Jonathan Pierce",
-        "Olivia Mason",
-        "Marcus Bradley",
-      ],
-      creator: "Andy Breckman",
-      genres: ["Adventure", "Mystery", "Thriller"],
-    },
-    {
-      id: "14",
-      image: people,
-      title: "Dramatic Stories",
-      description: "Embrace powerful emotions and compelling narratives.",
-      longDescription:
-        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
-      year: "2020",
-      length: "1 hr 01 min",
-      likes: "19",
-      tags: ["topRated", "trending"],
-      cast: [
-        "Emma Hartley",
-        "Jonathan Pierce",
-        "Olivia Mason",
-        "Marcus Bradley",
-      ],
-      creator: "Andy Breckman",
-      genres: ["Adventure", "Mystery", "Thriller"],
-    },
-    {
-      id: "15",
-      image: sciFi,
-      title: "Action Adventures",
-      description: "Experience adrenaline-pumping thrills and epic battles.",
-      longDescription:
-        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
-      year: "2012",
-      length: "1 hr 20 min",
-      likes: "8",
-      tags: ["popular"],
-      cast: [
-        "Emma Hartley",
-        "Jonathan Pierce",
-        "Olivia Mason",
-        "Marcus Bradley",
-      ],
-      creator: "Andy Breckman",
-      genres: ["Adventure", "Mystery", "Thriller"],
-    },
-    {
-      id: "16",
-      image: people,
-      title: "Fantasy Quests",
-      description: "Embark on magical journeys and mythical adventures.",
-      longDescription:
-        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
-      year: "2019",
-      length: "1 hr 05 min",
-      likes: "3",
-      tags: ["mustWatch", "recentlyAdded"],
-      cast: [
-        "Emma Hartley",
-        "Jonathan Pierce",
-        "Olivia Mason",
-        "Marcus Bradley",
-      ],
-      creator: "Andy Breckman",
-      genres: ["Adventure", "Mystery", "Thriller"],
-    },
-  ];
+   // Function to fetch all movies
+   const fetchAllMovies = async () => {
+    // setLoading(true);
+    const { data, error } = await supabase
+      .from('movies')
+      .select('*'); // Fetch all columns
+
+    if (error) {
+      console.error('Error fetching movies:', error);
+      // setError(error.message);
+    } else {
+      setMovies(data);
+      console.log('All movies:', data);
+    }
+    // setLoading(false);
+  };
+
+  // Use useEffect to fetch data when component mounts
+  useEffect(() => {
+    fetchAllMovies();
+  }, []); // Empty dependency array ensures it runs only once on mount
+
+  // const allMovies = [
+  //   {
+  //     id: "1",
+  //     image: sciFi,
+  //     title: "Fantasy Realm",
+  //     description: "Journey through magical lands and epic adventures.",
+  //     longDescription:
+  //       "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
+  //     year: "1985",
+  //     length: "1 hr 26 min",
+  //     likes: "5",
+  //     tags: ["topRated", "trending"],
+  //     cast: [
+  //       "Emma Hartley",
+  //       "Jonathan Pierce",
+  //       "Olivia Mason",
+  //       "Marcus Bradley",
+  //     ],
+  //     creator: "Andy Breckman",
+  //     genres: ["Adventure", "Mystery", "Thriller"],
+  //   },
+  //   {
+  //     id: "2",
+  //     image: people,
+  //     title: "Mystery Chronicles",
+  //     description: "Unraveling the most intriguing and puzzling cases.",
+  //     longDescription:
+  //       "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
+  //     year: "2010",
+  //     length: "1 hr 15 min",
+  //     likes: "20",
+  //     tags: ["topRated", "recentlyAdded"],
+  //     cast: [
+  //       "Emma Hartley",
+  //       "Jonathan Pierce",
+  //       "Olivia Mason",
+  //       "Marcus Bradley",
+  //     ],
+  //     creator: "Andy Breckman",
+  //     genres: ["Adventure", "Mystery", "Thriller"],
+  //   },
+  //   {
+  //     id: "3",
+  //     image: sciFi,
+  //     title: "Historical Insights",
+  //     description: "Diving deep into significant events and eras of the past.",
+  //     longDescription:
+  //       "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
+  //     year: "2024",
+  //     length: "1 hr 24 min",
+  //     likes: "72",
+  //     tags: ["mustWatch"],
+  //     cast: [
+  //       "Emma Hartley",
+  //       "Jonathan Pierce",
+  //       "Olivia Mason",
+  //       "Marcus Bradley",
+  //     ],
+  //     creator: "Andy Breckman",
+  //     genres: ["Adventure", "Mystery", "Thriller"],
+  //   },
+  //   {
+  //     id: "4",
+  //     image: people,
+  //     title: "Comedy Highlights",
+  //     description: "Laugh out loud with the best comedies and sitcoms.",
+  //     longDescription:
+  //       "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
+  //     year: "2016",
+  //     length: "1 hr 10 min",
+  //     likes: "25",
+  //     tags: ["mustWatch", "recentlyAdded"],
+  //     cast: [
+  //       "Emma Hartley",
+  //       "Jonathan Pierce",
+  //       "Olivia Mason",
+  //       "Marcus Bradley",
+  //     ],
+  //     creator: "Andy Breckman",
+  //     genres: ["Adventure", "Mystery", "Thriller"],
+  //   },
+  //   {
+  //     id: "5",
+  //     image: sciFi,
+  //     title: "Horror Tales",
+  //     description: "Prepare for spine-chilling scares.",
+  //     longDescription:
+  //       "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
+  //     year: "2020",
+  //     length: "1 hr 25 min",
+  //     likes: "12",
+  //     tags: ["topRated", "mustWatch"],
+  //     cast: [
+  //       "Emma Hartley",
+  //       "Jonathan Pierce",
+  //       "Olivia Mason",
+  //       "Marcus Bradley",
+  //     ],
+  //     creator: "Andy Breckman",
+  //     genres: ["Adventure", "Mystery", "Thriller"],
+  //   },
+  //   {
+  //     id: "6",
+  //     image: people,
+  //     title: "Dramatic Stories",
+  //     description: "Embrace powerful emotions and compelling narratives.",
+  //     longDescription:
+  //       "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
+  //     year: "2023",
+  //     length: "1 hr 10 min",
+  //     likes: "19",
+  //     tags: ["justForYou"],
+  //     cast: [
+  //       "Emma Hartley",
+  //       "Jonathan Pierce",
+  //       "Olivia Mason",
+  //       "Marcus Bradley",
+  //     ],
+  //     creator: "Andy Breckman",
+  //     genres: ["Adventure", "Mystery", "Thriller"],
+  //   },
+  //   {
+  //     id: "7",
+  //     image: sciFi,
+  //     title: "Action Adventures",
+  //     description: "Experience adrenaline-pumping thrills and epic battles.",
+  //     longDescription:
+  //       "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
+  //     year: "2021",
+  //     length: "1 hr 05 min",
+  //     likes: "8",
+  //     tags: ["topRated", "popular"],
+  //     cast: [
+  //       "Emma Hartley",
+  //       "Jonathan Pierce",
+  //       "Olivia Mason",
+  //       "Marcus Bradley",
+  //     ],
+  //     creator: "Andy Breckman",
+  //     genres: ["Adventure", "Mystery", "Thriller"],
+  //   },
+  //   {
+  //     id: "8",
+  //     image: people,
+  //     title: "Fantasy Quests",
+  //     description: "Embark on magical journeys and mythical adventures.",
+  //     longDescription:
+  //       "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
+  //     year: "2017",
+  //     length: "1 hr 20 min",
+  //     likes: "3",
+  //     tags: ["topRated", "popular"],
+  //     cast: [
+  //       "Emma Hartley",
+  //       "Jonathan Pierce",
+  //       "Olivia Mason",
+  //       "Marcus Bradley",
+  //     ],
+  //     creator: "Andy Breckman",
+  //     genres: ["Adventure", "Mystery", "Thriller"],
+  //   },
+  //   {
+  //     id: "9",
+  //     image: sciFi,
+  //     title: "Fantasy Realm",
+  //     description: "Journey through magical lands and epic adventures.",
+  //     longDescription:
+  //       "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
+  //     year: "2020",
+  //     length: "1 hr 08 min",
+  //     likes: "5",
+  //     tags: ["popular"],
+  //     cast: [
+  //       "Emma Hartley",
+  //       "Jonathan Pierce",
+  //       "Olivia Mason",
+  //       "Marcus Bradley",
+  //     ],
+  //     creator: "Andy Breckman",
+  //     genres: ["Adventure", "Mystery", "Thriller"],
+  //   },
+  //   {
+  //     id: "10",
+  //     image: people,
+  //     title: "Mystery Chronicles",
+  //     description: "Unraveling the most intriguing and puzzling cases.",
+  //     longDescription:
+  //       "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
+  //     year: "2014",
+  //     length: "1 hr 08 min",
+  //     likes: "20",
+  //     tags: ["mustWatch", "recentlyAdded"],
+  //     cast: [
+  //       "Emma Hartley",
+  //       "Jonathan Pierce",
+  //       "Olivia Mason",
+  //       "Marcus Bradley",
+  //     ],
+  //     creator: "Andy Breckman",
+  //     genres: ["Adventure", "Mystery", "Thriller"],
+  //   },
+  //   {
+  //     id: "11",
+  //     image: sciFi,
+  //     title: "Historical Insights",
+  //     description: "Diving deep into significant events and eras of the past.",
+  //     longDescription:
+  //       "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
+  //     year: "2018",
+  //     length: "1 hr 25 min",
+  //     likes: "72",
+  //     tags: ["topRated", "popular"],
+  //     cast: [
+  //       "Emma Hartley",
+  //       "Jonathan Pierce",
+  //       "Olivia Mason",
+  //       "Marcus Bradley",
+  //     ],
+  //     creator: "Andy Breckman",
+  //     genres: ["Adventure", "Mystery", "Thriller"],
+  //   },
+  //   {
+  //     id: "12",
+  //     image: people,
+  //     title: "Comedy Highlights",
+  //     description: "Laugh out loud with the best comedies and sitcoms.",
+  //     longDescription:
+  //       "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
+  //     year: "2020",
+  //     length: "1 hr 10 min",
+  //     likes: "25",
+  //     tags: ["justForYou"],
+  //     cast: [
+  //       "Emma Hartley",
+  //       "Jonathan Pierce",
+  //       "Olivia Mason",
+  //       "Marcus Bradley",
+  //     ],
+  //     creator: "Andy Breckman",
+  //     genres: ["Adventure", "Mystery", "Thriller"],
+  //   },
+  //   {
+  //     id: "13",
+  //     image: sciFi,
+  //     title: "Horror Tales",
+  //     description: "Prepare for spine-chilling scares.",
+  //     longDescription:
+  //       "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
+  //     year: "2017",
+  //     length: "1 hr 03 min",
+  //     likes: "12",
+  //     tags: ["mustWatch", "recentlyAdded"],
+  //     cast: [
+  //       "Emma Hartley",
+  //       "Jonathan Pierce",
+  //       "Olivia Mason",
+  //       "Marcus Bradley",
+  //     ],
+  //     creator: "Andy Breckman",
+  //     genres: ["Adventure", "Mystery", "Thriller"],
+  //   },
+  //   {
+  //     id: "14",
+  //     image: people,
+  //     title: "Dramatic Stories",
+  //     description: "Embrace powerful emotions and compelling narratives.",
+  //     longDescription:
+  //       "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
+  //     year: "2020",
+  //     length: "1 hr 01 min",
+  //     likes: "19",
+  //     tags: ["topRated", "trending"],
+  //     cast: [
+  //       "Emma Hartley",
+  //       "Jonathan Pierce",
+  //       "Olivia Mason",
+  //       "Marcus Bradley",
+  //     ],
+  //     creator: "Andy Breckman",
+  //     genres: ["Adventure", "Mystery", "Thriller"],
+  //   },
+  //   {
+  //     id: "15",
+  //     image: sciFi,
+  //     title: "Action Adventures",
+  //     description: "Experience adrenaline-pumping thrills and epic battles.",
+  //     longDescription:
+  //       "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
+  //     year: "2012",
+  //     length: "1 hr 20 min",
+  //     likes: "8",
+  //     tags: ["popular"],
+  //     cast: [
+  //       "Emma Hartley",
+  //       "Jonathan Pierce",
+  //       "Olivia Mason",
+  //       "Marcus Bradley",
+  //     ],
+  //     creator: "Andy Breckman",
+  //     genres: ["Adventure", "Mystery", "Thriller"],
+  //   },
+  //   {
+  //     id: "16",
+  //     image: people,
+  //     title: "Fantasy Quests",
+  //     description: "Embark on magical journeys and mythical adventures.",
+  //     longDescription:
+  //       "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
+  //     year: "2019",
+  //     length: "1 hr 05 min",
+  //     likes: "3",
+  //     tags: ["mustWatch", "recentlyAdded"],
+  //     cast: [
+  //       "Emma Hartley",
+  //       "Jonathan Pierce",
+  //       "Olivia Mason",
+  //       "Marcus Bradley",
+  //     ],
+  //     creator: "Andy Breckman",
+  //     genres: ["Adventure", "Mystery", "Thriller"],
+  //   },
+  // ];
 
   const continueWatching = [
     {
@@ -377,7 +401,7 @@ const FlixMain = () => {
   ];
 
   const playMovie = (id) => {
-    const movieToPlay = allMovies.find((movie) => movie.id === id);
+    const movieToPlay = movies.find((movie) => movie.id === id);
     setMoviePlayed(movieToPlay);
     console.log(movieToPlay, "movie to play from flixmain");
   };
@@ -385,7 +409,7 @@ const FlixMain = () => {
   const contextValue = {
     searchMode,
     setSearchMode,
-    allMovies,
+    movies,
     filteredData,
     setFilteredData,
     searchInput,
@@ -406,7 +430,7 @@ const FlixMain = () => {
           showModal={showModal}
           setShowModal={setShowModal}
           selectedMovie={selectedMovie}
-          allMovies={allMovies}
+          movies={movies}
         />
         {!location.pathname.includes("play") ? (
           <Row className={`${styles.layoutRow} h-100`}>
@@ -418,7 +442,7 @@ const FlixMain = () => {
                       searchInput={searchInput}
                       filteredData={filteredData}
                       setFilteredData={setFilteredData}
-                      allMovies={allMovies}
+                      movie={movies}
                       setSearchInput={setSearchInput}
                     />
                   )}
@@ -465,7 +489,7 @@ const FlixMain = () => {
         showModal={showModal}
         setShowModal={setShowModal}
         selectedMovie={selectedMovie}
-        allMovies={allMovies}
+        movies={movies}
       />
       {!location.pathname.includes("play") ? (
         <Row className={`${styles.layoutRow} h-100`}>
@@ -479,7 +503,7 @@ const FlixMain = () => {
                     searchInput={searchInput}
                     filteredData={filteredData}
                     setFilteredData={setFilteredData}
-                    allMovies={allMovies}
+                    movies={movies}
                     setSearchInput={setSearchInput}
                   />
                 )}

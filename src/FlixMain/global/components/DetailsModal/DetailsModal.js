@@ -14,13 +14,13 @@ const DetailsModal = ({
   showModal,
   setShowModal,
   selectedMovie,
-  allMovies,
+  movies,
 }) => {
   const [movie, setMovie] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const movie = allMovies.find((movie) => movie.id === selectedMovie);
+    const movie = movies.find((movie) => movie.id === selectedMovie);
     setMovie(movie);
   }, [selectedMovie]);
 
