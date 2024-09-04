@@ -15,7 +15,7 @@ import { MdPlaylistAdd } from "react-icons/md";
 const MovieCard = ({ movie, setMovie, setShowModal, height }) => {
   const navigate = useNavigate();
   return (
-    <Col sm={12} md={6} lg={4} className="mb-4 text-light">
+    <Col sm={12} lg={6} xl={4} className="mb-4 text-light">
       <div
         className={`${styles.cardContainer} px-3 pt-2 pb-3 d-flex flex-column h-100 justify-content-between`}
       >
@@ -33,7 +33,7 @@ const MovieCard = ({ movie, setMovie, setShowModal, height }) => {
             <MdPlaylistAdd className="fs-3 mb-2"/>
           </div>
 
-          <small className="pe-4">{movie.description}</small>
+          <small className="pe-4">{movie.description_short}</small>
         </div>
 
         <div

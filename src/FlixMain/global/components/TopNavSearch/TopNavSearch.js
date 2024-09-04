@@ -8,7 +8,7 @@ const TopNavSearch = ({
   searchInput,
   filteredData,
   setFilteredData,
-  allMovies,
+  movies,
   setSearchInput,
 }) => {
 
@@ -23,7 +23,7 @@ const TopNavSearch = ({
       setFilteredData([]);
     } else {
       setFilteredData(
-        allMovies.filter((movie) =>
+        movies.filter((movie) =>
           movie.title.toLowerCase().includes(userInput)
         )
       );

@@ -11,11 +11,11 @@ import { chunkArray } from "../../utils/chuckArray";
 import BasicMovieCard from "../../global/components/BasicMovieCard/BasicMovieCard";
 
 const Home = () => {
-  const { setShowModal, allMovies, setMovie, continueWatching } =
+  const { setShowModal, movies, setMovie, continueWatching } =
     useOutletContext();
 
-  const firstSixMovies = allMovies.slice(0, 6);
-  const firstThreeMovies = allMovies.slice(0, 3);
+  const firstSixMovies = movies.slice(0, 6);
+  const firstThreeMovies = movies.slice(0, 3);
 
   const {
     isTablet,
@@ -42,7 +42,7 @@ const Home = () => {
                   <Row className={styles.carouselRow}>
                     {moviePair.map((movie, subIndex) => (
                       <BasicMovieCard
-                        height="16rem"
+                        height="25rem"
                         key={index}
                         movie={movie}
                         setMovie={setMovie}
@@ -62,7 +62,7 @@ const Home = () => {
                 <Carousel.Item className="" key={index}>
                   <Row className={styles.carouselRow}>
                     <BasicMovieCard
-                      height={isXsMobile ? "15rem" : "20rem"}
+                      height={"25rem"}
                       key={index}
                       movie={movie}
                       setMovie={setMovie}
@@ -91,7 +91,7 @@ const Home = () => {
       </div>
 
       <DiscoverNewReleases
-        allMovies={allMovies}
+        movies={movies}
         setMovie={setMovie}
         setShowModal={setShowModal}
       />

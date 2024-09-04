@@ -60,7 +60,7 @@ const DetailsModal = ({
               padding="lgBTNPadding"
             />
           </div>
-          <p className="mt-4">{movie && movie.longDescription}</p>
+          <p className="mt-4">{movie && movie.description_long}</p>
           <Actions />
           <div className="d-flex mt-4 gap-2">
             {movie &&

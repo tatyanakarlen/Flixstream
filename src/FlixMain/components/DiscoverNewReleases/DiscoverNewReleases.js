@@ -5,7 +5,7 @@ import MovieCard from "../../global/components/MovieCard/MovieCard";
 import PaginationBTN from "../../global/components/PaginationBTN/PaginationBTN";
 import useMediaQueries from "../../utils/UseMediaQuery";
 
-const DiscoverNewReleases = ({ allMovies, setMovie, setShowModal }) => {
+const DiscoverNewReleases = ({ movies , setMovie, setShowModal }) => {
   const tags = ["All", "Watched", "Saved", "Recommended", "History"];
 
   const {
@@ -16,7 +16,7 @@ const DiscoverNewReleases = ({ allMovies, setMovie, setShowModal }) => {
     isLgDesktopOrLaptop,
   } = useMediaQueries();
 
-  const imagePerRow = 8;
+  const imagePerRow = 9;
 
   const [next, setNext] = useState(imagePerRow);
 
@@ -28,7 +28,7 @@ const DiscoverNewReleases = ({ allMovies, setMovie, setShowModal }) => {
     setNext(next - imagePerRow);
   };
 
-  const showLess = next >= allMovies.length;
+  const showLess = next >= movies.length;
 
   return (
     <div
@@ -46,13 +46,15 @@ const DiscoverNewReleases = ({ allMovies, setMovie, setShowModal }) => {
         ))}
       </div>
       <Row className="mt-5">
-        {allMovies?.slice(0, next)?.map((movie, index) => (
+        {movies?.slice(0, next)?.map((movie, index) => (
           <MovieCard
             movie={movie}
             key={index}
             setMovie={setMovie}
             setShowModal={setShowModal}
-            height={isMobile || isXsMobile ? "18rem" : "13rem"}
+            ////// this has to be adjusted 
+            // height={isDesktopOrLaptop || isTablet ? "18rem" : "25rem" }
+            height={"18rem"}
           />
         ))}
       </Row>
