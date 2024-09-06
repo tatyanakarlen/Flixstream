@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Row, Col, Image, Button } from "react-bootstrap";
+import React from "react";
+import { Col } from "react-bootstrap";
 import { BsThreeDots } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,14 @@ import ImgOnclickShowsDetail from "../ImgOnclickShowsDetail/ImgOnclickShowsDetai
 import { LuListPlus } from "react-icons/lu";
 import { MdPlaylistAdd } from "react-icons/md";
 
-const MovieCard = ({ movie, setMovie, setShowModal, height }) => {
+const MovieCard = ({
+  movie,
+  setMovie,
+  setShowModal,
+  height,
+  addToUserList,
+}) => {
+ 
   const navigate = useNavigate();
   return (
     <Col sm={12} lg={6} xl={4} className="mb-4 text-light">
@@ -30,7 +37,10 @@ const MovieCard = ({ movie, setMovie, setShowModal, height }) => {
           />
           <div className="mt-3 d-flex justify-content-between w-100 align-items-center">
             <h5 className="fw-semibold">{movie.title}</h5>
-            <MdPlaylistAdd className="fs-3 mb-2"/>
+            <MdPlaylistAdd
+              onClick={() => addToUserList(movie.id)}
+              className="fs-3 mb-2"
+            />
           </div>
 
           <small className="pe-4">{movie.description_short}</small>

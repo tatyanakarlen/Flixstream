@@ -11,7 +11,7 @@ import { chunkArray } from "../../utils/chuckArray";
 import BasicMovieCard from "../../global/components/BasicMovieCard/BasicMovieCard";
 
 const Home = () => {
-  const { setShowModal, movies, setMovie, continueWatching } =
+  const { setShowModal, movies, setMovie, continueWatching, addToUserList } =
     useOutletContext();
 
   const firstSixMovies = movies.slice(0, 6);
@@ -46,6 +46,8 @@ const Home = () => {
                         key={index}
                         movie={movie}
                         setMovie={setMovie}
+                        addToUserList={addToUserList}
+                        /// function needs to be connected to BTN
                       />
                     ))}
                   </Row>
@@ -67,6 +69,7 @@ const Home = () => {
                       movie={movie}
                       setMovie={setMovie}
                       setShowModal={setShowModal}
+                      addToUserList={addToUserList}
                     />
                   </Row>
                 </Carousel.Item>
@@ -94,107 +97,10 @@ const Home = () => {
         movies={movies}
         setMovie={setMovie}
         setShowModal={setShowModal}
+        addToUserList={addToUserList}
+       
       />
     </div>
-    // <div>
-    //   {isTablet ? (
-    //      <div>
-    //      <h4 className="text-light fw-semibold mt-4">Recently Added</h4>
-    //       <div className="w-100 mt-4">
-    //           <Carousel
-    //             className={styles.carousel}
-    //             controls={false}
-    //             interval={null}
-    //           >
-    //             {chunkArray(firstSixMovies, 2).map((moviePair, index) => (
-    //               <Carousel.Item className="" key={index}>
-    //                 <Row className={styles.carouselRow}>
-    //                   {moviePair.map((movie, subIndex) => (
-    //                     <BasicMovieCard
-    //                       height="16rem"
-    //                       key={index}
-    //                       movie={movie}
-    //                       setMovie={setMovie}
-    //                     />
-    //                   ))}
-    //                 </Row>
-    //               </Carousel.Item>
-    //             ))}
-    //           </Carousel>
-    //         </div>
-    //      <div className="mt-4">
-    //        <h4 className="text-light fw-semibold">Continue watching</h4>
-
-    //        <ScrollableList>
-    //          {continueWatching.map((movie, index) => (
-    //            <li
-    //              key={index}
-    //              className={`${styles.cardContainer} scrollableListCardContainer`}
-    //            >
-    //              <ContinueWatching movie={movie} />
-    //            </li>
-    //          ))}
-    //        </ScrollableList>
-    //      </div>
-
-    //      <DiscoverNewReleases
-    //        allMovies={allMovies}
-    //        setMovie={setMovie}
-    //        setShowModal={setShowModal}
-    //      />
-    //    </div>
-    //   ) : isMobile ? (
-    //     <div>
-    //     <HomePageHero setShowModal={setShowModal} />
-    //     <div className="mt-4">
-    //       <h4 className="text-light fw-semibold">Continue watching</h4>
-
-    //       <ScrollableList>
-    //         {continueWatching.map((movie, index) => (
-    //           <li
-    //             key={index}
-    //             className={`${styles.cardContainer} scrollableListCardContainer`}
-    //           >
-    //             <ContinueWatching movie={movie} />
-    //           </li>
-    //         ))}
-    //       </ScrollableList>
-    //     </div>
-
-    //     <DiscoverNewReleases
-    //       allMovies={allMovies}
-    //       setMovie={setMovie}
-    //       setShowModal={setShowModal}
-    //     />
-    //   </div>
-    //   ) : (
-    //     <div>
-    //     {
-    //       <HomePageHero setShowModal={setShowModal} />
-    //     }
-    //       <div className="mt-4">
-    //         <h4 className="text-light fw-semibold">Continue watching</h4>
-
-    //         <ScrollableList>
-    //           {continueWatching.map((movie, index) => (
-    //             <li
-    //               key={index}
-    //               className={`${styles.cardContainer} scrollableListCardContainer`}
-    //             >
-    //               <ContinueWatching movie={movie} />
-    //             </li>
-    //           ))}
-    //         </ScrollableList>
-    //       </div>
-
-    //       <DiscoverNewReleases
-    //         allMovies={allMovies}
-    //         setMovie={setMovie}
-    //         setShowModal={setShowModal}
-    //       />
-    //     </div>
-    //   )}
-    // </div>
   );
 };
 

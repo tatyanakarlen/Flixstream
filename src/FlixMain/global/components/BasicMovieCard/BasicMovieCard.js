@@ -6,7 +6,7 @@ import { FaEye } from "react-icons/fa";
 import { IoPlaySharp } from "react-icons/io5";
 import PlayBTN from "../PlayBTN/PlayBTN";
 
-const BasicMovieCard = ({ movie, setMovie, height, setShowModal }) => {
+const BasicMovieCard = ({ movie, setMovie, height, setShowModal, addToUserList }) => {
   return (
     <Col xs={12} md={6} lg={3} className="mb-5 text-light">
       <div className={`d-flex flex-column h-100`}>

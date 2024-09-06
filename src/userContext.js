@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
 import { logout as logoutUser } from "./logout";
 
+
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {

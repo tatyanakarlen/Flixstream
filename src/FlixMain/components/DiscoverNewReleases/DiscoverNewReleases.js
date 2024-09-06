@@ -5,7 +5,7 @@ import MovieCard from "../../global/components/MovieCard/MovieCard";
 import PaginationBTN from "../../global/components/PaginationBTN/PaginationBTN";
 import useMediaQueries from "../../utils/UseMediaQuery";
 
-const DiscoverNewReleases = ({ movies , setMovie, setShowModal }) => {
+const DiscoverNewReleases = ({ movies , setMovie, setShowModal, addToUserList }) => {
   const tags = ["All", "Watched", "Saved", "Recommended", "History"];
 
   const {
@@ -52,6 +52,7 @@ const DiscoverNewReleases = ({ movies , setMovie, setShowModal }) => {
             key={index}
             setMovie={setMovie}
             setShowModal={setShowModal}
+            addToUserList={addToUserList}
             ////// this has to be adjusted 
             // height={isDesktopOrLaptop || isTablet ? "18rem" : "25rem" }
             height={"18rem"}

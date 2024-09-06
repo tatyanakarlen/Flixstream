@@ -11,7 +11,8 @@ import MovieYearLength from "../MovieYearLength/MovieYearLength";
 import Actions from "../Actions/Actions";
 import Tag from "../Tag/Tag";
 
-const SearchResultsMovieCard = ({ movie, setMovie, setShowModal }) => {
+/// adding to users list functionality should be implemented 
+const SearchResultsMovieCard = ({ movie, setMovie, setShowModal, addToUserList }) => {
   return (
     <Col className="mb-4 text-light" xs={12} xxl={6}>
       <div className={`${styles.cardContainer} d-flex gap-4 p-3`}>
