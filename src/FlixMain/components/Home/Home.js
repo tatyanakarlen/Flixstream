@@ -98,6 +98,7 @@ const Home = () => {
         setMovie={setMovie}
         setShowModal={setShowModal}
         addToUserList={addToUserList}
+        
        
       />
     </div>

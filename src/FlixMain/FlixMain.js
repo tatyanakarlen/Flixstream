@@ -58,24 +58,57 @@ const FlixMain = () => {
 
   const addToUserList = async (movieId) => {
     if (loading) return; // Ensure not loading
-
+  
     if (!user) {
       console.error('User must be logged in to add movies to their list.');
       return;
     }
-
+  
     try {
       const { data, error } = await supabase
         .from('user_movies')
         .insert([{ user_id: user.id, movie_id: movieId }]);
-
-      if (error) throw error;
-
-      console.log('Movie added to user list:', data);
+  
+      if (error) {
+        // Check if the error is due to a unique constraint violation
+        if (error.code === '23505') {  // Unique violation error code
+          console.warn('Movie already in user list.');
+        } else {
+          throw error;
+        }
+      } else {
+        console.log('Movie added to user list:', data);
+      }
     } catch (error) {
       console.error('Error adding movie to user list:', error);
     }
   };
+
+  // const addToUserList = async (movieId) => {
+  //   try {
+  //     // Ensure you are not currently loading
+  //     if (loading) return; // Replace `loading` with your actual loading state
+  
+  //     // Ensure userId is globally available
+  //     if (!user) {
+  //       console.error('User must be logged in to add movies to their list.');
+  //       return;
+  //     }
+  
+  //     // Perform the insert operation
+  //     const { data, error } = await supabase
+  //       .from('user_movies')
+  //       .insert([{ user_id: user.id, movie_id: movieId }]);
+  
+  //     // Handle potential errors
+  //     if (error) throw error;
+  
+  //     // Log the result for debugging
+  //     console.log('Movie added to user list:', data);
+  //   } catch (error) {
+  //     console.error('Error adding movie to user list:', error);
+  //   }
+  // };
 
 
   const removeFromUserList = async (movieId) => {
@@ -113,8 +146,7 @@ const FlixMain = () => {
 
   async function fetchUserMovies() {
     try {
-      // Ensure 'user' object has been properly defined with an 'id' property
-      const userId = user.id;  // Replace with how you retrieve the current user ID
+      const userId = user.id;  // Retrieve the current user ID
   
       // Call the RPC function using Supabase client
       const { data, error } = await supabase.rpc('fetch_user_movies', { uid: userId });
@@ -125,7 +157,7 @@ const FlixMain = () => {
       }
   
       console.log('User movies:', data);
-      setUserMovies(data);
+      setUserMovies(data); // Update state with fetched data
     } catch (error) {
       console.error('Unexpected error fetching user movies:', error);
       return null;

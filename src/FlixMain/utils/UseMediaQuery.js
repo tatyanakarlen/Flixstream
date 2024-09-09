@@ -1,8 +1,8 @@
 import { useMediaQuery } from 'react-responsive';
 
 const useMediaQueries = () => {
-  const isLgDesktopOrLaptop = useMediaQuery({ query: '(min-width: 1218px) and (max-width: 2000px)' });
-  const isDesktopOrLaptop = useMediaQuery({ query: '(min-width: 991px) and (max-width: 1217px)' });
+  const isLgDesktopOrLaptop = useMediaQuery({ query: '(min-width: 1260px) and (max-width: 2000px)' });
+  const isDesktopOrLaptop = useMediaQuery({ query: '(min-width: 991px) and (max-width: 1259px)' });
   const isTablet = useMediaQuery({ query: '(min-width: 768px) and (max-width: 991px)' });
   const isMobile = useMediaQuery({ query: '(min-width: 450px) and (max-width: 767px)'})
   const isXsMobile = useMediaQuery({ query: '(min-width: 100px) and (max-width: 450px)'})
