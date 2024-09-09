@@ -69,6 +69,7 @@ const SideNav = () => {
                 <Link
                   className="text-light text-decoration-none"
                   to={link.link}
+                  key={index}
                 >
                   <span
                     key={index}

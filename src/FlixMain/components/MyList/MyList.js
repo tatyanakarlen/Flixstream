@@ -15,7 +15,7 @@ import PaginationBTN from "../../global/components/PaginationBTN/PaginationBTN";
 import BasicMovieCard from "../../global/components/BasicMovieCard/BasicMovieCard";
 
 const MyList = () => {
-  const { movies, setMovie, setShowModal, continueWatching } =
+  const { movies, setMovie, setShowModal, continueWatching, userMovies } =
     useOutletContext();
 
   const imagePerRow = 12;
@@ -36,7 +36,7 @@ const MyList = () => {
     <div>
       <h4 className="mt-4 text-light fw-semibold">My list</h4>
       <ScrollableList>
-        {movies.map((movie, index) => (
+        {userMovies.map((movie, index) => (
           <li
             key={index}
             className={`${styles.cardContainer} scrollableListCardContainer p-3 text-light`}

@@ -17,6 +17,7 @@ import { supabase } from "../supabaseClient";
 const FlixMain = () => {
   const location = useLocation();
   const [movies, setMovies] = useState([]);
+  const [userMovies, setUserMovies] = useState([]);
   const [searchMode, setSearchMode] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [filteredData, setFilteredData] = useState([]);
@@ -29,32 +30,14 @@ const FlixMain = () => {
   const { isTablet, isMobile, isXsMobile } = useMediaQueries();
 
   const { user, loading } = useContext(UserContext);
+  
 
   const setMovie = (id) => {
     setSelectedMovie(id);
     setShowModal(true);
   };
 
-  // const addToUserList = async (movieId) => {
-  //   if (loading) return; // Ensure not loading
 
-  //   if (!user) {
-  //     console.error('User must be logged in to add movies to their list.');
-  //     return;
-  //   }
-
-  //   try {
-  //     const { data, error } = await supabase
-  //       .from('user_movies')
-  //       .insert([{ user_id: user.id, movie_id: movieId }]);
-
-  //     if (error) throw error;
-
-  //     console.log('Movie added to user list:', data);
-  //   } catch (error) {
-  //     console.error('Error adding movie to user list:', error);
-  //   }
-  // };
 
    // Function to fetch all movies
    const fetchAllMovies = async () => {
@@ -72,11 +55,6 @@ const FlixMain = () => {
     }
     // setLoading(false);
   };
-
- 
-  useEffect(() => {
-    fetchAllMovies();
-  }, []); // Empty dependency array ensures it runs only once on mount
 
   const addToUserList = async (movieId) => {
     if (loading) return; // Ensure not loading
@@ -98,6 +76,34 @@ const FlixMain = () => {
       console.error('Error adding movie to user list:', error);
     }
   };
+
+  async function fetchUserMovies() {
+    try {
+      // Ensure 'user' object has been properly defined with an 'id' property
+      const userId = user.id;  // Replace with how you retrieve the current user ID
+  
+      // Call the RPC function using Supabase client
+      const { data, error } = await supabase.rpc('fetch_user_movies', { uid: userId });
+  
+      if (error) {
+        console.error('Error fetching user movies:', error.message, error.details);
+        return null;
+      }
+  
+      console.log('User movies:', data);
+      setUserMovies(data);
+    } catch (error) {
+      console.error('Unexpected error fetching user movies:', error);
+      return null;
+    }
+  }
+
+  useEffect(() => {
+    fetchAllMovies();
+    fetchUserMovies()
+  }, []); // Empty dependency array ensures it runs only once on mount
+
+  console.log(userMovies, 'user movies')
 
   const continueWatching = [
     {
@@ -143,7 +149,8 @@ const FlixMain = () => {
     playMovie,
     moviePlayed,
     continueWatching,
-    addToUserList
+    addToUserList, 
+    userMovies
   };
 
   if (isXsMobile || isMobile || isTablet) {

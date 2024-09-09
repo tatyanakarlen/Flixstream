@@ -21,7 +21,7 @@ const ProtectedRoute = ({ element }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-if (!loading) {
+    if (!loading) {
       if (user === null) {
         navigate("/", { replace: true });
       }
@@ -76,11 +76,8 @@ const App = () => {
   }, []);
 
   const { user, loading } = useContext(UserContext);
-  console.log(loading, "loading from app component");
 
-  useEffect(() => {
-    console.log("App component - User context:", user); // Log user in the App component
-  }, [user]);
+  useEffect(() => {}, [user]);
 
   if (loading) {
     return <div className="text-light">Loading...</div>; // Show a loading indicator while fetching user data
