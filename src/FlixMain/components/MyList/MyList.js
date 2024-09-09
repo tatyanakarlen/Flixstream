@@ -15,7 +15,7 @@ import PaginationBTN from "../../global/components/PaginationBTN/PaginationBTN";
 import BasicMovieCard from "../../global/components/BasicMovieCard/BasicMovieCard";
 
 const MyList = () => {
-  const { movies, setMovie, setShowModal, continueWatching, userMovies } =
+  const { movies, setMovie, setShowModal, continueWatching, userMovies, removeFromUserList } =
     useOutletContext();
 
   const imagePerRow = 12;
@@ -46,6 +46,8 @@ const MyList = () => {
               onClick={() => setMovie(movie.id)}
               height="11rem"
             />
+            <div className="d-flex flex-column w-100 flex-grow-1 justify-content-between">
+              <div>
             <div className="d-flex w-100 justify-content-between align-items-center">
               <h5 className="fw-semibold mt-3">{movie.title}</h5>
               <div className="mt-2">
@@ -67,14 +69,16 @@ const MyList = () => {
                 year={movie && movie.year}
               />
             </div>
+            </div>
             <div className="w-100 mt-3">
               <CustomProgress now={80} />
               <div className="mt-3 d-flex justify-content-between align-items-center">
                 <small className="fw-normal mb-1">12m 8 s remaining</small>
-                <CgPlayListRemove className="fs-3" />
+                <CgPlayListRemove onClick={() => removeFromUserList(movie.id)}className="fs-3" />
               </div>
             </div>
-            <div></div>
+            </div>
+           
           </li>
         ))}
       </ScrollableList>

@@ -77,6 +77,40 @@ const FlixMain = () => {
     }
   };
 
+
+  const removeFromUserList = async (movieId) => {
+    // if (loading) return; 
+  
+    if (!user) {
+      console.error('User must be logged in to remove movies from their list.');
+      return;
+    }
+  
+    try {
+      // Perform the delete operation
+      const { data, error } = await supabase
+        .from('user_movies')
+        .delete()
+        .eq('user_id', user.id)
+        .eq('movie_id', movieId);
+  
+      if (error) {
+        throw error; // Throw error to be caught in the catch block
+      }
+  
+      console.log('Movie removed from user list:', data);
+  
+      // Optionally update state or re-fetch user movies
+      // Example of updating state:
+      // setUserMovies(prevMovies => prevMovies.filter(movie => movie.id !== movieId));
+      
+      // Or re-fetching data:
+      await fetchUserMovies(); // Re-fetch the user movies after deletion
+    } catch (error) {
+      console.error('Error removing movie from user list:', error.message);
+    }
+  };
+
   async function fetchUserMovies() {
     try {
       // Ensure 'user' object has been properly defined with an 'id' property
@@ -150,7 +184,8 @@ const FlixMain = () => {
     moviePlayed,
     continueWatching,
     addToUserList, 
-    userMovies
+    userMovies, 
+    removeFromUserList
   };
 
   if (isXsMobile || isMobile || isTablet) {
