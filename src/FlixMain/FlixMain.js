@@ -30,28 +30,23 @@ const FlixMain = () => {
   const { isTablet, isMobile, isXsMobile } = useMediaQueries();
 
   const { user, loading } = useContext(UserContext);
-  
 
   const setMovie = (id) => {
     setSelectedMovie(id);
     setShowModal(true);
   };
 
-
-
-   // Function to fetch all movies
-   const fetchAllMovies = async () => {
+  // Function to fetch all movies
+  const fetchAllMovies = async () => {
     // setLoading(true);
-    const { data, error } = await supabase
-      .from('movies')
-      .select('*'); // Fetch all columns
+    const { data, error } = await supabase.from("movies").select("*"); // Fetch all columns
 
     if (error) {
-      console.error('Error fetching movies:', error);
+      console.error("Error fetching movies:", error);
       // setError(error.message);
     } else {
       setMovies(data);
-      console.log('All movies:', data);
+      console.log("All movies:", data);
     }
     // setLoading(false);
   };
@@ -60,116 +55,92 @@ const FlixMain = () => {
     if (loading) return; // Ensure not loading
   
     if (!user) {
-      console.error('User must be logged in to add movies to their list.');
+      console.error("User must be logged in to add movies to their list.");
       return;
     }
   
     try {
       const { data, error } = await supabase
-        .from('user_movies')
+        .from("user_movies")
         .insert([{ user_id: user.id, movie_id: movieId }]);
   
       if (error) {
-        // Check if the error is due to a unique constraint violation
-        if (error.code === '23505') {  // Unique violation error code
-          console.warn('Movie already in user list.');
+        if (error.code === "23505") {
+          console.warn("Movie already in user list.");
         } else {
           throw error;
         }
       } else {
-        console.log('Movie added to user list:', data);
+        console.log("Movie added to user list:", data);
+        await fetchUserMovies(); // Re-fetch the user movies after adding
       }
     } catch (error) {
-      console.error('Error adding movie to user list:', error);
+      console.error("Error adding movie to user list:", error);
     }
   };
 
-  // const addToUserList = async (movieId) => {
-  //   try {
-  //     // Ensure you are not currently loading
-  //     if (loading) return; // Replace `loading` with your actual loading state
-  
-  //     // Ensure userId is globally available
-  //     if (!user) {
-  //       console.error('User must be logged in to add movies to their list.');
-  //       return;
-  //     }
-  
-  //     // Perform the insert operation
-  //     const { data, error } = await supabase
-  //       .from('user_movies')
-  //       .insert([{ user_id: user.id, movie_id: movieId }]);
-  
-  //     // Handle potential errors
-  //     if (error) throw error;
-  
-  //     // Log the result for debugging
-  //     console.log('Movie added to user list:', data);
-  //   } catch (error) {
-  //     console.error('Error adding movie to user list:', error);
-  //   }
-  // };
-
-
   const removeFromUserList = async (movieId) => {
-    // if (loading) return; 
-  
+    // if (loading) return;
+
     if (!user) {
-      console.error('User must be logged in to remove movies from their list.');
+      console.error("User must be logged in to remove movies from their list.");
       return;
     }
-  
+
     try {
       // Perform the delete operation
       const { data, error } = await supabase
-        .from('user_movies')
+        .from("user_movies")
         .delete()
-        .eq('user_id', user.id)
-        .eq('movie_id', movieId);
-  
+        .eq("user_id", user.id)
+        .eq("movie_id", movieId);
+
       if (error) {
         throw error; // Throw error to be caught in the catch block
       }
-  
-      console.log('Movie removed from user list:', data);
-  
-      // Optionally update state or re-fetch user movies
-      // Example of updating state:
-      // setUserMovies(prevMovies => prevMovies.filter(movie => movie.id !== movieId));
-      
-      // Or re-fetching data:
+
+      console.log("Movie removed from user list:", data);
+
       await fetchUserMovies(); // Re-fetch the user movies after deletion
     } catch (error) {
-      console.error('Error removing movie from user list:', error.message);
+      console.error("Error removing movie from user list:", error.message);
     }
   };
 
   async function fetchUserMovies() {
     try {
-      const userId = user.id;  // Retrieve the current user ID
-  
-      // Call the RPC function using Supabase client
-      const { data, error } = await supabase.rpc('fetch_user_movies', { uid: userId });
-  
+      const userId = user.id; // Retrieve the current user ID
+
+      const { data, error } = await supabase.rpc("fetch_user_movies", {
+        uid: userId,
+      });
+
       if (error) {
-        console.error('Error fetching user movies:', error.message, error.details);
+        console.error(
+          "Error fetching user movies:",
+          error.message,
+          error.details
+        );
         return null;
       }
-  
-      console.log('User movies:', data);
+
+      console.log("User movies:", data);
       setUserMovies(data); // Update state with fetched data
     } catch (error) {
-      console.error('Unexpected error fetching user movies:', error);
+      console.error("Unexpected error fetching user movies:", error);
       return null;
     }
   }
 
   useEffect(() => {
     fetchAllMovies();
-    fetchUserMovies()
+    fetchUserMovies();
   }, []); // Empty dependency array ensures it runs only once on mount
 
-  console.log(userMovies, 'user movies')
+  // function to check if a movie is on a users list already
+  const isMovieOnUserList = (movieId) => {
+    return userMovies.some(movie => movie.id === movieId);
+  };
 
   const continueWatching = [
     {
@@ -215,9 +186,10 @@ const FlixMain = () => {
     playMovie,
     moviePlayed,
     continueWatching,
-    addToUserList, 
-    userMovies, 
-    removeFromUserList
+    addToUserList,
+    userMovies,
+    removeFromUserList,
+    isMovieOnUserList
   };
 
   if (isXsMobile || isMobile || isTablet) {
@@ -273,9 +245,7 @@ const FlixMain = () => {
             </Col>
           </Row>
         ) : (
-         
           <MoviePlayer playMovie={playMovie} moviePlayed={moviePlayed} />
-         
         )}
       </div>
     );

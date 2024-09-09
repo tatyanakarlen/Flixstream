@@ -11,6 +11,7 @@ import styles from "./MovieCard.module.css";
 import ImgOnclickShowsDetail from "../ImgOnclickShowsDetail/ImgOnclickShowsDetail";
 import { LuListPlus } from "react-icons/lu";
 import { MdPlaylistAdd } from "react-icons/md";
+import { CgPlayListRemove } from "react-icons/cg";
 
 const MovieCard = ({
   movie,
@@ -18,9 +19,18 @@ const MovieCard = ({
   setShowModal,
   height,
   addToUserList,
+  removeFromUserList, 
+  onList
 }) => {
  
-  const navigate = useNavigate();
+  const handleAddOrRemove = () => {
+    if (onList) {
+      removeFromUserList(movie.id);
+    } else {
+      addToUserList(movie.id);
+    }
+  };
+
   return (
     <Col sm={12} lg={6} xl={4} className="mb-4 text-light">
       <div
@@ -37,10 +47,21 @@ const MovieCard = ({
           />
           <div className="mt-3 d-flex justify-content-between w-100 align-items-center">
             <h5 className="fw-semibold">{movie.title}</h5>
-            <MdPlaylistAdd
-              onClick={() => addToUserList(movie.id)}
-              className="fs-3 mb-2"
-            />
+            {onList ? (
+              <CgPlayListRemove
+                onClick={handleAddOrRemove}
+                className="fs-3 mb-2"
+                role="button"
+                title="Remove from list"
+              />
+            ) : (
+              <MdPlaylistAdd
+                onClick={handleAddOrRemove}
+                className="fs-3 mb-2"
+                role="button"
+                title="Add to list"
+              />
+            )}
           </div>
 
           <small className="pe-4">{movie.description_short}</small>

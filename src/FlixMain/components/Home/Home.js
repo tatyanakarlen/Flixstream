@@ -11,7 +11,7 @@ import { chunkArray } from "../../utils/chuckArray";
 import BasicMovieCard from "../../global/components/BasicMovieCard/BasicMovieCard";
 
 const Home = () => {
-  const { setShowModal, movies, setMovie, continueWatching, addToUserList } =
+  const { setShowModal, movies, setMovie, continueWatching, addToUserList, removeFromUserList, userMovies, isMovieOnUserList } =
     useOutletContext();
 
   const firstSixMovies = movies.slice(0, 6);
@@ -47,6 +47,7 @@ const Home = () => {
                         movie={movie}
                         setMovie={setMovie}
                         addToUserList={addToUserList}
+                        removeFromUserList={removeFromUserList}
                         /// function needs to be connected to BTN
                       />
                     ))}
@@ -70,6 +71,7 @@ const Home = () => {
                       setMovie={setMovie}
                       setShowModal={setShowModal}
                       addToUserList={addToUserList}
+                      removeFromUserList={removeFromUserList}
                     />
                   </Row>
                 </Carousel.Item>
@@ -98,6 +100,8 @@ const Home = () => {
         setMovie={setMovie}
         setShowModal={setShowModal}
         addToUserList={addToUserList}
+        removeFromUserList={removeFromUserList}
+        userMovies={userMovies}
         
        
       />

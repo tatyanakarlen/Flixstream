@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./DiscoverNewReleases.module.css";
 import { Row, Button } from "react-bootstrap";
 import MovieCard from "../../global/components/MovieCard/MovieCard";
 import PaginationBTN from "../../global/components/PaginationBTN/PaginationBTN";
 import useMediaQueries from "../../utils/UseMediaQuery";
+import { isMovieOnUserList } from "../../utils/isMovieOnUserList";
 
-const DiscoverNewReleases = ({ movies , setMovie, setShowModal, addToUserList }) => {
+const DiscoverNewReleases = ({ movies , setMovie, setShowModal, addToUserList, removeFromUserList, userMovies }) => {
   const tags = ["All", "Watched", "Saved", "Recommended", "History"];
 
   const {
@@ -30,6 +31,14 @@ const DiscoverNewReleases = ({ movies , setMovie, setShowModal, addToUserList })
 
   const showLess = next >= movies.length;
 
+  useEffect(() => {
+    // This function will run whenever usersMovies is updated
+    console.log('usersMovies has been updated:', userMovies);
+
+    // You can add any side effects or logic here
+
+  }, [userMovies]); // Dependency array with usersMovies
+
   return (
     <div
       className={`${styles.container} py-3 d-flex flex-column mt-3 pe-md-4 pe-lg-3 pe-3`}
@@ -46,18 +55,23 @@ const DiscoverNewReleases = ({ movies , setMovie, setShowModal, addToUserList })
         ))}
       </div>
       <Row className="mt-5">
-        {movies?.slice(0, next)?.map((movie, index) => (
-          <MovieCard
-            movie={movie}
-            key={index}
-            setMovie={setMovie}
-            setShowModal={setShowModal}
-            addToUserList={addToUserList}
-            ////// this has to be adjusted 
-            // height={isDesktopOrLaptop || isTablet ? "18rem" : "25rem" }
-            height={"18rem"}
-          />
-        ))}
+        {movies?.slice(0, next)?.map((movie, index) => {
+          // Check if the movie is on the user's list
+          const onList = isMovieOnUserList(userMovies, movie.id);
+
+          return (
+            <MovieCard
+              movie={movie}
+              key={index}
+              setMovie={setMovie}
+              setShowModal={setShowModal}
+              addToUserList={addToUserList}
+              removeFromUserList={removeFromUserList}
+              onList={onList} // Pass the boolean to the MovieCard component
+              height={"18rem"}
+            />
+          );
+        })}
       </Row>
       <PaginationBTN
         onClick={showLess ? handleLessImage : handleMoreImage}
