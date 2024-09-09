@@ -13,10 +13,18 @@ import { FaEye } from "react-icons/fa";
 import { MdPlaylistAdd } from "react-icons/md";
 import PaginationBTN from "../../global/components/PaginationBTN/PaginationBTN";
 import BasicMovieCard from "../../global/components/BasicMovieCard/BasicMovieCard";
+import { isMovieOnUserList } from "../../utils/isMovieOnUserList";
 
 const MyList = () => {
-  const { movies, setMovie, setShowModal, continueWatching, userMovies, removeFromUserList } =
-    useOutletContext();
+  const {
+    movies,
+    setMovie,
+    setShowModal,
+    continueWatching,
+    userMovies,
+    addToUserList,
+    removeFromUserList,
+  } = useOutletContext();
 
   const imagePerRow = 12;
 
@@ -48,37 +56,39 @@ const MyList = () => {
             />
             <div className="d-flex flex-column w-100 flex-grow-1 justify-content-between">
               <div>
-            <div className="d-flex w-100 justify-content-between align-items-center">
-              <h5 className="fw-semibold mt-3">{movie.title}</h5>
-              <div className="mt-2">
-                <PlayBTN
-                  movieId={movie && movie.id}
-                  movie={movie && movie}
-                  setShowModal={setShowModal}
-                  text="Play"
-                  textColor="text-light"
-                  bgColor="redBTNbg"
-                  icon={true}
-                  padding="smBTNPadding"
-                />
+                <div className="d-flex w-100 justify-content-between align-items-center">
+                  <h5 className="fw-semibold mt-3">{movie.title}</h5>
+                  <div className="mt-2">
+                    <PlayBTN
+                      movieId={movie && movie.id}
+                      movie={movie && movie}
+                      setShowModal={setShowModal}
+                      text="Play"
+                      textColor="text-light"
+                      bgColor="redBTNbg"
+                      icon={true}
+                      padding="smBTNPadding"
+                    />
+                  </div>
+                </div>
+                <div className="w-100">
+                  <MovieYearLength
+                    length={movie && movie.length}
+                    year={movie && movie.year}
+                  />
+                </div>
+              </div>
+              <div className="w-100 mt-3">
+                <CustomProgress now={80} />
+                <div className="mt-3 d-flex justify-content-between align-items-center">
+                  <small className="fw-normal mb-1">12m 8 s remaining</small>
+                  <CgPlayListRemove
+                    onClick={() => removeFromUserList(movie.id)}
+                    className="fs-3"
+                  />
+                </div>
               </div>
             </div>
-            <div className="w-100">
-              <MovieYearLength
-                length={movie && movie.length}
-                year={movie && movie.year}
-              />
-            </div>
-            </div>
-            <div className="w-100 mt-3">
-              <CustomProgress now={80} />
-              <div className="mt-3 d-flex justify-content-between align-items-center">
-                <small className="fw-normal mb-1">12m 8 s remaining</small>
-                <CgPlayListRemove onClick={() => removeFromUserList(movie.id)}className="fs-3" />
-              </div>
-            </div>
-            </div>
-           
           </li>
         ))}
       </ScrollableList>
@@ -92,10 +102,27 @@ const MyList = () => {
       </ScrollableList>
       <h4 className="mt-3 text-light fw-semibold">Recommended</h4>
       <Row className="mt-4 pe-3">
+        {movies?.slice(0, next)?.map((movie, index) => {
+          const onList = isMovieOnUserList(userMovies, movie.id);
+          return (
+            <BasicMovieCard
+              height="13rem"
+              key={index}
+              movie={movie}
+              setMovie={setMovie}
+              addToUserList={addToUserList}
+              removeFromUserList={removeFromUserList}
+              onList={onList}
+            />
+          );
+        })}
+      </Row>
+
+      {/* <Row className="mt-4 pe-3">
         {movies?.slice(0, next)?.map((movie, index) => (
           <BasicMovieCard height="13rem" key={index} movie={movie} setMovie={setMovie} />
         ))}
-      </Row>
+      </Row> */}
       <div className="d-flex w-100 justify-content-center">
         <PaginationBTN
           onClick={showLess ? handleLessImage : handleMoreImage}

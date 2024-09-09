@@ -137,11 +137,6 @@ const FlixMain = () => {
     fetchUserMovies();
   }, []); // Empty dependency array ensures it runs only once on mount
 
-  // function to check if a movie is on a users list already
-  const isMovieOnUserList = (movieId) => {
-    return userMovies.some(movie => movie.id === movieId);
-  };
-
   const continueWatching = [
     {
       title: "Fantasy Quests",
@@ -189,7 +184,6 @@ const FlixMain = () => {
     addToUserList,
     userMovies,
     removeFromUserList,
-    isMovieOnUserList
   };
 
   if (isXsMobile || isMobile || isTablet) {

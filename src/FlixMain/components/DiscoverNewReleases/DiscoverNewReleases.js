@@ -6,7 +6,14 @@ import PaginationBTN from "../../global/components/PaginationBTN/PaginationBTN";
 import useMediaQueries from "../../utils/UseMediaQuery";
 import { isMovieOnUserList } from "../../utils/isMovieOnUserList";
 
-const DiscoverNewReleases = ({ movies , setMovie, setShowModal, addToUserList, removeFromUserList, userMovies }) => {
+const DiscoverNewReleases = ({
+  movies,
+  setMovie,
+  setShowModal,
+  addToUserList,
+  removeFromUserList,
+  userMovies,
+}) => {
   const tags = ["All", "Watched", "Saved", "Recommended", "History"];
 
   const {
@@ -31,13 +38,6 @@ const DiscoverNewReleases = ({ movies , setMovie, setShowModal, addToUserList, r
 
   const showLess = next >= movies.length;
 
-  useEffect(() => {
-    // This function will run whenever usersMovies is updated
-    console.log('usersMovies has been updated:', userMovies);
-
-    // You can add any side effects or logic here
-
-  }, [userMovies]); // Dependency array with usersMovies
 
   return (
     <div
