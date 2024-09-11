@@ -18,6 +18,7 @@ const FlixMain = () => {
   const location = useLocation();
   const [movies, setMovies] = useState([]);
   const [userMovies, setUserMovies] = useState([]);
+  const [continueWatching, setContinueWatching] = useState([]);
   const [searchMode, setSearchMode] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [filteredData, setFilteredData] = useState([]);
@@ -34,21 +35,6 @@ const FlixMain = () => {
   const setMovie = (id) => {
     setSelectedMovie(id);
     setShowModal(true);
-  };
-
-  // Function to fetch all movies
-  const fetchAllMovies = async () => {
-    // setLoading(true);
-    const { data, error } = await supabase.from("movies").select("*"); // Fetch all columns
-
-    if (error) {
-      console.error("Error fetching movies:", error);
-      // setError(error.message);
-    } else {
-      setMovies(data);
-      console.log("All movies:", data);
-    }
-    // setLoading(false);
   };
 
   const addToUserList = async (movieId) => {
@@ -107,6 +93,20 @@ const FlixMain = () => {
     }
   };
 
+    // Function to fetch all movies
+    const fetchAllMovies = async () => {
+      // setLoading(true);
+      const { data, error } = await supabase.from("movies").select("*"); // Fetch all columns
+  
+      if (error) {
+        console.error("Error fetching movies:", error);
+        // setError(error.message);
+      } else {
+        setMovies(data);
+      }
+      // setLoading(false);
+    };
+
   async function fetchUserMovies() {
     try {
       const userId = user.id; // Retrieve the current user ID
@@ -123,8 +123,6 @@ const FlixMain = () => {
         );
         return null;
       }
-
-      console.log("User movies:", data);
       setUserMovies(data); // Update state with fetched data
     } catch (error) {
       console.error("Unexpected error fetching user movies:", error);
@@ -132,33 +130,56 @@ const FlixMain = () => {
     }
   }
 
+  async function fetchContinueWatching() {
+    try {
+      const { data, error } = await supabase
+        .from("continue_watching")
+        .select("*")
+        .eq("user_id", user.id);
+
+      if (error) throw error;
+
+      setContinueWatching(data);
+    } catch (error) {
+      console.error("Error fetching continue watching list:", error);
+    }
+  }
+
   useEffect(() => {
     fetchAllMovies();
-    fetchUserMovies();
-  }, []); // Empty dependency array ensures it runs only once on mount
+  }, []);
 
-  const continueWatching = [
-    {
-      title: "Fantasy Quests",
-      timeRemaining: "12min 8s",
-      image: people,
-    },
-    {
-      title: "Action Adventures",
-      timeRemaining: "19min 2s",
-      image: people,
-    },
-    {
-      title: "Dramatic Stories",
-      timeRemaining: "23min 1s",
-      image: people,
-    },
-    {
-      title: "Comedy Highlights",
-      timeRemaining: "12min 8s",
-      image: people,
-    },
-  ];
+  useEffect(() => {
+    if (!loading && user) {
+      fetchUserMovies();
+      fetchContinueWatching();
+    }
+  }, [user, loading]);
+
+ 
+
+  // const continueWatching = [
+  //   {
+  //     title: "Fantasy Quests",
+  //     timeRemaining: "12min 8s",
+  //     image: people,
+  //   },
+  //   {
+  //     title: "Action Adventures",
+  //     timeRemaining: "19min 2s",
+  //     image: people,
+  //   },
+  //   {
+  //     title: "Dramatic Stories",
+  //     timeRemaining: "23min 1s",
+  //     image: people,
+  //   },
+  //   {
+  //     title: "Comedy Highlights",
+  //     timeRemaining: "12min 8s",
+  //     image: people,
+  //   },
+  // ];
 
   const playMovie = (id) => {
     const movieToPlay = movies.find((movie) => movie.id === id);
@@ -181,9 +202,12 @@ const FlixMain = () => {
     playMovie,
     moviePlayed,
     continueWatching,
+    setContinueWatching, 
+    fetchContinueWatching, 
     addToUserList,
     userMovies,
     removeFromUserList,
+    
   };
 
   if (isXsMobile || isMobile || isTablet) {
@@ -194,6 +218,9 @@ const FlixMain = () => {
           setShowModal={setShowModal}
           selectedMovie={selectedMovie}
           movies={movies}
+          continueWatching={continueWatching}
+          setContinueWatching={setContinueWatching}
+          fetchContinueWatching={fetchContinueWatching}
         />
         {!location.pathname.includes("play") ? (
           <Row className={`${styles.layoutRow} h-100`}>
@@ -252,6 +279,9 @@ const FlixMain = () => {
         setShowModal={setShowModal}
         selectedMovie={selectedMovie}
         movies={movies}
+        continueWatching={continueWatching}
+        setContinueWatching={setContinueWatching}
+        fetchContinueWatching={fetchContinueWatching}
       />
       {!location.pathname.includes("play") ? (
         <Row className={`${styles.layoutRow} h-100`}>

@@ -21,6 +21,8 @@ const MyList = () => {
     setMovie,
     setShowModal,
     continueWatching,
+    setContinueWatching, 
+    fetchContinueWatching, 
     userMovies,
     addToUserList,
     removeFromUserList,
@@ -68,6 +70,9 @@ const MyList = () => {
                       bgColor="redBTNbg"
                       icon={true}
                       padding="smBTNPadding"
+                      continueWatching={continueWatching}
+                      setContinueWatching={setContinueWatching}
+                      fetchContinueWatching={fetchContinueWatching}
                     />
                   </div>
                 </div>
@@ -113,6 +118,9 @@ const MyList = () => {
               addToUserList={addToUserList}
               removeFromUserList={removeFromUserList}
               onList={onList}
+              continueWatching={continueWatching}
+              setContinueWatching={setContinueWatching}
+              fetchContinueWatching={fetchContinueWatching}
             />
           );
         })}

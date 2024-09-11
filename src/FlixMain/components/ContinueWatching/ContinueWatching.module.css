@@ -13,6 +13,7 @@
   background-color: var(--bsLight);
   height: fit-content;
   border-radius: var(--borderRadiusSmall);
+  margin-top: 12px !important;
 }
 
 .customProgress {

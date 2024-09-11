@@ -15,6 +15,9 @@ const DetailsModal = ({
   setShowModal,
   selectedMovie,
   movies,
+  continueWatching, 
+  setContinueWatching, 
+  fetchContinueWatching
 }) => {
   const [movie, setMovie] = useState(null);
   const navigate = useNavigate();
@@ -45,14 +48,17 @@ const DetailsModal = ({
         >
           <h4 className="mt-1">{movie && movie.title}</h4>
           <MovieYearLength
-            length={movie && movie.length}
+            length={movie && movie?.length}
             year={movie && movie.year}
           />
           <div className="mt-3">
             <PlayBTN
               movieId={movie && movie.id}
               movie={movie && movie}
+              continueWatching={continueWatching}
+              setContinueWatching={setContinueWatching}
               setShowModal={setShowModal}
+              fetchContinueWatching={fetchContinueWatching}
               text="Play"
               textColor="text-light"
               bgColor="redBTNbg"
@@ -74,10 +80,10 @@ const DetailsModal = ({
             <p className={`mb-0`}>
               Cast:&nbsp;
               {movie &&
-                movie.cast.map((castMember, index) => (
+                movie.cast_members.map((castMember, index) => (
                   <span key={index}>
                     {castMember}
-                    {index < movie.cast.length - 1 && ", "}
+                    {index < movie.cast_members.length - 1 && ", "}
                   </span>
                 ))}
             </p>

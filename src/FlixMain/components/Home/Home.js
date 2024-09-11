@@ -10,9 +10,22 @@ import useMediaQueries from "../../utils/UseMediaQuery";
 import { chunkArray } from "../../utils/chuckArray";
 import BasicMovieCard from "../../global/components/BasicMovieCard/BasicMovieCard";
 
+// continueWatching,
+//     setContinueWatching,
+//     fetchContinueWatching,
+
 const Home = () => {
-  const { setShowModal, movies, setMovie, continueWatching, addToUserList, removeFromUserList, userMovies, isMovieOnUserList } =
-    useOutletContext();
+  const {
+    setShowModal,
+    movies,
+    setMovie,
+    continueWatching,
+    setContinueWatching,
+    fetchContinueWatching,
+    addToUserList,
+    removeFromUserList,
+    userMovies,
+  } = useOutletContext();
 
   const firstSixMovies = movies.slice(0, 6);
   const firstThreeMovies = movies.slice(0, 3);
@@ -89,7 +102,12 @@ const Home = () => {
               key={index}
               className={`${styles.cardContainer} scrollableListCardContainer`}
             >
-              <ContinueWatching movie={movie} />
+              <ContinueWatching
+                movie={movie}
+                continueWatching={continueWatching}
+                setContinueWatching={setContinueWatching}
+                fetchContinueWatching={fetchContinueWatching}
+              />
             </li>
           ))}
         </ScrollableList>
@@ -102,8 +120,6 @@ const Home = () => {
         addToUserList={addToUserList}
         removeFromUserList={removeFromUserList}
         userMovies={userMovies}
-        
-       
       />
     </div>
   );
