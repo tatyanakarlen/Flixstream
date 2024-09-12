@@ -70,7 +70,7 @@ const PlayBTN = ({
   return (
     <Button
       onClick={() => {
-        navigate(`/dashboard/play/${movie && movieId}`);
+        navigate(`/dashboard/play/${movieId}`, { state: { movie } });
         setShowModal && setShowModal(false);
         addToContinueWatching(movieId, movie);
       }}

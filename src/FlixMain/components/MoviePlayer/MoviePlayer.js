@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { useParams, useOutletContext } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../../../index.css";
 import styles from "./MoviePlayer.module.css";
 import { ProgressBar } from "react-bootstrap";
@@ -14,8 +14,7 @@ import { IoPlaySharp } from "react-icons/io5";
 import { IoMdFastforward } from "react-icons/io";
 import { IoStopSharp } from "react-icons/io5";
 
-const MoviePlayer = ({ playMovie, moviePlayed }) => {
-  const { movieId } = useParams();
+const MoviePlayer = ({}) => {
   const [controlsVisible, setControlsVisible] = useState(true);
   const [hasUserPressedPlay, setHasUserPressedPlay] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
@@ -24,9 +23,14 @@ const MoviePlayer = ({ playMovie, moviePlayed }) => {
   const progressCircleRef = useRef();
   const [progress, setProgress] = useState(0);
 
-  useEffect(() => {
-    playMovie(movieId);
-  }, []);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/dashboard/my-list");
+  };
+
+  const movie = location.state?.movie;
 
   useEffect(() => {
     const progressCircle = document.createElement("span");
@@ -155,10 +159,9 @@ const MoviePlayer = ({ playMovie, moviePlayed }) => {
       >
         <div className="d-flex gap-3 align-items-center text-light">
           <span>
-            {" "}
-            <MdArrowCircleLeft className="fs-5" />
+            <MdArrowCircleLeft onClick={handleClick} className="fs-5" />
           </span>
-          <span>{moviePlayed && moviePlayed.title}</span>
+          <span>{movie.title}</span>
         </div>
         <div className="d-flex gap-3 fs-5 align-items-center">
           <CgScreen />
@@ -171,7 +174,7 @@ const MoviePlayer = ({ playMovie, moviePlayed }) => {
           controlsVisible ? styles.controlsVisible : styles.controlsHidden
         } p-4 text-light`}
       >
-        <h3>{moviePlayed && moviePlayed.title}</h3>
+        <h3>{movie.title}</h3>
         <div
           ref={progressBarRef}
           onMouseDown={handleMouseDown}

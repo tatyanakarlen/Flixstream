@@ -2,6 +2,10 @@
   overflow: hidden;
 }
 
+.myListWrapper {
+  overflow-x: hidden;
+}
+
 .list {
   display: flex;
   overflow-x: scroll;
@@ -19,6 +23,16 @@
 
 .cardContainer {
   background-color: var(--darkGreyBG);
-  border-radius: 15px;
+  border-radius: 12px;
   width: 22rem;
+}
+
+.placeholderImage {
+  border-radius: 12px;
+}
+
+.fakeProgressBar {
+  height: 10px;
+  background-color: black;
+  width: 100%;
 }

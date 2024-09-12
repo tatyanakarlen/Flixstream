@@ -40,7 +40,7 @@ const Home = () => {
   return (
     <div>
       {isDesktopOrLaptop || isLgDesktopOrLaptop ? (
-        <HomePageHero setShowModal={setShowModal} />
+        <HomePageHero fetchContinueWatching={fetchContinueWatching} setContinueWatching={setContinueWatching} continueWatching={continueWatching} movies={movies} setShowModal={setShowModal} />
       ) : (
         <div className="w-100 mt-4 pe-md-4 pe-lg-3 pe-3">
           <h4 className="text-light fw-semibold mt-4">Recently Added</h4>

@@ -35,21 +35,28 @@ const FlixMain = () => {
   const setMovie = (id) => {
     setSelectedMovie(id);
     setShowModal(true);
+    console.log(selectedMovie, "selectedMovie");
   };
+
+  // const playMovie = (id) => {
+  //   const movieToPlay = movies.find((movie) => movie.id === id);
+  //   setMoviePlayed(movieToPlay);
+  //   console.log(movieToPlay, "movie to play from flixmain");
+  // };
 
   const addToUserList = async (movieId) => {
     if (loading) return; // Ensure not loading
-  
+
     if (!user) {
       console.error("User must be logged in to add movies to their list.");
       return;
     }
-  
+
     try {
       const { data, error } = await supabase
         .from("user_movies")
         .insert([{ user_id: user.id, movie_id: movieId }]);
-  
+
       if (error) {
         if (error.code === "23505") {
           console.warn("Movie already in user list.");
@@ -93,19 +100,19 @@ const FlixMain = () => {
     }
   };
 
-    // Function to fetch all movies
-    const fetchAllMovies = async () => {
-      // setLoading(true);
-      const { data, error } = await supabase.from("movies").select("*"); // Fetch all columns
-  
-      if (error) {
-        console.error("Error fetching movies:", error);
-        // setError(error.message);
-      } else {
-        setMovies(data);
-      }
-      // setLoading(false);
-    };
+  // Function to fetch all movies
+  const fetchAllMovies = async () => {
+    // setLoading(true);
+    const { data, error } = await supabase.from("movies").select("*"); // Fetch all columns
+
+    if (error) {
+      console.error("Error fetching movies:", error);
+      // setError(error.message);
+    } else {
+      setMovies(data);
+    }
+    // setLoading(false);
+  };
 
   async function fetchUserMovies() {
     try {
@@ -156,37 +163,6 @@ const FlixMain = () => {
     }
   }, [user, loading]);
 
- 
-
-  // const continueWatching = [
-  //   {
-  //     title: "Fantasy Quests",
-  //     timeRemaining: "12min 8s",
-  //     image: people,
-  //   },
-  //   {
-  //     title: "Action Adventures",
-  //     timeRemaining: "19min 2s",
-  //     image: people,
-  //   },
-  //   {
-  //     title: "Dramatic Stories",
-  //     timeRemaining: "23min 1s",
-  //     image: people,
-  //   },
-  //   {
-  //     title: "Comedy Highlights",
-  //     timeRemaining: "12min 8s",
-  //     image: people,
-  //   },
-  // ];
-
-  const playMovie = (id) => {
-    const movieToPlay = movies.find((movie) => movie.id === id);
-    setMoviePlayed(movieToPlay);
-    console.log(movieToPlay, "movie to play from flixmain");
-  };
-
   const contextValue = {
     searchMode,
     setSearchMode,
@@ -199,15 +175,13 @@ const FlixMain = () => {
     selectedMovie,
     setSelectedMovie,
     setMovie,
-    playMovie,
     moviePlayed,
     continueWatching,
-    setContinueWatching, 
-    fetchContinueWatching, 
+    setContinueWatching,
+    fetchContinueWatching,
     addToUserList,
     userMovies,
     removeFromUserList,
-    
   };
 
   if (isXsMobile || isMobile || isTablet) {
@@ -216,12 +190,16 @@ const FlixMain = () => {
         <DetailsModal
           showModal={showModal}
           setShowModal={setShowModal}
-          selectedMovie={selectedMovie}
           movies={movies}
           continueWatching={continueWatching}
           setContinueWatching={setContinueWatching}
           fetchContinueWatching={fetchContinueWatching}
+          userMovies={userMovies}
+          addToUserList={addToUserList}
+          removeFromUserList={removeFromUserList}
+          selectedMovie={selectedMovie}
         />
+
         {!location.pathname.includes("play") ? (
           <Row className={`${styles.layoutRow} h-100`}>
             <Col>
@@ -266,14 +244,14 @@ const FlixMain = () => {
             </Col>
           </Row>
         ) : (
-          <MoviePlayer playMovie={playMovie} moviePlayed={moviePlayed} />
+          <MoviePlayer />
         )}
       </div>
     );
   }
 
   return (
-    <div className="h-100">
+    <div className={`${styles.wrapper} h-100`}>
       <DetailsModal
         showModal={showModal}
         setShowModal={setShowModal}
@@ -282,6 +260,9 @@ const FlixMain = () => {
         continueWatching={continueWatching}
         setContinueWatching={setContinueWatching}
         fetchContinueWatching={fetchContinueWatching}
+        userMovies={userMovies}
+        addToUserList={addToUserList}
+        removeFromUserList={removeFromUserList}
       />
       {!location.pathname.includes("play") ? (
         <Row className={`${styles.layoutRow} h-100`}>
@@ -326,7 +307,7 @@ const FlixMain = () => {
           </Col>
         </Row>
       ) : (
-        <MoviePlayer playMovie={playMovie} moviePlayed={moviePlayed} />
+        <MoviePlayer />
       )}
     </div>
   );

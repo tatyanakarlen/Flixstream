@@ -3,24 +3,25 @@ import { Modal, Image, Button } from "react-bootstrap";
 import MovieYearLength from "../MovieYearLength/MovieYearLength";
 import styles from "./DetailsModal.module.css";
 import PlayBTN from "../PlayBTN/PlayBTN";
-import { IoPlaySharp } from "react-icons/io5";
 import Actions from "../Actions/Actions";
 import Tag from "../Tag/Tag";
 import HeartLikes from "../HeartLikes/HeartLikes";
 import { RiCloseLargeFill } from "react-icons/ri";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const DetailsModal = ({
   showModal,
   setShowModal,
   selectedMovie,
   movies,
-  continueWatching, 
-  setContinueWatching, 
-  fetchContinueWatching
+  continueWatching,
+  setContinueWatching,
+  fetchContinueWatching,
+  userMovies,
+  addToUserList,
+  removeFromUserList,
 }) => {
   const [movie, setMovie] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const movie = movies.find((movie) => movie.id === selectedMovie);
@@ -67,7 +68,12 @@ const DetailsModal = ({
             />
           </div>
           <p className="mt-4">{movie && movie.description_long}</p>
-          <Actions />
+          <Actions
+            userMovies={userMovies}
+            addToUserList={addToUserList}
+            removeFromUserList={removeFromUserList}
+            movieId={movie && movie.id}
+          />
           <div className="d-flex mt-4 gap-2">
             {movie &&
               movie.tags.map((tag, index) => <Tag tag={tag} key={index} />)}
