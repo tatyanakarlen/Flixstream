@@ -24,10 +24,10 @@ const SearchResultsMovieCard = ({
   userMovies,
 }) => {
   return (
-    <Col className="mb-4 text-light" xs={12}>
-      <div className={`${styles.cardContainer} d-flex gap-4 p-3`}>
+    <Col className="mb-4 text-light" xs={12} md={6}>
+      <div className={`${styles.cardContainer} h-100 d-flex gap-4 p-3`}>
         <div className={styles.imgContainer}>
-          <Image fluid className="w-100" src={movie.image} />
+          <Image src={movie.image} />
           <div
             onClick={() => setMovie(movie.id)}
             className={styles.detailsIconDiv}
@@ -56,7 +56,7 @@ const SearchResultsMovieCard = ({
             </div>
             <MovieYearLength length={movie.length} year={movie.year} />
             <div className="mt-3 text-light">
-              <small>{movie.description_long}</small>
+              <small>{movie.description_short}</small>
             </div>
             <div className="mt-4">
               <Actions
@@ -67,7 +67,7 @@ const SearchResultsMovieCard = ({
               />
             </div>
           </div>
-          <div className="d-flex mt-4 gap-2">
+          <div className="d-flex mt-4 gap-2 flex-wrap">
             {movie.tags.map((tag, index) => (
               <Tag tag={tag} key={index} />
             ))}

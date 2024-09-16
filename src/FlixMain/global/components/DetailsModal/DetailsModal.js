@@ -41,9 +41,11 @@ const DetailsModal = ({
         <Button onClick={() => setShowModal(false)} className={styles.closeBTN}>
           <RiCloseLargeFill className="fs-5" />
         </Button>
-        <Image className="w-100" src={movie && movie.image}></Image>
+       
+      <Image className="w-100" src={movie && movie.image} />
+   
       </div>
-      <div className="d-flex justify-content-between gap-5">
+      <div className={`${styles.modalContentContainer} d-flex justify-content-between`}>
         <div
           className={`${styles.leftSideContentDiv} text-light py-3 d-flex flex-column align-items-start`}
         >
@@ -105,7 +107,7 @@ const DetailsModal = ({
                 ))}
             </p>
           </div>
-          <div className="align-self-end">
+          <div className={`${styles.heartLikeContainer}`}>
             <HeartLikes likes={movie && movie.likes} altBG={true} />
           </div>
         </div>

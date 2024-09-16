@@ -10,7 +10,7 @@ import PlayBTN from "../PlayBTN/PlayBTN";
 const BasicMovieCard = ({
   movie,
   setMovie,
-  height,
+  // height,
   setShowModal,
   addToUserList,
   removeFromUserList,
@@ -33,7 +33,7 @@ const BasicMovieCard = ({
         <ImgOnclickShowsDetail
           src={movie.image}
           onClick={() => setMovie(movie.id)}
-          height={height}
+          // height={height}
         />
         <div className="mt-4 d-flex justify-content-between align-items-center">
           <h5 className="fw-semibold mb-0">{movie.title}</h5>

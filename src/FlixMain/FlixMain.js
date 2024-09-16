@@ -5,10 +5,9 @@ import SearchResultsMovieCard from "./global/components/SearchResultsMovieCard/S
 import SideNav from "./global/components/SideNav/SideNav";
 import TopNavSearch from "./global/components/TopNavSearch/TopNavSearch";
 import { Outlet, useLocation } from "react-router-dom";
-import { Col, Row, Nav, Navbar } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import styles from "./FlixMain.module.css";
 import MoviePlayer from "./components/MoviePlayer/MoviePlayer";
-import ProfileSettings from "./components/ProfileSettings/ProfileSettings";
 import useMediaQueries from "./utils/UseMediaQuery";
 import MobileNav from "./global/components/MobileNav/MobileNav";
 import { UserContext } from "../userContext";
@@ -25,8 +24,8 @@ const FlixMain = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [moviePlayed, setMoviePlayed] = useState(null);
-  const sciFi = process.env.PUBLIC_URL + "/images/sci-fi.jpg";
-  const people = process.env.PUBLIC_URL + "/images/people.jpg";
+
+  
 
   const { isTablet, isMobile, isXsMobile } = useMediaQueries();
 
@@ -39,7 +38,7 @@ const FlixMain = () => {
   };
 
   const addToUserList = async (movieId) => {
-    if (loading) return; // Ensure not loading
+    if (loading) return; 
 
     if (!user) {
       console.error("User must be logged in to add movies to their list.");
@@ -83,7 +82,7 @@ const FlixMain = () => {
         .eq("movie_id", movieId);
 
       if (error) {
-        throw error; // Throw error to be caught in the catch block
+        throw error; 
       }
 
       console.log("Movie removed from user list:", data);

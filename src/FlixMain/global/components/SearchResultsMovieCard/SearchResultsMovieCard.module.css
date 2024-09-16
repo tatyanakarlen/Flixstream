@@ -1,23 +1,27 @@
-.cardContainer,
-.imgContainer,
-.imgContainer img {
-  border-radius: var(--borderRadius);
-}
-
 .cardContainer {
   background-color: var(--darkGreyBG);
+  height: 100%; /* Ensure the card container takes up the full height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .imgContainer {
-  width: 40%;
+  width: 100%; /* Full width of the card */
+  height: 0;
+  padding-bottom: 70.25%; /* This maintains a 16:9 aspect ratio */
+  position: relative;
   overflow: hidden;
   border-radius: 15px;
-  position: relative;
 }
 
 .imgContainer img {
-  height: 18rem;
-  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  /* object-fit: cover; */
   transition: transform 0.3s ease, filter 0.3s ease;
   cursor: pointer;
 }

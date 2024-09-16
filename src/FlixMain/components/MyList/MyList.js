@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./MyList.module.css";
 import { useOutletContext, useNavigate } from "react-router-dom";
-import { Col, Row, Image } from "react-bootstrap";
+import { Row, Image } from "react-bootstrap";
 import CustomBTN from "../../global/components/CustomBTN/CustomBTN";
 import PlayBTN from "../../global/components/PlayBTN/PlayBTN";
 import MovieYearLength from "../../global/components/MovieYearLength/MovieYearLength";
@@ -11,8 +11,6 @@ import { CgPlayListRemove } from "react-icons/cg";
 import { BiSolidCameraMovie } from "react-icons/bi";
 import ScrollableList from "../../global/components/ScrollableList/ScrollableList";
 import ImgOnclickShowsDetail from "../../global/components/ImgOnclickShowsDetail/ImgOnclickShowsDetail";
-import { FaEye } from "react-icons/fa";
-import { MdPlaylistAdd } from "react-icons/md";
 import PaginationBTN from "../../global/components/PaginationBTN/PaginationBTN";
 import BasicMovieCard from "../../global/components/BasicMovieCard/BasicMovieCard";
 import { isMovieOnUserList } from "../../utils/isMovieOnUserList";
@@ -85,7 +83,6 @@ const MyList = () => {
                 <ImgOnclickShowsDetail
                   src={movie.image}
                   onClick={() => setMovie(movie.id)}
-                  height="11rem"
                 />
                 <div className="d-flex flex-column w-100 flex-grow-1 justify-content-between">
                   <div>
@@ -135,64 +132,44 @@ const MyList = () => {
 
       <h4 className="mt-4 text-light fw-semibold">Continue watching</h4>
       <div>
-        {continueWatching.length === 0 ? 
+        {continueWatching.length === 0 ? (
           <div
-          className={`${styles.cardContainer} d-flex align-items-center gap-3 p-3 text-light mt-3 flex-nowrap`}
-        >
-          <Image
-            height={70}
-            width={70}
-            className={styles.placeholderImage}
-            src={grey_background}
-          />
-          <div className="d-flex flex-column flex-grow-1">
-          <h5 className="fw-semibold">Watchlist empty</h5>
-         
-          <span className={`${styles.fakeProgressBar} mt-2`}></span>
-  
-  
-          </div>
-        </div> : 
-         <ScrollableList>
-        {continueWatching.map((movie, index) => (
-          <li key={index} className={`scrollableListCardContainer`}>
-            <ContinueWatching
-              movie={movie}
-              continueWatching={continueWatching}
-              setContinueWatching={setContinueWatching}
-              fetchContinueWatching={fetchContinueWatching}
+            className={`${styles.cardContainer} d-flex align-items-center gap-3 p-3 text-light mt-3 flex-nowrap`}
+          >
+            <Image
+              height={70}
+              width={70}
+              className={styles.placeholderImage}
+              src={grey_background}
             />
-          </li>
-        ))}
-      </ScrollableList> 
-        
-      }
+            <div className="d-flex flex-column flex-grow-1">
+              <h5 className="fw-semibold">Watchlist empty</h5>
+
+              <span className={`${styles.fakeProgressBar} mt-2`}></span>
+            </div>
+          </div>
+        ) : (
+          <ScrollableList>
+            {continueWatching.map((movie, index) => (
+              <li key={index} className={`scrollableListCardContainer`}>
+                <ContinueWatching
+                  movie={movie}
+                  continueWatching={continueWatching}
+                  setContinueWatching={setContinueWatching}
+                  fetchContinueWatching={fetchContinueWatching}
+                />
+              </li>
+            ))}
+          </ScrollableList>
+        )}
       </div>
-      {/* <div
-        className={`${styles.cardContainer} d-flex align-items-center gap-3 p-3 text-light mt-3 flex-nowrap`}
-      >
-        <Image
-          height={70}
-          width={70}
-          className={styles.placeholderImage}
-          src={grey_background}
-        />
-        <div className="d-flex flex-column flex-grow-1">
-        <h5 className="fw-semibold">Watchlist empty</h5>
-       
-        <span className={`${styles.fakeProgressBar} mt-2`}></span>
 
-
-        </div>
-      </div> */}
-    
       <h4 className="mt-3 text-light fw-semibold">Recommended</h4>
       <Row className="mt-4 pe-3">
         {movies?.slice(0, next)?.map((movie, index) => {
           const onList = isMovieOnUserList(userMovies, movie.id);
           return (
             <BasicMovieCard
-              height="13rem"
               key={index}
               movie={movie}
               setMovie={setMovie}
@@ -207,11 +184,6 @@ const MyList = () => {
         })}
       </Row>
 
-      {/* <Row className="mt-4 pe-3">
-        {movies?.slice(0, next)?.map((movie, index) => (
-          <BasicMovieCard height="13rem" key={index} movie={movie} setMovie={setMovie} />
-        ))}
-      </Row> */}
       <div className="d-flex w-100 justify-content-center">
         <PaginationBTN
           onClick={showLess ? handleLessImage : handleMoreImage}

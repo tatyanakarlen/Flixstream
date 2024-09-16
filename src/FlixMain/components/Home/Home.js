@@ -29,8 +29,6 @@ const Home = () => {
 
   const {
     isTablet,
-    isMobile,
-    isXsMobile,
     isDesktopOrLaptop,
     isLgDesktopOrLaptop,
   } = useMediaQueries();
@@ -52,13 +50,11 @@ const Home = () => {
                   <Row className={styles.carouselRow}>
                     {moviePair.map((movie, subIndex) => (
                       <BasicMovieCard
-                        height="25rem"
                         key={index}
                         movie={movie}
                         setMovie={setMovie}
                         addToUserList={addToUserList}
                         removeFromUserList={removeFromUserList}
-                        /// function needs to be connected to BTN
                       />
                     ))}
                   </Row>
@@ -75,7 +71,6 @@ const Home = () => {
                 <Carousel.Item className="" key={index}>
                   <Row className={styles.carouselRow}>
                     <BasicMovieCard
-                      height={"25rem"}
                       key={index}
                       movie={movie}
                       setMovie={setMovie}

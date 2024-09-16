@@ -3,8 +3,8 @@
 
 .modal img {
   border-radius: 15px !important;
-  height: 25rem !important;
-  object-fit: cover !important;
+  height: 30rem !important;
+  /* object-fit: cover !important; */
 }
 
 .modal > :first-child {
@@ -45,5 +45,28 @@
 
 .closeBTN:hover {
     background-color: rgb(78, 77, 77) !important;
+}
+
+.modalContentContainer {
+gap: 3rem;
+}
+
+.heartLikeContainer {
+  align-items: end;
+}
+
+@media (max-width: 991px) {
+  .modalContentContainer {
+   flex-direction: column; 
+   gap: 0; 
+  }
+  .heartLikeContainer {
+    align-items: start;
+    width: fit-content;
+  }
+  .leftSideContentDiv {
+    width: 100%;
+  }
+  
 }
 
