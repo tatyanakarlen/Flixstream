@@ -204,7 +204,7 @@ const FlixMain = () => {
                       searchInput={searchInput}
                       filteredData={filteredData}
                       setFilteredData={setFilteredData}
-                      movie={movies}
+                      movies={movies}
                       setSearchInput={setSearchInput}
                     />
                   )}
@@ -212,7 +212,7 @@ const FlixMain = () => {
                     {searchInput.length === 0 && filteredData.length === 0 ? (
                       <Outlet context={contextValue} />
                     ) : (
-                      <div className="text-light mt-4">
+                      <div className="pe-3 text-light mt-4">
                         <p className="mt-1">
                           {filteredData && filteredData.length} results found
                           for
@@ -226,6 +226,7 @@ const FlixMain = () => {
                               setMovie={setMovie}
                               key={index}
                               addToUserList={addToUserList}
+                              removeFromUserList={removeFromUserList}
                             />
                           ))}
                         </Row>
@@ -234,7 +235,10 @@ const FlixMain = () => {
                   </div>
                 </div>
               </div>
-              <MobileNav />
+              <MobileNav
+                setSearchInput={setSearchInput}
+                setFilteredData={setFilteredData}
+              />
             </Col>
           </Row>
         ) : (
@@ -260,7 +264,10 @@ const FlixMain = () => {
       />
       {!location.pathname.includes("play") ? (
         <Row className={`${styles.layoutRow} h-100`}>
-          <SideNav />
+          <SideNav
+            setSearchInput={setSearchInput}
+            setFilteredData={setFilteredData}
+          />
 
           <Col className={styles.scrollableContent}>
             <div className="h-100 pt-3 pb-3 ps-2">
@@ -278,7 +285,7 @@ const FlixMain = () => {
                   {searchInput.length === 0 && filteredData.length === 0 ? (
                     <Outlet context={contextValue} />
                   ) : (
-                    <div className="text-light mt-4">
+                    <div className="text-light mt-4 pe-3">
                       <p className="mt-1">
                         {filteredData && filteredData.length} results found for
                       </p>
@@ -290,7 +297,24 @@ const FlixMain = () => {
                             movie={movie}
                             setMovie={setMovie}
                             key={index}
+                            addToUserList={addToUserList}
+                            removeFromUserList={removeFromUserList}
+                            continueWatching={continueWatching}
+                            setContinueWatching={setContinueWatching}
+                            fetchContinueWatching={fetchContinueWatching}
+                            userMovies={userMovies}
                           />
+
+                          // showModal={showModal}
+                          // setShowModal={setShowModal}
+                          // selectedMovie={selectedMovie}
+                          // movies={movies}
+                          // continueWatching={continueWatching}
+                          // setContinueWatching={setContinueWatching}
+                          // fetchContinueWatching={fetchContinueWatching}
+                          // userMovies={userMovies}
+                          // addToUserList={addToUserList}
+                          // removeFromUserList={removeFromUserList}
                         ))}
                       </Row>
                     </div>

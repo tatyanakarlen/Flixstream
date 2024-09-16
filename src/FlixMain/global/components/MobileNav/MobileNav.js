@@ -11,10 +11,15 @@ import { useLocation, Link } from "react-router-dom";
 import styles from "./MobileNav.module.css";
 import useMediaQueries from "../../../utils/UseMediaQuery";
 
-const MobileNav = () => {
+const MobileNav = ({ setSearchInput, setFilteredData }) => {
   const location = useLocation();
   const { isTablet, isMobile, isXsMobile } = useMediaQueries();
-  console.log(isMobile, "isMobile");
+
+  const handleLinkClick = () => {
+    setSearchInput("");
+    setFilteredData([]);
+  };
+
   const links = [
     {
       text: "Home",
@@ -51,9 +56,10 @@ const MobileNav = () => {
         {links.map((link, index) => (
           <Nav.Item key={index}>
             <Link
+              onClick={handleLinkClick}
               className={`${
                 styles.navLink
-              } d-flex flex-column align-items-center ${
+              } d-flex flex-column align-items-center text-decoration-none ${
                 location.pathname === link.link ? styles.activeLink : ""
               }`}
               to={link.link}

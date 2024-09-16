@@ -14,11 +14,20 @@ import useMediaQueries from "../../../utils/UseMediaQuery";
 import { Col } from "react-bootstrap";
 import { UserContext } from "../../../../userContext";
 
-const SideNav = () => {
+const SideNav = ({
+  setSearchInput,
+  setFilteredData,
+}) => {
   const { logout } = useContext(UserContext);
   const location = useLocation();
   const { isLgDesktopOrLaptop } = useMediaQueries();
- 
+
+  const handleLinkClick = () => {
+    
+    setSearchInput("");
+    setFilteredData([]);
+  };
+
   const links = [
     {
       text: "Home",
@@ -67,6 +76,7 @@ const SideNav = () => {
             <div className="mt-3 d-flex flex-column gap-3">
               {links.map((link, index) => (
                 <Link
+                onClick={handleLinkClick}
                   className="text-light text-decoration-none"
                   to={link.link}
                   key={index}
