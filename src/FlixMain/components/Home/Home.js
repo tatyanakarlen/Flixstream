@@ -10,9 +10,6 @@ import useMediaQueries from "../../utils/UseMediaQuery";
 import { chunkArray } from "../../utils/chuckArray";
 import BasicMovieCard from "../../global/components/BasicMovieCard/BasicMovieCard";
 
-// continueWatching,
-//     setContinueWatching,
-//     fetchContinueWatching,
 
 const Home = () => {
   const {

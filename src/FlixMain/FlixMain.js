@@ -38,12 +38,6 @@ const FlixMain = () => {
     console.log(selectedMovie, "selectedMovie");
   };
 
-  // const playMovie = (id) => {
-  //   const movieToPlay = movies.find((movie) => movie.id === id);
-  //   setMoviePlayed(movieToPlay);
-  //   console.log(movieToPlay, "movie to play from flixmain");
-  // };
-
   const addToUserList = async (movieId) => {
     if (loading) return; // Ensure not loading
 

@@ -4,9 +4,13 @@ import styles from "./HomePageHero.module.css";
 import PlayBTN from "../../global/components/PlayBTN/PlayBTN";
 import CustomBTN from "../../global/components/CustomBTN/CustomBTN";
 
-const HomePageHero = ({ setShowModal, movies, fetchContinueWatching, setContinueWatching, continueWatching }) => {
-
-
+const HomePageHero = ({
+  setShowModal,
+  movies,
+  fetchContinueWatching,
+  setContinueWatching,
+  continueWatching,
+}) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [selectedMovies, setSelectedMovies] = useState([]);
 
@@ -87,19 +91,6 @@ const HomePageHero = ({ setShowModal, movies, fetchContinueWatching, setContinue
                       textColor="text-light"
                       bgColor="redBTNbg"
                     />
-
-
-{/* movieId={movie && movie.id}
-              movie={movie && movie}
-              continueWatching={continueWatching}
-              setContinueWatching={setContinueWatching}
-              setShowModal={setShowModal}
-              fetchContinueWatching={fetchContinueWatching}
-              text="Play"
-              textColor="text-light"
-              bgColor="redBTNbg"
-              icon={true}
-              padding="lgBTNPadding" */}
 
                     <CustomBTN
                       text="Watch trailer"
