@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Nav,
@@ -16,6 +16,7 @@ import styles from "./Welcome.module.css";
 import AuthModal from "./AuthModal/AuthModal";
 import useMediaQueries from "../../utils/UseMediaQuery";
 import { chunkArray } from "../../utils/chuckArray";
+import { supabase } from "../../../supabaseClient";
 
 const Welcome = () => {
   const { isTablet, isMobile, isXsMobile } = useMediaQueries();
@@ -24,10 +25,29 @@ const Welcome = () => {
   const people = process.env.PUBLIC_URL + "/images/people.jpg";
 
   const [showDetailsModal, setShowDetailsModal] = useState(false);
+  const [movies, setMovies] = useState(null);
   const [isLoginMode, setIsLoginMode] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
+  console.log(movies, 'movies')
+
+  const fetchAllMovies = async () => {
+    try {
+      const { data, error } = await supabase.from("movies").select("*");
+      if (error) {
+        console.error("Error fetching movies:", error);
+      } else {
+        setMovies(data);
+      }
+    } catch (error) {
+      console.error("Error fetching movies:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllMovies();
+  }, []);
 
   const handleCloseAuthModal = () => {
     setIsLoginMode(!isLoginMode);
@@ -38,133 +58,10 @@ const Welcome = () => {
     setSelectedMovie(id);
     setShowDetailsModal(true);
   };
-  const allMovies = [
-    {
-      id: "1",
-      image: sciFi,
-      title: "Fantasy Realm",
-      description: "Journey through magical lands and epic adventures.",
-      longDescription:
-        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
-      year: "1985",
-      length: "1 hr 26 min",
-      likes: "5",
-      tags: ["topRated", "trending"],
-      cast: [
-        "Emma Hartley",
-        "Jonathan Pierce",
-        "Olivia Mason",
-        "Marcus Bradley",
-      ],
-      creator: "Andy Breckman",
-      genres: ["Adventure", "Mystery", "Thriller"],
-    },
-    {
-      id: "2",
-      image: people,
-      title: "Mystery Chronicles",
-      description: "Unraveling the most intriguing and puzzling cases.",
-      longDescription:
-        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
-      year: "2010",
-      length: "1 hr 15 min",
-      likes: "20",
-      tags: ["topRated", "recentlyAdded"],
-      cast: [
-        "Emma Hartley",
-        "Jonathan Pierce",
-        "Olivia Mason",
-        "Marcus Bradley",
-      ],
-      creator: "Andy Breckman",
-      genres: ["Adventure", "Mystery", "Thriller"],
-    },
-    {
-      id: "3",
-      image: sciFi,
-      title: "Historical Insights",
-      description: "Diving deep into significant events and eras of the past.",
-      longDescription:
-        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
-      year: "2024",
-      length: "1 hr 24 min",
-      likes: "72",
-      tags: ["mustWatch"],
-      cast: [
-        "Emma Hartley",
-        "Jonathan Pierce",
-        "Olivia Mason",
-        "Marcus Bradley",
-      ],
-      creator: "Andy Breckman",
-      genres: ["Adventure", "Mystery", "Thriller"],
-    },
-    {
-      id: "4",
-      image: people,
-      title: "Comedy Highlights",
-      description: "Laugh out loud with the best comedies and sitcoms.",
-      longDescription:
-        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
-      year: "2016",
-      length: "1 hr 10 min",
-      likes: "25",
-      tags: ["mustWatch", "recentlyAdded"],
-      cast: [
-        "Emma Hartley",
-        "Jonathan Pierce",
-        "Olivia Mason",
-        "Marcus Bradley",
-      ],
-      creator: "Andy Breckman",
-      genres: ["Adventure", "Mystery", "Thriller"],
-    },
-    {
-      id: "5",
-      image: people,
-      title: "Comedy Highlights",
-      description: "Laugh out loud with the best comedies and sitcoms.",
-      longDescription:
-        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
-      year: "2016",
-      length: "1 hr 10 min",
-      likes: "25",
-      tags: ["mustWatch", "recentlyAdded"],
-      cast: [
-        "Emma Hartley",
-        "Jonathan Pierce",
-        "Olivia Mason",
-        "Marcus Bradley",
-      ],
-      creator: "Andy Breckman",
-      genres: ["Adventure", "Mystery", "Thriller"],
-    },
-    {
-      id: "6",
-      image: people,
-      title: "Comedy Highlights",
-      description: "Laugh out loud with the best comedies and sitcoms.",
-      longDescription:
-        "In the bustling city of San Francisco, young artist Maya finds herself entangled in an unexpected adventure when she discovers a mysterious, ancient artifact hidden within the walls of her loft.",
-      year: "2016",
-      length: "1 hr 10 min",
-      likes: "25",
-      tags: ["mustWatch", "recentlyAdded"],
-      cast: [
-        "Emma Hartley",
-        "Jonathan Pierce",
-        "Olivia Mason",
-        "Marcus Bradley",
-      ],
-      creator: "Andy Breckman",
-      genres: ["Adventure", "Mystery", "Thriller"],
-    },
-  ];
 
-  const firstThreeMovies = allMovies.slice(0, 3);
-  const firstFourMovies = allMovies.slice(0, 4);
-
-  const chunkedMovies = chunkArray(allMovies, 2);
+  const firstThreeMovies = movies ? movies.slice(0, 3) : [];
+const firstFourMovies = movies ? movies.slice(0, 4) : [];
+const chunkedMovies = movies ? chunkArray(movies, 2) : [];
 
   return (
     <div className={`${styles.welcomePage} text-light d-flex flex-column`}>
@@ -172,7 +69,7 @@ const Welcome = () => {
         showModal={showDetailsModal}
         setShowModal={setShowDetailsModal}
         selectedMovie={selectedMovie}
-        allMovies={allMovies}
+        movies={movies}
       />
 
       <AuthModal
@@ -240,12 +137,12 @@ const Welcome = () => {
                 controls={false}
                 interval={null}
               >
-                {chunkArray(allMovies, 2).map((moviePair, index) => (
+                {chunkArray(movies, 2).map((moviePair, index) => (
                   <Carousel.Item className="" key={index}>
                     <Row className={styles.carouselRow}>
                       {moviePair.map((movie, subIndex) => (
                         <BasicMovieCard
-                          height="16rem"
+                          // height="16rem"
                           key={index}
                           movie={movie}
                           setMovie={setMovie}
@@ -277,7 +174,7 @@ const Welcome = () => {
                   <Carousel.Item className="" key={index}>
                     <Row className={styles.carouselRow}>
                       <BasicMovieCard
-                        height={isXsMobile ? "15rem" : "20rem"}
+                        // height={isXsMobile ? "15rem" : "20rem"}
                         key={index}
                         movie={movie}
                         setMovie={setMovie}
@@ -318,7 +215,7 @@ const Welcome = () => {
             <Row className="mt-5 w-100 px-lg-1 px-xl-5">
               {firstFourMovies.map((movie, index) => (
                 <BasicMovieCard
-                  height="13rem"
+                 
                   key={index}
                   movie={movie}
                   setMovie={setMovie}

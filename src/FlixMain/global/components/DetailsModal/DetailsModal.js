@@ -13,7 +13,7 @@ const DetailsModal = ({
   showModal,
   setShowModal,
   selectedMovie,
-  movies,
+  movies = [], // Default to an empty array
   continueWatching,
   setContinueWatching,
   fetchContinueWatching,
@@ -24,9 +24,11 @@ const DetailsModal = ({
   const [movie, setMovie] = useState(null);
 
   useEffect(() => {
-    const movie = movies.find((movie) => movie.id === selectedMovie);
-    setMovie(movie);
-  }, [selectedMovie]);
+    if (Array.isArray(movies)) {
+      const foundMovie = movies.find((movie) => movie.id === selectedMovie);
+      setMovie(foundMovie);
+    }
+  }, [selectedMovie, movies]);
 
   return (
     <Modal
