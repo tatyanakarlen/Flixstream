@@ -24,6 +24,7 @@
 
 .carouselRow {
   background-color: black;
+  --bs-gutter-x: 2.5rem !important; 
 }
 
 .carousel > :first-child {

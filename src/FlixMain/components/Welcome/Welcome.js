@@ -21,16 +21,24 @@ import { supabase } from "../../../supabaseClient";
 const Welcome = () => {
   const { isTablet, isMobile, isXsMobile } = useMediaQueries();
 
-  const sciFi = process.env.PUBLIC_URL + "/images/sci-fi.jpg";
-  const people = process.env.PUBLIC_URL + "/images/people.jpg";
-
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [movies, setMovies] = useState(null);
   const [isLoginMode, setIsLoginMode] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
-  console.log(movies, 'movies')
+  console.log(movies, "movies");
+
+  const getRandomMovies = (moviesArray, num) => {
+    // Shuffle the array using Fisher-Yates algorithm
+    for (let i = moviesArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [moviesArray[i], moviesArray[j]] = [moviesArray[j], moviesArray[i]];
+    }
+    
+    // Return the first `num` items
+    return moviesArray.slice(0, num);
+  };
 
   const fetchAllMovies = async () => {
     try {
@@ -44,6 +52,30 @@ const Welcome = () => {
       console.error("Error fetching movies:", error);
     }
   };
+
+  
+
+  useEffect(() => {
+    const fetchAllMovies = async () => {
+      try {
+        const { data, error } = await supabase.from("movies").select("*");
+        if (error) {
+          console.error("Error fetching movies:", error);
+        } else {
+          // Set movies state to all fetched movies
+          setMovies(data);
+  
+          // Get 6 random movies
+          const randomMovies = getRandomMovies(data, 6);
+          setMovies(randomMovies); // Optionally, store these random movies in a separate state if needed
+        }
+      } catch (error) {
+        console.error("Error fetching movies:", error);
+      }
+    };
+  
+    fetchAllMovies();
+  }, []);
 
   useEffect(() => {
     fetchAllMovies();
@@ -59,9 +91,9 @@ const Welcome = () => {
     setShowDetailsModal(true);
   };
 
-  const firstThreeMovies = movies ? movies.slice(0, 3) : [];
-const firstFourMovies = movies ? movies.slice(0, 4) : [];
-const chunkedMovies = movies ? chunkArray(movies, 2) : [];
+  const firstSixMovies = movies ? movies.slice(0, 6) : [];
+  const firstFourMovies = movies ? movies.slice(0, 4) : [];
+  const chunkedMovies = movies ? chunkArray(movies, 2) : [];
 
   return (
     <div className={`${styles.welcomePage} text-light d-flex flex-column`}>
@@ -79,39 +111,40 @@ const chunkedMovies = movies ? chunkArray(movies, 2) : [];
         setIsLoginMode={setIsLoginMode}
       />
 
-      <Navbar className="justify-content-between" expand="lg">
-        <Navbar.Brand
-          className="d-flex align-items-center gap-2 fw-semibold"
-          href="/"
-        >
-          <TbMovie />
-          FlixStream
-        </Navbar.Brand>
-        {!isMobile && (
-          <div>
-            <Nav className="me-auto d-flex flex-row gap-3">
-              <CustomBTN
-                text="Register"
-                textColor={"text-dark fw-semibold"}
-                variant="light"
-                icon={false}
-                padding="px-4"
-                onClick={() => setShowAuthModal(true)}
-                // bgColor={isTablet && "redBTNbg"}
-              />
-              <Nav.Link
-                onClick={() => {
-                  setIsLoginMode(true);
-                  setShowAuthModal(true);
-                }}
-                className={`${styles.link} text-nowrap fw-semibold text-light`}
-              >
-                Sign in
-              </Nav.Link>
-            </Nav>
-          </div>
-        )}
-      </Navbar>
+<Navbar className="justify-content-between" expand="lg">
+      <Navbar.Brand
+        className="d-flex align-items-center gap-2 fw-semibold text-light"
+        href="/"
+      >
+        <TbMovie />
+        FlixStream
+      </Navbar.Brand>
+
+      {/* Conditional rendering for the rest of the navbar items */}
+      {!isMobile && (
+        <div>
+          <Nav className="me-auto d-flex flex-row gap-3">
+            <CustomBTN
+              text="Register"
+              textColor={"text-dark fw-semibold"}
+              variant="light"
+              icon={false}
+              padding="px-4"
+              onClick={() => setShowAuthModal(true)}
+            />
+            <Nav.Link
+              onClick={() => {
+                setIsLoginMode(true);
+                setShowAuthModal(true);
+              }}
+              className={`${styles.link} text-nowrap fw-semibold text-light`}
+            >
+              Sign in
+            </Nav.Link>
+          </Nav>
+        </div>
+      )}
+    </Navbar>
 
       <div className="d-flex justify-content-center align-items-center flex-column flex-grow-1">
         {isTablet ? (
@@ -139,7 +172,7 @@ const chunkedMovies = movies ? chunkArray(movies, 2) : [];
               >
                 {chunkArray(movies, 2).map((moviePair, index) => (
                   <Carousel.Item className="" key={index}>
-                    <Row className={styles.carouselRow}>
+                    <Row className={`${styles.carouselRow} g-5`}>
                       {moviePair.map((movie, subIndex) => (
                         <BasicMovieCard
                           // height="16rem"
@@ -170,11 +203,10 @@ const chunkedMovies = movies ? chunkArray(movies, 2) : [];
                 controls={false}
                 interval={null}
               >
-                {firstThreeMovies.map((movie, index) => (
+                {firstSixMovies.map((movie, index) => (
                   <Carousel.Item className="" key={index}>
                     <Row className={styles.carouselRow}>
                       <BasicMovieCard
-                        // height={isXsMobile ? "15rem" : "20rem"}
                         key={index}
                         movie={movie}
                         setMovie={setMovie}
@@ -212,16 +244,27 @@ const chunkedMovies = movies ? chunkArray(movies, 2) : [];
               </div>
               <h4 className="mt-5">Featured Movies</h4>
             </div>
-            <Row className="mt-5 w-100 px-lg-1 px-xl-5">
-              {firstFourMovies.map((movie, index) => (
-                <BasicMovieCard
-                 
-                  key={index}
-                  movie={movie}
-                  setMovie={setMovie}
-                />
-              ))}
-            </Row>
+            <div className="mt-5">
+              <Carousel
+                className={styles.carousel}
+                controls={false}
+                interval={null}
+              >
+                {chunkArray(movies, 3).map((moviePair, index) => (
+                  <Carousel.Item className="" key={index}>
+                    <Row className={styles.carouselRow}>
+                      {moviePair.map((movie, subIndex) => (
+                        <BasicMovieCard
+                          key={index}
+                          movie={movie}
+                          setMovie={setMovie}
+                        />
+                      ))}
+                    </Row>
+                  </Carousel.Item>
+                ))}
+              </Carousel>
+            </div>
           </>
         )}
       </div>
