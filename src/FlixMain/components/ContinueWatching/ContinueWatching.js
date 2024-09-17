@@ -1,4 +1,4 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import styles from "./ContinueWatching.module.css";
 import { Row, Col, Image, ProgressBar } from "react-bootstrap";
 import { FaPlay } from "react-icons/fa";
@@ -6,6 +6,20 @@ import CustomProgress from "../../global/components/CustomProgress/CustomProgres
 import { IoClose } from "react-icons/io5";
 import { supabase } from "../../../supabaseClient";
 import { UserContext } from "../../../userContext";
+import PlayBTN from "../../global/components/PlayBTN/PlayBTN";
+
+/// props play btn needs:
+// text,
+//   icon,
+//   textColor,
+//   padding,
+//   variant,
+//   setShowModal,
+//   movieId,
+//   movie,
+//   continueWatching,
+//   setContinueWatching,
+//   fetchContinueWatching
 
 const ContinueWatching = ({
   movie,
@@ -13,11 +27,9 @@ const ContinueWatching = ({
   setContinueWatching,
   fetchContinueWatching,
 }) => {
-
-  console.log(movie.movie_id, 'movieID from continue watching')
+  console.log(movie.movie_id, "movieID from continue watching");
 
   const { user, loading, logout } = useContext(UserContext);
-
 
   const removeFromContinueWatching = async (movieId) => {
     try {
@@ -25,13 +37,13 @@ const ContinueWatching = ({
         console.error("User must be logged in to remove movies.");
         return;
       }
-  
+
       const { error } = await supabase
         .from("continue_watching")
         .delete()
         .eq("user_id", user.id)
         .eq("movie_id", movieId);
-  
+
       if (error) {
         console.error("Error deleting movie:", error.message);
       } else {
@@ -55,12 +67,28 @@ const ContinueWatching = ({
         <small className="mt-2">{movie && movie.time_remaining}</small>
       </div>
       <div className="d-flex flex-column align-items-end ms-2">
-        <small 
-        onClick={() => removeFromContinueWatching(movie.movie_id)}
-        className="text-decoration-underline">Remove</small>
+        <small
+          onClick={() => removeFromContinueWatching(movie.movie_id)}
+          className="text-decoration-underline"
+        >
+          Remove
+        </small>
 
-        <div className={`${styles.playBTN} p-2 text-dark`}>
+        {/* <div className={`${styles.playBTN} p-2 text-dark`}>
           <FaPlay className="fs-5" />
+        </div> */}
+        <div className={styles.playBtnContainer}>
+        <PlayBTN
+          variant="light"
+          // bgColor="greyBTNbg"
+          textColor="text-dark"
+          icon={true}
+          movieId={movie.movie_id}
+          movie={movie}
+          continueWatching={continueWatching}
+          setContinueWatching={setContinueWatching}
+          fetchContinueWatching={fetchContinueWatching}
+        />
         </div>
       </div>
 

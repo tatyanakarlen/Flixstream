@@ -7,6 +7,7 @@ import { supabase } from "../../../../supabaseClient";
 import { UserContext } from "../../../../userContext";
 
 const PlayBTN = ({
+  bgColor, 
   text,
   icon,
   textColor,
@@ -75,7 +76,7 @@ const PlayBTN = ({
         addToContinueWatching(movieId, movie);
       }}
       variant={variant}
-      className={`${padding} ${styles.btn} ${textColor} d-flex align-items-center justify-content-center gap-2 rounded`}
+      className={`${padding} ${styles.btn} ${textColor} ${bgColor} d-flex align-items-center justify-content-center gap-2 rounded`}
     >
       {icon && <IoPlaySharp />}
 

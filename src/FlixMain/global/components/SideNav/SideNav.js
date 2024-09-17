@@ -11,19 +11,17 @@ import { GoHomeFill } from "react-icons/go";
 import { useLocation, Link } from "react-router-dom";
 import CustomBTN from "../CustomBTN/CustomBTN";
 import useMediaQueries from "../../../utils/UseMediaQuery";
-import { Col } from "react-bootstrap";
+import { Col, Image } from "react-bootstrap";
 import { UserContext } from "../../../../userContext";
 
-const SideNav = ({
-  setSearchInput,
-  setFilteredData,
-}) => {
+const SideNav = ({ setSearchInput, setFilteredData }) => {
+  const logoMobile =
+    process.env.PUBLIC_URL + "/images/logo/Icon-Only-Color.png";
   const { logout } = useContext(UserContext);
   const location = useLocation();
   const { isLgDesktopOrLaptop } = useMediaQueries();
 
   const handleLinkClick = () => {
-    
     setSearchInput("");
     setFilteredData([]);
   };
@@ -63,20 +61,20 @@ const SideNav = ({
         >
           <div className="d-flex flex-column">
             {isLgDesktopOrLaptop ? (
-              <h4 className={`${styles.flixStreamLogo} fw-semibold`}>
-                Flixstream
-              </h4>
+              <div className="d-flex align-items-center gap-2">
+                <Image src={logoMobile} height={32} />
+                <h5 className={`${styles.flixStreamLogo} fw-semibold mb-0`}>
+                  Flixstream
+                </h5>
+              </div>
             ) : (
-              <span
-                className={`${styles.logoMobile} mt-2 mb-2 d-flex justify-content-center align-items-center p-2 rounded`}
-              >
-                <TbMovie className="fs-4" />
-              </span>
+              <Image src={logoMobile} width={44} className="ms-1"/>
+            
             )}
-            <div className="mt-3 d-flex flex-column gap-3">
+            <div className="mt-4 d-flex flex-column gap-3">
               {links.map((link, index) => (
                 <Link
-                onClick={handleLinkClick}
+                  onClick={handleLinkClick}
                   className="text-light text-decoration-none"
                   to={link.link}
                   key={index}
@@ -103,23 +101,6 @@ const SideNav = ({
             </div>
           </div>
           <div className="d-flex flex-column">
-            {isLgDesktopOrLaptop && (
-              <div
-                className={`${styles.upgradePromo} borderRadiusSmall p-3 d-flex flex-column text-light`}
-              >
-                <small className="text-light">
-                  Upgrade to Premium for exclusive benefits!
-                </small>
-                <div className="mt-3 w-100">
-                  <CustomBTN
-                    text="Join"
-                    textColor="text-light"
-                    bgColor="redBTNbg"
-                    icon={false}
-                  />
-                </div>
-              </div>
-            )}
             <div className="d-flex flex-column mt-3 text-light">
               <span
                 className={`d-flex align-items-center ${

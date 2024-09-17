@@ -15,6 +15,7 @@ const Home = () => {
   const {
     setShowModal,
     movies,
+    selectedMovies, 
     setMovie,
     continueWatching,
     setContinueWatching,
@@ -32,10 +33,15 @@ const Home = () => {
     isDesktopOrLaptop,
     isLgDesktopOrLaptop,
   } = useMediaQueries();
+
+  
+
+ 
+
   return (
     <div>
       {isDesktopOrLaptop || isLgDesktopOrLaptop ? (
-        <HomePageHero fetchContinueWatching={fetchContinueWatching} setContinueWatching={setContinueWatching} continueWatching={continueWatching} movies={movies} setShowModal={setShowModal} />
+        <HomePageHero selectedMovies={selectedMovies} fetchContinueWatching={fetchContinueWatching} setContinueWatching={setContinueWatching} continueWatching={continueWatching} movies={movies} setShowModal={setShowModal} />
       ) : (
         <div className="w-100 mt-4 pe-md-4 pe-lg-3 pe-3">
           <h4 className="text-light fw-semibold mt-4">Recently Added</h4>
@@ -95,6 +101,7 @@ const Home = () => {
               className={`${styles.cardContainer} scrollableListCardContainer`}
             >
               <ContinueWatching
+                
                 movie={movie}
                 continueWatching={continueWatching}
                 setContinueWatching={setContinueWatching}

@@ -52,7 +52,7 @@ gap: 3rem;
 }
 
 .heartLikeContainer {
-  align-items: end;
+  /* align-items: end !important; */
 }
 
 @media (max-width: 991px) {

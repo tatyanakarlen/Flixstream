@@ -22,6 +22,16 @@
   object-fit: cover;
 }
 
+.logoContainer {
+  top: -27px;
+  left: -13px;
+}
+
+.logoContainerMobile {
+  top: 2px;
+  left: -10px;
+}
+
 .carouselRow {
   background-color: black;
   --bs-gutter-x: 2.5rem !important; 

@@ -3,6 +3,8 @@
   /* height: 60%; */
 }
 
+
+
 .backgroundImage {
   position: absolute;
   top: 0;
@@ -56,4 +58,9 @@
   height: 27rem;
   -webkit-backface-visibility: hidden !important;
   backface-visibility: hidden !important; 
+}
+
+.loadingDiv {
+  height: 27rem;
+  background-color: yellow;
 }

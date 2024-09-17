@@ -45,6 +45,7 @@ const BasicMovieCard = ({
           { user ? 
           <div className="d-flex align-items-center gap-2">
             <PlayBTN
+             bgColor="redBTNbg"
               movieId={movie && movie.id}
               movie={movie && movie}
               padding="px-3"

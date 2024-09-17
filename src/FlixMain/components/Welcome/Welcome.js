@@ -8,7 +8,6 @@ import {
   Image,
   Col,
 } from "react-bootstrap";
-import { TbMovie } from "react-icons/tb";
 import BasicMovieCard from "../../global/components/BasicMovieCard/BasicMovieCard";
 import CustomBTN from "../../global/components/CustomBTN/CustomBTN";
 import DetailsModal from "../../global/components/DetailsModal/DetailsModal";
@@ -35,7 +34,7 @@ const Welcome = () => {
       const j = Math.floor(Math.random() * (i + 1));
       [moviesArray[i], moviesArray[j]] = [moviesArray[j], moviesArray[i]];
     }
-    
+
     // Return the first `num` items
     return moviesArray.slice(0, num);
   };
@@ -53,8 +52,6 @@ const Welcome = () => {
     }
   };
 
-  
-
   useEffect(() => {
     const fetchAllMovies = async () => {
       try {
@@ -64,7 +61,7 @@ const Welcome = () => {
         } else {
           // Set movies state to all fetched movies
           setMovies(data);
-  
+
           // Get 6 random movies
           const randomMovies = getRandomMovies(data, 6);
           setMovies(randomMovies); // Optionally, store these random movies in a separate state if needed
@@ -73,7 +70,7 @@ const Welcome = () => {
         console.error("Error fetching movies:", error);
       }
     };
-  
+
     fetchAllMovies();
   }, []);
 
@@ -95,8 +92,13 @@ const Welcome = () => {
   const firstFourMovies = movies ? movies.slice(0, 4) : [];
   const chunkedMovies = movies ? chunkArray(movies, 2) : [];
 
+  const logoMobile =
+    process.env.PUBLIC_URL + "/images/logo/Icon-Only-Color.png";
+
   return (
-    <div className={`${styles.welcomePage} text-light d-flex flex-column`}>
+    <div
+      className={`${styles.welcomePage} position-relative text-light d-flex flex-column`}
+    >
       <DetailsModal
         showModal={showDetailsModal}
         setShowModal={setShowDetailsModal}
@@ -111,40 +113,43 @@ const Welcome = () => {
         setIsLoginMode={setIsLoginMode}
       />
 
-<Navbar className="justify-content-between" expand="lg">
-      <Navbar.Brand
-        className="d-flex align-items-center gap-2 fw-semibold text-light"
-        href="/"
-      >
-        <TbMovie />
-        FlixStream
-      </Navbar.Brand>
+      <Navbar className="justify-content-between position-relative" expand="lg">
+        <Navbar.Brand
+          className={`d-flex align-items-center gap-2 fw-semibold text-light`}
+          href="/"
+        >
+          <div
+            className={`${styles.logoContainerMobile} position-absolute d-flex align-items-center gap-2`}
+          >
+            <Image height={32} src={logoMobile} />
+            <p className={`${styles.logoText} mb-0`}>Flixstream</p>
+          </div>
+        </Navbar.Brand>
 
-      {/* Conditional rendering for the rest of the navbar items */}
-      {!isMobile && (
-        <div>
-          <Nav className="me-auto d-flex flex-row gap-3">
-            <CustomBTN
-              text="Register"
-              textColor={"text-dark fw-semibold"}
-              variant="light"
-              icon={false}
-              padding="px-4"
-              onClick={() => setShowAuthModal(true)}
-            />
-            <Nav.Link
-              onClick={() => {
-                setIsLoginMode(true);
-                setShowAuthModal(true);
-              }}
-              className={`${styles.link} text-nowrap fw-semibold text-light`}
-            >
-              Sign in
-            </Nav.Link>
-          </Nav>
-        </div>
-      )}
-    </Navbar>
+        {!isMobile && (
+          <div>
+            <Nav className="me-auto d-flex flex-row gap-3">
+              <CustomBTN
+                text="Register"
+                textColor={"text-dark fw-semibold"}
+                variant="light"
+                icon={false}
+                padding="px-4"
+                onClick={() => setShowAuthModal(true)}
+              />
+              <Nav.Link
+                onClick={() => {
+                  setIsLoginMode(true);
+                  setShowAuthModal(true);
+                }}
+                className={`${styles.link} text-nowrap fw-semibold text-light`}
+              >
+                Sign in
+              </Nav.Link>
+            </Nav>
+          </div>
+        )}
+      </Navbar>
 
       <div className="d-flex justify-content-center align-items-center flex-column flex-grow-1">
         {isTablet ? (
@@ -189,7 +194,7 @@ const Welcome = () => {
           </div>
         ) : isMobile ? (
           <>
-            <span className={`${styles.accentSpan} mt-1`}></span>
+            <span className={`${styles.accentSpan} mt-2`}></span>
             <div className="d-flex justify-content-center align-items-center">
               <h2
                 className={`${styles.h2} mt-4 text-center w-75 w-sm-100 fw-semibold`}

@@ -2,13 +2,6 @@
   background-color: var(--darkGreyBG);
 }
 
-.flixStreamLogo {
-  font-size: 1.4rem !important;
-}
-
-.link {
-}
-
 .activeLink,
 .upgradePromo {
   background-color: black;
@@ -17,10 +10,6 @@
 .fixed-side-nav {
   height: 100vh !important;
   overflow-y: auto !important;
-}
-
-.logoMobile {
-  border: 1px solid #e006069c;
 }
 
 .sideNavWrapper {

@@ -3,6 +3,11 @@ import { Image, Row, Col, Button, Carousel } from "react-bootstrap";
 import styles from "./HomePageHero.module.css";
 import PlayBTN from "../../global/components/PlayBTN/PlayBTN";
 import CustomBTN from "../../global/components/CustomBTN/CustomBTN";
+// import LazyLoad from "react-lazyload";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
+
+// import 'react-lazy-load-image-component/src/effects/blur.css';
 
 const HomePageHero = ({
   setShowModal,
@@ -10,22 +15,21 @@ const HomePageHero = ({
   fetchContinueWatching,
   setContinueWatching,
   continueWatching,
+  selectedMovies
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [selectedMovies, setSelectedMovies] = useState([]);
+  // const [selectedMovies, setSelectedMovies] = useState([]);
 
   const flowers = process.env.PUBLIC_URL + "/images/flowers.jpg";
 
-  useEffect(() => {
-    // Function to randomly select 3 movies
-    const getRandomMovies = (movies) => {
-      const shuffledMovies = [...movies].sort(() => 0.5 - Math.random());
-      return shuffledMovies.slice(0, 3);
-    };
+  // useEffect(() => {
+  //   const getRandomMovies = (movies) => {
+  //     const shuffledMovies = [...movies].sort(() => 0.5 - Math.random());
+  //     return shuffledMovies.slice(0, 3);
+  //   };
 
-    // Set selected movies on component mount
-    setSelectedMovies(getRandomMovies(movies));
-  }, [movies]);
+  //   setSelectedMovies(getRandomMovies(movies));
+  // }, [movies]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -35,12 +39,16 @@ const HomePageHero = ({
     return () => clearInterval(intervalId);
   }, [selectedMovies]);
 
-  // Ensure the component doesn't break if selectedMovies is empty
   if (selectedMovies.length === 0) {
-    return null; // or some loading indicator
+    return (
+      <div className={styles.loadingDiv}>
+        <h1>LOADING</h1>
+      </div>
+    );
   }
 
   return (
+    // <div className="text-light">BUNCH OF NOTHING</div>
     <div
       className={`${styles.homePageHeroContainer} position-relative mt-4 pe-3`}
     >
@@ -60,7 +68,7 @@ const HomePageHero = ({
             <Row className={`${styles.overlayContent} p-4`}>
               <Col className="h-100">
                 <div className="h-100">
-                  <Image src={movie.image} />
+                  <Image alt="Movie Background" src={movie.image} />
                 </div>
               </Col>
               <Col className="h-100 d-flex flex-column justify-content-center pe-5">

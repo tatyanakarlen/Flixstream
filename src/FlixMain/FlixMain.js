@@ -16,6 +16,7 @@ import { supabase } from "../supabaseClient";
 const FlixMain = () => {
   const location = useLocation();
   const [movies, setMovies] = useState([]);
+  const [selectedMovies, setSelectedMovies] = useState([]);
   const [userMovies, setUserMovies] = useState([]);
   const [continueWatching, setContinueWatching] = useState([]);
   const [searchMode, setSearchMode] = useState(false);
@@ -24,8 +25,6 @@ const FlixMain = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [moviePlayed, setMoviePlayed] = useState(null);
-
-  
 
   const { isTablet, isMobile, isXsMobile } = useMediaQueries();
 
@@ -38,7 +37,7 @@ const FlixMain = () => {
   };
 
   const addToUserList = async (movieId) => {
-    if (loading) return; 
+    if (loading) return;
 
     if (!user) {
       console.error("User must be logged in to add movies to their list.");
@@ -66,7 +65,7 @@ const FlixMain = () => {
   };
 
   const removeFromUserList = async (movieId) => {
-    // if (loading) return;
+    if (loading) return;
 
     if (!user) {
       console.error("User must be logged in to remove movies from their list.");
@@ -82,7 +81,7 @@ const FlixMain = () => {
         .eq("movie_id", movieId);
 
       if (error) {
-        throw error; 
+        throw error;
       }
 
       console.log("Movie removed from user list:", data);
@@ -150,6 +149,15 @@ const FlixMain = () => {
   }, []);
 
   useEffect(() => {
+    const getRandomMovies = (movies) => {
+      const shuffledMovies = [...movies].sort(() => 0.5 - Math.random());
+      return shuffledMovies.slice(0, 3);
+    };
+
+    setSelectedMovies(getRandomMovies(movies));
+  }, [movies]);
+
+  useEffect(() => {
     if (!loading && user) {
       fetchUserMovies();
       fetchContinueWatching();
@@ -160,6 +168,7 @@ const FlixMain = () => {
     searchMode,
     setSearchMode,
     movies,
+    selectedMovies,
     filteredData,
     setFilteredData,
     searchInput,
@@ -303,17 +312,6 @@ const FlixMain = () => {
                             fetchContinueWatching={fetchContinueWatching}
                             userMovies={userMovies}
                           />
-
-                          // showModal={showModal}
-                          // setShowModal={setShowModal}
-                          // selectedMovie={selectedMovie}
-                          // movies={movies}
-                          // continueWatching={continueWatching}
-                          // setContinueWatching={setContinueWatching}
-                          // fetchContinueWatching={fetchContinueWatching}
-                          // userMovies={userMovies}
-                          // addToUserList={addToUserList}
-                          // removeFromUserList={removeFromUserList}
                         ))}
                       </Row>
                     </div>
