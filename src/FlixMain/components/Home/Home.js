@@ -4,7 +4,7 @@ import DiscoverNewReleases from "../DiscoverNewReleases/DiscoverNewReleases";
 import ContinueWatching from "../ContinueWatching/ContinueWatching";
 import { useOutletContext } from "react-router-dom";
 import ScrollableList from "../../global/components/ScrollableList/ScrollableList";
-import { Row, Nav, Navbar, Carousel } from "react-bootstrap";
+import { Row, Carousel } from "react-bootstrap";
 import styles from "./Home.module.css";
 import useMediaQueries from "../../utils/UseMediaQuery";
 import { chunkArray } from "../../utils/chuckArray";
@@ -15,7 +15,7 @@ const Home = () => {
   const {
     setShowModal,
     movies,
-    selectedMovies, 
+    selectedMovies,
     setMovie,
     continueWatching,
     setContinueWatching,
@@ -28,25 +28,26 @@ const Home = () => {
   const firstSixMovies = movies.slice(0, 6);
   const firstThreeMovies = movies.slice(0, 3);
 
-  const {
-    isTablet,
-    isDesktopOrLaptop,
-    isLgDesktopOrLaptop,
-  } = useMediaQueries();
-
-  
-
- 
+  const { isTablet, isDesktopOrLaptop, isLgDesktopOrLaptop } =
+    useMediaQueries();
 
   return (
     <div>
       {isDesktopOrLaptop || isLgDesktopOrLaptop ? (
-        <HomePageHero selectedMovies={selectedMovies} fetchContinueWatching={fetchContinueWatching} setContinueWatching={setContinueWatching} continueWatching={continueWatching} movies={movies} setShowModal={setShowModal} />
+        <HomePageHero
+          selectedMovies={selectedMovies}
+          fetchContinueWatching={fetchContinueWatching}
+          setContinueWatching={setContinueWatching}
+          continueWatching={continueWatching}
+          movies={movies}
+          setShowModal={setShowModal}
+        />
       ) : (
         <div className="w-100 mt-4 pe-md-4 pe-lg-3 pe-3">
           <h4 className="text-light fw-semibold mt-4">Recently Added</h4>
           {isTablet ? (
             <Carousel
+              aria-labelledby="recently-added"
               className={`${styles.carousel} mt-3`}
               controls={false}
               interval={null}
@@ -61,6 +62,7 @@ const Home = () => {
                         setMovie={setMovie}
                         addToUserList={addToUserList}
                         removeFromUserList={removeFromUserList}
+                        aria-label={`Movie ${movie.title}`}
                       />
                     ))}
                   </Row>
@@ -69,6 +71,7 @@ const Home = () => {
             </Carousel>
           ) : (
             <Carousel
+              aria-labelledby="recently-added"
               className={styles.carousel}
               controls={false}
               interval={null}
@@ -83,6 +86,7 @@ const Home = () => {
                       setShowModal={setShowModal}
                       addToUserList={addToUserList}
                       removeFromUserList={removeFromUserList}
+                      aria-label={`Movie ${movie.title}`}
                     />
                   </Row>
                 </Carousel.Item>
@@ -101,11 +105,11 @@ const Home = () => {
               className={`${styles.cardContainer} scrollableListCardContainer`}
             >
               <ContinueWatching
-                
                 movie={movie}
                 continueWatching={continueWatching}
                 setContinueWatching={setContinueWatching}
                 fetchContinueWatching={fetchContinueWatching}
+                aria-label={`Continue watching ${movie.title}`}
               />
             </li>
           ))}
@@ -119,6 +123,7 @@ const Home = () => {
         addToUserList={addToUserList}
         removeFromUserList={removeFromUserList}
         userMovies={userMovies}
+        aria-label="Discover new releases"
       />
     </div>
   );

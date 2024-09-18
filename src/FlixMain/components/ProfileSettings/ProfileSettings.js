@@ -1,11 +1,10 @@
 import { supabase } from "../../../supabaseClient";
 import React, { useState, useContext, useEffect } from "react";
-import { Image, Row, Col, Form, Modal, Button } from "react-bootstrap";
+import { Image, Row, Col, Form } from "react-bootstrap";
 import styles from "./ProfileSettings.module.css";
 import CustomBTN from "../../global/components/CustomBTN/CustomBTN";
 import { BiSolidFilm } from "react-icons/bi";
 import { MdPlaylistAdd, MdOutlineEmail } from "react-icons/md";
-import { BsHandIndexThumb } from "react-icons/bs";
 import { AiFillEdit } from "react-icons/ai";
 import {
   FaUser,
@@ -21,15 +20,11 @@ import { UserContext } from "../../../userContext";
 
 const ProfileSettings = () => {
   const [isEditMode, setIsEditMode] = useState(false);
-  const [isUserExists, setIsUserExists] = useState(false); // New state to check if user data exists
-  const [showEditForm, setShowEditForm] = useState(false);
-  const [userName, setUserName] = useState(null)
+  const [isUserExists, setIsUserExists] = useState(false);
+  const [userName, setUserName] = useState(null);
   const { user } = useContext(UserContext);
   const [userId, setUserId] = useState(user.identities[0].user_id);
   console.log(userId, "user id");
-
-  const handleClose = () => setShowEditForm(false);
-  const handleShow = () => setShowEditForm(true);
 
   const image = process.env.PUBLIC_URL + "/images/user-04.jpg";
 
@@ -77,15 +72,15 @@ const ProfileSettings = () => {
             country: userData.country || "",
             province: userData.province || "",
           });
-          setUserName(userData.user_name)
+          setUserName(userData.user_name);
         } else {
           console.log("No matching data found.");
-          setIsUserExists(false); // No user data, set state to false
+          setIsUserExists(false);
           setFormData({
             firstName: "",
             lastName: "",
             userName: "",
-            email: user.email, // Assuming 'user' is available in your context or props
+            email: user.email,
             streetAddress: "",
             zipcode: "",
             city: "",
@@ -97,7 +92,7 @@ const ProfileSettings = () => {
     };
 
     fetchUserData();
-  }, [userId]); // Runs when userId changes
+  }, [userId]);
 
   console.log(isEditMode, "is edit mode");
 
@@ -114,13 +109,12 @@ const ProfileSettings = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Prepare data to be inserted or updated
     const userData = {
       user_id: userId,
       first_name: formData.firstName,
       last_name: formData.lastName,
       user_name: formData.userName,
-      email: user.email, // Assuming 'user' is available in your context or props
+      email: user.email,
       street_address: formData.streetAddress,
       zipcode: formData.zipcode,
       city: formData.city,
@@ -130,7 +124,6 @@ const ProfileSettings = () => {
 
     let response;
     if (isUserExists) {
-      // Edit existing user profile
       response = await supabase
         .from("users")
         .update(userData)
@@ -146,12 +139,10 @@ const ProfileSettings = () => {
       console.error("Error saving user data:", error);
     } else {
       console.log("User data saved successfully!");
-      setIsEditMode(false); // Exit edit mode after saving
-      setIsUserExists(true); // Set user exists to true after creating the profile
+      setIsEditMode(false);
+      setIsUserExists(true);
     }
   };
-
-  console.log(formData, "formData");
 
   const iconMapping = {
     firstName: <AiFillEdit />,
@@ -207,7 +198,14 @@ const ProfileSettings = () => {
         <NotificationsProfileBar />
       </div>
       <div className="d-flex mt-4 gap-4">
-        <Image src={image} height={110} width={110} roundedCircle />
+        <Image
+          alt="User profile"
+          aria-labelledby="profile-picture"
+          src={image}
+          height={110}
+          width={110}
+          roundedCircle
+        />
         <div className="d-flex flex-column mt-2">
           <h5>Username: {userName ? userName : "none"}</h5>
           <small className={styles.subscriptionPlan}>
@@ -215,7 +213,6 @@ const ProfileSettings = () => {
           </small>
           <div className="d-flex gap-2 mt-2">
             <CustomBTN
-              // type={isEditMode ? "submit" : "button"}
               onClick={(e) => {
                 if (isEditMode) {
                   handleSubmit(e);
@@ -472,7 +469,7 @@ const ProfileSettings = () => {
           <h5 className="fw-semibold mt-4 mb-4">Personal Details</h5>
           <Row>
             {Object.keys(formData).map((key, index) => {
-              if (key === "userId") return null; // Skip rendering userId
+              if (key === "userId") return null;
 
               return (
                 <Col key={index} xs={12} sm={6} className="mb-3">
@@ -488,26 +485,6 @@ const ProfileSettings = () => {
                 </Col>
               );
             })}
-            {/* {userInfo.map((user, index) => (
-              <React.Fragment key={index}>
-                {Object.entries(user).map(([key, value]) => {
-                  if (key === "icon") return null;
-                  return (
-                    <Col key={key} xs={12} sm={6} className="mb-3">
-                      <div className="d-flex flex-column">
-                        <div className="d-flex align-items-center gap-2">
-                          <span className={`${styles.icon} mb-1`}>
-                            {user.icon}{" "}
-                          </span>
-                          <small>{labelMapping[key] || key}</small>
-                        </div>
-                        <span className="">{value}</span>
-                      </div>
-                    </Col>
-                  );
-                })}
-              </React.Fragment>
-            ))} */}
           </Row>
         </>
       )}

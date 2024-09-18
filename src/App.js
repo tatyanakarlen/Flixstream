@@ -28,9 +28,9 @@ const ProtectedRoute = ({ element }) => {
     }
   }, [user, loading, navigate]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
   return user ? element : null;
 };
 
@@ -79,9 +79,9 @@ const App = () => {
 
   useEffect(() => {}, [user]);
 
-  if (loading) {
-    return <div className="text-light">Loading...</div>; // Show a loading indicator while fetching user data
-  }
+  // if (loading) {
+  //   return <div className="text-light">Loading...</div>; // Show a loading indicator while fetching user data
+  // }
 
   return <AppRoutes />;
 };

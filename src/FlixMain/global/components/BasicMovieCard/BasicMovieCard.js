@@ -38,6 +38,7 @@ const BasicMovieCard = ({
         <ImgOnclickShowsDetail
           src={movie.image}
           onClick={() => setMovie(movie.id)}
+          alt={`Poster for ${movie.title}`}
           // height={height}
         />
         <div className="mt-4 d-flex justify-content-between align-items-start gap-5">
@@ -54,6 +55,7 @@ const BasicMovieCard = ({
               continueWatching={continueWatching}
               setContinueWatching={setContinueWatching}
               fetchContinueWatching={fetchContinueWatching}
+              aria-label={`Play ${movie.title}`}
             />
             {onList ? (
               <CgPlayListRemove
@@ -61,6 +63,7 @@ const BasicMovieCard = ({
                 className="fs-3"
                 role="button"
                 title="Remove from list"
+                aria-label={`Remove ${movie.title} from list`}
               />
             ) : (
               <MdPlaylistAdd
@@ -68,14 +71,15 @@ const BasicMovieCard = ({
                 className="fs-3"
                 role="button"
                 title="Add to list"
+                aria-label={`Add ${movie.title} to list`}
               />
             )}
           </div>
-          : <HeartLikes likes={movie.likes} altBG={true}/>
+          : <HeartLikes aria-label={`Number of likes: ${movie.likes}`} likes={movie.likes} altBG={true}/>
 }
         </div>
         <div className="mt-1 d-flex gap-2 align-items-center">
-          <FaEye />
+          <FaEye aria-hidden="true"/>
           <small>10.5k watching</small>
         </div>
       </div>

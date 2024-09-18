@@ -3,11 +3,9 @@ import { Image, Row, Col, Button, Carousel } from "react-bootstrap";
 import styles from "./HomePageHero.module.css";
 import PlayBTN from "../../global/components/PlayBTN/PlayBTN";
 import CustomBTN from "../../global/components/CustomBTN/CustomBTN";
-// import LazyLoad from "react-lazyload";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import "react-lazy-load-image-component/src/effects/blur.css";
 
-// import 'react-lazy-load-image-component/src/effects/blur.css';
+
+
 
 const HomePageHero = ({
   setShowModal,
@@ -15,21 +13,11 @@ const HomePageHero = ({
   fetchContinueWatching,
   setContinueWatching,
   continueWatching,
-  selectedMovies
+  selectedMovies,
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  // const [selectedMovies, setSelectedMovies] = useState([]);
 
   const flowers = process.env.PUBLIC_URL + "/images/flowers.jpg";
-
-  // useEffect(() => {
-  //   const getRandomMovies = (movies) => {
-  //     const shuffledMovies = [...movies].sort(() => 0.5 - Math.random());
-  //     return shuffledMovies.slice(0, 3);
-  //   };
-
-  //   setSelectedMovies(getRandomMovies(movies));
-  // }, [movies]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -39,17 +27,9 @@ const HomePageHero = ({
     return () => clearInterval(intervalId);
   }, [selectedMovies]);
 
-  if (selectedMovies.length === 0) {
-    return (
-      <div className={styles.loadingDiv}>
-        <h1>LOADING</h1>
-      </div>
-    );
-  }
-
   return (
-    // <div className="text-light">BUNCH OF NOTHING</div>
-    <div
+    <section
+    aria-label="Home page hero section featuring movie highlights"
       className={`${styles.homePageHeroContainer} position-relative mt-4 pe-3`}
     >
       <Carousel
@@ -62,19 +42,19 @@ const HomePageHero = ({
         {selectedMovies.map((movie, index) => (
           <Carousel.Item key={index} className={`${styles.carouselItem}`}>
             <div className={styles.backgroundImage}>
-              <Image src={flowers} />
+              <Image  alt="Decorative background with flowers" src={flowers} />
             </div>
-            <div className={styles.overlay}></div>
-            <Row className={`${styles.overlayContent} p-4`}>
+            <div className={styles.overlay} aria-hidden="true"></div>
+            <Row role="group" aria-labelledby={`movie-title-${index}`} className={`${styles.overlayContent} p-4`}>
               <Col className="h-100">
                 <div className="h-100">
-                  <Image alt="Movie Background" src={movie.image} />
+                  <Image alt={`Poster of the movie ${movie.title}`} src={movie.image} />
                 </div>
               </Col>
               <Col className="h-100 d-flex flex-column justify-content-center pe-5">
                 {" "}
                 <div className={`${styles.textContainer} d-flex flex-column`}>
-                  <h2>
+                  <h2 id={`movie-title-${index}`}>
                     {movie.title} <span className="fs-5">({movie.year})</span>
                   </h2>
                   <p className="mt-3">
@@ -98,6 +78,7 @@ const HomePageHero = ({
                       icon={true}
                       textColor="text-light"
                       bgColor="redBTNbg"
+                      aria-label={`Watch now: ${movie.title}`}
                     />
 
                     <CustomBTN
@@ -105,6 +86,7 @@ const HomePageHero = ({
                       textColor="greyBTNText"
                       variant="light"
                       icon={false}
+                      aria-label={`Watch trailer for: ${movie.title}`}
                     />
                   </div>
                 </div>
@@ -113,7 +95,7 @@ const HomePageHero = ({
           </Carousel.Item>
         ))}
       </Carousel>
-    </div>
+    </section>
   );
 };
 

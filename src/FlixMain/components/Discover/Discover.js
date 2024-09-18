@@ -14,14 +14,16 @@ const Discover = () => {
   const drama = process.env.PUBLIC_URL + "/images/movie_categories/drama.jpg";
   const doc = process.env.PUBLIC_URL + "/images/movie_categories/doc.jpeg";
   const crime = process.env.PUBLIC_URL + "/images/movie_categories/crime.jpg";
-  const animation = process.env.PUBLIC_URL + "/images/movie_categories/animation.jpeg";
-  const romance = process.env.PUBLIC_URL + "/images/movie_categories/romance.jpg";
-  const foreign = process.env.PUBLIC_URL + "/images/movie_categories/foreign.jpg";
+  const animation =
+    process.env.PUBLIC_URL + "/images/movie_categories/animation.jpeg";
+  const romance =
+    process.env.PUBLIC_URL + "/images/movie_categories/romance.jpg";
+  const foreign =
+    process.env.PUBLIC_URL + "/images/movie_categories/foreign.jpg";
 
   const [selectedMovies, setSelectedMovies] = useState([]);
 
   useEffect(() => {
-
     const getRandomMovies = (movies) => {
       const shuffledMovies = [...movies].sort(() => 0.5 - Math.random());
       return shuffledMovies.slice(0, 6);
@@ -69,11 +71,12 @@ const Discover = () => {
     },
   ];
 
-  
   return (
     <div className="pe-3">
       <div className="d-flex w-100 justify-content-between mt-4">
-        <h4 className="text-light">Explore titles</h4>
+        <h4 aria-label="Clear history" className="text-light">
+          Explore titles
+        </h4>
         <Button className={`${styles.clearHistoryBTN} rounded`}>
           Clear history
         </Button>
@@ -81,6 +84,7 @@ const Discover = () => {
       <div className="d-flex flex-column mt-4 gap-4">
         {selectedMovies.map((movie, index) => (
           <div
+            aria-label={`View details for ${movie.title}`}
             role="button"
             key={index}
             className={`${styles.movieTitle} d-flex justify-content-between align-items-center`}
@@ -93,6 +97,7 @@ const Discover = () => {
                 height={50}
                 src={movie.image}
                 className={styles.historyIMG}
+                alt={`${movie.title} thumbnail`}
               />
               <div className="d-flex flex-column">
                 <span className="text-light fs-6 fw-semibold">
@@ -102,7 +107,10 @@ const Discover = () => {
               </div>
             </div>
 
-            <FaChevronRight className="text-light me-2 fs-5" />
+            <FaChevronRight
+              aria-hidden="true"
+              className="text-light me-2 fs-5"
+            />
           </div>
         ))}
       </div>

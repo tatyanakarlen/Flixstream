@@ -12,9 +12,12 @@ import useMediaQueries from "./utils/UseMediaQuery";
 import MobileNav from "./global/components/MobileNav/MobileNav";
 import { UserContext } from "../userContext";
 import { supabase } from "../supabaseClient";
+import Loader from "./components/HomePageHero/Loader/Loader";
 
 const FlixMain = () => {
   const location = useLocation();
+  // const [dataLoading, setDataLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [movies, setMovies] = useState([]);
   const [selectedMovies, setSelectedMovies] = useState([]);
   const [userMovies, setUserMovies] = useState([]);
@@ -92,77 +95,70 @@ const FlixMain = () => {
     }
   };
 
-  // Function to fetch all movies
   const fetchAllMovies = async () => {
-    // setLoading(true);
-    const { data, error } = await supabase.from("movies").select("*"); // Fetch all columns
-
-    if (error) {
-      console.error("Error fetching movies:", error);
-      // setError(error.message);
-    } else {
+    try {
+      const { data, error } = await supabase.from("movies").select("*");
+      if (error) throw error;
       setMovies(data);
+    } catch (error) {
+      console.error("Error fetching movies:", error);
     }
-    // setLoading(false);
   };
 
-  async function fetchUserMovies() {
+  const fetchUserMovies = async () => {
     try {
-      const userId = user.id; // Retrieve the current user ID
-
       const { data, error } = await supabase.rpc("fetch_user_movies", {
-        uid: userId,
+        uid: user.id,
       });
-
-      if (error) {
-        console.error(
-          "Error fetching user movies:",
-          error.message,
-          error.details
-        );
-        return null;
-      }
-      setUserMovies(data); // Update state with fetched data
+      if (error) throw error;
+      setUserMovies(data);
     } catch (error) {
-      console.error("Unexpected error fetching user movies:", error);
-      return null;
+      console.error("Error fetching user movies:", error);
     }
-  }
+  };
 
-  async function fetchContinueWatching() {
+  const fetchContinueWatching = async () => {
     try {
       const { data, error } = await supabase
         .from("continue_watching")
         .select("*")
         .eq("user_id", user.id);
-
       if (error) throw error;
-
       setContinueWatching(data);
     } catch (error) {
       console.error("Error fetching continue watching list:", error);
     }
-  }
+  };
 
-  useEffect(() => {
-    fetchAllMovies();
-  }, []);
-
-  useEffect(() => {
-    const getRandomMovies = (movies) => {
-      const shuffledMovies = [...movies].sort(() => 0.5 - Math.random());
-      return shuffledMovies.slice(0, 3);
-    };
-
-    setSelectedMovies(getRandomMovies(movies));
-  }, [movies]);
-
-  useEffect(() => {
-    if (!loading && user) {
-      fetchUserMovies();
-      fetchContinueWatching();
+  const fetchSelectedMovies = async () => {
+    try {
+      const { data, error } = await supabase.from("selectedmovies").select("*");
+      if (error) throw error;
+      setSelectedMovies(data);
+    } catch (error) {
+      console.error("Error fetching selected movies:", error);
     }
-  }, [user, loading]);
+  };
+
+  const fetchAllData = async () => {
+    setIsLoading(true);
+    try {
+      await Promise.all([
+        fetchAllMovies(),
+        fetchUserMovies(),
+        fetchContinueWatching(),
+        fetchSelectedMovies(),
+      ]);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAllData();
+  }, []);
 
   const contextValue = {
     searchMode,
@@ -187,8 +183,14 @@ const FlixMain = () => {
   };
 
   if (isXsMobile || isMobile || isTablet) {
-    return (
-      <div className={`${styles.mobileWrapper}`}>
+    return isLoading ? (
+      <div
+        className={`${styles.loaderDivContainer} h-100 d-flex flex-column justify-content-center align-items-center`}
+      >
+        <Loader />
+      </div>
+    ) : (
+      <main aria-label="Main Content" className={`${styles.mobileWrapper}`}>
         <DetailsModal
           showModal={showModal}
           setShowModal={setShowModal}
@@ -201,7 +203,6 @@ const FlixMain = () => {
           removeFromUserList={removeFromUserList}
           selectedMovie={selectedMovie}
         />
-
         {!location.pathname.includes("play") ? (
           <Row className={`${styles.layoutRow} h-100`}>
             <Col>
@@ -252,12 +253,18 @@ const FlixMain = () => {
         ) : (
           <MoviePlayer />
         )}
-      </div>
+      </main>
     );
   }
 
-  return (
-    <div className={`${styles.wrapper} h-100`}>
+  return isLoading ? (
+    <div
+      className={`${styles.loaderDivContainer} h-100 d-flex flex-column justify-content-center align-items-center`}
+    >
+      <Loader />
+    </div>
+  ) : (
+    <main aria-label="Main Content" className={`${styles.wrapper} h-100`}>
       <DetailsModal
         showModal={showModal}
         setShowModal={setShowModal}
@@ -277,9 +284,9 @@ const FlixMain = () => {
             setFilteredData={setFilteredData}
           />
 
-          <Col className={styles.scrollableContent}>
-            <div className="h-100 pt-3 pb-3 ps-2">
-              <div className="h-100">
+          <Col aria-live="polite" className={styles.scrollableContent}>
+            <section className="h-100 pt-3 pb-3 ps-2">
+              <section className="h-100">
                 {!location.pathname.includes("profile-settings") && (
                   <TopNavSearch
                     searchInput={searchInput}
@@ -317,14 +324,14 @@ const FlixMain = () => {
                     </div>
                   )}
                 </div>
-              </div>
-            </div>
+              </section>
+            </section>
           </Col>
         </Row>
       ) : (
         <MoviePlayer />
       )}
-    </div>
+    </main>
   );
 };
 

@@ -48,19 +48,30 @@ const MyList = () => {
     process.env.PUBLIC_URL + "/images/grey_background.png";
 
   return (
-    <div className={styles.myListWrapper}>
-      <h4 className="mt-4 text-light fw-semibold">My list</h4>
+    <div
+      role="region"
+      aria-labelledby="my-list-heading"
+      className={styles.myListWrapper}
+    >
+      <h4 id="my-list-heading" className="mt-4 text-light fw-semibold">
+        My list
+      </h4>
       <div>
         {userMovies.length === 0 ? (
           <div
+            role="region"
+            aria-labelledby="empty-list-heading"
             className={`${styles.cardContainer} d-flex flex-column p-4 text-light mt-3`}
           >
             <Image
               height={150}
               className={styles.placeholderImage}
               src={grey_background}
+              alt="Placeholder image indicating empty list"
             />
-            <h4 className="fw-semibold mt-3">Add to your list</h4>
+            <h4 id="empty-list-heading" className="fw-semibold mt-3">
+              Add to your list
+            </h4>
             <small className="mb-1">Browse through our movie collection!</small>
             <span className={`${styles.fakeProgressBar} mt-2`}></span>
             <div className="mt-3">
@@ -70,6 +81,7 @@ const MyList = () => {
                 icon={<BiSolidCameraMovie />}
                 bgColor="redBTNbg"
                 onClick={() => navigate("/dashboard")}
+                aria-label="Browse movie collection"
               />
             </div>
           </div>
@@ -77,10 +89,12 @@ const MyList = () => {
           <ScrollableList>
             {userMovies.map((movie, index) => (
               <li
+                role="listitem"
                 key={index}
                 className={`${styles.cardContainer} scrollableListCardContainer p-3 text-light`}
               >
                 <ImgOnclickShowsDetail
+                  alt={`Thumbnail of ${movie.title}`}
                   src={movie.image}
                   onClick={() => setMovie(movie.id)}
                 />
@@ -90,6 +104,7 @@ const MyList = () => {
                       <h5 className="fw-semibold mt-3">{movie.title}</h5>
                       <div className="mt-2">
                         <PlayBTN
+                          aria-label={`Play ${movie.title}`}
                           movieId={movie && movie.id}
                           movie={movie && movie}
                           setShowModal={setShowModal}
@@ -112,7 +127,10 @@ const MyList = () => {
                     </div>
                   </div>
                   <div className="w-100 mt-3">
-                    <CustomProgress now={80} />
+                    <CustomProgress
+                      aria-label={`Progress of ${movie.title}`}
+                      now={80}
+                    />
                     <div className="mt-3 d-flex justify-content-between align-items-center">
                       <small className="fw-normal mb-1">
                         12m 8 s remaining
@@ -120,6 +138,7 @@ const MyList = () => {
                       <CgPlayListRemove
                         onClick={() => removeFromUserList(movie.id)}
                         className="fs-3"
+                        aria-label={`Remove ${movie.title} from list`}
                       />
                     </div>
                   </div>
@@ -134,6 +153,8 @@ const MyList = () => {
       <div>
         {continueWatching.length === 0 ? (
           <div
+            role="region"
+            aria-labelledby="continue-watching-empty-heading"
             className={`${styles.cardContainer} d-flex align-items-center gap-3 p-3 text-light mt-3 flex-nowrap`}
           >
             <Image
@@ -141,9 +162,12 @@ const MyList = () => {
               width={70}
               className={styles.placeholderImage}
               src={grey_background}
+              alt="Placeholder image indicating no movies to continue watching"
             />
             <div className="d-flex flex-column flex-grow-1">
-              <h5 className="fw-semibold">Watchlist empty</h5>
+              <h5 id="continue-watching-empty-heading" className="fw-semibold">
+                Watchlist empty
+              </h5>
 
               <span className={`${styles.fakeProgressBar} mt-2`}></span>
             </div>
@@ -151,7 +175,11 @@ const MyList = () => {
         ) : (
           <ScrollableList>
             {continueWatching.map((movie, index) => (
-              <li key={index} className={`scrollableListCardContainer`}>
+              <li
+                key={index}
+                role="listitem"
+                className={`scrollableListCardContainer`}
+              >
                 <ContinueWatching
                   movie={movie}
                   continueWatching={continueWatching}
@@ -179,6 +207,7 @@ const MyList = () => {
               continueWatching={continueWatching}
               setContinueWatching={setContinueWatching}
               fetchContinueWatching={fetchContinueWatching}
+              aria-label={`Recommended movie ${movie.title}`}
             />
           );
         })}
@@ -186,6 +215,7 @@ const MyList = () => {
 
       <div className="d-flex w-100 justify-content-center">
         <PaginationBTN
+          aria-label={showLess ? "See fewer movies" : "Load more movies"}
           onClick={showLess ? handleLessImage : handleMoreImage}
           text={showLess ? "See less" : "Load more"}
         />
