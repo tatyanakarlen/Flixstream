@@ -28,9 +28,6 @@ const ProtectedRoute = ({ element }) => {
     }
   }, [user, loading, navigate]);
 
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
   return user ? element : null;
 };
 
@@ -43,7 +40,6 @@ const AppRoutes = () => {
         path="/"
         element={user ? <Navigate to="/dashboard" replace /> : <Welcome />}
       />{" "}
-      {/* Conditional Redirect */}
       <Route
         path="/dashboard"
         element={<ProtectedRoute element={<FlixMain />} />}
@@ -54,7 +50,6 @@ const AppRoutes = () => {
         <Route path="play/:movieId" element={<MoviePlayer />} />
         <Route path="profile-settings" element={<ProfileSettings />} />
       </Route>
-      {/* You can also add other routes like /welcome explicitly if needed */}
     </Routes>
   );
 };
@@ -62,26 +57,20 @@ const AppRoutes = () => {
 const App = () => {
   useEffect(() => {
     const interval = setInterval(() => {
-      // Check if the access token is close to expiring and refresh it
       const expiresAt = localStorage.getItem("expires_at");
-      const currentTime = Math.floor(Date.now() / 1000); // Current time in seconds
+      const currentTime = Math.floor(Date.now() / 1000);
 
       if (expiresAt && currentTime > expiresAt - 300) {
-        // Refresh 5 minutes before expiry
         refreshAuthToken();
       }
-    }, 1000 * 60 * 5); // Check every 5 minutes
+    }, 1000 * 60 * 5);
 
-    return () => clearInterval(interval); // Clean up interval on unmount
+    return () => clearInterval(interval);
   }, []);
 
   const { user, loading } = useContext(UserContext);
 
   useEffect(() => {}, [user]);
-
-  // if (loading) {
-  //   return <div className="text-light">Loading...</div>; // Show a loading indicator while fetching user data
-  // }
 
   return <AppRoutes />;
 };

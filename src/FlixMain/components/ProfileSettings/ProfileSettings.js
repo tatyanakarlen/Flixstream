@@ -24,7 +24,6 @@ const ProfileSettings = () => {
   const [userName, setUserName] = useState(null);
   const { user } = useContext(UserContext);
   const [userId, setUserId] = useState(user.identities[0].user_id);
-  console.log(userId, "user id");
 
   const image = process.env.PUBLIC_URL + "/images/user-04.jpg";
 
@@ -45,16 +44,12 @@ const ProfileSettings = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       if (userId) {
-        console.log("Fetching data for userId:", userId);
         const { data, error } = await supabase
           .from("users")
           .select("*")
           .eq("user_id", userId);
 
-        console.log("API Response data:", data);
-
         if (error) {
-          console.error("Error fetching profile:", error);
           return;
         }
 
@@ -93,10 +88,6 @@ const ProfileSettings = () => {
 
     fetchUserData();
   }, [userId]);
-
-  console.log(isEditMode, "is edit mode");
-
-  console.log(formData, "form data");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -455,8 +446,8 @@ const ProfileSettings = () => {
           <h5 className="fw-semibold mt-4 mb-4">Notifications</h5>
           <Row>
             {notifications.map((notification, index) => (
-              <div>
-                <Col key={index} xs={12}>
+              <div key={index} >
+                <Col xs={12}>
                   <div className="d-flex justify-content-between align-items-center">
                     <p className="mb-0">{notification.title}</p>
                     <Form.Check type="switch" className={styles.switch} />

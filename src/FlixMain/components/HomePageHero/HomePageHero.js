@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Image, Row, Col, Button, Carousel } from "react-bootstrap";
+import { Image, Row, Col, Carousel } from "react-bootstrap";
 import styles from "./HomePageHero.module.css";
 import PlayBTN from "../../global/components/PlayBTN/PlayBTN";
 import CustomBTN from "../../global/components/CustomBTN/CustomBTN";
 
-
-
-
 const HomePageHero = ({
   setShowModal,
-  movies,
   fetchContinueWatching,
   setContinueWatching,
   continueWatching,
@@ -29,7 +25,7 @@ const HomePageHero = ({
 
   return (
     <section
-    aria-label="Home page hero section featuring movie highlights"
+      aria-label="Home page hero section featuring movie highlights"
       className={`${styles.homePageHeroContainer} position-relative mt-4 pe-3`}
     >
       <Carousel
@@ -42,13 +38,20 @@ const HomePageHero = ({
         {selectedMovies.map((movie, index) => (
           <Carousel.Item key={index} className={`${styles.carouselItem}`}>
             <div className={styles.backgroundImage}>
-              <Image  alt="Decorative background with flowers" src={flowers} />
+              <Image alt="Decorative background with flowers" src={flowers} />
             </div>
             <div className={styles.overlay} aria-hidden="true"></div>
-            <Row role="group" aria-labelledby={`movie-title-${index}`} className={`${styles.overlayContent} p-4`}>
+            <Row
+              role="group"
+              aria-labelledby={`movie-title-${index}`}
+              className={`${styles.overlayContent} p-4`}
+            >
               <Col className="h-100">
                 <div className="h-100">
-                  <Image alt={`Poster of the movie ${movie.title}`} src={movie.image} />
+                  <Image
+                    alt={`Poster of the movie ${movie.title}`}
+                    src={movie.image}
+                  />
                 </div>
               </Col>
               <Col className="h-100 d-flex flex-column justify-content-center pe-5">

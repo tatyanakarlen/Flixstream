@@ -12,8 +12,6 @@ const ContinueWatching = ({
   setContinueWatching,
   fetchContinueWatching,
 }) => {
-  console.log(movie.movie_id, "movieID from continue watching");
-
   const { user } = useContext(UserContext);
 
   const removeFromContinueWatching = async (movieId) => {
@@ -42,11 +40,21 @@ const ContinueWatching = ({
   };
 
   return (
-    <div role="region"
-    aria-labelledby={`movie-title-${movie.movie_id}`} className={`${styles.continueWatching} d-flex p-3 text-light gap-3`}>
-      <Image alt={`Poster for ${movie?.title}`} src={movie && movie.image} width={90} height={80} />
+    <div
+      role="region"
+      aria-labelledby={`movie-title-${movie.movie_id}`}
+      className={`${styles.continueWatching} d-flex p-3 text-light gap-3`}
+    >
+      <Image
+        alt={`Poster for ${movie?.title}`}
+        src={movie && movie.image}
+        width={90}
+        height={80}
+      />
       <div className="d-flex flex-column w-100">
-        <h5 id={`movie-title-${movie.movie_id}`} className="mb-1">{movie && movie.title}</h5>
+        <h5 id={`movie-title-${movie.movie_id}`} className="mb-1">
+          {movie && movie.title}
+        </h5>
         <div className="mt-3">
           <CustomProgress aria-label={`Progress: 80%`} now={80} />
         </div>
@@ -54,7 +62,7 @@ const ContinueWatching = ({
       </div>
       <div className="d-flex flex-column align-items-end ms-2">
         <small
-         aria-label={`Remove ${movie?.title} from continue watching`}
+          aria-label={`Remove ${movie?.title} from continue watching`}
           onClick={() => removeFromContinueWatching(movie.movie_id)}
           className="text-decoration-underline"
         >

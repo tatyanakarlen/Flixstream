@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./DiscoverNewReleases.module.css";
-import { Row, Button } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import MovieCard from "../../global/components/MovieCard/MovieCard";
 import PaginationBTN from "../../global/components/PaginationBTN/PaginationBTN";
-import useMediaQueries from "../../utils/UseMediaQuery";
+
 import { isMovieOnUserList } from "../../utils/isMovieOnUserList";
 
 const DiscoverNewReleases = ({
@@ -15,14 +15,6 @@ const DiscoverNewReleases = ({
   userMovies,
 }) => {
   const tags = ["All", "Watched", "Saved", "Recommended", "History"];
-
-  const {
-    isTablet,
-    isMobile,
-    isXsMobile,
-    isDesktopOrLaptop,
-    isLgDesktopOrLaptop,
-  } = useMediaQueries();
 
   const imagePerRow = 9;
 
@@ -38,17 +30,23 @@ const DiscoverNewReleases = ({
 
   const showLess = next >= movies.length;
 
-
   return (
     <div
-    role="region"
+      role="region"
       aria-labelledby="discover-new-releases-title"
       className={`${styles.container} py-3 d-flex flex-column mt-3 pe-md-4 pe-lg-3 pe-3`}
     >
-      <h4 id="discover-new-releases-title" className="text-light fw-semibold">Discover New Releases</h4>
-      <div  role="list"
-        aria-labelledby="tags-title" className={`${styles.tagsContainer} d-flex flex-wrap gap-2 mt-4`}>
-          <h5 id="tags-title" className="visually-hidden">Tags</h5>
+      <h4 id="discover-new-releases-title" className="text-light fw-semibold">
+        Discover New Releases
+      </h4>
+      <div
+        role="list"
+        aria-labelledby="tags-title"
+        className={`${styles.tagsContainer} d-flex flex-wrap gap-2 mt-4`}
+      >
+        <h5 id="tags-title" className="visually-hidden">
+          Tags
+        </h5>
         {tags.map((tag, index) => (
           <small
             key={index}
@@ -60,7 +58,6 @@ const DiscoverNewReleases = ({
       </div>
       <Row className="mt-5">
         {movies?.slice(0, next)?.map((movie, index) => {
-          // Check if the movie is on the user's list
           const onList = isMovieOnUserList(userMovies, movie.id);
 
           return (
@@ -71,14 +68,14 @@ const DiscoverNewReleases = ({
               setShowModal={setShowModal}
               addToUserList={addToUserList}
               removeFromUserList={removeFromUserList}
-              onList={onList} 
+              onList={onList}
               role="listitem"
             />
           );
         })}
       </Row>
       <PaginationBTN
-       aria-label={showLess ? "Show fewer movies" : "Load more movies"}
+        aria-label={showLess ? "Show fewer movies" : "Load more movies"}
         onClick={showLess ? handleLessImage : handleMoreImage}
         text={showLess ? "See less" : "Load more"}
       />

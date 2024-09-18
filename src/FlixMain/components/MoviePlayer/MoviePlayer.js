@@ -4,9 +4,9 @@ import "../../../index.css";
 import styles from "./MoviePlayer.module.css";
 import { ProgressBar } from "react-bootstrap";
 import { CgScreen } from "react-icons/cg";
-import { AiFillSound } from "react-icons/ai";
+
 import { MdArrowCircleLeft } from "react-icons/md";
-import { RiSoundModuleFill } from "react-icons/ri";
+
 import { CgLoadbarSound } from "react-icons/cg";
 import { IoMdPause } from "react-icons/io";
 import { IoIosRewind } from "react-icons/io";
@@ -109,7 +109,6 @@ const MoviePlayer = ({}) => {
   const handlePauseVideo = () => videoRef.current.pause();
 
   const handleStopVideo = () => {
-    // setHasUserPressedPlay(false)
     setControlsVisible(true);
     videoRef.current.pause();
     videoRef.current.currentTime = 0;
@@ -144,7 +143,6 @@ const MoviePlayer = ({}) => {
       onMouseLeave={() => !videoRef.current.paused && setControlsVisible(false)}
     >
       <video
-        // controls
         onTimeUpdate={handleTimeUpdate}
         src={videoSrc}
         width="100%"
