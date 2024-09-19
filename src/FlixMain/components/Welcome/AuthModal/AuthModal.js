@@ -14,13 +14,11 @@ const AuthModal = ({
   isLoginMode,
   setIsLoginMode,
 }) => {
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const [message, setMessage] = useState('');
-  const navigate = useNavigate()
-
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
     e.preventDefault();
@@ -33,55 +31,55 @@ const AuthModal = ({
 
     if (authError) {
       setError(authError.message);
-      setMessage('');
+      setMessage("");
       return;
     }
 
-    handleCloseAuthModal()
-    setEmail('')
-    setPassword('')
+    handleCloseAuthModal();
+    setEmail("");
+    setPassword("");
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     // Sign in the user
-    const { data: { user }, error: authError } = await supabase.auth.signInWithPassword({
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
 
     if (authError) {
       setError(authError.message);
-      setMessage('');
+      setMessage("");
     } else {
       setError(null);
-      setMessage('Logged in successfully!');
-      console.log('Logged in user:', user); // Log the signed-in user
+      setMessage("Logged in successfully!");
+      console.log("Logged in user:", user); // Log the signed-in user
     }
-    handleCloseAuthModal()
-    setEmail('')
-    setPassword('')
-    navigate('/dashboard')
+    handleCloseAuthModal();
+    setEmail("");
+    setPassword("");
+    navigate("/dashboard");
   };
 
   const handleGoogleLogin = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: 'https://66eb3037f8bce6906b49a6b1--flixstreamapp.netlify.app/dashboard',
-      },
+      provider: "google",
     });
 
     if (error) {
-      console.error('Error during Google sign-in:', error.message);
+      console.error("Error during Google sign-in:", error.message);
       setError(error.message);
     } else {
       handleCloseAuthModal();
-      navigate('/dashboard');
+      navigate("/dashboard");
     }
   };
-  
+
   return (
     <Modal
       dialogClassName={styles.modal}
@@ -103,7 +101,10 @@ const AuthModal = ({
         <h2 className="fw-semibold mt-4">
           {isLoginMode ? "Sign In" : "Create Your Account"}
         </h2>
-        <Form onSubmit={isLoginMode ? handleLogin : handleSignUp} className={`${styles.form} mt-2`}>
+        <Form
+          onSubmit={isLoginMode ? handleLogin : handleSignUp}
+          className={`${styles.form} mt-2`}
+        >
           <Row className="mb-3">
             <Form.Group as={Col} md="12" controlId="validationCustom01">
               <Form.Label>Email</Form.Label>
@@ -153,11 +154,15 @@ const AuthModal = ({
           )}
           <div className="mt-4 d-flex justify-content-between align-items-center">
             <div className="flex-grow-1">
-              <Button className="py-2 w-100 text-light redBTNbg border-0" type="submit">{isLoginMode ? "Sign In" : "Sign Up"}</Button>
-             
+              <Button
+                className="py-2 w-100 text-light redBTNbg border-0"
+                type="submit"
+              >
+                {isLoginMode ? "Sign In" : "Sign Up"}
+              </Button>
             </div>
             <div className="d-flex justify-content-center flex-grow-1 gap-2 align-items-center">
-            {isLoginMode ? 'New user?' : 'Have an account?'}
+              {isLoginMode ? "New user?" : "Have an account?"}
               <span
                 role="button"
                 // onClick={() => setIsLoginMode(false)}
@@ -168,7 +173,7 @@ const AuthModal = ({
                 }
                 className={`${styles.signUpSpan} fw-semibold text-decoration-underline`}
               >
-                {isLoginMode ? 'Sign up' : 'Login'}
+                {isLoginMode ? "Sign up" : "Login"}
               </span>
             </div>
           </div>
