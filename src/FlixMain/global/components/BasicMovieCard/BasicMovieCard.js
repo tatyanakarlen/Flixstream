@@ -12,7 +12,6 @@ import HeartLikes from "../HeartLikes/HeartLikes";
 const BasicMovieCard = ({
   movie,
   setMovie,
-  // height,
   setShowModal,
   addToUserList,
   removeFromUserList,
