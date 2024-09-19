@@ -13,17 +13,23 @@ import CustomBTN from "../CustomBTN/CustomBTN";
 import useMediaQueries from "../../../utils/UseMediaQuery";
 import { Col, Image } from "react-bootstrap";
 import { UserContext } from "../../../../userContext";
+import { useNavigate } from "react-router-dom";
 
 const SideNav = ({ setSearchInput, setFilteredData }) => {
   const logoMobile =
     process.env.PUBLIC_URL + "/images/logo/Icon-Only-Color.png";
   const { logout } = useContext(UserContext);
   const location = useLocation();
+  const navigate = useNavigate()
   const { isLgDesktopOrLaptop } = useMediaQueries();
 
   const handleLinkClick = () => {
     setSearchInput("");
     setFilteredData([]);
+  };
+
+  const handleLogout = async () => {
+    await logout(navigate);
   };
 
   const links = [
@@ -118,7 +124,7 @@ const SideNav = ({ setSearchInput, setFilteredData }) => {
               </span>
               <span
                 role="button"
-                onClick={logout}
+                onClick={handleLogout}
                 className={`d-flex align-items-center ${
                   !isLgDesktopOrLaptop && "justify-content-center"
                 } gap-3 px-3 py-2 rounded ${styles.link}`}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { GoHomeFill } from "react-icons/go";
 import { BiSolidFilm } from "react-icons/bi";
@@ -10,14 +10,22 @@ import { MdLogout } from "react-icons/md";
 import { useLocation, Link } from "react-router-dom";
 import styles from "./MobileNav.module.css";
 import useMediaQueries from "../../../utils/UseMediaQuery";
+import { UserContext } from "../../../../userContext";
+import { useNavigate } from "react-router-dom";
 
 const MobileNav = ({ setSearchInput, setFilteredData }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { isTablet, isMobile, isXsMobile } = useMediaQueries();
+  const { logout } = useContext(UserContext);
 
   const handleLinkClick = () => {
     setSearchInput("");
     setFilteredData([]);
+  };
+
+  const handleLogout = async () => {
+    await logout(navigate);
   };
 
   const links = [
@@ -43,8 +51,9 @@ const MobileNav = ({ setSearchInput, setFilteredData }) => {
     },
     {
       text: "Logout",
-      link: "/dashboard/profile-settings",
+      link: "",
       icon: <MdLogout />,
+      onClick: handleLogout,
     },
   ];
 
@@ -56,7 +65,12 @@ const MobileNav = ({ setSearchInput, setFilteredData }) => {
         {links.map((link, index) => (
           <Nav.Item key={index}>
             <Link
-              onClick={handleLinkClick}
+              onClick={(e) => {
+                if (link.onClick) {
+                  e.preventDefault(); // Prevent default link behavior
+                  link.onClick(); // Call the onClick handler
+                }
+              }}
               className={`${
                 styles.navLink
               } d-flex flex-column align-items-center text-decoration-none ${

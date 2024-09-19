@@ -60,22 +60,21 @@ const AuthModal = ({
       setMessage("Logged in successfully!");
       console.log("Logged in user:", user); // Log the signed-in user
     }
-   
+
     setEmail("");
     setPassword("");
-    
   };
 
   const handleGoogleLogin = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
     });
+    console.log("google btn clicked");
 
     if (error) {
       console.error("Error during Google sign-in:", error.message);
       setError(error.message);
     } else {
-     
     }
   };
 
