@@ -68,6 +68,9 @@ const AuthModal = ({
   const handleGoogleLogin = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
+      options: {
+        redirectTo: `${process.env.REACT_APP_SUPABASE_URL}/auth/v1/callback`
+      }
     });
     console.log("google btn clicked");
 
