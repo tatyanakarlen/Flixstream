@@ -60,10 +60,10 @@ const AuthModal = ({
       setMessage("Logged in successfully!");
       console.log("Logged in user:", user); // Log the signed-in user
     }
-    handleCloseAuthModal();
+   
     setEmail("");
     setPassword("");
-    navigate("/dashboard");
+    
   };
 
   const handleGoogleLogin = async () => {
@@ -75,8 +75,7 @@ const AuthModal = ({
       console.error("Error during Google sign-in:", error.message);
       setError(error.message);
     } else {
-      handleCloseAuthModal();
-      navigate("/dashboard");
+     
     }
   };
 

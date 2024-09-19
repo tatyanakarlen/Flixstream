@@ -13,6 +13,7 @@ import MobileNav from "./global/components/MobileNav/MobileNav";
 import { UserContext } from "../userContext";
 import { supabase } from "../supabaseClient";
 import Loader from "./components/HomePageHero/Loader/Loader";
+import FullScreenLoader from "./global/components/FullScreenLoader/FullScreenLoader";
 
 const FlixMain = () => {
   const location = useLocation();
@@ -184,11 +185,7 @@ const FlixMain = () => {
 
   if (isXsMobile || isMobile || isTablet) {
     return isLoading ? (
-      <div
-        className={`${styles.loaderDivContainer} h-100 d-flex flex-column justify-content-center align-items-center`}
-      >
-        <Loader />
-      </div>
+      <FullScreenLoader />
     ) : (
       <main aria-label="Main Content" className={`${styles.mobileWrapper}`}>
         <DetailsModal
@@ -258,11 +255,7 @@ const FlixMain = () => {
   }
 
   return isLoading ? (
-    <div
-      className={`${styles.loaderDivContainer} h-100 d-flex flex-column justify-content-center align-items-center`}
-    >
-      <Loader />
-    </div>
+    <FullScreenLoader />
   ) : (
     <main aria-label="Main Content" className={`${styles.wrapper} h-100`}>
       <DetailsModal

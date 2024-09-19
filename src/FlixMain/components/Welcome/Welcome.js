@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
-  Container,
   Nav,
   Navbar,
   Row,
   Carousel,
   Image,
-  Col,
+  
 } from "react-bootstrap";
 import BasicMovieCard from "../../global/components/BasicMovieCard/BasicMovieCard";
 import CustomBTN from "../../global/components/CustomBTN/CustomBTN";
@@ -16,17 +15,20 @@ import AuthModal from "./AuthModal/AuthModal";
 import useMediaQueries from "../../utils/UseMediaQuery";
 import { chunkArray } from "../../utils/chuckArray";
 import { supabase } from "../../../supabaseClient";
+import { UserContext } from "../../../userContext";
+import FullScreenLoader from "../../global/components/FullScreenLoader/FullScreenLoader";
 
 const Welcome = () => {
-  const { isTablet, isMobile, isXsMobile } = useMediaQueries();
+  const { isTablet, isMobile } = useMediaQueries();
 
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [movies, setMovies] = useState(null);
   const [isLoginMode, setIsLoginMode] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [loadingMovies, setLoadingMovies] = useState(true); // New loading state
 
-  console.log(movies, "movies");
+  const { user, loading } = useContext(UserContext);
 
   const getRandomMovies = (moviesArray, num) => {
     // Shuffle the array using Fisher-Yates algorithm
@@ -39,42 +41,24 @@ const Welcome = () => {
     return moviesArray.slice(0, num);
   };
 
-  const fetchAllMovies = async () => {
-    try {
-      const { data, error } = await supabase.from("movies").select("*");
-      if (error) {
-        console.error("Error fetching movies:", error);
-      } else {
-        setMovies(data);
-      }
-    } catch (error) {
-      console.error("Error fetching movies:", error);
-    }
-  };
-
   useEffect(() => {
     const fetchAllMovies = async () => {
+      setLoadingMovies(true); // Set loading state to true while fetching
       try {
         const { data, error } = await supabase.from("movies").select("*");
         if (error) {
           console.error("Error fetching movies:", error);
         } else {
-          // Set movies state to all fetched movies
-          setMovies(data);
-
-          // Get 6 random movies
           const randomMovies = getRandomMovies(data, 6);
-          setMovies(randomMovies); // Optionally, store these random movies in a separate state if needed
+          setMovies(randomMovies);
         }
       } catch (error) {
         console.error("Error fetching movies:", error);
+      } finally {
+        setLoadingMovies(false); // Set loading state to false after fetching
       }
     };
 
-    fetchAllMovies();
-  }, []);
-
-  useEffect(() => {
     fetchAllMovies();
   }, []);
 
@@ -89,11 +73,13 @@ const Welcome = () => {
   };
 
   const firstSixMovies = movies ? movies.slice(0, 6) : [];
-  const firstFourMovies = movies ? movies.slice(0, 4) : [];
-  const chunkedMovies = movies ? chunkArray(movies, 2) : [];
 
   const logoMobile =
     process.env.PUBLIC_URL + "/images/logo/Icon-Only-Color.png";
+
+  if (loading || loadingMovies) {
+    return <FullScreenLoader />;
+  }
 
   return (
     <div
@@ -153,7 +139,7 @@ const Welcome = () => {
 
       <div className="d-flex justify-content-center align-items-center flex-column flex-grow-1">
         {isTablet ? (
-          <div className="d-flex flex-column h-100 justify-content-center">
+          <div className="w-75 d-flex flex-column h-100 justify-content-center">
             <div className="d-flex flex-column gap-2 align-items-center">
               <span className={`${styles.accentSpan} mb-3`}></span>
               <h1 className="fw-semibold">Welcome to FlixStream</h1>
@@ -171,7 +157,7 @@ const Welcome = () => {
             </div>
             <div className="w-100 mt-5">
               <Carousel
-                className={styles.carousel}
+                className={`${styles.carousel} w-100`}
                 controls={false}
                 interval={null}
               >
@@ -249,7 +235,7 @@ const Welcome = () => {
               </div>
               <h4 className="mt-5">Featured Movies</h4>
             </div>
-            <div className="mt-5">
+            <div className="mt-5 w-75">
               <Carousel
                 className={styles.carousel}
                 controls={false}
