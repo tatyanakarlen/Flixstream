@@ -24,9 +24,9 @@ const MobileNav = ({ setSearchInput, setFilteredData }) => {
     setFilteredData([]);
   };
 
-  const handleLogout = async () => {
-    await logout(navigate);
-  };
+  // const handleLogout = async () => {
+  //   await logout(navigate);
+  // };
 
   const links = [
     {
@@ -53,7 +53,7 @@ const MobileNav = ({ setSearchInput, setFilteredData }) => {
       text: "Logout",
       link: "",
       icon: <MdLogout />,
-      onClick: handleLogout,
+      onClick: logout,
     },
   ];
 

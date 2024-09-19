@@ -124,7 +124,7 @@ const SideNav = ({ setSearchInput, setFilteredData }) => {
               </span>
               <span
                 role="button"
-                onClick={handleLogout}
+                onClick={logout}
                 className={`d-flex align-items-center ${
                   !isLgDesktopOrLaptop && "justify-content-center"
                 } gap-3 px-3 py-2 rounded ${styles.link}`}
