@@ -37,18 +37,6 @@ const AuthModal = ({
       return;
     }
 
-    // Insert additional user profile data
-    // const { error: profileError } = await supabase
-    //   .from('profiles')
-    //   .upsert({ id: user.id, username });
-
-    // if (profileError) {
-    //   setError(profileError.message);
-    //   setMessage('');
-    // } else {
-    //   setError(null);
-    //   setMessage('Check your email for a confirmation link and your profile is set!');
-    // }
     handleCloseAuthModal()
     setEmail('')
     setPassword('')
@@ -75,6 +63,23 @@ const AuthModal = ({
     setEmail('')
     setPassword('')
     navigate('/dashboard')
+  };
+
+  const handleGoogleLogin = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: 'https://66eb3037f8bce6906b49a6b1--flixstreamapp.netlify.app/dashboard',
+      },
+    });
+
+    if (error) {
+      console.error('Error during Google sign-in:', error.message);
+      setError(error.message);
+    } else {
+      handleCloseAuthModal();
+      navigate('/dashboard');
+    }
   };
   
   return (
@@ -169,6 +174,7 @@ const AuthModal = ({
           </div>
 
           <div
+            onClick={handleGoogleLogin}
             role="button"
             className={`${styles.googleOAuthBTN} w-100 d-flex gap-2 justify-content-center align-items-center mt-3 w-100`}
           >
