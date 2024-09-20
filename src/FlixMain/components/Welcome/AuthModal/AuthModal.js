@@ -68,6 +68,10 @@ const AuthModal = ({
   const handleGoogleLogin = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
+      // options: {
+        
+      //   redirectTo: `https://flixstreamapp.netlify.app/auth/v1/callback`,
+      // },
     });
     console.log("google btn clicked");
 
