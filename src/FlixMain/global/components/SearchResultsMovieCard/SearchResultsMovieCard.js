@@ -24,7 +24,7 @@ const SearchResultsMovieCard = ({
   userMovies,
 }) => {
   return (
-    <Col className="mb-4 text-light" xs={12} md={6}>
+    <Col className="mb-4 text-light" xs={12} md={6} lg={4}>
       <div className={`${styles.cardContainer} h-100 d-flex gap-4 p-3`}>
         <div className={styles.imgContainer}>
           <Image src={movie.image} />
